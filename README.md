@@ -1,7 +1,8 @@
 # VoKi – Terms of Service & Privacy Policy
 
 **Effective Date: August 30, 2025**
-Contact: VoKi.io@outlook.com
+Contact: [Contact Support](mailto:VoKi.io@outlook.com)
+
 
 1. Introduction
 
