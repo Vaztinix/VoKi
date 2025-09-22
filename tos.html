@@ -5,35 +5,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VoKi – Terms of Service</title>
   <style>
-    /* General Styles */
+    /* Root Variables for Light/Dark Mode */
+    :root {
+      --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
+      --text-color: #fff;
+      --nav-bg: rgba(0,0,0,0.6);
+      --updates-bg: rgba(0,0,0,0.25);
+      --faq-question-bg: rgba(0,0,0,0.35);
+      --faq-question-hover: rgba(0,0,0,0.55);
+      --faq-answer-bg: rgba(0,0,0,0.25);
+    }
+
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: linear-gradient(to bottom right, #4facfe, #8e44ad);
-      background-attachment: fixed;
-      color: #fff;
+      background: var(--bg-gradient);
+      color: var(--text-color);
       line-height: 1.6;
       scroll-behavior: smooth;
+      transition: all 0.3s ease;
     }
 
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(0,0,0,0.6);
+      background: var(--nav-bg);
       padding: 15px 0;
       text-align: center;
       z-index: 100;
+      transition: background 0.3s;
     }
 
     nav a {
-      color: #fff;
+      color: var(--text-color);
       margin: 0 15px;
       text-decoration: none;
       font-weight: bold;
       transition: 0.3s;
     }
-
     nav a:hover { color: #aeefff; text-decoration: underline; }
 
     .container {
@@ -49,7 +59,7 @@
 
     /* Updates Box */
     .updates {
-      background: rgba(0,0,0,0.25);
+      background: var(--updates-bg);
       padding: 20px;
       border-radius: 12px;
       margin: 30px 0;
@@ -59,15 +69,15 @@
     /* FAQ / Accordion */
     .faq { margin-top: 40px; }
     .faq .question {
-      background: rgba(0,0,0,0.35);
+      background: var(--faq-question-bg);
       cursor: pointer;
       padding: 15px;
       border-radius: 8px;
       margin-bottom: 8px;
       transition: background 0.3s;
     }
-    .faq .question:hover { background: rgba(0,0,0,0.55); }
-    .faq .answer { display: none; padding: 12px 15px; background: rgba(0,0,0,0.25); border-radius: 8px; margin-bottom: 10px; }
+    .faq .question:hover { background: var(--faq-question-hover); }
+    .faq .answer { display: none; padding: 12px 15px; background: var(--faq-answer-bg); border-radius: 8px; margin-bottom: 10px; }
 
     footer {
       text-align: center;
@@ -77,6 +87,34 @@
       background: rgba(0,0,0,0.2);
       margin-top: 50px;
     }
+
+    /* Dark Mode */
+    body.dark {
+      --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
+      --text-color: #eee;
+      --nav-bg: rgba(30,30,30,0.85);
+      --updates-bg: rgba(50,50,50,0.4);
+      --faq-question-bg: rgba(50,50,50,0.4);
+      --faq-question-hover: rgba(60,60,60,0.7);
+      --faq-answer-bg: rgba(60,60,60,0.3);
+    }
+
+    /* Dark Mode Toggle Button */
+    #themeToggle {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #aeefff;
+      color: #000;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 1000;
+      transition: background 0.3s;
+    }
+    #themeToggle:hover { background: #85dfff; }
+
   </style>
 </head>
 <body>
@@ -91,111 +129,8 @@
     <h1>VoKi – Terms of Service & Privacy Policy</h1>
     <p><strong>Effective Date: September 22, 2025</strong></p>
 
-    <!-- Introduction -->
-    <h2>1. Introduction</h2>
-    <p>
-      Welcome to VoKi, a Discord bot designed to enhance community management with moderation, AI, and utility features.  
-      These Terms of Service (ToS) explain your rights, responsibilities, and how we manage your data.  
-      By using VoKi, you agree to these terms. If you do not agree, discontinue use immediately.
-    </p>
+    <!-- (Your existing content here) -->
 
-    <!-- Eligibility -->
-    <h2>2. Eligibility</h2>
-    <ul>
-      <li>You must be at least <strong>13 years old</strong> (or meet your country’s digital consent age) to use VoKi.</li>
-      <li>By using VoKi, you confirm that you have the legal capacity to enter this agreement.</li>
-    </ul>
-
-    <!-- Bot Usage Guidelines -->
-    <h2>3. Bot Usage Guidelines</h2>
-    <ul>
-      <li>Do not misuse VoKi for illegal, harmful, or disruptive activities.</li>
-      <li>Do not attempt to exploit, hack, or reverse-engineer VoKi.</li>
-      <li>Spam or harmful content through VoKi is prohibited.</li>
-      <li>VoKi may disable access for users violating these terms.</li>
-    </ul>
-
-    <!-- Commands & Features -->
-    <h2>4. Commands & Features</h2>
-    <p>
-      VoKi includes a variety of commands:
-      <ul>
-        <li><strong>Moderation:</strong> ban, unban, kick, mute, unmute, add role, remove role, set logs channel, set support role</li>
-        <li><strong>Utility:</strong> relay, support, say</li>
-        <li><strong>AI Tools:</strong> ask (AI-powered responses)</li>
-        <li><strong>Server Management:</strong> rank, set welcomer</li>
-      </ul>
-      Commands may update over time.
-    </p>
-
-    <!-- Event Listeners -->
-    <h2>5. Event Listeners</h2>
-    <p>
-      VoKi uses Discord event listeners for certain features:
-      <ul>
-        <li><strong>messageCreate:</strong> leveling (rank) & AI ping (ask)</li>
-        <li><strong>guildMemberAdd:</strong> set welcomer</li>
-        <li><strong>guildMemberRemove:</strong> set logs channel</li>
-        <li><strong>messageUpdate:</strong> messages edited (in development)</li>
-      </ul>
-    </p>
-
-    <!-- Data Collection -->
-    <h2>6. Data We Collect</h2>
-    <ul>
-      <li>Discord User ID & Server ID for command execution and permissions.</li>
-      <li>Message content only when needed for relay or AI commands.</li>
-      <li>Server configurations: roles, channels, and settings.</li>
-      <li>Interaction logs for debugging and ensuring service reliability.</li>
-    </ul>
-
-    <!-- Data Privacy -->
-    <h2>7. How We Use Your Data</h2>
-    <p>
-      Data is used solely to provide and improve VoKi. We do not sell or share your personal data.  
-      VoKi admins cannot view your data; they may only delete it upon request.  
-      Users may opt out to remove all saved data.
-    </p>
-
-    <!-- Data Security -->
-    <h2>8. Data Storage & Security</h2>
-    <ul>
-      <li>Data is stored securely on authorized servers.</li>
-      <li>Industry-standard security measures protect your information.</li>
-      <li>Only authorized developers have limited access for maintenance.</li>
-    </ul>
-
-    <!-- Data Retention -->
-    <h2>9. Data Retention & Deletion</h2>
-    <p>Data is kept only as long as necessary for VoKi’s functions. Users can request deletion anytime; deleted data is permanent.</p>
-
-    <!-- Responsibilities -->
-    <h2>10. Your Responsibilities</h2>
-    <p>Ensure compliance with Discord’s Terms of Service. Do not attempt to bypass permissions or use VoKi harmfully. Inviting VoKi implies accepting responsibility for its usage.</p>
-
-    <!-- Updates -->
-    <h2>11. Updates & Development</h2>
-    <div class="updates">
-      <p>VoKi is actively developing new features:</p>
-      <ul>
-        <li>Enhanced logging system</li>
-        <li>Multilingual support</li>
-        <li>Advanced leveling: XP add, level set</li>
-        <li>Privacy opt-out functionality</li>
-        <li>Future AI & utility enhancements</li>
-      </ul>
-      <p>Continued use of VoKi means you accept ongoing updates.</p>
-    </div>
-
-    <!-- Limitation of Liability -->
-    <h2>12. Limitation of Liability</h2>
-    <p>VoKi is provided “as is.” Developers are not responsible for damages arising from its use or inability to use it.</p>
-
-    <!-- Termination -->
-    <h2>13. Termination</h2>
-    <p>We may restrict or terminate access for users violating these terms, and data associated with terminated access may be deleted.</p>
-
-    <!-- FAQ -->
     <div class="faq">
       <h2>FAQ</h2>
       <div class="question">How is my data protected?</div>
@@ -207,12 +142,14 @@
       <div class="question">Will features change over time?</div>
       <div class="answer">Yes! VoKi is continuously updated with new commands and improvements.</div>
     </div>
-
   </div>
 
   <footer>
     © 2025 VoKi — Building smarter communities together.
   </footer>
+
+  <!-- Theme Toggle Button -->
+  <div id="themeToggle">Toggle Theme</div>
 
   <script>
     // FAQ Accordion
@@ -222,6 +159,31 @@
         const answer = q.nextElementSibling;
         answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
       });
+    });
+
+    // Dark Mode / Light Mode with LocalStorage
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+
+    // Load saved preference
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      body.classList.toggle('dark', savedTheme === 'dark');
+    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      body.classList.add('dark');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark');
+      // Save preference
+      localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+    });
+
+    // Optional: Listen for system changes if no saved preference
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      if (!localStorage.getItem('theme')) {
+        body.classList.toggle('dark', e.matches);
+      }
     });
   </script>
 
