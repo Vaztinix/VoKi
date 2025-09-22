@@ -6,13 +6,29 @@
   <title>VoKi – Your Discord Bot</title>
   <style>
     /* General Styles */
+    :root {
+      --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
+      --text-color: #fff;
+      --nav-bg: rgba(0,0,0,0.6);
+      --card-bg: rgba(0,0,0,0.25);
+      --card-hover-bg: rgba(0,0,0,0.45);
+      --faq-bg: rgba(0,0,0,0.25);
+      --faq-answer-bg: rgba(0,0,0,0.15);
+      --event-bg: rgba(0,0,0,0.2);
+      --event-hover-bg: rgba(0,0,0,0.35);
+      --footer-bg: rgba(0,0,0,0.2);
+      --btn-primary-bg: #aeefff;
+      --btn-primary-color: #000;
+      --btn-primary-hover: #85dfff;
+    }
+
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
-      background: linear-gradient(to bottom right, #4facfe, #8e44ad);
-      background-attachment: fixed;
-      color: #fff;
+      background: var(--bg-gradient);
+      color: var(--text-color);
       scroll-behavior: smooth;
+      transition: all 0.3s ease;
     }
 
     a { text-decoration: none; }
@@ -21,14 +37,15 @@
       position: fixed;
       top: 0;
       width: 100%;
-      background: rgba(0,0,0,0.6);
+      background: var(--nav-bg);
       padding: 15px 0;
       text-align: center;
       z-index: 100;
+      transition: background 0.3s;
     }
 
     nav a {
-      color: #fff;
+      color: var(--text-color);
       margin: 0 20px;
       font-weight: 600;
       transition: 0.3s;
@@ -40,18 +57,8 @@
       padding: 140px 20px 60px;
     }
 
-    header h1 {
-      font-size: 3rem;
-      margin-bottom: 15px;
-      color: #e6f7ff;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      max-width: 700px;
-      margin: 0 auto 25px;
-      opacity: 0.9;
-    }
+    header h1 { font-size: 3rem; margin-bottom: 15px; color: #e6f7ff; }
+    header p { font-size: 1.2rem; max-width: 700px; margin: 0 auto 25px; opacity: 0.9; }
 
     .btn {
       display: inline-block;
@@ -62,39 +69,23 @@
       transition: background 0.3s;
       cursor: pointer;
     }
-    .btn-primary { background: #aeefff; color: #000; }
-    .btn-primary:hover { background: #85dfff; }
+    .btn-primary { background: var(--btn-primary-bg); color: var(--btn-primary-color); }
+    .btn-primary:hover { background: var(--btn-primary-hover); }
     .btn-secondary { background: #fff; color: #000; }
     .btn-secondary:hover { background: #e6e6e6; }
 
-    /* Sections */
     section {
       max-width: 900px;
       margin: 60px auto;
       padding: 0 20px;
       text-align: center;
     }
-    section h2 { 
-      font-size: 2rem; 
-      margin-bottom: 25px; 
-      color: #e6f7ff; 
-    }
-    section p { 
-      font-size: 1.1rem; 
-      line-height: 1.8; 
-      margin-bottom: 20px; 
-    }
+    section h2 { font-size: 2rem; margin-bottom: 25px; color: #e6f7ff; }
+    section p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 20px; }
 
-    /* Feature Cards */
-    .features {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 25px;
-      margin-top: 20px;
-    }
+    .features { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-top: 20px; }
     .card {
-      background: rgba(0,0,0,0.25);
+      background: var(--card-bg);
       padding: 25px 20px;
       border-radius: 12px;
       flex: 1 1 220px;
@@ -102,14 +93,10 @@
       text-align: left;
       transition: transform 0.3s, background 0.3s;
     }
-    .card:hover { 
-      transform: translateY(-6px); 
-      background: rgba(0,0,0,0.45); 
-    }
+    .card:hover { transform: translateY(-6px); background: var(--card-hover-bg); }
     .card h3 { margin-top: 0; margin-bottom: 12px; color: #aeefff; }
     .card p { font-size: 0.95rem; line-height: 1.6; }
 
-    /* Event Listeners */
     .events ul {
       list-style: none;
       padding: 0;
@@ -121,16 +108,15 @@
       margin-bottom: 14px;
       font-size: 1rem;
       padding: 8px 12px;
-      background: rgba(0,0,0,0.2);
+      background: var(--event-bg);
       border-radius: 8px;
       transition: background 0.3s;
     }
-    .events li:hover { background: rgba(0,0,0,0.35); }
+    .events li:hover { background: var(--event-hover-bg); }
 
-    /* FAQ Accordion */
     .faq { max-width: 700px; margin: 50px auto; text-align: left; }
     .faq .question {
-      background: rgba(0,0,0,0.25);
+      background: var(--faq-bg);
       cursor: pointer;
       padding: 15px;
       border-radius: 8px;
@@ -138,19 +124,11 @@
       font-weight: 600;
       transition: background 0.3s;
     }
-    .faq .question:hover { background: rgba(0,0,0,0.45); }
-    .faq .answer { 
-      display: none; 
-      padding: 12px 15px; 
-      background: rgba(0,0,0,0.15); 
-      border-radius: 8px; 
-      margin-bottom: 12px; 
-      line-height: 1.6;
-    }
+    .faq .question:hover { background: var(--card-hover-bg); }
+    .faq .answer { display: none; padding: 12px 15px; background: var(--faq-answer-bg); border-radius: 8px; margin-bottom: 12px; line-height: 1.6; }
 
-    /* Updates Section */
     .updates {
-      background: rgba(0,0,0,0.2);
+      background: var(--event-bg);
       padding: 25px;
       border-radius: 12px;
       margin-top: 30px;
@@ -158,17 +136,15 @@
     }
     .updates ul { padding-left: 20px; }
 
-    /* Footer */
-    footer { 
-      text-align: center; 
-      padding: 20px; 
-      font-size: 0.9rem; 
-      opacity: 0.85; 
-      background: rgba(0,0,0,0.2); 
-      margin-top: 60px; 
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      background: var(--footer-bg);
+      margin-top: 60px;
     }
 
-    /* Popup */
     #devPopup {
       position: fixed; bottom: 20px; right: 20px;
       background-color: rgba(0,0,0,0.9); color: #fff;
@@ -192,6 +168,39 @@
       background: none; border: none; color: #fff; font-size: 18px; 
       cursor: pointer; position: absolute; top: 8px; right: 10px; 
     }
+
+    /* Dark Mode */
+    body.dark {
+      --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
+      --text-color: #eee;
+      --nav-bg: rgba(30,30,30,0.85);
+      --card-bg: rgba(50,50,50,0.4);
+      --card-hover-bg: rgba(60,60,60,0.7);
+      --faq-bg: rgba(50,50,50,0.4);
+      --faq-answer-bg: rgba(60,60,60,0.3);
+      --event-bg: rgba(50,50,50,0.3);
+      --event-hover-bg: rgba(60,60,60,0.6);
+      --footer-bg: rgba(50,50,50,0.3);
+      --btn-primary-bg: #85dfff;
+      --btn-primary-color: #000;
+      --btn-primary-hover: #5bc0ff;
+    }
+
+    /* Dark Mode Toggle Button */
+    #themeToggle {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: var(--btn-primary-bg);
+      color: var(--btn-primary-color);
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+      z-index: 1000;
+      transition: background 0.3s;
+    }
+    #themeToggle:hover { background: var(--btn-primary-hover); }
 
   </style>
 </head>
@@ -283,6 +292,9 @@
     </div>
   </div>
 
+  <!-- Theme Toggle Button -->
+  <div id="themeToggle">Toggle Theme</div>
+
   <script>
     // Popup
     window.addEventListener('load', () => {
@@ -298,6 +310,24 @@
         const answer = q.nextElementSibling;
         answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
       });
+    });
+
+    // Dark Mode / Light Mode
+    const body = document.body;
+    const toggleBtn = document.getElementById('themeToggle');
+
+    // Check system preference
+    if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+      body.classList.add('dark');
+    }
+
+    toggleBtn.addEventListener('click', () => {
+      body.classList.toggle('dark');
+    });
+
+    // Optional: Listen for system changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+      body.classList.toggle('dark', e.matches);
     });
   </script>
 
