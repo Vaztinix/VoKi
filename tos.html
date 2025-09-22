@@ -5,16 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VoKi – Terms of Service</title>
   <style>
+    /* General Styles */
     body {
       margin: 0;
       font-family: Arial, sans-serif;
       background: linear-gradient(to bottom right, #4facfe, #8e44ad);
       background-attachment: fixed;
-      color: white;
+      color: #fff;
       line-height: 1.6;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+      scroll-behavior: smooth;
     }
 
     nav {
@@ -35,241 +34,196 @@
       transition: 0.3s;
     }
 
-    nav a:hover {
-      color: #ffd700;
-      text-decoration: underline;
-    }
-
-    header {
-      text-align: center;
-      padding: 100px 20px 20px; /* leave space for fixed nav */
-    }
-
-    header h1 {
-      font-size: 2.8rem;
-      margin-bottom: 10px;
-    }
-
-    header p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-      max-width: 700px;
-      margin: 0 auto;
-    }
+    nav a:hover { color: #aeefff; text-decoration: underline; }
 
     .container {
       max-width: 900px;
-      margin: 20px auto 50px;
+      margin: 100px auto 50px;
       padding: 0 20px;
     }
 
-    h2 {
-      margin-top: 30px;
-      margin-bottom: 15px;
-      font-size: 1.5rem;
-      color: #ffd700;
+    h1 { font-size: 2.5rem; margin-bottom: 15px; color: #e6f7ff; text-align: center; }
+    h2 { font-size: 2rem; margin-bottom: 15px; color: #aeefff; }
+    p, li { font-size: 1.05rem; margin-bottom: 10px; }
+    ul { list-style-type: disc; padding-left: 20px; margin-bottom: 20px; }
+
+    /* Updates Box */
+    .updates {
+      background: rgba(0,0,0,0.25);
+      padding: 20px;
+      border-radius: 12px;
+      margin: 30px 0;
+      color: #e6f7ff;
     }
 
-    p, li {
-      margin-bottom: 12px;
-      font-size: 1rem;
+    /* FAQ / Accordion */
+    .faq { margin-top: 40px; }
+    .faq .question {
+      background: rgba(0,0,0,0.35);
+      cursor: pointer;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 8px;
+      transition: background 0.3s;
     }
-
-    ul {
-      list-style-type: disc;
-      padding-left: 25px;
-      margin-bottom: 20px;
-    }
+    .faq .question:hover { background: rgba(0,0,0,0.55); }
+    .faq .answer { display: none; padding: 12px 15px; background: rgba(0,0,0,0.25); border-radius: 8px; margin-bottom: 10px; }
 
     footer {
       text-align: center;
       padding: 15px;
       font-size: 0.9rem;
       opacity: 0.8;
-      background: rgba(0,0,0,0.3);
-      margin-top: auto;
-    }
-
-    /* Development Popup */
-    #devPopup {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: rgba(0,0,0,0.9);
-      color: #fff;
-      padding: 20px 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-      max-width: 350px;
-      font-size: 15px;
-      z-index: 1000;
-      opacity: 0;
-      transform: translateY(40px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    #devPopup.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    #devPopup h3 {
-      margin-top: 0;
-      font-size: 1.2rem;
-      margin-bottom: 10px;
-      color: #ffd700;
-    }
-    #devPopup p {
-      margin: 0 0 10px;
-      font-size: 0.95rem;
-    }
-    #devPopup .buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    #devPopup a {
-      background: #ffd700;
-      color: #000;
-      padding: 8px 14px;
-      border-radius: 6px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
-      font-size: 0.9rem;
-    }
-    #devPopup a:hover {
-      background: #e6c200;
-    }
-    #devPopup button.closeBtn {
-      background: none;
-      border: none;
-      color: #fff;
-      font-size: 18px;
-      cursor: pointer;
-      position: absolute;
-      top: 8px;
-      right: 10px;
+      background: rgba(0,0,0,0.2);
+      margin-top: 50px;
     }
   </style>
 </head>
 <body>
+
   <nav>
     <a href="index.html">Home</a>
     <a href="tos.html">Terms of Service</a>
     <a href="mailto:VoKi.io@outlook.com">Contact</a>
   </nav>
 
-  <header>
-    <h1>VoKi – Terms of Service & Privacy Policy</h1>
-    <p>Learn about how VoKi operates, what data we collect, and your responsibilities when using our Discord bot.</p>
-  </header>
-
   <div class="container">
-    <p><strong>Effective Date: August 30, 2025</strong></p>
+    <h1>VoKi – Terms of Service & Privacy Policy</h1>
+    <p><strong>Effective Date: September 22, 2025</strong></p>
 
+    <!-- Introduction -->
     <h2>1. Introduction</h2>
-    <p>Welcome to VoKi, a moderation and utility bot designed to enhance community management and engagement. These Terms of Service (ToS) and Privacy Policy explain your rights, obligations, and how we handle your data when you use VoKi.</p>
-    <p>By using VoKi, you agree to comply with these terms. If you do not agree, you must stop using VoKi immediately.</p>
+    <p>
+      Welcome to VoKi, a Discord bot designed to enhance community management with moderation, AI, and utility features.  
+      These Terms of Service (ToS) explain your rights, responsibilities, and how we manage your data.  
+      By using VoKi, you agree to these terms. If you do not agree, discontinue use immediately.
+    </p>
 
+    <!-- Eligibility -->
     <h2>2. Eligibility</h2>
     <ul>
-      <li>You must be at least <strong>13 years old</strong> to use VoKi (or meet your country’s digital consent age).</li>
-      <li>By using VoKi, you confirm that you have the legal capacity to enter into this agreement.</li>
+      <li>You must be at least <strong>13 years old</strong> (or meet your country’s digital consent age) to use VoKi.</li>
+      <li>By using VoKi, you confirm that you have the legal capacity to enter this agreement.</li>
     </ul>
 
+    <!-- Bot Usage Guidelines -->
     <h2>3. Bot Usage Guidelines</h2>
     <ul>
-      <li>You agree not to misuse VoKi, including:
-        <ul>
-          <li>Using VoKi for illegal activities.</li>
-          <li>Attempting to exploit, hack, or reverse-engineer the bot.</li>
-          <li>Sending spam or harmful content through VoKi.</li>
-        </ul>
-      </li>
-      <li>We reserve the right to <strong>disable access</strong> to any user or server that violates these terms.</li>
+      <li>Do not misuse VoKi for illegal, harmful, or disruptive activities.</li>
+      <li>Do not attempt to exploit, hack, or reverse-engineer VoKi.</li>
+      <li>Spam or harmful content through VoKi is prohibited.</li>
+      <li>VoKi may disable access for users violating these terms.</li>
     </ul>
 
+    <!-- Commands & Features -->
     <h2>4. Commands & Features</h2>
-    <p>VoKi provides a variety of features, including:</p>
+    <p>
+      VoKi includes a variety of commands:
+      <ul>
+        <li><strong>Moderation:</strong> ban, unban, kick, mute, unmute, add role, remove role, set logs channel, set support role</li>
+        <li><strong>Utility:</strong> relay, support, say</li>
+        <li><strong>AI Tools:</strong> ask (AI-powered responses)</li>
+        <li><strong>Server Management:</strong> rank, set welcomer</li>
+      </ul>
+      Commands may update over time.
+    </p>
+
+    <!-- Event Listeners -->
+    <h2>5. Event Listeners</h2>
+    <p>
+      VoKi uses Discord event listeners for certain features:
+      <ul>
+        <li><strong>messageCreate:</strong> leveling (rank) & AI ping (ask)</li>
+        <li><strong>guildMemberAdd:</strong> set welcomer</li>
+        <li><strong>guildMemberRemove:</strong> set logs channel</li>
+        <li><strong>messageUpdate:</strong> messages edited (in development)</li>
+      </ul>
+    </p>
+
+    <!-- Data Collection -->
+    <h2>6. Data We Collect</h2>
     <ul>
-      <li>Moderation commands: /ban, /unban, /kick, /mute, /addrole, /removerole.</li>
-      <li>Messaging utilities: /relay, /msgtemplate, /support.</li>
-      <li>AI commands: /ask for AI-powered responses.</li>
-      <li>Server management tools: role automation, templates, and future customizations.</li>
+      <li>Discord User ID & Server ID for command execution and permissions.</li>
+      <li>Message content only when needed for relay or AI commands.</li>
+      <li>Server configurations: roles, channels, and settings.</li>
+      <li>Interaction logs for debugging and ensuring service reliability.</li>
     </ul>
-    <p><strong>Note:</strong> Commands are subject to updates and may change without prior notice.</p>
 
-    <h2>5. Data We Collect</h2>
+    <!-- Data Privacy -->
+    <h2>7. How We Use Your Data</h2>
+    <p>
+      Data is used solely to provide and improve VoKi. We do not sell or share your personal data.  
+      VoKi admins cannot view your data; they may only delete it upon request.  
+      Users may opt out to remove all saved data.
+    </p>
+
+    <!-- Data Security -->
+    <h2>8. Data Storage & Security</h2>
     <ul>
-      <li><strong>Discord User ID & Server ID:</strong> For command execution and permissions.</li>
-      <li><strong>Message Content:</strong> Only when required for features like /relay or AI queries.</li>
-      <li><strong>Server Configuration Data:</strong> Roles, channels, and command settings.</li>
-      <li><strong>Interaction Logs:</strong> For debugging and ensuring service reliability.</li>
+      <li>Data is stored securely on authorized servers.</li>
+      <li>Industry-standard security measures protect your information.</li>
+      <li>Only authorized developers have limited access for maintenance.</li>
     </ul>
 
-    <h2>6. How We Use Your Data</h2>
-    <ul>
-      <li>To execute bot commands.</li>
-      <li>To improve functionality and provide updates.</li>
-      <li>To ensure compliance with Discord's Terms of Service.</li>
-    </ul>
-    <p>We do not sell or share your data with third parties.</p>
+    <!-- Data Retention -->
+    <h2>9. Data Retention & Deletion</h2>
+    <p>Data is kept only as long as necessary for VoKi’s functions. Users can request deletion anytime; deleted data is permanent.</p>
 
-    <h2>7. Data Storage & Security</h2>
-    <ul>
-      <li>Data is stored securely and is only accessible to authorized developers.</li>
-      <li>We use industry-standard security measures to protect your data.</li>
-      <li>VoKi is hosted on secure servers with restricted access.</li>
-    </ul>
+    <!-- Responsibilities -->
+    <h2>10. Your Responsibilities</h2>
+    <p>Ensure compliance with Discord’s Terms of Service. Do not attempt to bypass permissions or use VoKi harmfully. Inviting VoKi implies accepting responsibility for its usage.</p>
 
-    <h2>8. Data Retention & Deletion</h2>
-    <p>Data is retained <strong>only as long as necessary</strong> for VoKi’s functionality. You can request deletion at any time. Once deletion is confirmed, your data will be <strong>permanently removed</strong> and cannot be recovered.</p>
+    <!-- Updates -->
+    <h2>11. Updates & Development</h2>
+    <div class="updates">
+      <p>VoKi is actively developing new features:</p>
+      <ul>
+        <li>Enhanced logging system</li>
+        <li>Multilingual support</li>
+        <li>Advanced leveling: XP add, level set</li>
+        <li>Privacy opt-out functionality</li>
+        <li>Future AI & utility enhancements</li>
+      </ul>
+      <p>Continued use of VoKi means you accept ongoing updates.</p>
+    </div>
 
-    <h2>9. Your Responsibilities</h2>
-    <p>Ensure compliance with <strong>Discord’s Terms of Service</strong> when using VoKi. Do not attempt to <strong>bypass permissions</strong> or use VoKi for harmful purposes. If you invite VoKi to your server, you <strong>accept responsibility</strong> for its usage.</p>
+    <!-- Limitation of Liability -->
+    <h2>12. Limitation of Liability</h2>
+    <p>VoKi is provided “as is.” Developers are not responsible for damages arising from its use or inability to use it.</p>
 
-    <h2>10. Service Availability</h2>
-    <p>VoKi is provided “<strong>as is</strong>” without any guarantees of uptime. We may <strong>update, remove, or discontinue features</strong> without prior notice. We are <strong>not liable for downtime, data loss, or feature removal</strong>.</p>
+    <!-- Termination -->
+    <h2>13. Termination</h2>
+    <p>We may restrict or terminate access for users violating these terms, and data associated with terminated access may be deleted.</p>
 
-    <h2>11. Limitation of Liability</h2>
-    <p>VoKi and its developers are <strong>not responsible for damages</strong> arising from the use or inability to use the bot and provide VoKi <strong>without any warranty</strong>, expressed or implied.</p>
+    <!-- FAQ -->
+    <div class="faq">
+      <h2>FAQ</h2>
+      <div class="question">How is my data protected?</div>
+      <div class="answer">VoKi only stores necessary data. Admins cannot view messages, and users can delete all data at any time.</div>
 
-    <h2>12. Termination</h2>
-    <p>We reserve the right to <strong>restrict or terminate access</strong> to VoKi for any user or server that violates these terms and delete data associated with terminated access.</p>
+      <div class="question">How do I request deletion of my data?</div>
+      <div class="answer">Contact us via Discord or email to request complete data removal. Deletion is permanent.</div>
 
-    <h2>13. Changes to These Terms</h2>
-    <p>We may update these terms and policies at any time. Continued use of VoKi after updates means you accept the changes. Last updated: <strong>August 30, 2025</strong>.</p>
+      <div class="question">Will features change over time?</div>
+      <div class="answer">Yes! VoKi is continuously updated with new commands and improvements.</div>
+    </div>
+
   </div>
 
   <footer>
     © 2025 VoKi — Building smarter communities together.
   </footer>
 
-  <!-- Development Popup -->
-  <div id="devPopup">
-    <button class="closeBtn" onclick="closePopup()">✖</button>
-    <h3>🚧 Site in Development</h3>
-    <p>
-      This page is still being improved! Join our community to share feedback and ideas.
-    </p>
-    <div class="buttons">
-      <a href="https://discord.gg/PHKdvcYd" target="_blank">Join Discord</a>
-      <a href="mailto:VoKi.io@outlook.com">Contact Us</a>
-    </div>
-  </div>
-
   <script>
-    // Show popup after delay with fade-in
-    window.addEventListener('load', () => {
-      const popup = document.getElementById('devPopup');
-      setTimeout(() => {
-        popup.classList.add('show');
-      }, 1500);
+    // FAQ Accordion
+    const questions = document.querySelectorAll('.faq .question');
+    questions.forEach(q => {
+      q.addEventListener('click', () => {
+        const answer = q.nextElementSibling;
+        answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
+      });
     });
-
-    function closePopup() {
-      const popup = document.getElementById('devPopup');
-      popup.classList.remove('show');
-    }
   </script>
+
 </body>
 </html>
