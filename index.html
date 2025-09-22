@@ -28,7 +28,47 @@
     }
     a:hover {
       text-decoration: underline;
-      color: #ffd700; /* Optional: adds a hover color effect */
+      color: #ffd700; /* Optional hover color */
+    }
+
+    /* Popup / Toast styling */
+    #devPopup {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: rgba(0,0,0,0.85);
+      color: #fff;
+      padding: 15px 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+      max-width: 300px;
+      font-size: 14px;
+      z-index: 1000;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      opacity: 0;
+      transform: translateY(100px);
+      transition: all 0.5s ease;
+    }
+
+    #devPopup.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #devPopup a {
+      color: #ffd700;
+      text-decoration: underline;
+    }
+
+    #devPopup button {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+      margin-left: 10px;
     }
   </style>
 </head>
@@ -39,8 +79,32 @@
   <nav>
     <a href="index.html">Home</a>
     <a href="tos.html">Terms of Service</a>
-    <!-- Updated Contact link -->
     <a href="mailto:VoKi.io@outlook.com">Contact</a>
   </nav>
+
+  <!-- Development Popup -->
+  <div id="devPopup">
+    <span>
+      This site is currently in development. If you’d like to support us and share your ideas, join our 
+      <a href="https://discord.gg/PHKdvcYd" target="_blank">Discord server</a>.
+    </span>
+    <button onclick="closePopup()">✖</button>
+  </div>
+
+  <script>
+    // Show popup after 1 second
+    window.addEventListener('load', () => {
+      const popup = document.getElementById('devPopup');
+      setTimeout(() => {
+        popup.classList.add('show');
+      }, 1000);
+    });
+
+    // Close popup function
+    function closePopup() {
+      const popup = document.getElementById('devPopup');
+      popup.classList.remove('show');
+    }
+  </script>
 </body>
 </html>
