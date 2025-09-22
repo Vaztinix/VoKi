@@ -5,15 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VoKi – Terms of Service</title>
   <style>
-    /* Root Variables for Light/Dark Mode */
+    /* ===== ROOT VARIABLES ===== */
     :root {
-      --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
+      --primary-color: #aeefff;
       --text-color: #fff;
+      --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
       --nav-bg: rgba(0,0,0,0.6);
-      --updates-bg: rgba(0,0,0,0.25);
+      --card-bg: rgba(0,0,0,0.25);
+      --card-hover-bg: rgba(0,0,0,0.45);
       --faq-question-bg: rgba(0,0,0,0.35);
       --faq-question-hover: rgba(0,0,0,0.55);
       --faq-answer-bg: rgba(0,0,0,0.25);
+      --error-bg: rgba(255,50,50,0.9);
     }
 
     body {
@@ -24,49 +27,112 @@
       line-height: 1.6;
       scroll-behavior: smooth;
       transition: all 0.3s ease;
+      overflow-x: hidden;
     }
 
+    /* ===== NAVIGATION ===== */
     nav {
       position: fixed;
       top: 0;
+      left: 0;
       width: 100%;
+      height: 60px;
       background: var(--nav-bg);
-      padding: 15px 0;
-      text-align: center;
-      z-index: 100;
-      transition: background 0.3s;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 20px;
+      z-index: 1000;
     }
 
-    nav a {
-      color: var(--text-color);
-      margin: 0 15px;
+    /* Hamburger Button */
+    .hamburger {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 20px;
+      height: 2px;
+      background: #000;
+      margin: 3px 0;
+      transition: all 0.3s ease;
+    }
+
+    /* Slide-out Menu */
+    .menu {
+      position: fixed;
+      top: 0;
+      right: -270px;
+      width: 270px;
+      height: 100%;
+      background: rgba(0,0,0,0.95);
+      display: flex;
+      flex-direction: column;
+      padding: 80px 20px;
+      transition: right 0.3s ease;
+      z-index: 999;
+    }
+
+    .menu a {
+      color: var(--primary-color);
       text-decoration: none;
+      font-size: 1.2rem;
+      margin: 15px 0;
       font-weight: bold;
       transition: 0.3s;
     }
-    nav a:hover { color: #aeefff; text-decoration: underline; }
+    .menu a:hover { color: #fff; }
 
+    .menu.show { right: 0; }
+
+    /* ===== ERROR NOTIFICATION ===== */
+    .error-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--error-bg);
+      padding: 15px 20px;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: bold;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      z-index: 2000;
+    }
+    .error-notification.show { opacity: 1; pointer-events: auto; }
+
+    /* ===== CONTAINER ===== */
     .container {
       max-width: 900px;
       margin: 100px auto 50px;
       padding: 0 20px;
     }
 
-    h1 { font-size: 2.5rem; margin-bottom: 15px; color: #e6f7ff; text-align: center; }
-    h2 { font-size: 2rem; margin-bottom: 15px; color: #aeefff; }
+    h1 { font-size: 2.5rem; margin-bottom: 20px; text-align: center; color: #e6f7ff; }
+    h2 { font-size: 2rem; margin-bottom: 15px; color: var(--primary-color); }
     p, li { font-size: 1.05rem; margin-bottom: 10px; }
-    ul { list-style-type: disc; padding-left: 20px; margin-bottom: 20px; }
+    ul { padding-left: 20px; margin-bottom: 20px; }
 
-    /* Updates Box */
+    /* ===== CARD / UPDATES ===== */
     .updates {
-      background: var(--updates-bg);
+      background: var(--card-bg);
       padding: 20px;
       border-radius: 12px;
       margin: 30px 0;
-      color: #e6f7ff;
     }
 
-    /* FAQ / Accordion */
+    /* ===== FAQ ===== */
     .faq { margin-top: 40px; }
     .faq .question {
       background: var(--faq-question-bg);
@@ -75,80 +141,137 @@
       border-radius: 8px;
       margin-bottom: 8px;
       transition: background 0.3s;
+      font-weight: bold;
     }
     .faq .question:hover { background: var(--faq-question-hover); }
     .faq .answer { display: none; padding: 12px 15px; background: var(--faq-answer-bg); border-radius: 8px; margin-bottom: 10px; }
 
+    /* ===== FOOTER ===== */
     footer {
       text-align: center;
-      padding: 15px;
+      padding: 20px;
       font-size: 0.9rem;
-      opacity: 0.8;
-      background: rgba(0,0,0,0.2);
+      opacity: 0.85;
+      background: rgba(0,0,0,0.25);
       margin-top: 50px;
+      border-top: 1px solid rgba(255,255,255,0.2);
     }
 
-    /* Dark Mode */
+    /* ===== DARK MODE ===== */
     body.dark {
       --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
       --text-color: #eee;
       --nav-bg: rgba(30,30,30,0.85);
-      --updates-bg: rgba(50,50,50,0.4);
+      --card-bg: rgba(50,50,50,0.4);
+      --card-hover-bg: rgba(60,60,60,0.7);
       --faq-question-bg: rgba(50,50,50,0.4);
-      --faq-question-hover: rgba(60,60,60,0.7);
+      --faq-question-hover: rgba(60,60,60,0.6);
       --faq-answer-bg: rgba(60,60,60,0.3);
     }
 
-    /* Dark Mode Toggle Button */
+    /* ===== DARK MODE TOGGLE ===== */
     #themeToggle {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: #aeefff;
+      background: var(--primary-color);
       color: #000;
-      padding: 10px 15px;
-      border-radius: 8px;
-      cursor: pointer;
+      padding: 8px 12px;
+      border-radius: 6px;
       font-weight: bold;
-      z-index: 1000;
-      transition: background 0.3s;
+      cursor: pointer;
+      margin-top: 20px;
+      align-self: flex-start;
     }
-    #themeToggle:hover { background: #85dfff; }
 
   </style>
 </head>
 <body>
 
+  <!-- NAVIGATION -->
   <nav>
-    <a href="index.html">Home</a>
-    <a href="tos.html">Terms of Service</a>
-    <a href="mailto:VoKi.io@outlook.com">Contact</a>
+    <div class="hamburger" id="hamburger">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
   </nav>
 
+  <!-- SLIDE OUT MENU -->
+  <div class="menu" id="menu">
+    <a href="index.html">Home</a>
+    <a href="tos.html">Terms of Service</a>
+    <a href="#" id="discordLogin">Login with Discord</a>
+    <div id="themeToggle">Toggle Theme</div>
+  </div>
+
+  <!-- ERROR NOTIFICATION -->
+  <div class="error-notification" id="errorNotification">
+    ⚠️ This feature is not available yet and is still in development.
+  </div>
+
+  <!-- CONTENT -->
   <div class="container">
     <h1>VoKi – Terms of Service & Privacy Policy</h1>
     <p><strong>Effective Date: September 22, 2025</strong></p>
 
-    <!-- Example Terms Content -->
+    <!-- FULL TOS CONTENT -->
+    <h2>1. Overview</h2>
+    <p>VoKi is a Discord bot designed to provide moderation, AI tools, and community support. By using VoKi, you agree to follow this Terms of Service (TOS) and Privacy Policy.</p>
+
+    <h2>2. Data Privacy & Security</h2>
+    <ul>
+      <li>VoKi only collects data necessary for bot features.</li>
+      <li>No personal messages are read or stored beyond functionality requirements.</li>
+      <li>Server admins cannot access your personal data, only delete it if requested.</li>
+      <li>Users can opt-out and delete all stored data at any time.</li>
+    </ul>
+
+    <h2>3. User Responsibilities</h2>
+    <ul>
+      <li>Do not use VoKi for illegal activities.</li>
+      <li>Ensure proper permissions are given to VoKi for its commands.</li>
+      <li>Abusive or exploitative behavior may result in removal of bot access.</li>
+    </ul>
+
+    <h2>4. Bot Updates & Changes</h2>
+    <ul>
+      <li>VoKi is updated regularly with new features, bug fixes, and improvements.</li>
+      <li>Changes to commands or features will be communicated through Discord or website updates.</li>
+    </ul>
+
+    <h2>5. Liability</h2>
+    <ul>
+      <li>VoKi is provided "as-is" without warranties.</li>
+      <li>Developers are not liable for indirect, incidental, or consequential damages from bot use.</li>
+    </ul>
+
+    <h2>6. Contact & Support</h2>
+    <p>For questions, bug reports, or data deletion requests, contact us via:</p>
+    <ul>
+      <li>Email: VoKi.io@outlook.com</li>
+      <li>Discord: <a href="https://discord.gg/PHKdvcYd" style="color: var(--primary-color);">Join our server</a></li>
+    </ul>
+
+    <!-- Updates Section -->
     <div class="updates">
-      <h2>Current Updates & Policies</h2>
+      <h2>Current Updates</h2>
       <ul>
-        <li>VoKi stores only necessary data to run commands.</li>
-        <li>Users can request deletion of all their data at any time.</li>
-        <li>Features and policies are updated regularly for better community experience.</li>
+        <li>Enhanced logging system</li>
+        <li>Multilingual support</li>
+        <li>Advanced leveling features</li>
+        <li>Privacy opt-out available for all users</li>
       </ul>
     </div>
 
+    <!-- FAQ Section -->
     <div class="faq">
       <h2>FAQ</h2>
       <div class="question">How is my data protected?</div>
-      <div class="answer">VoKi only stores necessary data. Admins cannot view messages, and users can delete all data at any time.</div>
+      <div class="answer">VoKi only stores necessary data. Admins cannot view messages; users can delete all data anytime.</div>
 
       <div class="question">How do I request deletion of my data?</div>
-      <div class="answer">Contact us via Discord or email to request complete data removal. Deletion is permanent.</div>
+      <div class="answer">Contact us via Discord or email to request complete deletion. Deletion is permanent.</div>
 
       <div class="question">Will features change over time?</div>
-      <div class="answer">Yes! VoKi is continuously updated with new commands and improvements.</div>
+      <div class="answer">Yes, VoKi is regularly updated with new commands and improvements.</div>
     </div>
   </div>
 
@@ -156,11 +279,15 @@
     © 2025 VoKi — Building smarter communities together.
   </footer>
 
-  <!-- Theme Toggle Button -->
-  <div id="themeToggle">Toggle Theme</div>
-
   <script>
-    // FAQ Accordion
+    // ===== MENU TOGGLE =====
+    const hamburger = document.getElementById('hamburger');
+    const menu = document.getElementById('menu');
+    hamburger.addEventListener('click', () => {
+      menu.classList.toggle('show');
+    });
+
+    // ===== FAQ ACCORDION =====
     const questions = document.querySelectorAll('.faq .question');
     questions.forEach(q => {
       q.addEventListener('click', () => {
@@ -169,28 +296,30 @@
       });
     });
 
-    // Dark Mode / Light Mode with LocalStorage
+    // ===== DARK MODE =====
     const body = document.body;
-    const toggleBtn = document.getElementById('themeToggle');
-
-    // Load saved preference
+    const themeToggle = document.getElementById('themeToggle');
     const savedTheme = localStorage.getItem('theme');
-    if (savedTheme) {
-      body.classList.toggle('dark', savedTheme === 'dark');
-    } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      body.classList.add('dark');
-    }
+    if(savedTheme) body.classList.toggle('dark', savedTheme === 'dark');
+    else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) body.classList.add('dark');
 
-    toggleBtn.addEventListener('click', () => {
+    themeToggle.addEventListener('click', () => {
       body.classList.toggle('dark');
       localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
     });
 
-    // Optional: Listen for system changes if no saved preference
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-      if (!localStorage.getItem('theme')) {
-        body.classList.toggle('dark', e.matches);
-      }
+      if(!localStorage.getItem('theme')) body.classList.toggle('dark', e.matches);
+    });
+
+    // ===== DISCORD LOGIN ERROR =====
+    const discordLogin = document.getElementById('discordLogin');
+    const errorNotification = document.getElementById('errorNotification');
+
+    discordLogin.addEventListener('click', e => {
+      e.preventDefault();
+      errorNotification.classList.add('show');
+      setTimeout(() => errorNotification.classList.remove('show'), 4000);
     });
   </script>
 
