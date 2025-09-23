@@ -22,19 +22,18 @@
 body {
   margin:0; font-family: Arial, sans-serif; background: var(--bg-gradient);
   color: var(--text-color); line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden;
-  transition: all 0.3s ease;
-  display:flex; flex-direction:column; align-items:center;
+  transition: all 0.3s ease; display:flex; flex-direction:column; align-items:center;
 }
 
 nav {
   position: fixed; top: 0; left: 0; width: 100%; height: 60px;
   background: var(--nav-bg); display: flex; justify-content: center; align-items: center;
-  gap: 25px; z-index: 1000; padding: 0 20px;
+  gap: 25px; z-index: 1000; padding: 0 20px; opacity:0; pointer-events:none; transition:0.5s;
 }
 nav a { color: var(--text-color); font-weight: bold; text-decoration: none; transition: 0.3s; }
 nav a:hover { color: var(--primary-color); }
 
-.container { max-width: 900px; margin: 100px auto 50px; padding: 0 20px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:20px; }
+.container { max-width: 900px; margin: 100px auto 50px; padding: 0 20px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:20px; opacity:0; pointer-events:none; transition:0.5s; }
 
 .card { background: var(--card-bg); padding: 20px; border-radius: 20px; width: 100%; max-width:400px; transition: background 0.3s, transform 0.3s; text-align:left; }
 .card:hover { background: var(--card-hover-bg); transform: translateY(-5px); }
@@ -62,7 +61,7 @@ button:hover { background: #fff; color: #000; }
 #aiBubble {
   position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px;
   background: var(--primary-color); border-radius: 50%; display: flex; justify-content: center;
-  align-items: center; cursor: pointer; font-weight: bold; z-index: 1002; box-shadow: 0 0 10px rgba(0,0,0,0.5);
+  align-items: center; cursor: pointer; font-weight: bold; z-index: 1002; box-shadow: 0 0 10px rgba(0,0,0,0.5); opacity:0; pointer-events:none; transition:0.5s;
 }
 #aiChat {
   position: fixed; bottom: 90px; right: 20px; width: 320px; max-height: 400px;
@@ -76,6 +75,12 @@ button:hover { background: #fff; color: #000; }
 #aiInputWrapper { display: flex; padding: 10px; background: rgba(0,0,0,0.25); border-top: 1px solid #fff; }
 #aiInput { flex: 1; padding: 8px; border-radius: 12px; border: none; outline: none; }
 #aiSend { margin-left: 5px; padding: 8px 12px; border-radius: 12px; border: none; background: var(--primary-color); cursor: pointer; }
+
+#loadingOverlay {
+  position: fixed; top:0; left:0; width:100%; height:100%;
+  background: rgba(0,0,0,0.95); display:flex; justify-content:center; align-items:center; flex-direction:column;
+  color: var(--primary-color); font-size:1.5rem; z-index:2000; transition:opacity 0.5s;
+}
 
 body.dark {
   --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
@@ -143,50 +148,69 @@ body.dark {
       <li>Privacy opt-out available for all users</li>
     </ul>
   </div>
-
 </div>
 
 <div id="aiBubble">AI</div>
 <div id="aiChat">
   <div id="aiMessages"></div>
   <div id="aiInputWrapper">
-    <input type="text" id="aiInput" placeholder="Ask me anything..." disabled/>
+    <input type="text" id="aiInput" placeholder="Ask me anything..." disabled>
     <button id="aiSend" disabled>Send</button>
   </div>
 </div>
 
-<footer>
-  © 2025 VoKi — Building smarter communities together.
-</footer>
+<div id="loadingOverlay"></div>
+
+<footer style="opacity:0; pointer-events:none;">© 2025 VoKi — Building smarter communities together.</footer>
 
 <script>
-// Account system
-let accounts = JSON.parse(localStorage.getItem("vokiAccounts")||"{}");
-const loginForm = document.getElementById("loginForm");
-const signUpForm = document.getElementById("signUpForm");
-const loginBtn = document.getElementById("loginBtn");
-const goSignUp = document.getElementById("goSignUp");
-const backToLogin = document.getElementById("backToLogin");
-const signUpBtn = document.getElementById("signUpBtn");
-const userBubble = document.getElementById("userBubble");
-const loginGuestBtn = document.getElementById("loginGuestBtn");
-const errorLogin = document.getElementById("errorLogin");
-const errorSignUp = document.getElementById("errorSignUp");
+const loginCard=document.getElementById("loginCard");
+const loginForm=document.getElementById("loginForm");
+const signUpForm=document.getElementById("signUpForm");
+const loginBtn=document.getElementById("loginBtn");
+const goSignUp=document.getElementById("goSignUp");
+const backToLogin=document.getElementById("backToLogin");
+const signUpBtn=document.getElementById("signUpBtn");
+const errorLogin=document.getElementById("errorLogin");
+const errorSignUp=document.getElementById("errorSignUp");
+const loginGuestBtn=document.getElementById("loginGuestBtn");
+const userBubble=document.getElementById("userBubble");
 
+let accounts=JSON.parse(localStorage.getItem("vokiAccounts")||"{}");
+
+// Helpers
 function updateUserBubble(user){
   if(user){
-    userBubble.innerHTML=`Signed in as ${user} <span class="badge">Beta Program</span>`;
-    enableAI();
-  }else{
+    userBubble.innerHTML=`Signed in as ${user}<span class="badge">Beta Program</span>`;
+  } else {
     userBubble.innerHTML=`Not signed in <span class="badge">Guest</span><div><button id="loginGuestBtn">Login / Sign Up</button></div>`;
     document.getElementById("aiInput").disabled=true;
     document.getElementById("aiSend").disabled=true;
-    document.getElementById("loginGuestBtn").onclick=()=>{document.getElementById("loginCard").style.display="block";}
+    document.getElementById("loginGuestBtn").onclick=()=>{loginCard.style.display="block";}
   }
 }
 
-updateUserBubble(localStorage.getItem("vokiLastUser")||null);
+function showLoading(user){
+  const overlay=document.getElementById("loadingOverlay");
+  overlay.innerHTML=`<div>Getting things ready for you, <strong>${user}</strong>...</div>`;
+  overlay.style.display="flex";
+  setTimeout(()=>{
+    overlay.style.opacity="0";
+    setTimeout(()=>overlay.style.display="none",500);
+    document.querySelector(".container").style.opacity="1";
+    document.querySelector(".container").style.pointerEvents="auto";
+    document.querySelector("nav").style.opacity="1";
+    document.querySelector("nav").style.pointerEvents="auto";
+    document.getElementById("aiBubble").style.opacity="1";
+    document.getElementById("aiBubble").style.pointerEvents="auto";
+    document.querySelector("footer").style.opacity="1";
+    document.querySelector("footer").style.pointerEvents="auto";
+    document.getElementById("aiInput").disabled=false;
+    document.getElementById("aiSend").disabled=false;
+  },2000);
+}
 
+// Sign Up / Login
 goSignUp.onclick=()=>{loginForm.style.display="none"; signUpForm.style.display="block"; errorSignUp.style.display="none";}
 backToLogin.onclick=()=>{loginForm.style.display="block"; signUpForm.style.display="none"; errorLogin.style.display="none";}
 
@@ -197,20 +221,21 @@ signUpBtn.onclick=()=>{
   accounts[u]=p;
   localStorage.setItem("vokiAccounts", JSON.stringify(accounts));
   localStorage.setItem("vokiLastUser", u);
-  document.getElementById("loginCard").style.display="none";
+  loginCard.style.display="none";
   updateUserBubble(u);
+  showLoading(u);
 }
 
 loginBtn.onclick=()=>{
   const u=document.getElementById("loginUsername").value.trim();
   const p=document.getElementById("loginPassword").value.trim();
-  if(accounts[u]&&accounts[u]===p){
+  if(accounts[u] && accounts[u]===p){
     localStorage.setItem("vokiLastUser", u);
-    document.getElementById("loginCard").style.display="none";
+    loginCard.style.display="none";
     updateUserBubble(u);
-  }else errorLogin.style.display="block";
+    showLoading(u);
+  } else errorLogin.style.display="block";
 }
-loginGuestBtn.onclick=()=>{ document.getElementById("loginCard").style.display="block"; }
 
 // AI Chat
 const aiBubble = document.getElementById("aiBubble");
@@ -219,15 +244,13 @@ const aiInput = document.getElementById("aiInput");
 const aiSend = document.getElementById("aiSend");
 const aiMessages = document.getElementById("aiMessages");
 let memory = [];
-const bannedWords = ["badword1","badword2","badword3","offensive"];
-
-function enableAI(){ aiInput.disabled=false; aiSend.disabled=false; }
+const bannedWords = ["badword1","badword2","badword3"];
 
 function isSafe(text){ return !bannedWords.some(w=>text.toLowerCase().includes(w)); }
 function addMessage(sender,text){
   const msg=document.createElement("div");
   msg.classList.add("ai-message",sender==="You"?"ai-user":"ai-bot");
-  const time = new Date().toLocaleTimeString();
+  const time=new Date().toLocaleTimeString();
   msg.innerHTML=`<strong>${sender}:</strong> ${text} <span style="float:right;font-size:0.7em;">${time}</span>`;
   aiMessages.appendChild(msg);
   aiMessages.scrollTop=aiMessages.scrollHeight;
@@ -235,12 +258,17 @@ function addMessage(sender,text){
 function getAIResponse(text){
   const found = memory.find(item=>item.question.toLowerCase()===text.toLowerCase());
   if(found) return found.answer;
-  const responses = ["Interesting! Tell me more.","I'm here to help!","That's a great question.","Could you clarify?"];
+  const responses = [
+    "Interesting! Tell me more.",
+    "I'm here to help!",
+    "That's a great question.",
+    "Could you clarify?"
+  ];
   const answer = responses[Math.floor(Math.random()*responses.length)];
   memory.push({question:text, answer:answer});
   return answer;
 }
-aiBubble.onclick=()=>{ aiChat.style.display = aiChat.style.display==="flex"?"flex":"flex"; aiChat.style.display=(aiChat.style.display==="flex"?"none":"flex"); }
+aiBubble.onclick=()=>{ aiChat.style.display = aiChat.style.display==="flex"?"none":"flex"; }
 aiSend.onclick=()=>{
   const text=aiInput.value.trim();
   if(!text) return;
@@ -250,6 +278,10 @@ aiSend.onclick=()=>{
   aiInput.value="";
 }
 aiInput.addEventListener("keypress",e=>{if(e.key==="Enter") aiSend.click();});
+
+// Initialize
+const lastUser = localStorage.getItem("vokiLastUser");
+if(lastUser){ loginCard.style.display="none"; updateUserBubble(lastUser); showLoading(lastUser); }
 </script>
 </body>
 </html>
