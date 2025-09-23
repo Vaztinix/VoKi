@@ -7,6 +7,7 @@
 <style>
 :root {
   --primary-color: #aeefff;
+  --secondary-color: #4facfe;
   --text-color: #fff;
   --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
   --nav-bg: rgba(0,0,0,0.6);
@@ -19,8 +20,9 @@
 }
 
 body {
-  margin:0; font-family: Arial, sans-serif; background: var(--bg-gradient);
-  color: var(--text-color); line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden;
+  margin:0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: var(--bg-gradient); color: var(--text-color);
+  line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden;
   transition: all 0.3s ease;
 }
 
@@ -54,7 +56,7 @@ nav a:hover { color: var(--primary-color); }
 
 .error-notification {
   position: fixed; top: 20px; right: 20px; background: var(--error-bg);
-  padding: 15px 20px; border-radius: 8px; color: #fff; font-weight: bold;
+  padding: 15px 20px; border-radius: 12px; color: #fff; font-weight: bold;
   opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 2000;
 }
 .error-notification.show { opacity: 1; pointer-events: auto; }
@@ -65,13 +67,14 @@ h2 { font-size: 2rem; margin-bottom: 15px; color: var(--primary-color); }
 p, li { font-size: 1.05rem; margin-bottom: 10px; }
 ul { padding-left: 20px; margin-bottom: 20px; }
 
-.card { background: var(--card-bg); padding: 20px; border-radius: 12px; margin: 20px 0; transition: background 0.3s; }
+.card { background: var(--card-bg); padding: 20px; border-radius: 20px; margin: 20px 0; transition: background 0.3s; backdrop-filter: blur(5px); }
 .card:hover { background: var(--card-hover-bg); }
 
 .team-card {
   display: flex; flex-direction: column; align-items: center;
-  background: var(--card-bg); padding: 20px; border-radius: 12px;
+  background: var(--card-bg); padding: 20px; border-radius: 20px;
   max-width: 250px; margin: 20px auto; transition: background 0.3s, transform 0.3s;
+  backdrop-filter: blur(5px);
 }
 .team-card:hover { background: var(--card-hover-bg); transform: translateY(-5px); }
 .profile-pic { width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.1); margin-bottom: 10px; }
@@ -83,12 +86,12 @@ ul { padding-left: 20px; margin-bottom: 20px; }
 .faq { margin-top: 40px; }
 .faq .question {
   background: rgba(0,0,0,0.35); cursor: pointer;
-  padding: 12px; border-radius: 8px; margin-bottom: 8px; font-weight: bold;
+  padding: 12px; border-radius: 12px; margin-bottom: 8px; font-weight: bold;
   transition: background 0.3s;
 }
 .faq .question:hover { background: rgba(0,0,0,0.55); }
 .faq .answer { display: none; padding: 12px 15px; background: rgba(0,0,0,0.25);
-  border-radius: 8px; margin-bottom: 10px;
+  border-radius: 12px; margin-bottom: 10px;
 }
 
 footer { text-align: center; padding: 20px; font-size: 0.9rem; opacity: 0.85;
@@ -113,30 +116,46 @@ body.dark {
   width: 60px; height: 60px; background: var(--primary-color);
   border-radius: 50%; display: flex; justify-content: center; align-items: center;
   cursor: pointer; font-size: 28px; z-index: 1500;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+  transition: transform 0.2s ease;
 }
+#aiChatBubble:hover { transform: scale(1.1); }
+
 #aiChatBox {
-  position: fixed; bottom: 90px; right: 20px;
-  width: 350px; max-height: 500px; background: var(--card-bg);
-  border-radius: 12px; display: none; flex-direction: column;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1500;
+  position: fixed; bottom: 100px; right: 20px;
+  width: 360px; max-height: 550px; background: rgba(0,0,0,0.35);
+  border-radius: 20px; display: none; flex-direction: column;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.5); backdrop-filter: blur(10px);
+  z-index: 1500; overflow: hidden;
 }
+
 #aiChatHeader {
-  padding: 10px; font-weight: bold; background: var(--nav-bg);
-  border-radius: 12px 12px 0 0; display: flex; justify-content: space-between;
+  padding: 12px; font-weight: bold; background: rgba(0,0,0,0.6);
+  display: flex; justify-content: space-between; align-items: center;
+  color: var(--primary-color); font-size: 1.1rem;
 }
+
 #aiChatMessages {
-  flex: 1; padding: 10px; overflow-y: auto; color: var(--text-color);
+  flex: 1; padding: 12px; overflow-y: auto; color: var(--text-color);
+  font-size: 0.95rem;
 }
+
+#aiChatInputContainer {
+  display: flex; border-top: 1px solid rgba(255,255,255,0.2);
+}
+
 #aiChatInput {
-  padding: 8px; border: none; border-radius: 0 0 0 0;
-  width: calc(100% - 60px); outline: none;
+  flex: 1; padding: 10px; border: none; outline: none;
+  border-radius: 0 0 0 20px; background: rgba(255,255,255,0.1); color: var(--text-color);
 }
+
 #aiChatSend {
-  width: 60px; border: none; background: var(--primary-color);
-  color: #000; cursor: pointer;
+  width: 80px; border: none; background: var(--primary-color);
+  color: #000; cursor: pointer; font-weight: bold;
+  border-radius: 0 0 20px 0; transition: 0.3s;
 }
-body.dark #aiChatBox { background: var(--card-bg); }
+#aiChatSend:hover { background: var(--secondary-color); }
+
 </style>
 </head>
 <body>
@@ -233,11 +252,14 @@ body.dark #aiChatBox { background: var(--card-bg); }
 <div id="aiChatBox">
   <div id="aiChatHeader">VoKi AI <span id="closeAiChat">✖</span></div>
   <div id="aiChatMessages"></div>
-  <input type="text" id="aiChatInput" placeholder="Ask me something..." />
-  <button id="aiChatSend">Send</button>
+  <div id="aiChatInputContainer">
+    <input type="text" id="aiChatInput" placeholder="Ask me something..." />
+    <button id="aiChatSend">Send</button>
+  </div>
 </div>
 
 <script>
+// Menu and theme
 const menuToggle = document.getElementById('menuToggle');
 const menu = document.getElementById('menu');
 menuToggle.addEventListener('click', () => { menu.classList.toggle('show'); menuToggle.classList.toggle('shifted'); });
@@ -253,18 +275,9 @@ themeToggle.addEventListener('click', () => {
 
 const discordLogin = document.getElementById('discordLogin');
 const errorNotification = document.getElementById('errorNotification');
-discordLogin.addEventListener('click', e => {
-  e.preventDefault();
-  errorNotification.classList.add('show');
-  setTimeout(() => errorNotification.classList.remove('show'), 4000);
-});
+discordLogin.addEventListener('click', e => { e.preventDefault(); errorNotification.classList.add('show'); setTimeout(() => errorNotification.classList.remove('show'), 4000); });
 
-document.querySelectorAll('.faq .question').forEach(q => {
-  q.addEventListener('click', () => {
-    const ans = q.nextElementSibling;
-    ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
-  });
-});
+document.querySelectorAll('.faq .question').forEach(q => { q.addEventListener('click', () => { const ans = q.nextElementSibling; ans.style.display = ans.style.display === 'block' ? 'none' : 'block'; }); });
 
 // AI Chat
 const bubble = document.getElementById("aiChatBubble");
@@ -283,7 +296,7 @@ const bannedWords = ["badword1","badword2","sex","drugs","kill","hack","spam","t
 // AI memory
 let memory = [];
 
-// Large responses array
+// Responses
 const responses = [
   {keywords:["hello","hi","hey"], answer:"Hello! How can I assist you today?"},
   {keywords:["how are you"], answer:"I'm just a bot, but ready to help!"},
@@ -297,10 +310,7 @@ const responses = [
   {keywords:["question","ask"], answer:"Feel free to ask me anything about VoKi or Discord!"}
 ];
 
-// Generate more responses programmatically
-for(let i=1;i<=1000;i++){
-  responses.push({keywords:["example"+i], answer:"This is a sample answer number "+i+". You can ask more!"});
-}
+for(let i=1;i<=1000;i++){ responses.push({keywords:["example"+i], answer:"This is a sample answer number "+i+". You can ask more!"}); }
 
 function addMessage(sender,text){
   const now=new Date();
@@ -311,43 +321,28 @@ function addMessage(sender,text){
   messages.scrollTop = messages.scrollHeight;
 }
 
-function isSafe(text){
-  return !bannedWords.some(word=>text.toLowerCase().includes(word));
-}
+function isSafe(text){ return !bannedWords.some(word=>text.toLowerCase().includes(word)); }
 
 sendBtn.addEventListener("click",()=>{
   const userText=input.value.trim();
   if(!userText) return;
-  if(!isSafe(userText)){
-    addMessage("AI","⚠️ Unsafe content blocked.");
-    input.value='';
-    return;
-  }
+  if(!isSafe(userText)){ addMessage("AI","⚠️ Unsafe content blocked."); input.value=''; return; }
   addMessage("You",userText);
-
   let found=memory.find(item=>item.question.toLowerCase()===userText.toLowerCase());
-  if(found){
-    addMessage("AI",found.answer);
-  }else{
+  if(found){ addMessage("AI",found.answer); }
+  else{
     let matched=false;
-    for(let item of responses){
-      if(item.keywords.some(k=>userText.toLowerCase().includes(k))){
-        addMessage("AI",item.answer);
-        memory.push({question:userText,answer:item.answer});
-        matched=true;
-        break;
-      }
-    }
+    for(let item of responses){ if(item.keywords.some(k=>userText.toLowerCase().includes(k))){
+      addMessage("AI",item.answer); memory.push({question:userText,answer:item.answer}); matched=true; break;
+    }}
     if(!matched){
       const generic=["Interesting! Can you tell me more?","Hmm… that's a good question!","I see! What else can you tell me about that?","Let me think about that for a moment...","Fascinating! Let's explore this further!"];
       const ans=generic[Math.floor(Math.random()*generic.length)];
-      addMessage("AI",ans);
-      memory.push({question:userText,answer:ans});
+      addMessage("AI",ans); memory.push({question:userText,answer:ans});
     }
   }
   input.value='';
 });
-
 input.addEventListener("keypress",e=>{if(e.key==='Enter') sendBtn.click();});
 </script>
 
