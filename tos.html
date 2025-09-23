@@ -1,322 +1,306 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VoKi – Terms of Service</title>
-  <style>
-    /* ===== ROOT VARIABLES ===== */
-    :root {
-      --primary-color: #aeefff;
-      --text-color: #fff;
-      --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
-      --nav-bg: rgba(0,0,0,0.6);
-      --card-bg: rgba(0,0,0,0.25);
-      --card-hover-bg: rgba(0,0,0,0.45);
-      --faq-question-bg: rgba(0,0,0,0.35);
-      --faq-question-hover: rgba(0,0,0,0.55);
-      --faq-answer-bg: rgba(0,0,0,0.25);
-      --error-bg: rgba(0,0,0,0.9);
-    }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VoKi – Terms of Service</title>
+<style>
+  :root {
+    --primary-color: #aeefff;
+    --text-color: #fff;
+    --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
+    --nav-bg: rgba(0,0,0,0.6);
+    --card-bg: rgba(0,0,0,0.25);
+    --card-hover-bg: rgba(0,0,0,0.45);
+    --faq-question-bg: rgba(0,0,0,0.35);
+    --faq-question-hover: rgba(0,0,0,0.55);
+    --faq-answer-bg: rgba(0,0,0,0.25);
+    --error-bg: rgba(0,0,0,0.9);
+  }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--bg-gradient);
-      color: var(--text-color);
-      line-height: 1.6;
-      scroll-behavior: smooth;
-      transition: all 0.3s ease;
-      overflow-x: hidden;
-    }
+  body {
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: var(--bg-gradient);
+    color: var(--text-color);
+    line-height: 1.6;
+    scroll-behavior: smooth;
+    transition: all 0.3s ease;
+    overflow-x: hidden;
+  }
 
-    /* ===== NAVIGATION ===== */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 60px;
-      background: var(--nav-bg);
-      display: flex;
-      justify-content: flex-end;
-      align-items: center;
-      padding: 0 20px;
-      z-index: 1000;
-    }
-    nav a {
-      color: var(--text-color);
-      margin-left: 25px;
-      font-weight: bold;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    nav a:hover { color: var(--primary-color); }
+  /* ===== NAVIGATION ===== */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: var(--nav-bg);
+    display: flex;
+    justify-content: center; /* changed from flex-end */
+    align-items: center;
+    padding: 0 20px;
+    z-index: 1000;
+    gap: 25px; /* space between links */
+  }
+  nav a {
+    color: var(--text-color);
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+  }
+  nav a:hover { color: var(--primary-color); }
 
-    /* ===== MENU BUTTON ===== */
-    #menuToggle {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      width: 50px;
-      height: 50px;
-      background: var(--primary-color);
-      border-radius: 50%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-      z-index: 1001;
-    }
-    #menuToggle span {
-      display: block;
-      width: 22px;
-      height: 2px;
-      background: #000;
-      margin: 3px 0;
-      transition: 0.3s;
-    }
+  /* ===== BOTTOM MENU BUTTON ===== */
+  #menuToggle {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1001;
+  }
+  #menuToggle span {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #000;
+    margin: 3px 0;
+    transition: 0.3s;
+  }
 
-    /* ===== SLIDE-OUT MENU ===== */
-    #menu {
-      position: fixed;
-      bottom: 0;
-      left: 0;
-      width: 250px;
-      height: auto;
-      background: rgba(0,0,0,0.85);
-      border-radius: 12px 12px 0 0;
-      padding: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-      z-index: 1000;
-    }
-    #menu.show { transform: translateY(0); }
+  /* ===== SLIDE-UP MENU MATCH HOME PAGE ===== */
+  #menu {
+    position: fixed;
+    bottom: 0;
+    left: 20px;
+    width: 260px;
+    background: rgba(0,0,0,0.85);
+    border-radius: 12px 12px 0 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
+  }
+  #menu.show { transform: translateY(0); }
 
-    #menu a, #menu div {
-      color: var(--primary-color);
-      font-weight: bold;
-      cursor: pointer;
-      padding: 8px 0;
-      text-decoration: none;
-      transition: 0.3s;
-    }
-    #menu a:hover, #menu div:hover { color: #fff; }
+  #menu a, #menu div {
+    color: var(--primary-color);
+    font-weight: bold;
+    cursor: pointer;
+    padding: 8px 0;
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  #menu a:hover, #menu div:hover { color: #fff; }
 
-    /* ===== ERROR NOTIFICATION ===== */
-    .error-notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: var(--error-bg);
-      padding: 15px 20px;
-      border-radius: 8px;
-      color: #fff;
-      font-weight: bold;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
-      z-index: 2000;
-    }
-    .error-notification.show { opacity: 1; pointer-events: auto; }
+  /* ===== ERROR NOTIFICATION ===== */
+  .error-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--error-bg);
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: #fff;
+    font-weight: bold;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+    z-index: 2000;
+  }
+  .error-notification.show { opacity: 1; pointer-events: auto; }
 
-    /* ===== CONTAINER ===== */
-    .container {
-      max-width: 900px;
-      margin: 100px auto 50px;
-      padding: 0 20px;
-    }
+  /* ===== CONTENT CONTAINER ===== */
+  .container {
+    max-width: 900px;
+    margin: 100px auto 50px;
+    padding: 0 20px;
+  }
 
-    h1 { font-size: 2.5rem; margin-bottom: 20px; text-align: center; color: #e6f7ff; }
-    h2 { font-size: 2rem; margin-bottom: 15px; color: var(--primary-color); }
-    p, li { font-size: 1.05rem; margin-bottom: 10px; }
-    ul { padding-left: 20px; margin-bottom: 20px; }
+  h1 { font-size: 2.5rem; margin-bottom: 20px; text-align: center; color: #e6f7ff; }
+  h2 { font-size: 2rem; margin-bottom: 15px; color: var(--primary-color); }
+  p, li { font-size: 1.05rem; margin-bottom: 10px; }
+  ul { padding-left: 20px; margin-bottom: 20px; }
 
-    /* ===== CARD / UPDATES ===== */
-    .updates {
-      background: var(--card-bg);
-      padding: 20px;
-      border-radius: 12px;
-      margin: 30px 0;
-    }
+  /* ===== CARD / UPDATES ===== */
+  .updates {
+    background: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    margin: 30px 0;
+  }
 
-    /* ===== FAQ ===== */
-    .faq { margin-top: 40px; }
-    .faq .question {
-      background: var(--faq-question-bg);
-      cursor: pointer;
-      padding: 15px;
-      border-radius: 8px;
-      margin-bottom: 8px;
-      transition: background 0.3s;
-      font-weight: bold;
-    }
-    .faq .question:hover { background: var(--faq-question-hover); }
-    .faq .answer { display: none; padding: 12px 15px; background: var(--faq-answer-bg); border-radius: 8px; margin-bottom: 10px; }
+  /* ===== FAQ ===== */
+  .faq { margin-top: 40px; }
+  .faq .question {
+    background: var(--faq-question-bg);
+    cursor: pointer;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    transition: background 0.3s;
+    font-weight: bold;
+  }
+  .faq .question:hover { background: var(--faq-question-hover); }
+  .faq .answer { display: none; padding: 12px 15px; background: var(--faq-answer-bg); border-radius: 8px; margin-bottom: 10px; }
 
-    /* ===== FOOTER ===== */
-    footer {
-      text-align: center;
-      padding: 20px;
-      font-size: 0.9rem;
-      opacity: 0.85;
-      background: rgba(0,0,0,0.25);
-      margin-top: 50px;
-      border-top: 1px solid rgba(255,255,255,0.2);
-    }
+  footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9rem;
+    opacity: 0.85;
+    background: rgba(0,0,0,0.25);
+    margin-top: 50px;
+    border-top: 1px solid rgba(255,255,255,0.2);
+  }
 
-    /* ===== DARK MODE ===== */
-    body.dark {
-      --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
-      --text-color: #eee;
-      --nav-bg: rgba(30,30,30,0.85);
-      --card-bg: rgba(50,50,50,0.4);
-      --faq-question-bg: rgba(50,50,50,0.4);
-      --faq-question-hover: rgba(60,60,60,0.6);
-      --faq-answer-bg: rgba(60,60,60,0.3);
-      --error-bg: rgba(0,0,0,0.9);
-    }
-
-    /* ===== DARK MODE TOGGLE ===== */
-    #themeToggle { cursor: pointer; font-weight: bold; }
-  </style>
+  /* ===== DARK MODE ===== */
+  body.dark {
+    --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
+    --text-color: #eee;
+    --nav-bg: rgba(30,30,30,0.85);
+    --card-bg: rgba(50,50,50,0.4);
+    --faq-question-bg: rgba(50,50,50,0.4);
+    --faq-question-hover: rgba(60,60,60,0.6);
+    --faq-answer-bg: rgba(60,60,60,0.3);
+    --error-bg: rgba(0,0,0,0.9);
+  }
+</style>
 </head>
 <body>
 
-  <!-- NAVIGATION -->
-  <nav>
-    <a href="index.html">Home</a>
-    <a href="tos.html">Terms of Service</a>
-  </nav>
+<!-- NAVIGATION -->
+<nav>
+  <a href="index.html">Home</a>
+  <a href="tos.html">Terms of Service</a>
+</nav>
 
-  <!-- BOTTOM LEFT MENU BUTTON -->
-  <div id="menuToggle">
-    <span></span>
-    <span></span>
-    <span></span>
+<!-- MENU BUTTON -->
+<div id="menuToggle">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+
+<!-- SLIDE-UP MENU -->
+<div id="menu">
+  <a href="index.html">Home</a>
+  <a href="tos.html">Terms of Service</a>
+  <a href="#" id="discordLogin">Login with Discord</a>
+  <div id="themeToggle">Toggle Theme</div>
+</div>
+
+<!-- ERROR NOTIFICATION -->
+<div class="error-notification" id="errorNotification">⚠️ This feature is not available yet and is still in development.</div>
+
+<!-- CONTENT -->
+<div class="container">
+  <h1>VoKi – Terms of Service & Privacy Policy</h1>
+  <p><strong>Effective Date: September 22, 2025</strong></p>
+
+  <h2>1. Overview</h2>
+  <p>VoKi is a Discord bot designed to provide moderation, AI tools, and community support. By using VoKi, you agree to follow this Terms of Service (TOS) and Privacy Policy.</p>
+
+  <h2>2. Data Privacy & Security</h2>
+  <ul>
+    <li>VoKi only collects data necessary for bot features.</li>
+    <li>No personal messages are read or stored beyond functionality requirements.</li>
+    <li>Server admins cannot access your personal data, only delete it if requested.</li>
+    <li>Users can opt-out and delete all stored data at any time.</li>
+  </ul>
+
+  <h2>3. User Responsibilities</h2>
+  <ul>
+    <li>Do not use VoKi for illegal activities.</li>
+    <li>Ensure proper permissions are given to VoKi for its commands.</li>
+    <li>Abusive or exploitative behavior may result in removal of bot access.</li>
+  </ul>
+
+  <h2>4. Bot Updates & Changes</h2>
+  <ul>
+    <li>VoKi is updated regularly with new features, bug fixes, and improvements.</li>
+    <li>Changes to commands or features will be communicated through Discord or website updates.</li>
+  </ul>
+
+  <h2>5. Liability</h2>
+  <ul>
+    <li>VoKi is provided "as-is" without warranties.</li>
+    <li>Developers are not liable for indirect, incidental, or consequential damages from bot use.</li>
+  </ul>
+
+  <h2>6. Contact & Support</h2>
+  <ul>
+    <li>Email: VoKi.io@outlook.com</li>
+    <li>Discord: <a href="https://discord.gg/PHKdvcYd" style="color: var(--primary-color);">Join our server</a></li>
+  </ul>
+
+  <div class="updates">
+    <h2>Current Updates</h2>
+    <ul>
+      <li>Enhanced logging system</li>
+      <li>Multilingual support</li>
+      <li>Advanced leveling features</li>
+      <li>Privacy opt-out available for all users</li>
+    </ul>
   </div>
 
-  <!-- SLIDE-UP MENU -->
-  <div id="menu">
-    <a href="index.html">Home</a>
-    <a href="tos.html">Terms of Service</a>
-    <a href="#" id="discordLogin">Login with Discord</a>
-    <div id="themeToggle">Toggle Theme</div>
+  <div class="faq">
+    <h2>FAQ</h2>
+    <div class="question">How is my data protected?</div>
+    <div class="answer">VoKi only stores necessary data. Admins cannot view messages; users can delete all data anytime.</div>
+
+    <div class="question">How do I request deletion of my data?</div>
+    <div class="answer">Contact us via Discord or email to request complete deletion. Deletion is permanent.</div>
+
+    <div class="question">Will features change over time?</div>
+    <div class="answer">Yes, VoKi is regularly updated with new commands and improvements.</div>
   </div>
+</div>
 
-  <!-- ERROR NOTIFICATION -->
-  <div class="error-notification" id="errorNotification">
-    ⚠️ This feature is not available yet and is still in development.
-  </div>
+<footer>
+  © 2025 VoKi — Building smarter communities together.
+</footer>
 
-  <!-- CONTENT -->
-  <div class="container">
-    <h1>VoKi – Terms of Service & Privacy Policy</h1>
-    <p><strong>Effective Date: September 22, 2025</strong></p>
+<script>
+  const menuToggle = document.getElementById('menuToggle');
+  const menu = document.getElementById('menu');
+  menuToggle.addEventListener('click', () => menu.classList.toggle('show'));
 
-    <h2>1. Overview</h2>
-    <p>VoKi is a Discord bot designed to provide moderation, AI tools, and community support. By using VoKi, you agree to follow this Terms of Service (TOS) and Privacy Policy.</p>
-
-    <h2>2. Data Privacy & Security</h2>
-    <ul>
-      <li>VoKi only collects data necessary for bot features.</li>
-      <li>No personal messages are read or stored beyond functionality requirements.</li>
-      <li>Server admins cannot access your personal data, only delete it if requested.</li>
-      <li>Users can opt-out and delete all stored data at any time.</li>
-    </ul>
-
-    <h2>3. User Responsibilities</h2>
-    <ul>
-      <li>Do not use VoKi for illegal activities.</li>
-      <li>Ensure proper permissions are given to VoKi for its commands.</li>
-      <li>Abusive or exploitative behavior may result in removal of bot access.</li>
-    </ul>
-
-    <h2>4. Bot Updates & Changes</h2>
-    <ul>
-      <li>VoKi is updated regularly with new features, bug fixes, and improvements.</li>
-      <li>Changes to commands or features will be communicated through Discord or website updates.</li>
-    </ul>
-
-    <h2>5. Liability</h2>
-    <ul>
-      <li>VoKi is provided "as-is" without warranties.</li>
-      <li>Developers are not liable for indirect, incidental, or consequential damages from bot use.</li>
-    </ul>
-
-    <h2>6. Contact & Support</h2>
-    <ul>
-      <li>Email: VoKi.io@outlook.com</li>
-      <li>Discord: <a href="https://discord.gg/PHKdvcYd" style="color: var(--primary-color);">Join our server</a></li>
-    </ul>
-
-    <!-- Updates Section -->
-    <div class="updates">
-      <h2>Current Updates</h2>
-      <ul>
-        <li>Enhanced logging system</li>
-        <li>Multilingual support</li>
-        <li>Advanced leveling features</li>
-        <li>Privacy opt-out available for all users</li>
-      </ul>
-    </div>
-
-    <!-- FAQ Section -->
-    <div class="faq">
-      <h2>FAQ</h2>
-      <div class="question">How is my data protected?</div>
-      <div class="answer">VoKi only stores necessary data. Admins cannot view messages; users can delete all data anytime.</div>
-
-      <div class="question">How do I request deletion of my data?</div>
-      <div class="answer">Contact us via Discord or email to request complete deletion. Deletion is permanent.</div>
-
-      <div class="question">Will features change over time?</div>
-      <div class="answer">Yes, VoKi is regularly updated with new commands and improvements.</div>
-    </div>
-  </div>
-
-  <footer>
-    © 2025 VoKi — Building smarter communities together.
-  </footer>
-
-  <script>
-    // MENU TOGGLE
-    const menuToggle = document.getElementById('menuToggle');
-    const menu = document.getElementById('menu');
-    menuToggle.addEventListener('click', () => {
-      menu.classList.toggle('show');
+  document.querySelectorAll('.faq .question').forEach(q => {
+    q.addEventListener('click', () => {
+      const ans = q.nextElementSibling;
+      ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
     });
+  });
 
-    // FAQ Accordion
-    document.querySelectorAll('.faq .question').forEach(q => {
-      q.addEventListener('click', () => {
-        const ans = q.nextElementSibling;
-        ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
-      });
-    });
+  const body = document.body;
+  const themeToggle = document.getElementById('themeToggle');
+  const savedTheme = localStorage.getItem('theme');
+  if(savedTheme) body.classList.toggle('dark', savedTheme === 'dark');
+  themeToggle.addEventListener('click', () => {
+    body.classList.toggle('dark');
+    localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+  });
 
-    // Dark Mode
-    const body = document.body;
-    const themeToggle = document.getElementById('themeToggle');
-    const savedTheme = localStorage.getItem('theme');
-    if(savedTheme) body.classList.toggle('dark', savedTheme === 'dark');
-    themeToggle.addEventListener('click', () => {
-      body.classList.toggle('dark');
-      localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
-    });
-
-    // Discord login error
-    const discordLogin = document.getElementById('discordLogin');
-    const errorNotification = document.getElementById('errorNotification');
-    discordLogin.addEventListener('click', e => {
-      e.preventDefault();
-      errorNotification.classList.add('show');
-      setTimeout(() => errorNotification.classList.remove('show'), 4000);
-    });
-  </script>
+  const discordLogin = document.getElementById('discordLogin');
+  const errorNotification = document.getElementById('errorNotification');
+  discordLogin.addEventListener('click', e => {
+    e.preventDefault();
+    errorNotification.classList.add('show');
+    setTimeout(() => errorNotification.classList.remove('show'), 4000);
+  });
+</script>
 </body>
 </html>
