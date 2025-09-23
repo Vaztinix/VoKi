@@ -7,79 +7,89 @@
 <style>
 :root {
   --primary-color: #aeefff;
-  --secondary-color: #ffaeae;
   --text-color: #fff;
   --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
   --nav-bg: rgba(0,0,0,0.6);
   --card-bg: rgba(0,0,0,0.25);
   --card-hover-bg: rgba(0,0,0,0.45);
-  --error-bg: rgba(255,0,0,0.8);
-  --chat-bg: rgba(0,0,0,0.75);
-  --chat-hover: rgba(0,0,0,0.85);
-  --bubble-bg: rgba(0,0,0,0.6);
+  --faq-question-bg: rgba(0,0,0,0.35);
+  --faq-question-hover: rgba(0,0,0,0.55);
+  --faq-answer-bg: rgba(0,0,0,0.25);
+  --error-bg: rgba(0,0,0,0.9);
 }
 
 body {
   margin:0; font-family: Arial, sans-serif; background: var(--bg-gradient);
   color: var(--text-color); line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden;
-  transition: all 0.3s ease; display:flex; flex-direction:column; align-items:center;
+  transition: all 0.3s ease;
 }
 
 nav {
   position: fixed; top: 0; left: 0; width: 100%; height: 60px;
   background: var(--nav-bg); display: flex; justify-content: center; align-items: center;
-  gap: 25px; z-index: 1000; padding: 0 20px; opacity:0; pointer-events:none; transition:0.5s;
+  gap: 25px; z-index: 1000; padding: 0 20px;
 }
 nav a { color: var(--text-color); font-weight: bold; text-decoration: none; transition: 0.3s; }
 nav a:hover { color: var(--primary-color); }
 
-.container { max-width: 900px; margin: 100px auto 50px; padding: 0 20px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:20px; opacity:0; pointer-events:none; transition:0.5s; }
+#menuToggle {
+  position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px;
+  background: var(--primary-color); border-radius: 50%; display: flex;
+  flex-direction: column; justify-content: center; align-items: center;
+  cursor: pointer; z-index: 1001; transition: transform 0.3s ease;
+}
+#menuToggle span { display: block; width: 22px; height: 2px; background: #000; margin: 3px 0; }
+#menuToggle.shifted { transform: translateY(-260px); }
+
+#menu {
+  position: fixed; bottom: 0; left: 20px; width: 260px;
+  background: rgba(0,0,0,0.85); border-radius: 12px 12px 0 0;
+  padding: 20px; display: flex; flex-direction: column; gap: 12px;
+  transform: translateY(100%); transition: transform 0.3s ease; z-index: 1000;
+}
+#menu.show { transform: translateY(0); }
+#menu a, #menu div { color: var(--primary-color); font-weight: bold; cursor: pointer;
+  padding: 8px 0; text-decoration: none; transition: color 0.3s; }
+#menu a:hover, #menu div:hover { color: #fff; }
+
+.error-notification {
+  position: fixed; top: 20px; right: 20px; background: var(--error-bg);
+  padding: 15px 20px; border-radius: 8px; color: #fff; font-weight: bold;
+  opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 2000;
+}
+.error-notification.show { opacity: 1; pointer-events: auto; }
+
+.container { max-width: 1000px; margin: 100px auto 50px; padding: 0 20px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:20px; }
 
 .card { background: var(--card-bg); padding: 20px; border-radius: 20px; width: 100%; max-width:400px; transition: background 0.3s, transform 0.3s; text-align:left; }
 .card:hover { background: var(--card-hover-bg); transform: translateY(-5px); }
 
-input[type="text"], input[type="password"] {
-  width: calc(100% - 20px); padding: 10px; margin: 8px 0;
-  border-radius: 15px; border: none; outline: none; font-size: 1rem;
+.team-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; margin: 20px 0; }
+.team-card {
+  display: flex; flex-direction: column; align-items: center;
+  background: var(--card-bg); padding: 20px; border-radius: 20px;
+  width: 220px; transition: background 0.3s, transform 0.3s;
 }
-button {
-  background: var(--primary-color); color: #000; font-weight: bold;
-  padding: 10px 20px; border-radius: 15px; border: none; cursor: pointer;
-  transition: background 0.3s; margin-top:5px;
-}
-button:hover { background: #fff; color: #000; }
+.team-card:hover { background: var(--card-hover-bg); transform: translateY(-5px); }
+.profile-pic { width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.1); margin-bottom: 10px; }
+.username { font-weight: bold; margin-bottom: 5px; }
+.display-name { font-style: italic; color: var(--primary-color); margin-bottom: 10px; }
+.links a { color: var(--primary-color); text-decoration: none; display: block; margin: 5px 0; }
+.links a:hover { color: #fff; }
 
-#errorLogin, #errorSignUp { display:none; color: var(--error-bg); font-weight: bold; margin-top: 10px; text-align:center; }
-
-#userBubble {
-  position: fixed; top: 20px; right: 20px; padding: 12px 18px;
-  background: var(--bubble-bg); border-radius: 20px; text-align: center;
-  z-index: 1001; min-width: 180px;
+.faq { margin-top: 40px; width:100%; max-width:600px; }
+.faq .question {
+  background: rgba(0,0,0,0.35); cursor: pointer;
+  padding: 12px; border-radius: 8px; margin-bottom: 8px; font-weight: bold;
+  transition: background 0.3s;
 }
-#userBubble .badge { display:block; font-size:0.8rem; color: var(--secondary-color); margin-top:2px; }
-
-#aiBubble {
-  position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px;
-  background: var(--primary-color); border-radius: 50%; display: flex; justify-content: center;
-  align-items: center; cursor: pointer; font-weight: bold; z-index: 1002; box-shadow: 0 0 10px rgba(0,0,0,0.5); opacity:0; pointer-events:none; transition:0.5s;
+.faq .question:hover { background: rgba(0,0,0,0.55); }
+.faq .answer { display: none; padding: 12px 15px; background: rgba(0,0,0,0.25);
+  border-radius: 8px; margin-bottom: 10px;
 }
-#aiChat {
-  position: fixed; bottom: 90px; right: 20px; width: 320px; max-height: 400px;
-  background: var(--chat-bg); border-radius: 20px; display: none; flex-direction: column;
-  overflow: hidden; box-shadow: 0 0 15px rgba(0,0,0,0.7); z-index: 1001;
-}
-#aiMessages { flex: 1; overflow-y: auto; padding: 10px; }
-.ai-message { margin-bottom: 8px; border-radius: 12px; padding: 8px; }
-.ai-user { background: rgba(255,255,255,0.2); }
-.ai-bot { background: rgba(255,255,255,0.1); }
-#aiInputWrapper { display: flex; padding: 10px; background: rgba(0,0,0,0.25); border-top: 1px solid #fff; }
-#aiInput { flex: 1; padding: 8px; border-radius: 12px; border: none; outline: none; }
-#aiSend { margin-left: 5px; padding: 8px 12px; border-radius: 12px; border: none; background: var(--primary-color); cursor: pointer; }
 
-#loadingOverlay {
-  position: fixed; top:0; left:0; width:100%; height:100%;
-  background: rgba(0,0,0,0.95); display:flex; justify-content:center; align-items:center; flex-direction:column;
-  color: var(--primary-color); font-size:1.5rem; z-index:2000; transition:opacity 0.5s;
+footer { text-align: center; padding: 20px; font-size: 0.9rem; opacity: 0.85;
+  background: rgba(0,0,0,0.25); margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.2);
 }
 
 body.dark {
@@ -88,7 +98,9 @@ body.dark {
   --nav-bg: rgba(30,30,30,0.85);
   --card-bg: rgba(50,50,50,0.4);
   --card-hover-bg: rgba(60,60,60,0.6);
-  --chat-bg: rgba(30,30,30,0.85);
+  --faq-question-bg: rgba(50,50,50,0.4);
+  --faq-question-hover: rgba(60,60,60,0.6);
+  --faq-answer-bg: rgba(60,60,60,0.3);
 }
 </style>
 </head>
@@ -100,45 +112,34 @@ body.dark {
   <a href="tos.html">Terms of Service</a>
 </nav>
 
-<div id="userBubble">
-  Not signed in <span class="badge">Guest</span>
-  <div><button id="loginGuestBtn">Login / Sign Up</button></div>
+<div id="menuToggle">
+  <span></span><span></span><span></span>
 </div>
+
+<div id="menu">
+  <a href="index.html">Home</a>
+  <a href="tos.html">Terms of Service</a>
+  <a href="about.html">Team</a>
+  <a href="#" id="discordLogin">Login with Discord</a>
+  <div id="themeToggle">Toggle Theme</div>
+</div>
+
+<div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
 
 <div class="container">
   <h1>Welcome to VoKi</h1>
+  <p>VoKi is your all-in-one Discord bot providing moderation, AI tools, and community support.</p>
 
-  <!-- Login Card -->
-  <div class="card" id="loginCard">
-    <h2>VoKi Login / Sign Up</h2>
-    <div id="loginForm">
-      <input type="text" id="loginUsername" placeholder="Username">
-      <input type="password" id="loginPassword" placeholder="Password">
-      <button id="loginBtn">Login</button>
-      <button id="goSignUp">Sign Up</button>
-      <div id="errorLogin">Invalid credentials!</div>
-    </div>
-    <div id="signUpForm" style="display:none;">
-      <input type="text" id="signUsername" placeholder="Choose a username">
-      <input type="password" id="signPassword" placeholder="Choose a password">
-      <button id="signUpBtn">Sign Up</button>
-      <button id="backToLogin">Back</button>
-      <div id="errorSignUp">Username already exists!</div>
-    </div>
-  </div>
-
-  <!-- Features -->
   <div class="card">
     <h2>Features</h2>
     <ul>
       <li>Moderation commands: ban, mute, kick, etc.</li>
-      <li>AI-powered Q&A (requires login)</li>
+      <li>AI-powered Q&A</li>
       <li>Custom role management</li>
       <li>Support system for server staff</li>
     </ul>
   </div>
 
-  <!-- Updates -->
   <div class="card">
     <h2>Current Updates</h2>
     <ul>
@@ -148,140 +149,81 @@ body.dark {
       <li>Privacy opt-out available for all users</li>
     </ul>
   </div>
-</div>
 
-<div id="aiBubble">AI</div>
-<div id="aiChat">
-  <div id="aiMessages"></div>
-  <div id="aiInputWrapper">
-    <input type="text" id="aiInput" placeholder="Ask me anything..." disabled>
-    <button id="aiSend" disabled>Send</button>
+  <div class="team-container">
+    <div class="team-card">
+      <div class="profile-pic"></div>
+      <div class="username">Vaztinix</div>
+      <div class="display-name">Founder & Developer</div>
+      <div class="links">
+        <a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube</a>
+        <a href="#" target="_blank">Discord</a>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="profile-pic"></div>
+      <div class="username">solorads</div>
+      <div class="display-name">Partner</div>
+      <div class="links">
+        <a href="https://www.roblox.com/games/17590556553/NEW-Military-Roleplay" target="_blank">Roblox Game</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="card faq">
+    <h2>FAQ</h2>
+    <div class="question">How do I add VoKi to my server?</div>
+    <div class="answer">Click the "Invite" button on the VoKi website and select your server. Make sure you have the required permissions.</div>
+    <div class="question">Is my data safe with VoKi?</div>
+    <div class="answer">Yes, VoKi only collects necessary data for bot functionality. You can delete your data anytime.</div>
+  </div>
+
+  <div class="card">
+    <h2>Contact & Support</h2>
+    <ul>
+      <li>Email: VoKi.io@outlook.com</li>
+      <li>Discord: <a href="https://discord.gg/PHKdvcYd" style="color: var(--primary-color);">Join our server</a></li>
+    </ul>
   </div>
 </div>
 
-<div id="loadingOverlay"></div>
-
-<footer style="opacity:0; pointer-events:none;">© 2025 VoKi — Building smarter communities together.</footer>
+<footer>
+  © 2025 VoKi — Building smarter communities together.
+</footer>
 
 <script>
-const loginCard=document.getElementById("loginCard");
-const loginForm=document.getElementById("loginForm");
-const signUpForm=document.getElementById("signUpForm");
-const loginBtn=document.getElementById("loginBtn");
-const goSignUp=document.getElementById("goSignUp");
-const backToLogin=document.getElementById("backToLogin");
-const signUpBtn=document.getElementById("signUpBtn");
-const errorLogin=document.getElementById("errorLogin");
-const errorSignUp=document.getElementById("errorSignUp");
-const loginGuestBtn=document.getElementById("loginGuestBtn");
-const userBubble=document.getElementById("userBubble");
+const menuToggle = document.getElementById('menuToggle');
+const menu = document.getElementById('menu');
+menuToggle.addEventListener('click', () => {
+  menu.classList.toggle('show');
+  menuToggle.classList.toggle('shifted');
+});
 
-let accounts=JSON.parse(localStorage.getItem("vokiAccounts")||"{}");
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+const savedTheme = localStorage.getItem('theme');
+if(savedTheme) body.classList.toggle('dark', savedTheme === 'dark');
+themeToggle.addEventListener('click', () => {
+  body.classList.toggle('dark');
+  localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+});
 
-// Helpers
-function updateUserBubble(user){
-  if(user){
-    userBubble.innerHTML=`Signed in as ${user}<span class="badge">Beta Program</span>`;
-  } else {
-    userBubble.innerHTML=`Not signed in <span class="badge">Guest</span><div><button id="loginGuestBtn">Login / Sign Up</button></div>`;
-    document.getElementById("aiInput").disabled=true;
-    document.getElementById("aiSend").disabled=true;
-    document.getElementById("loginGuestBtn").onclick=()=>{loginCard.style.display="block";}
-  }
-}
+const discordLogin = document.getElementById('discordLogin');
+const errorNotification = document.getElementById('errorNotification');
+discordLogin.addEventListener('click', e => {
+  e.preventDefault();
+  errorNotification.classList.add('show');
+  setTimeout(() => errorNotification.classList.remove('show'), 4000);
+});
 
-function showLoading(user){
-  const overlay=document.getElementById("loadingOverlay");
-  overlay.innerHTML=`<div>Getting things ready for you, <strong>${user}</strong>...</div>`;
-  overlay.style.display="flex";
-  setTimeout(()=>{
-    overlay.style.opacity="0";
-    setTimeout(()=>overlay.style.display="none",500);
-    document.querySelector(".container").style.opacity="1";
-    document.querySelector(".container").style.pointerEvents="auto";
-    document.querySelector("nav").style.opacity="1";
-    document.querySelector("nav").style.pointerEvents="auto";
-    document.getElementById("aiBubble").style.opacity="1";
-    document.getElementById("aiBubble").style.pointerEvents="auto";
-    document.querySelector("footer").style.opacity="1";
-    document.querySelector("footer").style.pointerEvents="auto";
-    document.getElementById("aiInput").disabled=false;
-    document.getElementById("aiSend").disabled=false;
-  },2000);
-}
-
-// Sign Up / Login
-goSignUp.onclick=()=>{loginForm.style.display="none"; signUpForm.style.display="block"; errorSignUp.style.display="none";}
-backToLogin.onclick=()=>{loginForm.style.display="block"; signUpForm.style.display="none"; errorLogin.style.display="none";}
-
-signUpBtn.onclick=()=>{
-  const u=document.getElementById("signUsername").value.trim();
-  const p=document.getElementById("signPassword").value.trim();
-  if(accounts[u]){ errorSignUp.style.display="block"; return; }
-  accounts[u]=p;
-  localStorage.setItem("vokiAccounts", JSON.stringify(accounts));
-  localStorage.setItem("vokiLastUser", u);
-  loginCard.style.display="none";
-  updateUserBubble(u);
-  showLoading(u);
-}
-
-loginBtn.onclick=()=>{
-  const u=document.getElementById("loginUsername").value.trim();
-  const p=document.getElementById("loginPassword").value.trim();
-  if(accounts[u] && accounts[u]===p){
-    localStorage.setItem("vokiLastUser", u);
-    loginCard.style.display="none";
-    updateUserBubble(u);
-    showLoading(u);
-  } else errorLogin.style.display="block";
-}
-
-// AI Chat
-const aiBubble = document.getElementById("aiBubble");
-const aiChat = document.getElementById("aiChat");
-const aiInput = document.getElementById("aiInput");
-const aiSend = document.getElementById("aiSend");
-const aiMessages = document.getElementById("aiMessages");
-let memory = [];
-const bannedWords = ["badword1","badword2","badword3"];
-
-function isSafe(text){ return !bannedWords.some(w=>text.toLowerCase().includes(w)); }
-function addMessage(sender,text){
-  const msg=document.createElement("div");
-  msg.classList.add("ai-message",sender==="You"?"ai-user":"ai-bot");
-  const time=new Date().toLocaleTimeString();
-  msg.innerHTML=`<strong>${sender}:</strong> ${text} <span style="float:right;font-size:0.7em;">${time}</span>`;
-  aiMessages.appendChild(msg);
-  aiMessages.scrollTop=aiMessages.scrollHeight;
-}
-function getAIResponse(text){
-  const found = memory.find(item=>item.question.toLowerCase()===text.toLowerCase());
-  if(found) return found.answer;
-  const responses = [
-    "Interesting! Tell me more.",
-    "I'm here to help!",
-    "That's a great question.",
-    "Could you clarify?"
-  ];
-  const answer = responses[Math.floor(Math.random()*responses.length)];
-  memory.push({question:text, answer:answer});
-  return answer;
-}
-aiBubble.onclick=()=>{ aiChat.style.display = aiChat.style.display==="flex"?"none":"flex"; }
-aiSend.onclick=()=>{
-  const text=aiInput.value.trim();
-  if(!text) return;
-  if(!isSafe(text)){ addMessage("AI","⚠️ Unsafe content blocked."); aiInput.value=""; return; }
-  addMessage("You", text);
-  addMessage("AI", getAIResponse(text));
-  aiInput.value="";
-}
-aiInput.addEventListener("keypress",e=>{if(e.key==="Enter") aiSend.click();});
-
-// Initialize
-const lastUser = localStorage.getItem("vokiLastUser");
-if(lastUser){ loginCard.style.display="none"; updateUserBubble(lastUser); showLoading(lastUser); }
+document.querySelectorAll('.faq .question').forEach(q => {
+  q.addEventListener('click', () => {
+    const ans = q.nextElementSibling;
+    ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
+  });
+});
 </script>
+
 </body>
 </html>
