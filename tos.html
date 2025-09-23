@@ -29,7 +29,7 @@
     overflow-x: hidden;
   }
 
-  /* ===== NAVIGATION ===== */
+  /* NAVIGATION */
   nav {
     position: fixed;
     top: 0;
@@ -38,11 +38,11 @@
     height: 60px;
     background: var(--nav-bg);
     display: flex;
-    justify-content: center; /* changed from flex-end */
+    justify-content: center;
     align-items: center;
     padding: 0 20px;
     z-index: 1000;
-    gap: 25px; /* space between links */
+    gap: 25px;
   }
   nav a {
     color: var(--text-color);
@@ -52,7 +52,7 @@
   }
   nav a:hover { color: var(--primary-color); }
 
-  /* ===== BOTTOM MENU BUTTON ===== */
+  /* BOTTOM MENU BUTTON */
   #menuToggle {
     position: fixed;
     bottom: 20px;
@@ -67,6 +67,7 @@
     align-items: center;
     cursor: pointer;
     z-index: 1001;
+    transition: transform 0.3s ease;
   }
   #menuToggle span {
     display: block;
@@ -76,8 +77,9 @@
     margin: 3px 0;
     transition: 0.3s;
   }
+  #menuToggle.shifted { transform: translateY(-260px); }
 
-  /* ===== SLIDE-UP MENU MATCH HOME PAGE ===== */
+  /* SLIDE-UP MENU */
   #menu {
     position: fixed;
     bottom: 0;
@@ -105,7 +107,7 @@
   }
   #menu a:hover, #menu div:hover { color: #fff; }
 
-  /* ===== ERROR NOTIFICATION ===== */
+  /* ERROR NOTIFICATION */
   .error-notification {
     position: fixed;
     top: 20px;
@@ -122,7 +124,7 @@
   }
   .error-notification.show { opacity: 1; pointer-events: auto; }
 
-  /* ===== CONTENT CONTAINER ===== */
+  /* CONTENT CONTAINER */
   .container {
     max-width: 900px;
     margin: 100px auto 50px;
@@ -134,7 +136,7 @@
   p, li { font-size: 1.05rem; margin-bottom: 10px; }
   ul { padding-left: 20px; margin-bottom: 20px; }
 
-  /* ===== CARD / UPDATES ===== */
+  /* CARD / UPDATES */
   .updates {
     background: var(--card-bg);
     padding: 20px;
@@ -142,7 +144,7 @@
     margin: 30px 0;
   }
 
-  /* ===== FAQ ===== */
+  /* FAQ */
   .faq { margin-top: 40px; }
   .faq .question {
     background: var(--faq-question-bg);
@@ -166,7 +168,7 @@
     border-top: 1px solid rgba(255,255,255,0.2);
   }
 
-  /* ===== DARK MODE ===== */
+  /* DARK MODE */
   body.dark {
     --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
     --text-color: #eee;
@@ -274,10 +276,15 @@
 </footer>
 
 <script>
+  // MENU TOGGLE WITH SLIDE-UP BUTTON
   const menuToggle = document.getElementById('menuToggle');
   const menu = document.getElementById('menu');
-  menuToggle.addEventListener('click', () => menu.classList.toggle('show'));
+  menuToggle.addEventListener('click', () => {
+    menu.classList.toggle('show');
+    menuToggle.classList.toggle('shifted');
+  });
 
+  // FAQ ACCORDION
   document.querySelectorAll('.faq .question').forEach(q => {
     q.addEventListener('click', () => {
       const ans = q.nextElementSibling;
@@ -285,6 +292,7 @@
     });
   });
 
+  // DARK MODE
   const body = document.body;
   const themeToggle = document.getElementById('themeToggle');
   const savedTheme = localStorage.getItem('theme');
@@ -294,6 +302,7 @@
     localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
   });
 
+  // DISCORD LOGIN NOTIFICATION
   const discordLogin = document.getElementById('discordLogin');
   const errorNotification = document.getElementById('errorNotification');
   discordLogin.addEventListener('click', e => {
