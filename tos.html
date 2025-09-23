@@ -31,133 +31,63 @@
 
   nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
+    top: 0; left:0; width: 100%; height: 60px;
     background: var(--nav-bg);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 20px;
-    z-index: 1000;
     gap: 25px;
+    z-index: 1000;
+    padding: 0 20px;
   }
-  nav a {
-    color: var(--text-color);
-    font-weight: bold;
-    text-decoration: none;
-    transition: 0.3s;
-  }
+  nav a { color: var(--text-color); font-weight: bold; text-decoration: none; transition: 0.3s; }
   nav a:hover { color: var(--primary-color); }
 
   #menuToggle {
     position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 50px;
-    height: 50px;
-    background: var(--primary-color);
-    border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 1001;
-    transition: transform 0.3s ease;
+    bottom: 20px; left: 20px;
+    width: 50px; height: 50px;
+    background: var(--primary-color); border-radius: 50%;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    cursor: pointer; z-index: 1001; transition: transform 0.3s ease;
   }
-  #menuToggle span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: #000;
-    margin: 3px 0;
-    transition: 0.3s;
-  }
+  #menuToggle span { display: block; width: 22px; height: 2px; background: #000; margin: 3px 0; }
   #menuToggle.shifted { transform: translateY(-260px); }
 
   #menu {
-    position: fixed;
-    bottom: 0;
-    left: 20px;
-    width: 260px;
-    background: rgba(0,0,0,0.85);
-    border-radius: 12px 12px 0 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
-    z-index: 1000;
+    position: fixed; bottom:0; left:20px; width: 260px;
+    background: rgba(0,0,0,0.85); border-radius: 12px 12px 0 0;
+    padding: 20px; display:flex; flex-direction: column; gap:12px;
+    transform: translateY(100%); transition: transform 0.3s ease; z-index:1000;
   }
   #menu.show { transform: translateY(0); }
   #menu a, #menu div { color: var(--primary-color); font-weight: bold; cursor: pointer; padding: 8px 0; text-decoration: none; transition: color 0.3s; }
   #menu a:hover, #menu div:hover { color: #fff; }
 
   .error-notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--error-bg);
-    padding: 15px 20px;
-    border-radius: 8px;
-    color: #fff;
-    font-weight: bold;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-    z-index: 2000;
+    position: fixed; top:20px; right:20px;
+    background: var(--error-bg); padding: 15px 20px; border-radius: 8px;
+    color: #fff; font-weight: bold; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index:2000;
   }
-  .error-notification.show { opacity: 1; pointer-events: auto; }
+  .error-notification.show { opacity:1; pointer-events:auto; }
 
   .container {
-    max-width: 900px;
-    margin: 100px auto 50px;
-    padding: 0 20px;
+    max-width:900px; margin:100px auto 50px; padding:0 20px;
   }
 
-  h1 { font-size: 2.5rem; margin-bottom: 20px; text-align: center; color: #e6f7ff; }
-  h2 { font-size: 2rem; margin-bottom: 15px; color: var(--primary-color); }
-  p, li { font-size: 1.05rem; margin-bottom: 10px; }
-  ul { padding-left: 20px; margin-bottom: 20px; }
+  h1 { font-size:2.5rem; margin-bottom:20px; text-align:center; color:#e6f7ff; }
+  h2 { font-size:2rem; margin-bottom:15px; color: var(--primary-color); }
+  p, li { font-size:1.05rem; margin-bottom:10px; }
+  ul { padding-left:20px; margin-bottom:20px; }
 
-  .card {
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 12px;
-    margin: 20px 0;
-    transition: background 0.3s;
-  }
+  .card { background: var(--card-bg); padding:20px; border-radius:12px; margin:20px 0; transition: background 0.3s; }
   .card:hover { background: var(--card-hover-bg); }
 
-  .faq { margin-top: 40px; }
-  .faq .question {
-    background: var(--faq-question-bg);
-    cursor: pointer;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 8px;
-    transition: background 0.3s;
-    font-weight: bold;
-  }
-  .faq .question:hover { background: var(--faq-question-hover); }
-  .faq .answer { display: none; padding: 12px 15px; background: var(--faq-answer-bg); border-radius: 8px; margin-bottom: 10px; }
-
-  footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 0.9rem;
-    opacity: 0.85;
-    background: rgba(0,0,0,0.25);
-    margin-top: 50px;
-    border-top: 1px solid rgba(255,255,255,0.2);
-  }
+  footer { text-align:center; padding:20px; font-size:0.9rem; opacity:0.85; background: rgba(0,0,0,0.25); margin-top:50px; border-top:1px solid rgba(255,255,255,0.2); }
 
   body.dark {
     --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
-    --text-color: #eee;
+    --text-color:#eee;
     --nav-bg: rgba(30,30,30,0.85);
     --card-bg: rgba(50,50,50,0.4);
     --card-hover-bg: rgba(60,60,60,0.6);
@@ -170,33 +100,26 @@
 </head>
 <body>
 
-<!-- NAVIGATION -->
 <nav>
   <a href="index.html">Home</a>
-  <a href="team.html">Team</a> <!-- ADDED -->
+  <a href="team.html">Team</a>
   <a href="tos.html">Terms of Service</a>
 </nav>
 
-<!-- MENU BUTTON -->
 <div id="menuToggle">
-  <span></span>
-  <span></span>
-  <span></span>
+  <span></span><span></span><span></span>
 </div>
 
-<!-- SLIDE-UP MENU -->
 <div id="menu">
   <a href="index.html">Home</a>
-  <a href="team.html">Team</a> <!-- ADDED -->
+  <a href="team.html">Team</a>
   <a href="tos.html">Terms of Service</a>
   <a href="#" id="discordLogin">Login with Discord</a>
   <div id="themeToggle">Toggle Theme</div>
 </div>
 
-<!-- ERROR NOTIFICATION -->
-<div class="error-notification" id="errorNotification">⚠️ This feature is not available yet and is still in development.</div>
+<div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
 
-<!-- CONTENT -->
 <div class="container">
   <h1>VoKi – Terms of Service & Privacy Policy</h1>
   <p><strong>Effective Date: September 22, 2025</strong></p>
@@ -208,7 +131,6 @@
   <ul>
     <li>VoKi only collects data necessary for bot features.</li>
     <li>No personal messages are read or stored beyond functionality requirements.</li>
-    <li>Server admins cannot access your personal data, only delete it if requested.</li>
     <li>Users can opt-out and delete all stored data at any time.</li>
   </ul>
 
@@ -250,13 +172,9 @@
   <div class="card">
     <h2>Meet the Team</h2>
     <ul>
-      <li><strong>VoKi</strong> – Founder & Developer</li>
-      <li><strong>Alex</strong> – Lead Designer</li>
-      <li><strong>Jamie</strong> – Community Manager</li>
-      <li><strong>Sydney</strong> – Support & Moderation</li>
+      <li><strong>Vaztinix</strong> – Founder & Developer</li>
     </ul>
   </div>
-
 </div>
 
 <footer>
@@ -266,17 +184,7 @@
 <script>
   const menuToggle = document.getElementById('menuToggle');
   const menu = document.getElementById('menu');
-  menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('show');
-    menuToggle.classList.toggle('shifted');
-  });
-
-  document.querySelectorAll('.faq .question').forEach(q => {
-    q.addEventListener('click', () => {
-      const ans = q.nextElementSibling;
-      ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
-    });
-  });
+  menuToggle.addEventListener('click', () => { menu.classList.toggle('show'); menuToggle.classList.toggle('shifted'); });
 
   const body = document.body;
   const themeToggle = document.getElementById('themeToggle');
