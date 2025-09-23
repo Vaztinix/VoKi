@@ -106,6 +106,38 @@ body.dark {
   --faq-answer-bg: rgba(60,60,60,0.3);
   --error-bg: rgba(0,0,0,0.9);
 }
+
+/* AI Chat Styles */
+#aiChatButton {
+  position: fixed; bottom: 20px; right: 20px;
+  width: 60px; height: 60px; background: var(--primary-color);
+  border-radius: 50%; display: flex; justify-content: center; align-items: center;
+  cursor: pointer; font-size: 28px; z-index: 1500;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.3s;
+}
+#aiChatButton:hover { transform: scale(1.1); }
+
+#aiChatBox {
+  position: fixed; bottom: 90px; right: 20px;
+  width: 320px; max-height: 400px;
+  background: var(--card-bg); border-radius: 12px; display: none; flex-direction: column;
+  overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 1500;
+}
+#aiChatHeader {
+  background: var(--nav-bg); padding: 12px; font-weight: bold; text-align: center;
+  cursor: move; user-select: none;
+}
+#aiChatContent {
+  flex: 1; padding: 10px; overflow-y: auto; font-size: 0.95rem; line-height: 1.4;
+}
+#aiChatContent .message { margin-bottom: 10px; }
+#aiChatContent .message.you { color: #fff; }
+#aiChatContent .message.ai { color: var(--primary-color); }
+#aiChatInputArea { display: flex; padding: 8px; background: var(--card-bg); }
+#aiChatInput { flex: 1; padding: 8px; border-radius: 6px; border: none; outline: none; }
+#aiSendBtn { padding: 8px 12px; margin-left: 6px; border-radius: 6px; border: none;
+  background: var(--primary-color); cursor: pointer; color: #000; font-weight: bold; }
+#aiSendBtn:hover { background: #fff; color: var(--primary-color); }
 </style>
 </head>
 <body>
@@ -191,6 +223,17 @@ body.dark {
   </div>
 </div>
 
+<!-- AI Chat Elements -->
+<div id="aiChatButton" title="Chat with VoKi AI">💬</div>
+<div id="aiChatBox">
+  <div id="aiChatHeader">VoKi AI</div>
+  <div id="aiChatContent"></div>
+  <div id="aiChatInputArea">
+    <input type="text" id="aiChatInput" placeholder="Type your question..." />
+    <button id="aiSendBtn">Send</button>
+  </div>
+</div>
+
 <footer>
   © 2025 VoKi — Building smarter communities together.
 </footer>
@@ -223,6 +266,79 @@ document.querySelectorAll('.faq .question').forEach(q => {
     ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
   });
 });
+
+// AI Chat Functionality
+const memory = [];
+const unsafeWords = [
+  "kill","murder","attack","fight","shoot","stab","bomb","explode","assault",
+  "suicide","die","end my life","hang myself","cut myself",
+  "drugs","cocaine","heroin","meth","marijuana","weed","pcp","lsd","opiate",
+  "hack","exploit","cheat","ddos","phish","steal","password","token",
+  "porn","sex","nude","nsfw","xxx","fetish","erotic",
+  "racist","homophobic","nigger","faggot","kike","chink","slur","offensive",
+  "suicide challenge","bomb threat","kill yourself","illegal","terrorist"
+];
+
+function isSafe(text) {
+  return !unsafeWords.some(word => text.toLowerCase().includes(word));
+}
+
+const chatButton = document.getElementById('aiChatButton');
+const chatBox = document.getElementById('aiChatBox');
+chatButton.addEventListener('click', () => { 
+  chatBox.style.display = chatBox.style.display === 'flex' ? 'none' : 'flex'; 
+});
+
+const sendBtn = document.getElementById('aiSendBtn');
+const input = document.getElementById('aiChatInput');
+const content = document.getElementById('aiChatContent');
+
+function addMessage(sender, text) {
+  const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+  const div = document.createElement('div');
+  div.classList.add('message', sender.toLowerCase());
+  div.innerHTML = `<strong>${sender}</strong> [${time}]: ${text}`;
+  content.appendChild(div);
+  content.scrollTop = content.scrollHeight;
+}
+
+sendBtn.addEventListener('click', () => {
+  const userText = input.value.trim();
+  if(!userText) return;
+
+  if(!isSafe(userText)) {
+    addMessage('AI', '⚠️ Unsafe content blocked.');
+    input.value = '';
+    return;
+  }
+
+  addMessage('You', userText);
+
+  let response = memory.find(item => item.question.toLowerCase() === userText.toLowerCase());
+  if(response) {
+    addMessage('AI', response.answer);
+  } else {
+    const aiAnswer = `Interesting! Here's a thought on "${userText}"... Let's explore that further!`;
+    addMessage('AI', aiAnswer);
+    memory.push({ question: userText, answer: aiAnswer });
+  }
+
+  input.value = '';
+});
+
+input.addEventListener('keypress', (e) => { if(e.key === 'Enter') sendBtn.click(); });
+
+const observer = new MutationObserver(() => {
+  if(document.body.classList.contains('dark')) {
+    chatBox.style.background = 'rgba(50,50,50,0.4)';
+    document.getElementById('aiChatHeader').style.background = 'rgba(30,30,30,0.85)';
+  } else {
+    chatBox.style.background = 'rgba(0,0,0,0.25)';
+    document.getElementById('aiChatHeader').style.background = 'rgba(0,0,0,0.6)';
+  }
+});
+observer.observe(document.body, { attributes: true, attributeFilter: ['class'] });
 </script>
+
 </body>
 </html>
