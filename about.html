@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>VoKi – Team</title>
+<title>VoKi – Your Discord Bot</title>
 <style>
   :root {
     --primary-color: #aeefff;
@@ -20,231 +20,143 @@
     font-family: Arial, sans-serif;
     background: var(--bg-gradient);
     color: var(--text-color);
+    line-height: 1.6;
     scroll-behavior: smooth;
-    transition: all 0.3s ease;
     overflow-x: hidden;
+    transition: all 0.3s ease;
   }
 
-  /* NAVIGATION */
   nav {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 60px;
+    top: 0; left: 0; width: 100%; height: 60px;
     background: var(--nav-bg);
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0 20px;
-    z-index: 1000;
     gap: 25px;
+    z-index: 1000;
+    padding: 0 20px;
   }
-  nav a {
-    color: var(--text-color);
-    font-weight: bold;
-    text-decoration: none;
-    transition: 0.3s;
-  }
-  nav a.active, nav a:hover { color: var(--primary-color); }
+  nav a { color: var(--text-color); font-weight: bold; text-decoration: none; transition: 0.3s; }
+  nav a:hover { color: var(--primary-color); }
 
-  /* BOTTOM MENU BUTTON */
   #menuToggle {
-    position: fixed;
-    bottom: 20px;
-    left: 20px;
-    width: 50px;
-    height: 50px;
+    position: fixed; bottom: 20px; left: 20px;
+    width: 50px; height: 50px;
     background: var(--primary-color);
     border-radius: 50%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    z-index: 1001;
+    display: flex; flex-direction: column;
+    justify-content: center; align-items: center;
+    cursor: pointer; z-index: 1001;
     transition: transform 0.3s ease;
   }
-  #menuToggle span {
-    display: block;
-    width: 22px;
-    height: 2px;
-    background: #000;
-    margin: 3px 0;
-    transition: 0.3s;
-  }
+  #menuToggle span { display: block; width: 22px; height: 2px; background: #000; margin: 3px 0; }
   #menuToggle.shifted { transform: translateY(-260px); }
 
-  /* SLIDE-UP MENU */
   #menu {
-    position: fixed;
-    bottom: 0;
-    left: 20px;
-    width: 260px;
-    background: rgba(0,0,0,0.85);
-    border-radius: 12px 12px 0 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    transform: translateY(100%);
-    transition: transform 0.3s ease;
+    position: fixed; bottom: 0; left: 20px; width: 260px;
+    background: rgba(0,0,0,0.85); border-radius: 12px 12px 0 0;
+    padding: 20px; display: flex; flex-direction: column; gap: 12px;
+    transform: translateY(100%); transition: transform 0.3s ease;
     z-index: 1000;
   }
   #menu.show { transform: translateY(0); }
-  #menu a, #menu div {
-    color: var(--primary-color);
-    font-weight: bold;
-    cursor: pointer;
-    padding: 8px 0;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
+  #menu a, #menu div { color: var(--primary-color); font-weight: bold; cursor: pointer; padding: 8px 0; text-decoration: none; transition: color 0.3s; }
   #menu a:hover, #menu div:hover { color: #fff; }
 
-  /* ERROR NOTIFICATION */
   .error-notification {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: var(--error-bg);
-    padding: 15px 20px;
-    border-radius: 8px;
-    color: #fff;
-    font-weight: bold;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.5s ease;
-    z-index: 2000;
+    position: fixed; top: 20px; right: 20px;
+    background: var(--error-bg); padding: 15px 20px; border-radius: 8px;
+    color: #fff; font-weight: bold;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.5s ease; z-index: 2000;
   }
   .error-notification.show { opacity: 1; pointer-events: auto; }
 
-  /* CONTAINER */
-  .container {
-    max-width: 900px;
-    margin: 100px auto 50px;
-    padding: 0 20px;
-  }
-
+  .container { max-width: 900px; margin: 100px auto 50px; padding: 0 20px; }
   h1 { font-size: 2.5rem; margin-bottom: 20px; text-align: center; color: #e6f7ff; }
   h2 { font-size: 2rem; margin-bottom: 15px; color: var(--primary-color); }
 
-  /* TEAM CARDS */
-  .team {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-    justify-content: center;
-    margin-top: 20px;
+  .card { background: var(--card-bg); padding: 20px; border-radius: 12px; margin: 20px 0; transition: background 0.3s; }
+  .card:hover { background: var(--card-hover-bg); }
+
+  /* Team card for a single member */
+  .team-card {
+    display: flex; flex-direction: column; align-items: center;
+    background: var(--card-bg); padding: 20px; border-radius: 12px;
+    max-width: 250px; margin: 20px auto; transition: background 0.3s, transform 0.3s;
   }
-  .member-card {
-    background: var(--card-bg);
-    padding: 20px;
-    border-radius: 12px;
-    width: 220px;
-    text-align: center;
-    transition: transform 0.3s, background 0.3s;
-  }
-  .member-card:hover { transform: translateY(-5px); background: var(--card-hover-bg); }
-  .profile-pic {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: rgba(255,255,255,0.1);
-    margin: 0 auto 10px;
-  }
-  .username { font-weight: bold; margin-top: 5px; }
+  .team-card:hover { background: var(--card-hover-bg); transform: translateY(-5px); }
+  .profile-pic { width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.1); margin-bottom: 10px; }
+  .username { font-weight: bold; margin-bottom: 5px; }
   .display-name { font-style: italic; color: var(--primary-color); margin-bottom: 10px; }
   .links a { color: var(--primary-color); text-decoration: none; display: block; margin: 5px 0; }
   .links a:hover { color: #fff; }
 
-  footer {
-    text-align: center;
-    padding: 20px;
-    font-size: 0.9rem;
-    opacity: 0.85;
-    background: rgba(0,0,0,0.25);
-    margin-top: 50px;
-    border-top: 1px solid rgba(255,255,255,0.2);
-  }
+  footer { text-align: center; padding: 20px; font-size: 0.9rem; opacity: 0.85; background: rgba(0,0,0,0.25); margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.2); }
 
-  /* DARK MODE */
   body.dark {
     --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
-    --text-color:#eee;
+    --text-color: #eee;
     --nav-bg: rgba(30,30,30,0.85);
     --card-bg: rgba(50,50,50,0.4);
-    --card-hover-bg: rgba(60,60,60,0.7);
+    --card-hover-bg: rgba(60,60,60,0.6);
     --error-bg: rgba(0,0,0,0.9);
   }
 </style>
 </head>
 <body>
 
-<!-- NAVIGATION -->
 <nav>
   <a href="index.html">Home</a>
-  <a href="about.html" class="active">Team</a>
   <a href="tos.html">Terms of Service</a>
 </nav>
 
-<!-- MENU BUTTON -->
 <div id="menuToggle">
   <span></span>
   <span></span>
   <span></span>
 </div>
 
-<!-- SLIDE-UP MENU -->
 <div id="menu">
   <a href="index.html">Home</a>
-  <a href="about.html">Team</a>
   <a href="tos.html">Terms of Service</a>
   <a href="#" id="discordLogin">Login with Discord</a>
   <div id="themeToggle">Toggle Theme</div>
 </div>
 
-<!-- ERROR NOTIFICATION -->
-<div class="error-notification" id="errorNotification">⚠️ Feature still in development.</div>
+<div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
 
-<!-- CONTENT -->
 <div class="container">
-  <h1>Meet the VoKi Team</h1>
-  <div class="team">
-    <!-- Vaztinix -->
-    <div class="member-card">
-      <div class="profile-pic"></div>
-      <div class="username">Vaztinix</div>
-      <div class="display-name">⊹ ₊⁺ Vaztinix ₊˚⊹</div>
-      <div class="links">
-        <a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube</a>
-      </div>
+  <h1>Welcome to VoKi</h1>
+  <p>VoKi is your all-in-one Discord bot providing moderation, AI tools, and community support.</p>
+
+  <div class="card">
+    <h2>Features</h2>
+    <ul>
+      <li>Moderation commands: ban, mute, kick, etc.</li>
+      <li>AI-powered Q&A</li>
+      <li>Custom role management</li>
+      <li>Support system for server staff</li>
+    </ul>
+  </div>
+
+  <div class="team-card">
+    <div class="profile-pic"></div>
+    <div class="username">Vaztinix</div>
+    <div class="display-name">Founder & Developer</div>
+    <div class="links">
+      <a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube</a>
+      <a href="#" target="_blank">Discord</a>
     </div>
-    <!-- Add other team members -->
-    <div class="member-card">
-      <div class="profile-pic"></div>
-      <div class="username">Alex</div>
-      <div class="display-name">Lead Designer</div>
-      <div class="links">
-        <a href="#" target="_blank">Portfolio</a>
-      </div>
-    </div>
-    <div class="member-card">
-      <div class="profile-pic"></div>
-      <div class="username">Jamie</div>
-      <div class="display-name">Community Manager</div>
-      <div class="links">
-        <a href="#" target="_blank">Discord</a>
-      </div>
-    </div>
-    <div class="member-card">
-      <div class="profile-pic"></div>
-      <div class="username">Sydney</div>
-      <div class="display-name">Support & Moderation</div>
-      <div class="links">
-        <a href="#" target="_blank">Discord</a>
-      </div>
-    </div>
+  </div>
+
+  <div class="card">
+    <h2>Contact & Support</h2>
+    <ul>
+      <li>Email: VoKi.io@outlook.com</li>
+      <li>Discord: <a href="https://discord.gg/PHKdvcYd" style="color: var(--primary-color);">Join our server</a></li>
+    </ul>
   </div>
 </div>
 
@@ -255,10 +167,7 @@
 <script>
   const menuToggle = document.getElementById('menuToggle');
   const menu = document.getElementById('menu');
-  menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('show');
-    menuToggle.classList.toggle('shifted');
-  });
+  menuToggle.addEventListener('click', () => { menu.classList.toggle('show'); menuToggle.classList.toggle('shifted'); });
 
   const themeToggle = document.getElementById('themeToggle');
   const body = document.body;
