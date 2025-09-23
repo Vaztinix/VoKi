@@ -115,7 +115,7 @@
     cursor: pointer;
     z-index: 1001;
     flex-direction: column;
-    transition: transform 0.3s ease; /* Smooth slide */
+    transition: transform 0.3s ease;
   }
   #menuToggle span {
     display:block; width:22px; height:2px; background:#000; margin:3px 0; transition:0.3s;
@@ -148,6 +148,7 @@
 
 <nav>
   <a href="index.html">Home</a>
+  <a href="about.html">Team</a> <!-- Added About/Team -->
   <a href="tos.html">Terms of Service</a>
   <a href="mailto:VoKi.io@outlook.com">Contact</a>
 </nav>
@@ -160,110 +161,7 @@
 </div>
 <div id="menu">
   <a href="index.html">Home</a>
+  <a href="about.html">Team</a> <!-- Added About/Team -->
   <a href="tos.html">Terms of Service</a>
   <a href="#" id="discordLogin">Login with Discord</a>
-  <div id="themeToggle">Toggle Theme</div>
-</div>
-
-<div class="error-notification" id="errorNotification"></div>
-
-<header>
-  <h1>Welcome to VoKi</h1>
-  <p>Your all-in-one Discord bot for moderation, AI-powered tools, and community growth.</p>
-  <div>
-    <a href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&scope=bot&permissions=8" class="btn btn-primary">Invite VoKi</a>
-    <a href="https://discord.gg/PHKdvcYd" class="btn btn-secondary">Join Discord</a>
-  </div>
-</header>
-
-<section>
-  <h2>Popular Commands</h2>
-  <div class="features">
-    <div class="card"><h3>Moderation</h3><p>ban | unban | kick | mute | unmute | add role | remove role | set logs channel | set support role</p></div>
-    <div class="card"><h3>Utility</h3><p>relay | support | say</p></div>
-    <div class="card"><h3>AI Tools</h3><p>ask (quick AI responses via message ping)</p></div>
-    <div class="card"><h3>Server Tools</h3><p>rank | set welcomer</p></div>
-  </div>
-</section>
-
-<section class="events">
-  <h2>Event Listeners</h2>
-  <ul>
-    <li><strong>messageCreate:</strong> leveling (rank) | AI ping (ask)</li>
-    <li><strong>guildMemberAdd:</strong> set welcomer</li>
-    <li><strong>guildMemberRemove:</strong> set logs channel</li>
-    <li><strong>messageUpdate:</strong> messages edited (in development)</li>
-  </ul>
-</section>
-
-<section>
-  <h2>Data Privacy & Safety</h2>
-  <p>VoKi respects your privacy. No personal messages or data are stored outside what is necessary for commands and features.<br>Even VoKi admins <strong>cannot view your data</strong>—they can only delete it if requested.<br>Users may opt out at any time to remove all saved data associated with them.</p>
-</section>
-
-<section class="updates">
-  <h2>Current Updates & Development</h2>
-  <ul>
-    <li>Enhanced logging system</li>
-    <li>Multilingual support</li>
-    <li>Advanced leveling features: XP add, level set</li>
-    <li>Privacy opt-out: users can remove saved data</li>
-  </ul>
-</section>
-
-<section class="faq">
-  <h2>FAQ</h2>
-  <div class="question">How do I add VoKi to my server?</div>
-  <div class="answer">Click the "Invite VoKi" button at the top of the page and authorize the bot in your Discord server.</div>
-
-  <div class="question">How do I use popular commands?</div>
-  <div class="answer">Use commands like /rank, /set welcomer, /ask, or /support in your server. Ensure VoKi has the correct permissions.</div>
-
-  <div class="question">Is my data safe?</div>
-  <div class="answer">Yes! VoKi only stores necessary data. Admins cannot view your messages; you can delete your data anytime.</div>
-</section>
-
-<footer>
-  © 2025 VoKi — Building smarter communities together.
-</footer>
-
-<script>
-  // MENU TOGGLE WITH SLIDE-UP BUTTON
-  const menuToggle = document.getElementById('menuToggle');
-  const menu = document.getElementById('menu');
-  menuToggle.addEventListener('click', () => {
-    menu.classList.toggle('show');
-    menuToggle.classList.toggle('shifted');
-  });
-
-  // DISCORD LOGIN
-  const discordLogin = document.getElementById('discordLogin');
-  const errorNotification = document.getElementById('errorNotification');
-  discordLogin.addEventListener('click', e => {
-    e.preventDefault();
-    errorNotification.textContent = '⚠️ Discord login is not available yet. Feature still in development.';
-    errorNotification.classList.add('show');
-    setTimeout(() => errorNotification.classList.remove('show'), 4000);
-  });
-
-  // FAQ ACCORDION
-  document.querySelectorAll('.faq .question').forEach(q => {
-    q.addEventListener('click', () => {
-      const ans = q.nextElementSibling;
-      ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
-    });
-  });
-
-  // DARK MODE
-  const body = document.body;
-  const themeToggle = document.getElementById('themeToggle');
-  const savedTheme = localStorage.getItem('theme');
-  if(savedTheme) body.classList.toggle('dark', savedTheme === 'dark');
-  themeToggle.addEventListener('click', () => {
-    body.classList.toggle('dark');
-    localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
-  });
-</script>
-
-</body>
-</html>
+  <div id="themeToggle">Toggle Theme</
