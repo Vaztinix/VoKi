@@ -35,7 +35,7 @@ nav a:hover { color: var(--primary-color); }
 
 #signedIn {
   position: fixed; top: 10px; right: 20px;
-  text-align: right; font-size: 0.9rem;
+  text-align: right; font-size: 0.9rem; display:none;
 }
 #signedIn .beta { display: block; font-size: 0.75rem; color: var(--secondary-color); }
 
@@ -60,14 +60,13 @@ button {
 }
 button:hover { background: #fff; color: #000; }
 
+#errorLogin, #errorSignUp { display:none; color: var(--error-bg); font-weight: bold; margin-top: 10px; }
+
 #tempNotice {
   background: var(--notice-bg); color: #000; padding: 12px; border-radius: 12px;
   text-align: center; font-weight: bold; margin-bottom: 20px; transition: opacity 1s ease;
 }
 
-#errorLogin { display: none; color: var(--error-bg); font-weight: bold; margin-top: 10px; }
-
-/* AI Chat Styles */
 #aiBubble {
   position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px;
   background: var(--primary-color); border-radius: 50%; display: flex; justify-content: center;
@@ -105,26 +104,33 @@ body.dark {
   <a href="tos.html">Terms of Service</a>
 </nav>
 
-<div id="signedIn" style="display:none;">
+<div id="signedIn">
   Signed in as <span id="signedUser"></span>
   <span class="beta">Beta Program</span>
 </div>
 
 <div class="container">
   <h1>Welcome to VoKi</h1>
-
-  <!-- Temporary Login Notice -->
   <div id="tempNotice">
     ⚠️ This VoKi login is temporary and not permanent. Your info is stored locally.
   </div>
 
   <div class="card" id="loginCard">
-    <h2>VoKi Login</h2>
-    <input type="text" id="username" placeholder="Username" />
-    <input type="password" id="password" placeholder="Password" />
-    <label><input type="checkbox" id="rememberMe" /> Remember me</label>
-    <button id="loginBtn">Login</button>
-    <div id="errorLogin">Invalid username or password!</div>
+    <h2>VoKi Login / Sign Up</h2>
+    <div id="loginForm">
+      <input type="text" id="loginUsername" placeholder="Username">
+      <input type="password" id="loginPassword" placeholder="Password">
+      <button id="loginBtn">Login</button>
+      <button id="goSignUp">Sign Up</button>
+      <div id="errorLogin">Invalid credentials!</div>
+    </div>
+    <div id="signUpForm" style="display:none;">
+      <input type="text" id="signUsername" placeholder="Choose a username">
+      <input type="password" id="signPassword" placeholder="Choose a password">
+      <button id="signUpBtn">Sign Up</button>
+      <button id="backToLogin">Back</button>
+      <div id="errorSignUp">Username already exists!</div>
+    </div>
   </div>
 
   <div class="card">
@@ -138,7 +144,6 @@ body.dark {
   </div>
 </div>
 
-<!-- AI Chat Bubble -->
 <div id="aiBubble">AI</div>
 <div id="aiChat">
   <div id="aiMessages"></div>
@@ -153,45 +158,59 @@ body.dark {
 </footer>
 
 <script>
-// Temporary notice fade
-const tempNotice = document.getElementById("tempNotice");
-setTimeout(() => {
-  tempNotice.style.opacity = 0;
-  setTimeout(() => tempNotice.style.display = "none", 1000);
-}, 5000);
+// Fade out temp notice
+setTimeout(()=>{ document.getElementById("tempNotice").style.opacity=0; },5000);
 
-// Login functionality (local storage)
+// Account system
+let accounts = JSON.parse(localStorage.getItem("vokiAccounts")||"{}");
+const loginForm = document.getElementById("loginForm");
+const signUpForm = document.getElementById("signUpForm");
 const loginBtn = document.getElementById("loginBtn");
-const usernameInput = document.getElementById("username");
-const passwordInput = document.getElementById("password");
-const errorLogin = document.getElementById("errorLogin");
+const goSignUp = document.getElementById("goSignUp");
+const backToLogin = document.getElementById("backToLogin");
+const signUpBtn = document.getElementById("signUpBtn");
 const signedInDiv = document.getElementById("signedIn");
 const signedUserSpan = document.getElementById("signedUser");
+const errorLogin = document.getElementById("errorLogin");
+const errorSignUp = document.getElementById("errorSignUp");
 const loginCard = document.getElementById("loginCard");
 
-loginBtn.addEventListener("click", () => {
-  const user = usernameInput.value.trim();
-  const pass = passwordInput.value.trim();
-  if(!user || !pass){
-    errorLogin.style.display = "block";
-    return;
-  }
-  // Save locally
-  localStorage.setItem("vokiUser", user);
-  localStorage.setItem("vokiPass", pass);
-  
+function showSignedIn(user){
   signedUserSpan.textContent = user;
-  signedInDiv.style.display = "block";
-  loginCard.style.display = "none";
-  errorLogin.style.display = "none";
-});
+  signedInDiv.style.display="block";
+  loginCard.style.display="none";
+}
 
-// Load saved info
-const savedUser = localStorage.getItem("vokiUser");
-if(savedUser){
-  signedUserSpan.textContent = savedUser;
-  signedInDiv.style.display = "block";
-  loginCard.style.display = "none";
+// Load last logged in
+const lastUser = localStorage.getItem("vokiLastUser");
+if(lastUser) showSignedIn(lastUser);
+
+// Switch forms
+goSignUp.onclick=()=>{loginForm.style.display="none"; signUpForm.style.display="block";}
+backToLogin.onclick=()=>{signUpForm.style.display="none"; loginForm.style.display="block";}
+
+// Sign Up
+signUpBtn.onclick=()=>{
+  const u=document.getElementById("signUsername").value.trim();
+  const p=document.getElementById("signPassword").value.trim();
+  if(!u||!p){ errorSignUp.style.display="block"; return; }
+  if(accounts[u]){ errorSignUp.style.display="block"; return; }
+  accounts[u]=p;
+  localStorage.setItem("vokiAccounts", JSON.stringify(accounts));
+  localStorage.setItem("vokiLastUser", u);
+  showSignedIn(u);
+}
+
+// Login
+loginBtn.onclick=()=>{
+  const u=document.getElementById("loginUsername").value.trim();
+  const p=document.getElementById("loginPassword").value.trim();
+  if(accounts[u]&&accounts[u]===p){
+    localStorage.setItem("vokiLastUser", u);
+    showSignedIn(u);
+  } else {
+    errorLogin.style.display="block";
+  }
 }
 
 // AI Chat
@@ -200,65 +219,39 @@ const aiChat = document.getElementById("aiChat");
 const aiInput = document.getElementById("aiInput");
 const aiSend = document.getElementById("aiSend");
 const aiMessages = document.getElementById("aiMessages");
-
 let memory = [];
-const bannedWords = ["badword1","badword2","badword3","badword4","offensive"]; // expand as needed
+const bannedWords = ["badword1","badword2","badword3","offensive"];
 
-function isSafe(text){
-  const lower = text.toLowerCase();
-  return !bannedWords.some(word => lower.includes(word));
-}
-
-function addMessage(sender, text){
-  const msg = document.createElement("div");
-  msg.classList.add("ai-message", sender === "You" ? "ai-user":"ai-bot");
+function isSafe(text){ return !bannedWords.some(w=>text.toLowerCase().includes(w)); }
+function addMessage(sender,text){
+  const msg=document.createElement("div");
+  msg.classList.add("ai-message",sender==="You"?"ai-user":"ai-bot");
   const time = new Date().toLocaleTimeString();
-  msg.innerHTML = `<strong>${sender}:</strong> ${text} <span style="float:right;font-size:0.7em;">${time}</span>`;
+  msg.innerHTML=`<strong>${sender}:</strong> ${text} <span style="float:right;font-size:0.7em;">${time}</span>`;
   aiMessages.appendChild(msg);
-  aiMessages.scrollTop = aiMessages.scrollHeight;
+  aiMessages.scrollTop=aiMessages.scrollHeight;
 }
 
-aiBubble.addEventListener("click", () => {
-  aiChat.style.display = aiChat.style.display === "flex" ? "none" : "flex";
-});
+aiBubble.onclick=()=>{ aiChat.style.display = aiChat.style.display==="flex"?"none":"flex"; }
 
 function getAIResponse(text){
-  // Check memory for previous answer
-  const found = memory.find(item => item.question.toLowerCase() === text.toLowerCase());
+  const found = memory.find(item=>item.question.toLowerCase()===text.toLowerCase());
   if(found) return found.answer;
-  
-  // Basic generic responses
-  const responses = [
-    "Interesting! Can you tell me more?",
-    "I'm here to help! What else?",
-    "That's a great question!",
-    "Let me think about that...",
-    "Could you clarify your question?",
-    "I see! Can you expand on that?",
-    "Hmm, that's something I can answer in multiple ways..."
-  ];
+  const responses = ["Interesting! Tell me more.","I'm here to help!","That's a great question.","Could you clarify?"];
   const answer = responses[Math.floor(Math.random()*responses.length)];
   memory.push({question:text, answer:answer});
   return answer;
 }
 
-aiSend.addEventListener("click", () => {
-  const userText = aiInput.value.trim();
-  if(!userText) return;
-  if(!isSafe(userText)){
-    addMessage("AI","⚠️ Unsafe content blocked.");
-    aiInput.value = '';
-    return;
-  }
-  addMessage("You", userText);
-  const aiAnswer = getAIResponse(userText);
-  addMessage("AI", aiAnswer);
-  aiInput.value = '';
-});
-
-aiInput.addEventListener("keypress", e => {
-  if(e.key === "Enter") aiSend.click();
-});
+aiSend.onclick=()=>{
+  const text=aiInput.value.trim();
+  if(!text) return;
+  if(!isSafe(text)){ addMessage("AI","⚠️ Unsafe content blocked."); aiInput.value=""; return; }
+  addMessage("You", text);
+  addMessage("AI", getAIResponse(text));
+  aiInput.value="";
+}
+aiInput.addEventListener("keypress",e=>{if(e.key==="Enter") aiSend.click();});
 </script>
 </body>
 </html>
