@@ -14,15 +14,16 @@
   --card-bg: rgba(0,0,0,0.25);
   --card-hover-bg: rgba(0,0,0,0.45);
   --error-bg: rgba(255,0,0,0.8);
-  --notice-bg: rgba(255,255,0,0.3);
   --chat-bg: rgba(0,0,0,0.75);
   --chat-hover: rgba(0,0,0,0.85);
+  --bubble-bg: rgba(0,0,0,0.6);
 }
 
 body {
   margin:0; font-family: Arial, sans-serif; background: var(--bg-gradient);
   color: var(--text-color); line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden;
   transition: all 0.3s ease;
+  display:flex; flex-direction:column; align-items:center;
 }
 
 nav {
@@ -33,20 +34,9 @@ nav {
 nav a { color: var(--text-color); font-weight: bold; text-decoration: none; transition: 0.3s; }
 nav a:hover { color: var(--primary-color); }
 
-#signedIn {
-  position: fixed; top: 10px; right: 20px;
-  text-align: right; font-size: 0.9rem; display:none;
-}
-#signedIn .beta { display: block; font-size: 0.75rem; color: var(--secondary-color); }
+.container { max-width: 900px; margin: 100px auto 50px; padding: 0 20px; text-align:center; display:flex; flex-direction:column; align-items:center; gap:20px; }
 
-.container { max-width: 900px; margin: 100px auto 50px; padding: 0 20px; }
-
-h1 { font-size: 2.5rem; margin-bottom: 20px; text-align: center; color: #e6f7ff; }
-h2 { font-size: 2rem; margin-bottom: 15px; color: var(--primary-color); }
-p, li { font-size: 1.05rem; margin-bottom: 10px; }
-ul { padding-left: 20px; margin-bottom: 20px; }
-
-.card { background: var(--card-bg); padding: 20px; border-radius: 20px; margin: 20px 0; transition: background 0.3s, transform 0.3s; }
+.card { background: var(--card-bg); padding: 20px; border-radius: 20px; width: 100%; max-width:400px; transition: background 0.3s, transform 0.3s; text-align:left; }
 .card:hover { background: var(--card-hover-bg); transform: translateY(-5px); }
 
 input[type="text"], input[type="password"] {
@@ -56,16 +46,18 @@ input[type="text"], input[type="password"] {
 button {
   background: var(--primary-color); color: #000; font-weight: bold;
   padding: 10px 20px; border-radius: 15px; border: none; cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s; margin-top:5px;
 }
 button:hover { background: #fff; color: #000; }
 
-#errorLogin, #errorSignUp { display:none; color: var(--error-bg); font-weight: bold; margin-top: 10px; }
+#errorLogin, #errorSignUp { display:none; color: var(--error-bg); font-weight: bold; margin-top: 10px; text-align:center; }
 
-#tempNotice {
-  background: var(--notice-bg); color: #000; padding: 12px; border-radius: 12px;
-  text-align: center; font-weight: bold; margin-bottom: 20px; transition: opacity 1s ease;
+#userBubble {
+  position: fixed; top: 20px; right: 20px; padding: 12px 18px;
+  background: var(--bubble-bg); border-radius: 20px; text-align: center;
+  z-index: 1001; min-width: 180px;
 }
+#userBubble .badge { display:block; font-size:0.8rem; color: var(--secondary-color); margin-top:2px; }
 
 #aiBubble {
   position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px;
@@ -73,7 +65,7 @@ button:hover { background: #fff; color: #000; }
   align-items: center; cursor: pointer; font-weight: bold; z-index: 1002; box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 #aiChat {
-  position: fixed; bottom: 90px; right: 20px; width: 300px; max-height: 400px;
+  position: fixed; bottom: 90px; right: 20px; width: 320px; max-height: 400px;
   background: var(--chat-bg); border-radius: 20px; display: none; flex-direction: column;
   overflow: hidden; box-shadow: 0 0 15px rgba(0,0,0,0.7); z-index: 1001;
 }
@@ -91,7 +83,6 @@ body.dark {
   --nav-bg: rgba(30,30,30,0.85);
   --card-bg: rgba(50,50,50,0.4);
   --card-hover-bg: rgba(60,60,60,0.6);
-  --notice-bg: rgba(255,255,0,0.2);
   --chat-bg: rgba(30,30,30,0.85);
 }
 </style>
@@ -104,17 +95,15 @@ body.dark {
   <a href="tos.html">Terms of Service</a>
 </nav>
 
-<div id="signedIn">
-  Signed in as <span id="signedUser"></span>
-  <span class="beta">Beta Program</span>
+<div id="userBubble">
+  Not signed in <span class="badge">Guest</span>
+  <div><button id="loginGuestBtn">Login / Sign Up</button></div>
 </div>
 
 <div class="container">
   <h1>Welcome to VoKi</h1>
-  <div id="tempNotice">
-    ⚠️ This VoKi login is temporary and not permanent. Your info is stored locally.
-  </div>
 
+  <!-- Login Card -->
   <div class="card" id="loginCard">
     <h2>VoKi Login / Sign Up</h2>
     <div id="loginForm">
@@ -133,23 +122,36 @@ body.dark {
     </div>
   </div>
 
+  <!-- Features -->
   <div class="card">
     <h2>Features</h2>
     <ul>
       <li>Moderation commands: ban, mute, kick, etc.</li>
-      <li>AI-powered Q&A</li>
+      <li>AI-powered Q&A (requires login)</li>
       <li>Custom role management</li>
       <li>Support system for server staff</li>
     </ul>
   </div>
+
+  <!-- Updates -->
+  <div class="card">
+    <h2>Current Updates</h2>
+    <ul>
+      <li>Enhanced logging system</li>
+      <li>Multilingual support</li>
+      <li>Advanced leveling features</li>
+      <li>Privacy opt-out available for all users</li>
+    </ul>
+  </div>
+
 </div>
 
 <div id="aiBubble">AI</div>
 <div id="aiChat">
   <div id="aiMessages"></div>
   <div id="aiInputWrapper">
-    <input type="text" id="aiInput" placeholder="Ask me anything..." />
-    <button id="aiSend">Send</button>
+    <input type="text" id="aiInput" placeholder="Ask me anything..." disabled/>
+    <button id="aiSend" disabled>Send</button>
   </div>
 </div>
 
@@ -158,9 +160,6 @@ body.dark {
 </footer>
 
 <script>
-// Fade out temp notice
-setTimeout(()=>{ document.getElementById("tempNotice").style.opacity=0; },5000);
-
 // Account system
 let accounts = JSON.parse(localStorage.getItem("vokiAccounts")||"{}");
 const loginForm = document.getElementById("loginForm");
@@ -169,49 +168,49 @@ const loginBtn = document.getElementById("loginBtn");
 const goSignUp = document.getElementById("goSignUp");
 const backToLogin = document.getElementById("backToLogin");
 const signUpBtn = document.getElementById("signUpBtn");
-const signedInDiv = document.getElementById("signedIn");
-const signedUserSpan = document.getElementById("signedUser");
+const userBubble = document.getElementById("userBubble");
+const loginGuestBtn = document.getElementById("loginGuestBtn");
 const errorLogin = document.getElementById("errorLogin");
 const errorSignUp = document.getElementById("errorSignUp");
-const loginCard = document.getElementById("loginCard");
 
-function showSignedIn(user){
-  signedUserSpan.textContent = user;
-  signedInDiv.style.display="block";
-  loginCard.style.display="none";
+function updateUserBubble(user){
+  if(user){
+    userBubble.innerHTML=`Signed in as ${user} <span class="badge">Beta Program</span>`;
+    enableAI();
+  }else{
+    userBubble.innerHTML=`Not signed in <span class="badge">Guest</span><div><button id="loginGuestBtn">Login / Sign Up</button></div>`;
+    document.getElementById("aiInput").disabled=true;
+    document.getElementById("aiSend").disabled=true;
+    document.getElementById("loginGuestBtn").onclick=()=>{document.getElementById("loginCard").style.display="block";}
+  }
 }
 
-// Load last logged in
-const lastUser = localStorage.getItem("vokiLastUser");
-if(lastUser) showSignedIn(lastUser);
+updateUserBubble(localStorage.getItem("vokiLastUser")||null);
 
-// Switch forms
-goSignUp.onclick=()=>{loginForm.style.display="none"; signUpForm.style.display="block";}
-backToLogin.onclick=()=>{signUpForm.style.display="none"; loginForm.style.display="block";}
+goSignUp.onclick=()=>{loginForm.style.display="none"; signUpForm.style.display="block"; errorSignUp.style.display="none";}
+backToLogin.onclick=()=>{loginForm.style.display="block"; signUpForm.style.display="none"; errorLogin.style.display="none";}
 
-// Sign Up
 signUpBtn.onclick=()=>{
   const u=document.getElementById("signUsername").value.trim();
   const p=document.getElementById("signPassword").value.trim();
-  if(!u||!p){ errorSignUp.style.display="block"; return; }
   if(accounts[u]){ errorSignUp.style.display="block"; return; }
   accounts[u]=p;
   localStorage.setItem("vokiAccounts", JSON.stringify(accounts));
   localStorage.setItem("vokiLastUser", u);
-  showSignedIn(u);
+  document.getElementById("loginCard").style.display="none";
+  updateUserBubble(u);
 }
 
-// Login
 loginBtn.onclick=()=>{
   const u=document.getElementById("loginUsername").value.trim();
   const p=document.getElementById("loginPassword").value.trim();
   if(accounts[u]&&accounts[u]===p){
     localStorage.setItem("vokiLastUser", u);
-    showSignedIn(u);
-  } else {
-    errorLogin.style.display="block";
-  }
+    document.getElementById("loginCard").style.display="none";
+    updateUserBubble(u);
+  }else errorLogin.style.display="block";
 }
+loginGuestBtn.onclick=()=>{ document.getElementById("loginCard").style.display="block"; }
 
 // AI Chat
 const aiBubble = document.getElementById("aiBubble");
@@ -222,6 +221,8 @@ const aiMessages = document.getElementById("aiMessages");
 let memory = [];
 const bannedWords = ["badword1","badword2","badword3","offensive"];
 
+function enableAI(){ aiInput.disabled=false; aiSend.disabled=false; }
+
 function isSafe(text){ return !bannedWords.some(w=>text.toLowerCase().includes(w)); }
 function addMessage(sender,text){
   const msg=document.createElement("div");
@@ -231,9 +232,6 @@ function addMessage(sender,text){
   aiMessages.appendChild(msg);
   aiMessages.scrollTop=aiMessages.scrollHeight;
 }
-
-aiBubble.onclick=()=>{ aiChat.style.display = aiChat.style.display==="flex"?"none":"flex"; }
-
 function getAIResponse(text){
   const found = memory.find(item=>item.question.toLowerCase()===text.toLowerCase());
   if(found) return found.answer;
@@ -242,7 +240,7 @@ function getAIResponse(text){
   memory.push({question:text, answer:answer});
   return answer;
 }
-
+aiBubble.onclick=()=>{ aiChat.style.display = aiChat.style.display==="flex"?"flex":"flex"; aiChat.style.display=(aiChat.style.display==="flex"?"none":"flex"); }
 aiSend.onclick=()=>{
   const text=aiInput.value.trim();
   if(!text) return;
