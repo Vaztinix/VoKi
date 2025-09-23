@@ -68,6 +68,18 @@ ul { padding-left: 20px; margin-bottom: 20px; }
 .card { background: var(--card-bg); padding: 20px; border-radius: 12px; margin: 20px 0; transition: background 0.3s; }
 .card:hover { background: var(--card-hover-bg); }
 
+.team-card {
+  display: flex; flex-direction: column; align-items: center;
+  background: var(--card-bg); padding: 20px; border-radius: 12px;
+  max-width: 250px; margin: 20px auto; transition: background 0.3s, transform 0.3s;
+}
+.team-card:hover { background: var(--card-hover-bg); transform: translateY(-5px); }
+.profile-pic { width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.1); margin-bottom: 10px; }
+.username { font-weight: bold; margin-bottom: 5px; }
+.display-name { font-style: italic; color: var(--primary-color); margin-bottom: 10px; }
+.links a { color: var(--primary-color); text-decoration: none; display: block; margin: 5px 0; }
+.links a:hover { color: #fff; }
+
 footer { text-align: center; padding: 20px; font-size: 0.9rem; opacity: 0.85;
   background: rgba(0,0,0,0.25); margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.2);
 }
@@ -156,9 +168,26 @@ body.dark {
 
   <div class="card">
     <h2>Meet the Team</h2>
-    <ul>
-      <li><strong>Vaztinix</strong> – Founder & Developer</li>
-    </ul>
+
+    <div class="team-card">
+      <div class="profile-pic"></div>
+      <div class="username">Vaztinix</div>
+      <div class="display-name">Founder & Developer</div>
+      <div class="links">
+        <a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube</a>
+        <a href="#" target="_blank">Discord</a>
+      </div>
+    </div>
+
+    <div class="team-card">
+      <div class="profile-pic"></div>
+      <div class="username">solorads</div>
+      <div class="display-name">Partner</div>
+      <div class="links">
+        <a href="https://www.roblox.com/games/17590556553/NEW-Military-Roleplay" target="_blank">Roblox Game</a>
+      </div>
+    </div>
+
   </div>
 </div>
 
