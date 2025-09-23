@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>VoKi – About</title>
+<title>VoKi – Team</title>
 <style>
   :root {
     --primary-color: #aeefff;
@@ -46,7 +46,7 @@
     text-decoration: none;
     transition: 0.3s;
   }
-  nav a:hover { color: var(--primary-color); }
+  nav a.active, nav a:hover { color: var(--primary-color); }
 
   /* BOTTOM MENU BUTTON */
   #menuToggle {
@@ -63,6 +63,7 @@
     align-items: center;
     cursor: pointer;
     z-index: 1001;
+    transition: transform 0.3s ease;
   }
   #menuToggle span {
     display: block;
@@ -72,6 +73,7 @@
     margin: 3px 0;
     transition: 0.3s;
   }
+  #menuToggle.shifted { transform: translateY(-260px); }
 
   /* SLIDE-UP MENU */
   #menu {
@@ -90,7 +92,6 @@
     z-index: 1000;
   }
   #menu.show { transform: translateY(0); }
-
   #menu a, #menu div {
     color: var(--primary-color);
     font-weight: bold;
@@ -128,7 +129,7 @@
   h1 { font-size: 2.5rem; margin-bottom: 20px; text-align: center; color: #e6f7ff; }
   h2 { font-size: 2rem; margin-bottom: 15px; color: var(--primary-color); }
 
-  /* STAFF CARDS */
+  /* TEAM CARDS */
   .team {
     display: flex;
     flex-wrap: wrap;
@@ -183,7 +184,7 @@
 <!-- NAVIGATION -->
 <nav>
   <a href="index.html">Home</a>
-  <a href="about.html">Team</a>
+  <a href="about.html" class="active">Team</a>
   <a href="tos.html">Terms of Service</a>
 </nav>
 
@@ -219,7 +220,31 @@
         <a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube</a>
       </div>
     </div>
-    <!-- Add other team members here similarly -->
+    <!-- Add other team members -->
+    <div class="member-card">
+      <div class="profile-pic"></div>
+      <div class="username">Alex</div>
+      <div class="display-name">Lead Designer</div>
+      <div class="links">
+        <a href="#" target="_blank">Portfolio</a>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="profile-pic"></div>
+      <div class="username">Jamie</div>
+      <div class="display-name">Community Manager</div>
+      <div class="links">
+        <a href="#" target="_blank">Discord</a>
+      </div>
+    </div>
+    <div class="member-card">
+      <div class="profile-pic"></div>
+      <div class="username">Sydney</div>
+      <div class="display-name">Support & Moderation</div>
+      <div class="links">
+        <a href="#" target="_blank">Discord</a>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -230,7 +255,10 @@
 <script>
   const menuToggle = document.getElementById('menuToggle');
   const menu = document.getElementById('menu');
-  menuToggle.addEventListener('click', () => menu.classList.toggle('show'));
+  menuToggle.addEventListener('click', () => {
+    menu.classList.toggle('show');
+    menuToggle.classList.toggle('shifted');
+  });
 
   const themeToggle = document.getElementById('themeToggle');
   const body = document.body;
@@ -251,4 +279,3 @@
 </script>
 </body>
 </html>
-
