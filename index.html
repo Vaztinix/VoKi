@@ -7,22 +7,21 @@
 <style>
 :root {
   --primary-color: #aeefff;
-  --secondary-color: #4facfe;
+  --secondary-color: #ffaeae;
   --text-color: #fff;
   --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
   --nav-bg: rgba(0,0,0,0.6);
   --card-bg: rgba(0,0,0,0.25);
   --card-hover-bg: rgba(0,0,0,0.45);
-  --faq-question-bg: rgba(0,0,0,0.35);
-  --faq-question-hover: rgba(0,0,0,0.55);
-  --faq-answer-bg: rgba(0,0,0,0.25);
-  --error-bg: rgba(0,0,0,0.9);
+  --error-bg: rgba(255,0,0,0.8);
+  --notice-bg: rgba(255,255,0,0.3);
+  --chat-bg: rgba(0,0,0,0.75);
+  --chat-hover: rgba(0,0,0,0.85);
 }
 
 body {
-  margin:0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: var(--bg-gradient); color: var(--text-color);
-  line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden;
+  margin:0; font-family: Arial, sans-serif; background: var(--bg-gradient);
+  color: var(--text-color); line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden;
   transition: all 0.3s ease;
 }
 
@@ -34,69 +33,58 @@ nav {
 nav a { color: var(--text-color); font-weight: bold; text-decoration: none; transition: 0.3s; }
 nav a:hover { color: var(--primary-color); }
 
-#menuToggle {
-  position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px;
-  background: var(--primary-color); border-radius: 50%; display: flex;
-  flex-direction: column; justify-content: center; align-items: center;
-  cursor: pointer; z-index: 1001; transition: transform 0.3s ease;
+#signedIn {
+  position: fixed; top: 10px; right: 20px;
+  text-align: right; font-size: 0.9rem;
 }
-#menuToggle span { display: block; width: 22px; height: 2px; background: #000; margin: 3px 0; }
-#menuToggle.shifted { transform: translateY(-260px); }
-
-#menu {
-  position: fixed; bottom: 0; left: 20px; width: 260px;
-  background: rgba(0,0,0,0.85); border-radius: 12px 12px 0 0;
-  padding: 20px; display: flex; flex-direction: column; gap: 12px;
-  transform: translateY(100%); transition: transform 0.3s ease; z-index: 1000;
-}
-#menu.show { transform: translateY(0); }
-#menu a, #menu div { color: var(--primary-color); font-weight: bold; cursor: pointer;
-  padding: 8px 0; text-decoration: none; transition: color 0.3s; }
-#menu a:hover, #menu div:hover { color: #fff; }
-
-.error-notification {
-  position: fixed; top: 20px; right: 20px; background: var(--error-bg);
-  padding: 15px 20px; border-radius: 12px; color: #fff; font-weight: bold;
-  opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 2000;
-}
-.error-notification.show { opacity: 1; pointer-events: auto; }
+#signedIn .beta { display: block; font-size: 0.75rem; color: var(--secondary-color); }
 
 .container { max-width: 900px; margin: 100px auto 50px; padding: 0 20px; }
+
 h1 { font-size: 2.5rem; margin-bottom: 20px; text-align: center; color: #e6f7ff; }
 h2 { font-size: 2rem; margin-bottom: 15px; color: var(--primary-color); }
 p, li { font-size: 1.05rem; margin-bottom: 10px; }
 ul { padding-left: 20px; margin-bottom: 20px; }
 
-.card { background: var(--card-bg); padding: 20px; border-radius: 20px; margin: 20px 0; transition: background 0.3s; backdrop-filter: blur(5px); }
-.card:hover { background: var(--card-hover-bg); }
+.card { background: var(--card-bg); padding: 20px; border-radius: 20px; margin: 20px 0; transition: background 0.3s, transform 0.3s; }
+.card:hover { background: var(--card-hover-bg); transform: translateY(-5px); }
 
-.team-card {
-  display: flex; flex-direction: column; align-items: center;
-  background: var(--card-bg); padding: 20px; border-radius: 20px;
-  max-width: 250px; margin: 20px auto; transition: background 0.3s, transform 0.3s;
-  backdrop-filter: blur(5px);
+input[type="text"], input[type="password"] {
+  width: calc(100% - 20px); padding: 10px; margin: 8px 0;
+  border-radius: 15px; border: none; outline: none; font-size: 1rem;
 }
-.team-card:hover { background: var(--card-hover-bg); transform: translateY(-5px); }
-.profile-pic { width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.1); margin-bottom: 10px; }
-.username { font-weight: bold; margin-bottom: 5px; }
-.display-name { font-style: italic; color: var(--primary-color); margin-bottom: 10px; }
-.links a { color: var(--primary-color); text-decoration: none; display: block; margin: 5px 0; }
-.links a:hover { color: #fff; }
-
-.faq { margin-top: 40px; }
-.faq .question {
-  background: rgba(0,0,0,0.35); cursor: pointer;
-  padding: 12px; border-radius: 12px; margin-bottom: 8px; font-weight: bold;
+button {
+  background: var(--primary-color); color: #000; font-weight: bold;
+  padding: 10px 20px; border-radius: 15px; border: none; cursor: pointer;
   transition: background 0.3s;
 }
-.faq .question:hover { background: rgba(0,0,0,0.55); }
-.faq .answer { display: none; padding: 12px 15px; background: rgba(0,0,0,0.25);
-  border-radius: 12px; margin-bottom: 10px;
+button:hover { background: #fff; color: #000; }
+
+#tempNotice {
+  background: var(--notice-bg); color: #000; padding: 12px; border-radius: 12px;
+  text-align: center; font-weight: bold; margin-bottom: 20px; transition: opacity 1s ease;
 }
 
-footer { text-align: center; padding: 20px; font-size: 0.9rem; opacity: 0.85;
-  background: rgba(0,0,0,0.25); margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.2);
+#errorLogin { display: none; color: var(--error-bg); font-weight: bold; margin-top: 10px; }
+
+/* AI Chat Styles */
+#aiBubble {
+  position: fixed; bottom: 20px; right: 20px; width: 60px; height: 60px;
+  background: var(--primary-color); border-radius: 50%; display: flex; justify-content: center;
+  align-items: center; cursor: pointer; font-weight: bold; z-index: 1002; box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
+#aiChat {
+  position: fixed; bottom: 90px; right: 20px; width: 300px; max-height: 400px;
+  background: var(--chat-bg); border-radius: 20px; display: none; flex-direction: column;
+  overflow: hidden; box-shadow: 0 0 15px rgba(0,0,0,0.7); z-index: 1001;
+}
+#aiMessages { flex: 1; overflow-y: auto; padding: 10px; }
+.ai-message { margin-bottom: 8px; border-radius: 12px; padding: 8px; }
+.ai-user { background: rgba(255,255,255,0.2); }
+.ai-bot { background: rgba(255,255,255,0.1); }
+#aiInputWrapper { display: flex; padding: 10px; background: rgba(0,0,0,0.25); border-top: 1px solid #fff; }
+#aiInput { flex: 1; padding: 8px; border-radius: 12px; border: none; outline: none; }
+#aiSend { margin-left: 5px; padding: 8px 12px; border-radius: 12px; border: none; background: var(--primary-color); cursor: pointer; }
 
 body.dark {
   --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
@@ -104,58 +92,9 @@ body.dark {
   --nav-bg: rgba(30,30,30,0.85);
   --card-bg: rgba(50,50,50,0.4);
   --card-hover-bg: rgba(60,60,60,0.6);
-  --faq-question-bg: rgba(50,50,50,0.4);
-  --faq-question-hover: rgba(60,60,60,0.6);
-  --faq-answer-bg: rgba(60,60,60,0.3);
-  --error-bg: rgba(0,0,0,0.9);
+  --notice-bg: rgba(255,255,0,0.2);
+  --chat-bg: rgba(30,30,30,0.85);
 }
-
-/* AI Chat styles */
-#aiChatBubble {
-  position: fixed; bottom: 20px; right: 20px;
-  width: 60px; height: 60px; background: var(--primary-color);
-  border-radius: 50%; display: flex; justify-content: center; align-items: center;
-  cursor: pointer; font-size: 28px; z-index: 1500;
-  box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-  transition: transform 0.2s ease;
-}
-#aiChatBubble:hover { transform: scale(1.1); }
-
-#aiChatBox {
-  position: fixed; bottom: 100px; right: 20px;
-  width: 360px; max-height: 550px; background: rgba(0,0,0,0.35);
-  border-radius: 20px; display: none; flex-direction: column;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5); backdrop-filter: blur(10px);
-  z-index: 1500; overflow: hidden;
-}
-
-#aiChatHeader {
-  padding: 12px; font-weight: bold; background: rgba(0,0,0,0.6);
-  display: flex; justify-content: space-between; align-items: center;
-  color: var(--primary-color); font-size: 1.1rem;
-}
-
-#aiChatMessages {
-  flex: 1; padding: 12px; overflow-y: auto; color: var(--text-color);
-  font-size: 0.95rem;
-}
-
-#aiChatInputContainer {
-  display: flex; border-top: 1px solid rgba(255,255,255,0.2);
-}
-
-#aiChatInput {
-  flex: 1; padding: 10px; border: none; outline: none;
-  border-radius: 0 0 0 20px; background: rgba(255,255,255,0.1); color: var(--text-color);
-}
-
-#aiChatSend {
-  width: 80px; border: none; background: var(--primary-color);
-  color: #000; cursor: pointer; font-weight: bold;
-  border-radius: 0 0 20px 0; transition: 0.3s;
-}
-#aiChatSend:hover { background: var(--secondary-color); }
-
 </style>
 </head>
 <body>
@@ -166,23 +105,27 @@ body.dark {
   <a href="tos.html">Terms of Service</a>
 </nav>
 
-<div id="menuToggle">
-  <span></span><span></span><span></span>
+<div id="signedIn" style="display:none;">
+  Signed in as <span id="signedUser"></span>
+  <span class="beta">Beta Program</span>
 </div>
-
-<div id="menu">
-  <a href="index.html">Home</a>
-  <a href="tos.html">Terms of Service</a>
-  <a href="about.html">Team</a>
-  <a href="#" id="discordLogin">Login with Discord</a>
-  <div id="themeToggle">Toggle Theme</div>
-</div>
-
-<div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
 
 <div class="container">
   <h1>Welcome to VoKi</h1>
-  <p>VoKi is your all-in-one Discord bot providing moderation, AI tools, and community support.</p>
+
+  <!-- Temporary Login Notice -->
+  <div id="tempNotice">
+    ⚠️ This VoKi login is temporary and not permanent. Your info is stored locally.
+  </div>
+
+  <div class="card" id="loginCard">
+    <h2>VoKi Login</h2>
+    <input type="text" id="username" placeholder="Username" />
+    <input type="password" id="password" placeholder="Password" />
+    <label><input type="checkbox" id="rememberMe" /> Remember me</label>
+    <button id="loginBtn">Login</button>
+    <div id="errorLogin">Invalid username or password!</div>
+  </div>
 
   <div class="card">
     <h2>Features</h2>
@@ -193,51 +136,15 @@ body.dark {
       <li>Support system for server staff</li>
     </ul>
   </div>
+</div>
 
-  <div class="card">
-    <h2>Current Updates</h2>
-    <ul>
-      <li>Enhanced logging system</li>
-      <li>Multilingual support</li>
-      <li>Advanced leveling features</li>
-      <li>Privacy opt-out available for all users</li>
-    </ul>
-  </div>
-
-  <!-- Team Cards -->
-  <div class="team-card">
-    <div class="profile-pic"></div>
-    <div class="username">Vaztinix</div>
-    <div class="display-name">Founder & Developer</div>
-    <div class="links">
-      <a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube</a>
-      <a href="#" target="_blank">Discord</a>
-    </div>
-  </div>
-
-  <div class="team-card">
-    <div class="profile-pic"></div>
-    <div class="username">solorads</div>
-    <div class="display-name">Partner</div>
-    <div class="links">
-      <a href="https://www.roblox.com/games/17590556553/NEW-Military-Roleplay" target="_blank">Roblox Game</a>
-    </div>
-  </div>
-
-  <div class="card faq">
-    <h2>FAQ</h2>
-    <div class="question">How do I add VoKi to my server?</div>
-    <div class="answer">Click the "Invite" button on the VoKi website and select your server. Make sure you have the required permissions.</div>
-    <div class="question">Is my data safe with VoKi?</div>
-    <div class="answer">Yes, VoKi only collects necessary data for bot functionality. You can delete your data anytime.</div>
-  </div>
-
-  <div class="card">
-    <h2>Contact & Support</h2>
-    <ul>
-      <li>Email: VoKi.io@outlook.com</li>
-      <li>Discord: <a href="https://discord.gg/PHKdvcYd" style="color: var(--primary-color);">Join our server</a></li>
-    </ul>
+<!-- AI Chat Bubble -->
+<div id="aiBubble">AI</div>
+<div id="aiChat">
+  <div id="aiMessages"></div>
+  <div id="aiInputWrapper">
+    <input type="text" id="aiInput" placeholder="Ask me anything..." />
+    <button id="aiSend">Send</button>
   </div>
 </div>
 
@@ -245,106 +152,113 @@ body.dark {
   © 2025 VoKi — Building smarter communities together.
 </footer>
 
-<!-- AI Chat Bubble -->
-<div id="aiChatBubble">💬</div>
-
-<!-- AI Chat Box -->
-<div id="aiChatBox">
-  <div id="aiChatHeader">VoKi AI <span id="closeAiChat">✖</span></div>
-  <div id="aiChatMessages"></div>
-  <div id="aiChatInputContainer">
-    <input type="text" id="aiChatInput" placeholder="Ask me something..." />
-    <button id="aiChatSend">Send</button>
-  </div>
-</div>
-
 <script>
-// Menu and theme
-const menuToggle = document.getElementById('menuToggle');
-const menu = document.getElementById('menu');
-menuToggle.addEventListener('click', () => { menu.classList.toggle('show'); menuToggle.classList.toggle('shifted'); });
+// Temporary notice fade
+const tempNotice = document.getElementById("tempNotice");
+setTimeout(() => {
+  tempNotice.style.opacity = 0;
+  setTimeout(() => tempNotice.style.display = "none", 1000);
+}, 5000);
 
-const themeToggle = document.getElementById('themeToggle');
-const body = document.body;
-const savedTheme = localStorage.getItem('theme');
-if(savedTheme) body.classList.toggle('dark', savedTheme === 'dark');
-themeToggle.addEventListener('click', () => {
-  body.classList.toggle('dark');
-  localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+// Login functionality (local storage)
+const loginBtn = document.getElementById("loginBtn");
+const usernameInput = document.getElementById("username");
+const passwordInput = document.getElementById("password");
+const errorLogin = document.getElementById("errorLogin");
+const signedInDiv = document.getElementById("signedIn");
+const signedUserSpan = document.getElementById("signedUser");
+const loginCard = document.getElementById("loginCard");
+
+loginBtn.addEventListener("click", () => {
+  const user = usernameInput.value.trim();
+  const pass = passwordInput.value.trim();
+  if(!user || !pass){
+    errorLogin.style.display = "block";
+    return;
+  }
+  // Save locally
+  localStorage.setItem("vokiUser", user);
+  localStorage.setItem("vokiPass", pass);
+  
+  signedUserSpan.textContent = user;
+  signedInDiv.style.display = "block";
+  loginCard.style.display = "none";
+  errorLogin.style.display = "none";
 });
 
-const discordLogin = document.getElementById('discordLogin');
-const errorNotification = document.getElementById('errorNotification');
-discordLogin.addEventListener('click', e => { e.preventDefault(); errorNotification.classList.add('show'); setTimeout(() => errorNotification.classList.remove('show'), 4000); });
-
-document.querySelectorAll('.faq .question').forEach(q => { q.addEventListener('click', () => { const ans = q.nextElementSibling; ans.style.display = ans.style.display === 'block' ? 'none' : 'block'; }); });
-
-// AI Chat
-const bubble = document.getElementById("aiChatBubble");
-const chatBox = document.getElementById("aiChatBox");
-const closeBtn = document.getElementById("closeAiChat");
-bubble.addEventListener("click", () => { chatBox.style.display = "flex"; });
-closeBtn.addEventListener("click", () => { chatBox.style.display = "none"; });
-
-const input = document.getElementById("aiChatInput");
-const sendBtn = document.getElementById("aiChatSend");
-const messages = document.getElementById("aiChatMessages");
-
-// Banned words
-const bannedWords = ["badword1","badword2","sex","drugs","kill","hack","spam","terror"];
-
-// AI memory
-let memory = [];
-
-// Responses
-const responses = [
-  {keywords:["hello","hi","hey"], answer:"Hello! How can I assist you today?"},
-  {keywords:["how are you"], answer:"I'm just a bot, but ready to help!"},
-  {keywords:["discord","bot"], answer:"VoKi is your all-in-one Discord bot."},
-  {keywords:["help","support"], answer:"Sure! What do you need help with?"},
-  {keywords:["commands","ban"], answer:"You can use ban, mute, kick, and more!"},
-  {keywords:["privacy","data"], answer:"Your data is safe; VoKi only collects what is necessary."},
-  {keywords:["fun","game"], answer:"I love helping with fun and games ideas!"},
-  {keywords:["update","new"], answer:"Check out the latest updates in our website section."},
-  {keywords:["feature","features"], answer:"VoKi comes with moderation, AI Q&A, and more features!"},
-  {keywords:["question","ask"], answer:"Feel free to ask me anything about VoKi or Discord!"}
-];
-
-for(let i=1;i<=1000;i++){ responses.push({keywords:["example"+i], answer:"This is a sample answer number "+i+". You can ask more!"}); }
-
-function addMessage(sender,text){
-  const now=new Date();
-  const timestamp=now.getHours().toString().padStart(2,'0')+':'+now.getMinutes().toString().padStart(2,'0');
-  const div=document.createElement("div");
-  div.innerHTML=`<strong>${sender} [${timestamp}]:</strong> ${text}`;
-  messages.appendChild(div);
-  messages.scrollTop = messages.scrollHeight;
+// Load saved info
+const savedUser = localStorage.getItem("vokiUser");
+if(savedUser){
+  signedUserSpan.textContent = savedUser;
+  signedInDiv.style.display = "block";
+  loginCard.style.display = "none";
 }
 
-function isSafe(text){ return !bannedWords.some(word=>text.toLowerCase().includes(word)); }
+// AI Chat
+const aiBubble = document.getElementById("aiBubble");
+const aiChat = document.getElementById("aiChat");
+const aiInput = document.getElementById("aiInput");
+const aiSend = document.getElementById("aiSend");
+const aiMessages = document.getElementById("aiMessages");
 
-sendBtn.addEventListener("click",()=>{
-  const userText=input.value.trim();
-  if(!userText) return;
-  if(!isSafe(userText)){ addMessage("AI","⚠️ Unsafe content blocked."); input.value=''; return; }
-  addMessage("You",userText);
-  let found=memory.find(item=>item.question.toLowerCase()===userText.toLowerCase());
-  if(found){ addMessage("AI",found.answer); }
-  else{
-    let matched=false;
-    for(let item of responses){ if(item.keywords.some(k=>userText.toLowerCase().includes(k))){
-      addMessage("AI",item.answer); memory.push({question:userText,answer:item.answer}); matched=true; break;
-    }}
-    if(!matched){
-      const generic=["Interesting! Can you tell me more?","Hmm… that's a good question!","I see! What else can you tell me about that?","Let me think about that for a moment...","Fascinating! Let's explore this further!"];
-      const ans=generic[Math.floor(Math.random()*generic.length)];
-      addMessage("AI",ans); memory.push({question:userText,answer:ans});
-    }
-  }
-  input.value='';
+let memory = [];
+const bannedWords = ["badword1","badword2","badword3","badword4","offensive"]; // expand as needed
+
+function isSafe(text){
+  const lower = text.toLowerCase();
+  return !bannedWords.some(word => lower.includes(word));
+}
+
+function addMessage(sender, text){
+  const msg = document.createElement("div");
+  msg.classList.add("ai-message", sender === "You" ? "ai-user":"ai-bot");
+  const time = new Date().toLocaleTimeString();
+  msg.innerHTML = `<strong>${sender}:</strong> ${text} <span style="float:right;font-size:0.7em;">${time}</span>`;
+  aiMessages.appendChild(msg);
+  aiMessages.scrollTop = aiMessages.scrollHeight;
+}
+
+aiBubble.addEventListener("click", () => {
+  aiChat.style.display = aiChat.style.display === "flex" ? "none" : "flex";
 });
-input.addEventListener("keypress",e=>{if(e.key==='Enter') sendBtn.click();});
-</script>
 
+function getAIResponse(text){
+  // Check memory for previous answer
+  const found = memory.find(item => item.question.toLowerCase() === text.toLowerCase());
+  if(found) return found.answer;
+  
+  // Basic generic responses
+  const responses = [
+    "Interesting! Can you tell me more?",
+    "I'm here to help! What else?",
+    "That's a great question!",
+    "Let me think about that...",
+    "Could you clarify your question?",
+    "I see! Can you expand on that?",
+    "Hmm, that's something I can answer in multiple ways..."
+  ];
+  const answer = responses[Math.floor(Math.random()*responses.length)];
+  memory.push({question:text, answer:answer});
+  return answer;
+}
+
+aiSend.addEventListener("click", () => {
+  const userText = aiInput.value.trim();
+  if(!userText) return;
+  if(!isSafe(userText)){
+    addMessage("AI","⚠️ Unsafe content blocked.");
+    aiInput.value = '';
+    return;
+  }
+  addMessage("You", userText);
+  const aiAnswer = getAIResponse(userText);
+  addMessage("AI", aiAnswer);
+  aiInput.value = '';
+});
+
+aiInput.addEventListener("keypress", e => {
+  if(e.key === "Enter") aiSend.click();
+});
+</script>
 </body>
 </html>
