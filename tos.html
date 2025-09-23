@@ -25,11 +25,10 @@
     color: var(--text-color);
     line-height: 1.6;
     scroll-behavior: smooth;
-    transition: all 0.3s ease;
     overflow-x: hidden;
+    transition: all 0.3s ease;
   }
 
-  /* NAVIGATION */
   nav {
     position: fixed;
     top: 0;
@@ -52,7 +51,6 @@
   }
   nav a:hover { color: var(--primary-color); }
 
-  /* BOTTOM MENU BUTTON */
   #menuToggle {
     position: fixed;
     bottom: 20px;
@@ -79,7 +77,6 @@
   }
   #menuToggle.shifted { transform: translateY(-260px); }
 
-  /* SLIDE-UP MENU */
   #menu {
     position: fixed;
     bottom: 0;
@@ -96,18 +93,9 @@
     z-index: 1000;
   }
   #menu.show { transform: translateY(0); }
-
-  #menu a, #menu div {
-    color: var(--primary-color);
-    font-weight: bold;
-    cursor: pointer;
-    padding: 8px 0;
-    text-decoration: none;
-    transition: color 0.3s;
-  }
+  #menu a, #menu div { color: var(--primary-color); font-weight: bold; cursor: pointer; padding: 8px 0; text-decoration: none; transition: color 0.3s; }
   #menu a:hover, #menu div:hover { color: #fff; }
 
-  /* ERROR NOTIFICATION */
   .error-notification {
     position: fixed;
     top: 20px;
@@ -124,7 +112,6 @@
   }
   .error-notification.show { opacity: 1; pointer-events: auto; }
 
-  /* CONTENT CONTAINER */
   .container {
     max-width: 900px;
     margin: 100px auto 50px;
@@ -136,15 +123,15 @@
   p, li { font-size: 1.05rem; margin-bottom: 10px; }
   ul { padding-left: 20px; margin-bottom: 20px; }
 
-  /* CARD / UPDATES / TEAM */
-  .updates {
+  .card {
     background: var(--card-bg);
     padding: 20px;
     border-radius: 12px;
-    margin: 30px 0;
+    margin: 20px 0;
+    transition: background 0.3s;
   }
+  .card:hover { background: var(--card-hover-bg); }
 
-  /* FAQ */
   .faq { margin-top: 40px; }
   .faq .question {
     background: var(--faq-question-bg);
@@ -168,12 +155,12 @@
     border-top: 1px solid rgba(255,255,255,0.2);
   }
 
-  /* DARK MODE */
   body.dark {
     --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
     --text-color: #eee;
     --nav-bg: rgba(30,30,30,0.85);
     --card-bg: rgba(50,50,50,0.4);
+    --card-hover-bg: rgba(60,60,60,0.6);
     --faq-question-bg: rgba(50,50,50,0.4);
     --faq-question-hover: rgba(60,60,60,0.6);
     --faq-answer-bg: rgba(60,60,60,0.3);
@@ -186,6 +173,7 @@
 <!-- NAVIGATION -->
 <nav>
   <a href="index.html">Home</a>
+  <a href="team.html">Team</a> <!-- ADDED -->
   <a href="tos.html">Terms of Service</a>
 </nav>
 
@@ -199,6 +187,7 @@
 <!-- SLIDE-UP MENU -->
 <div id="menu">
   <a href="index.html">Home</a>
+  <a href="team.html">Team</a> <!-- ADDED -->
   <a href="tos.html">Terms of Service</a>
   <a href="#" id="discordLogin">Login with Discord</a>
   <div id="themeToggle">Toggle Theme</div>
@@ -248,8 +237,7 @@
     <li>Discord: <a href="https://discord.gg/PHKdvcYd" style="color: var(--primary-color);">Join our server</a></li>
   </ul>
 
-  <!-- UPDATES SECTION -->
-  <div class="updates">
+  <div class="card">
     <h2>Current Updates</h2>
     <ul>
       <li>Enhanced logging system</li>
@@ -259,8 +247,7 @@
     </ul>
   </div>
 
-  <!-- TEAM SECTION -->
-  <div class="updates">
+  <div class="card">
     <h2>Meet the Team</h2>
     <ul>
       <li><strong>VoKi</strong> – Founder & Developer</li>
@@ -270,18 +257,6 @@
     </ul>
   </div>
 
-  <!-- FAQ SECTION -->
-  <div class="faq">
-    <h2>FAQ</h2>
-    <div class="question">How is my data protected?</div>
-    <div class="answer">VoKi only stores necessary data. Admins cannot view messages; users can delete all data anytime.</div>
-
-    <div class="question">How do I request deletion of my data?</div>
-    <div class="answer">Contact us via Discord or email to request complete deletion. Deletion is permanent.</div>
-
-    <div class="question">Will features change over time?</div>
-    <div class="answer">Yes, VoKi is regularly updated with new commands and improvements.</div>
-  </div>
 </div>
 
 <footer>
@@ -289,7 +264,6 @@
 </footer>
 
 <script>
-  // MENU TOGGLE WITH SLIDE-UP BUTTON
   const menuToggle = document.getElementById('menuToggle');
   const menu = document.getElementById('menu');
   menuToggle.addEventListener('click', () => {
@@ -297,7 +271,6 @@
     menuToggle.classList.toggle('shifted');
   });
 
-  // FAQ ACCORDION
   document.querySelectorAll('.faq .question').forEach(q => {
     q.addEventListener('click', () => {
       const ans = q.nextElementSibling;
@@ -305,7 +278,6 @@
     });
   });
 
-  // DARK MODE
   const body = document.body;
   const themeToggle = document.getElementById('themeToggle');
   const savedTheme = localStorage.getItem('theme');
@@ -315,7 +287,6 @@
     localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
   });
 
-  // DISCORD LOGIN NOTIFICATION
   const discordLogin = document.getElementById('discordLogin');
   const errorNotification = document.getElementById('errorNotification');
   discordLogin.addEventListener('click', e => {
