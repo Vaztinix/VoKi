@@ -26,7 +26,6 @@ body {
   transition: background 0.8s ease, color 0.8s ease;
 }
 
-/* Navigation */
 nav {
   position: fixed; top:0; left:0; width:100%; height:60px;
   background: var(--nav-bg);
@@ -39,7 +38,6 @@ nav a {
 }
 nav a:hover { color: var(--primary-color); }
 
-/* Floating Menu */
 #menuToggle {
   position: fixed; bottom:20px; left:20px; width:50px; height:50px;
   background: var(--primary-color); border-radius:50%;
@@ -67,7 +65,6 @@ nav a:hover { color: var(--primary-color); }
 }
 #menu a:hover, #menu div:hover { color:#fff; }
 
-/* Error Notification */
 .error-notification {
   position:fixed; top:20px; right:20px;
   background: var(--error-bg);
@@ -79,7 +76,6 @@ nav a:hover { color: var(--primary-color); }
 }
 .error-notification.show { opacity:1; pointer-events:auto; }
 
-/* Main Content */
 .container {
   max-width:1200px;
   margin:100px auto 50px;
@@ -91,7 +87,6 @@ nav a:hover { color: var(--primary-color); }
 h1 { font-size:2.5rem; margin-bottom:10px; color:#e6f7ff; }
 p.lead { font-size:1.2rem; opacity:0.9; }
 
-/* Team Cards */
 .card-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -113,8 +108,9 @@ p.lead { font-size:1.2rem; opacity:0.9; }
   margin-bottom:15px;
   object-fit:cover;
 }
+.card a { color: var(--primary-color); text-decoration:none; font-weight:bold; }
+.card a:hover { text-decoration:underline; }
 
-/* Footer */
 footer {
   text-align:center;
   padding:20px;
@@ -125,7 +121,6 @@ footer {
   margin-top:50px;
 }
 
-/* Dark Mode */
 body.dark {
   --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
   --text-color: #eee;
@@ -137,14 +132,12 @@ body.dark {
 </head>
 <body>
 
-<!-- Navigation -->
 <nav>
   <a href="index.html">Home</a>
   <a href="team.html">Team</a>
   <a href="tos.html">ToS</a>
 </nav>
 
-<!-- Floating Menu -->
 <div id="menuToggle"><span></span><span></span><span></span></div>
 <div id="menu">
   <a href="index.html">Home</a>
@@ -156,31 +149,30 @@ body.dark {
 
 <div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
 
-<!-- Main Content -->
 <div class="container">
   <h1>Meet the Team</h1>
-  <p class="lead"><strong>VoKi is powered by dedicated developers and moderators</strong> — keeping the community safe and our bot running smoothly.</p>
+  <p class="lead"><strong>VoKi is powered by dedicated developers and partners</strong> — keeping the community safe and our bot running smoothly.</p>
 
   <div class="card-grid">
     <div class="card">
       <img src="https://via.placeholder.com/100" alt="Vaztinix">
       <h2>Vaztinix</h2>
-      <p>Developer & Community Support</p>
+      <p>Founder & Lead Developer</p>
+      <p><a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube Channel</a></p>
     </div>
 
     <div class="card">
       <img src="https://via.placeholder.com/100" alt="Solorads">
       <h2>Solorads</h2>
-      <p>Creative Lead & Feature Innovator</p>
+      <p>VoKi Partner & Owner of SMRP</p>
+      <p><a href="https://www.roblox.com/games/17590556553/NEW-Military-Roleplay" target="_blank">Visit SMRP Game</a></p>
     </div>
   </div>
 </div>
 
-<!-- Footer -->
 <footer>© 2025 VoKi — Building smarter communities together.</footer>
 
 <script>
-// Menu toggle
 const menuToggle = document.getElementById('menuToggle');
 const menu = document.getElementById('menu');
 menuToggle.addEventListener('click', () => {
@@ -188,7 +180,6 @@ menuToggle.addEventListener('click', () => {
   menuToggle.classList.toggle('shifted');
 });
 
-// Theme toggle
 const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
 const savedTheme = localStorage.getItem('theme');
@@ -198,7 +189,6 @@ themeToggle.addEventListener('click', () => {
   localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
 });
 
-// Login placeholder
 const discordLogin = document.getElementById('discordLogin');
 const errorNotification = document.getElementById('errorNotification');
 discordLogin.addEventListener('click', e => {
