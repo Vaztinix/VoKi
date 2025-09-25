@@ -8,11 +8,12 @@
 :root {
   --primary-color: #aeefff;
   --text-color: #fff;
-  --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
+  --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad); /* Light mode gradient */
   --nav-bg: rgba(0,0,0,0.6);
   --card-bg: rgba(0,0,0,0.25);
   --card-hover-bg: rgba(0,0,0,0.45);
   --error-bg: rgba(0,0,0,0.9);
+  --modal-gradient: linear-gradient(135deg, #4facfe, #8e44ad);
 }
 
 body {
@@ -101,12 +102,13 @@ footer { text-align:center; padding:20px; font-size:0.9rem; opacity:0.85; backgr
 .support-btn:hover { opacity:0.85; }
 
 body.dark {
-  --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
+  --bg-gradient: linear-gradient(to bottom right, #0d1b2a, #2c2c2c); /* Dark blue to dark gray */
   --text-color: #eee;
   --nav-bg: rgba(30,30,30,0.85);
   --card-bg: rgba(50,50,50,0.4);
   --card-hover-bg: rgba(60,60,60,0.6);
   --error-bg: rgba(0,0,0,0.9);
+  --modal-gradient: linear-gradient(135deg, #0d1b2a, #2c2c2c);
 }
 
 /* Fullscreen Modal */
@@ -119,7 +121,7 @@ body.dark {
 .modal.active { display:flex; }
 .modal-bg {
   position:absolute; top:0; left:0; width:100%; height:100%;
-  background: linear-gradient(135deg, #4facfe, #ffffff);
+  background: var(--modal-gradient);
   background-size: 300% 300%;
   animation: gradientFlow 6s ease infinite;
   z-index:-1;
