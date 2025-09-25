@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>VoKi – Team</title>
+<title>VoKi – Your Discord Bot</title>
 <style>
 :root {
   --primary-color: #aeefff;
@@ -12,7 +12,9 @@
   --nav-bg: rgba(0,0,0,0.7);
   --card-bg: rgba(255,255,255,0.08);
   --card-hover-bg: rgba(255,255,255,0.18);
-  --modal-bg: rgba(0,0,0,0.85);
+  --faq-question-bg: rgba(255,255,255,0.08);
+  --faq-question-hover: rgba(255,255,255,0.18);
+  --faq-answer-bg: rgba(255,255,255,0.06);
   --error-bg: rgba(0,0,0,0.9);
 }
 
@@ -27,94 +29,112 @@ body {
   transition: background 0.8s ease, color 0.8s ease;
 }
 
-/* Navigation Top */
+/* Navigation */
 nav {
   position: fixed; top:0; left:0; width:100%; height:60px;
   background: var(--nav-bg);
   display:flex; justify-content:center; align-items:center;
   gap:25px; z-index:1000;
 }
-nav a { color: var(--text-color); font-weight:bold; text-decoration:none; transition:0.3s; }
+nav a {
+  color: var(--text-color); font-weight:bold;
+  text-decoration:none; transition:0.3s;
+}
 nav a:hover { color: var(--primary-color); }
 
-/* Bottom-left menu toggle */
+/* Floating Menu */
 #menuToggle {
   position: fixed; bottom:20px; left:20px; width:50px; height:50px;
   background: var(--primary-color); border-radius:50%;
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
-  cursor: pointer; z-index: 1001; transition: transform 0.3s ease;
+  display:flex; flex-direction:column; justify-content:center; align-items:center;
+  cursor:pointer; z-index:1001; transition:transform 0.3s ease;
 }
 #menuToggle span { display:block; width:22px; height:2px; background:#000; margin:3px 0; }
-#menuToggle.shifted { transform: translateY(-260px); }
+#menuToggle.shifted { transform: translateY(-200px); }
 
-/* Menu */
 #menu {
-  position: fixed; bottom:0; left:20px; width:260px;
-  background: rgba(0,0,0,0.85); border-radius:12px 12px 0 0;
-  padding:20px; display:flex; flex-direction: column; gap:12px;
-  transform: translateY(100%); transition: transform 0.3s ease; z-index:1000;
+  position: fixed; bottom:0; left:20px; width:200px;
+  background: rgba(0,0,0,0.85);
+  border-radius:12px 12px 0 0;
+  padding:20px; display:flex; flex-direction:column; gap:12px;
+  transform:translateY(100%);
+  transition:transform 0.3s ease;
+  z-index:1000;
 }
-#menu.show { transform: translateY(0); }
-#menu a, #menu div { color: var(--primary-color); font-weight:bold; cursor:pointer;
-  padding:8px 0; text-decoration:none; transition: color 0.3s; }
+#menu.show { transform:translateY(0); }
+#menu a, #menu div {
+  color: var(--primary-color);
+  font-weight:bold; cursor:pointer;
+  padding:8px 0; text-decoration:none;
+  transition:color 0.3s;
+}
 #menu a:hover, #menu div:hover { color:#fff; }
 
 /* Error Notification */
 .error-notification {
-  position: fixed; top: 20px; right: 20px; background: var(--error-bg);
-  padding: 15px 20px; border-radius: 8px; color: #fff; font-weight: bold;
-  opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index:2000;
+  position:fixed; top:20px; right:20px;
+  background: var(--error-bg);
+  padding:15px 20px; border-radius:8px;
+  color:#fff; font-weight:bold;
+  opacity:0; pointer-events:none;
+  transition:opacity 0.5s ease;
+  z-index:2000;
 }
 .error-notification.show { opacity:1; pointer-events:auto; }
 
-/* Container */
+/* Main Content */
 .container {
   max-width:1200px;
   margin:100px auto 50px;
   padding:0 20px;
-  text-align:center;
+  display:flex; flex-direction:column; align-items:center;
+  gap:40px;
 }
+h1 { font-size:2.5rem; margin-bottom:10px; color:#e6f7ff; text-align:center; }
+p.lead { font-size:1.2rem; opacity:0.9; text-align:center; max-width:800px; }
 
-/* Team Cards */
-.team-wrapper {
+/* Cards */
+.card-grid {
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
   gap:25px;
-  margin-top:40px;
+  width:100%;
+  justify-items:center;
 }
-.team-card {
+.card {
   background: var(--card-bg);
-  border-radius:20px;
   padding:25px;
-  text-align:center;
-  transition: background 0.3s, transform 0.3s;
-  box-shadow:0 4px 12px rgba(0,0,0,0.25);
-}
-.team-card:hover { background: var(--card-hover-bg); transform:translateY(-6px); }
-.profile-pic { width:110px; height:110px; border-radius:50%; background: rgba(255,255,255,0.15); margin:0 auto 15px; }
-.username { font-weight:bold; font-size:1.3rem; margin-bottom:5px; }
-.display-name { font-style:italic; color: var(--primary-color); margin-bottom:15px; }
-.links a { color: var(--primary-color); text-decoration:none; display:block; margin:6px 0; }
-.links a:hover { color:#fff; }
-.view-btn { margin-top:14px; padding:10px 18px; border:none; border-radius:10px; background: var(--primary-color); color:#000; font-weight:bold; cursor:pointer; transition:0.3s; }
-.view-btn:hover { opacity:0.85; }
-
-/* Info Cards */
-.info-card {
-  background: var(--card-bg);
   border-radius:20px;
-  padding:25px;
-  margin:40px auto;
+  transition:background 0.3s, transform 0.3s;
   text-align:left;
-  max-width:800px;
-  box-shadow:0 4px 12px rgba(0,0,0,0.25);
+  box-shadow:0 6px 18px rgba(0,0,0,0.25);
+  width:100%;
+  max-width:350px;
 }
-.info-card h2 { color: var(--primary-color); margin-bottom:15px; }
+.card:hover { background: var(--card-hover-bg); transform:translateY(-6px); }
+.card h2 { color: var(--primary-color); margin-bottom:12px; }
 
-/* Support Button */
-.support-btn {
+/* FAQ */
+.faq .question {
+  background: var(--faq-question-bg);
+  cursor:pointer; padding:12px;
+  border-radius:8px; margin-bottom:8px;
+  font-weight:bold;
+  transition:background 0.3s;
+}
+.faq .question:hover { background: var(--faq-question-hover); }
+.faq .answer {
+  display:none;
+  padding:12px 15px;
+  background: var(--faq-answer-bg);
+  border-radius:8px;
+  margin-bottom:10px;
+}
+
+/* Buttons */
+.main-btn {
   display:inline-block;
-  margin:30px auto;
+  margin:10px 10px 0 0;
   padding:14px 22px;
   background: var(--primary-color);
   color:#000;
@@ -124,7 +144,7 @@ nav a:hover { color: var(--primary-color); }
   text-decoration:none;
   transition:0.3s;
 }
-.support-btn:hover { opacity:0.85; }
+.main-btn:hover { opacity:0.85; }
 
 /* Footer */
 footer {
@@ -134,27 +154,8 @@ footer {
   opacity:0.85;
   background: rgba(0,0,0,0.25);
   border-top:1px solid rgba(255,255,255,0.2);
+  margin-top:50px;
 }
-
-/* Modal */
-.modal {
-  position:fixed; top:0; left:0; width:100%; height:100%;
-  display:none; justify-content:center; align-items:center;
-  background: var(--modal-bg);
-  z-index:2000;
-}
-.modal.active { display:flex; }
-.modal-content {
-  background: rgba(255,255,255,0.12);
-  padding:30px;
-  border-radius:20px;
-  text-align:center;
-  max-width:400px; width:90%;
-  box-shadow:0 6px 15px rgba(0,0,0,0.4);
-}
-.modal-content h2 { margin-bottom:10px; }
-.close-btn { margin-top:20px; padding:10px 20px; border:none; border-radius:10px; background:#fff; color:#000; font-weight:bold; cursor:pointer; }
-.close-btn:hover { background:#ddd; }
 
 /* Dark Mode */
 body.dark {
@@ -163,8 +164,9 @@ body.dark {
   --nav-bg: rgba(30,30,30,0.85);
   --card-bg: rgba(50,50,50,0.4);
   --card-hover-bg: rgba(60,60,60,0.6);
-  --modal-bg: rgba(20,20,20,0.85);
-  --error-bg: rgba(50,50,50,0.95);
+  --faq-question-bg: rgba(50,50,50,0.4);
+  --faq-question-hover: rgba(60,60,60,0.6);
+  --faq-answer-bg: rgba(60,60,60,0.3);
 }
 </style>
 </head>
@@ -177,96 +179,75 @@ body.dark {
   <a href="tos.html">ToS</a>
 </nav>
 
-<!-- Menu Toggle -->
+<!-- Floating Menu -->
 <div id="menuToggle"><span></span><span></span><span></span></div>
 <div id="menu">
   <a href="index.html">Home</a>
   <a href="team.html">Team</a>
-  <a href="tos.html">ToS</a>
+  <a href="tos.html">Terms of Service</a>
   <div id="themeToggle">Toggle Theme</div>
   <a href="#" id="discordLogin">Login with Discord</a>
 </div>
 
-<!-- Error Notification -->
 <div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
 
 <!-- Main Content -->
 <div class="container">
-  <h1>Meet the VoKi Team</h1>
-  <p>Our team works hard to provide the best moderation, AI tools, and support for your Discord server.</p>
+  <h1>Welcome to VoKi</h1>
+  <p class="lead"><strong>Privacy-First AI & Moderation Bot</strong> — keeping your Discord safe, positive, and secure.</p>
 
-  <div class="team-wrapper">
-    <div class="team-card">
-      <div class="profile-pic"></div>
-      <div class="username">Vaztinix</div>
-      <div class="display-name">Founder & Developer</div>
-      <div class="links">
-        <a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube</a>
-      </div>
-      <button class="view-btn" data-name="Vaztinix" data-role="Founder & Developer">View</button>
+  <div class="card-grid">
+    <div class="card">
+      <h2>Why Choose VoKi?</h2>
+      <ul>
+        <li><strong>Community Safety:</strong> AI detects toxic content only when invoked.</li>
+        <li><strong>Privacy First:</strong> Logs stay inside your server.</li>
+        <li><strong>Customization:</strong> Create commands, relay messages, tailor moderation.</li>
+        <li><strong>Effortless Moderation:</strong> Multi-level access control.</li>
+        <li><strong>Global Support:</strong> Multilingual features coming soon.</li>
+      </ul>
     </div>
-    <div class="team-card">
-      <div class="profile-pic"></div>
-      <div class="username">solorads</div>
-      <div class="display-name">Partner</div>
-      <div class="links">
-        <a href="https://www.roblox.com/games/17590556553/NEW-Military-Roleplay" target="_blank">Roblox Game</a>
-      </div>
-      <button class="view-btn" data-name="solorads" data-role="Partner">View</button>
+
+    <div class="card">
+      <h2>New Features</h2>
+      <ul>
+        <li><strong>Command Control:</strong> Enable/disable commands per server.</li>
+        <li><strong>Activity Logging:</strong> Private edit tracking.</li>
+        <li><strong>Content Monitoring:</strong> AI scans flagged content privately.</li>
+        <li><strong>Roblox Integration:</strong> Tools for Roblox communities.</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2>Get Started</h2>
+      <p>Invite VoKi to your server or join our Discord community to explore more features, get help, and connect with other users.</p>
+      <a class="main-btn" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank">Invite VoKi</a>
+      <a class="main-btn" href="https://discord.gg/PKWJuRrgUd" target="_blank">Join Server</a>
     </div>
   </div>
 
-  <div class="info-card">
-    <h2>Our Features</h2>
-    <ul>
-      <li>Moderation commands: ban, mute, kick, etc.</li>
-      <li>AI-powered Q&A</li>
-      <li>Custom role management</li>
-      <li>Support system for server staff</li>
-      <li>Advanced logging & analytics</li>
-    </ul>
+  <div class="card faq">
+    <h2>FAQ</h2>
+    <div class="question">How do I add VoKi to my server?</div>
+    <div class="answer">Click the "Invite" button and select your server.</div>
+    <div class="question">Is my data safe with VoKi?</div>
+    <div class="answer">Yes, VoKi only logs data locally in your server.</div>
   </div>
 
-  <div class="info-card">
+  <div class="card">
     <h2>Contact & Support</h2>
     <ul>
-      <li>Email: VoKi.io@outlook.com</li>
+      <li>Email: <a href="mailto:VoKi.io@outlook.com" style="color: var(--primary-color);">VoKi.io@outlook.com</a></li>
       <li>Discord: <a href="https://discord.gg/PHKdvcYd" style="color: var(--primary-color);">Join our server</a></li>
     </ul>
   </div>
-
-  <a href="mailto:VoKi.io@outlook.com" class="support-btn">Need Help? Contact Support</a>
 </div>
 
 <!-- Footer -->
 <footer>© 2025 VoKi — Building smarter communities together.</footer>
 
-<!-- Modal -->
-<div class="modal" id="profileModal">
-  <div class="modal-content">
-    <h2 id="modalName"></h2>
-    <p id="modalRole"></p>
-    <button class="close-btn">Close</button>
-  </div>
-</div>
-
 <script>
-// Modal logic
-const modal = document.getElementById("profileModal");
-const modalName = document.getElementById("modalName");
-const modalRole = document.getElementById("modalRole");
-const closeBtn = modal.querySelector(".close-btn");
-
-document.querySelectorAll(".view-btn").forEach(btn => {
-  btn.addEventListener("click", () => {
-    modalName.textContent = btn.dataset.name;
-    modalRole.textContent = btn.dataset.role;
-    modal.classList.add("active");
-  });
-});
-closeBtn.addEventListener("click", () => modal.classList.remove("active"));
-
-// Bottom menu toggle
+// Menu toggle
 const menuToggle = document.getElementById('menuToggle');
 const menu = document.getElementById('menu');
 menuToggle.addEventListener('click', () => {
@@ -279,13 +260,12 @@ const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
 const savedTheme = localStorage.getItem('theme');
 if(savedTheme) body.classList.toggle('dark', savedTheme === 'dark');
-
 themeToggle.addEventListener('click', () => {
   body.classList.toggle('dark');
   localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
 });
 
-// Discord login error
+// Login placeholder
 const discordLogin = document.getElementById('discordLogin');
 const errorNotification = document.getElementById('errorNotification');
 discordLogin.addEventListener('click', e => {
@@ -293,6 +273,15 @@ discordLogin.addEventListener('click', e => {
   errorNotification.classList.add('show');
   setTimeout(() => errorNotification.classList.remove('show'), 4000);
 });
+
+// FAQ toggle
+document.querySelectorAll('.faq .question').forEach(q => {
+  q.addEventListener('click', () => {
+    const ans = q.nextElementSibling;
+    ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
+  });
+});
 </script>
+
 </body>
 </html>
