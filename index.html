@@ -82,7 +82,7 @@ nav a:hover { color: var(--primary-color); }
 }
 .error-notification.show { opacity:1; pointer-events:auto; }
 
-/* Content */
+/* Main Content */
 .container {
   max-width:1200px;
   margin:100px auto 50px;
@@ -107,8 +107,9 @@ p.lead { font-size:1.2rem; opacity:0.9; }
   border-radius:20px;
   transition:background 0.3s, transform 0.3s;
   text-align:left;
+  box-shadow:0 4px 12px rgba(0,0,0,0.25);
 }
-.card:hover { background: var(--card-hover-bg); transform:translateY(-5px); }
+.card:hover { background: var(--card-hover-bg); transform:translateY(-6px); }
 .card h2 { color: var(--primary-color); margin-bottom:10px; }
 
 /* FAQ */
@@ -127,6 +128,21 @@ p.lead { font-size:1.2rem; opacity:0.9; }
   border-radius:8px;
   margin-bottom:10px;
 }
+
+/* Buttons */
+.main-btn {
+  display:inline-block;
+  margin:20px 10px 0 0;
+  padding:14px 22px;
+  background: var(--primary-color);
+  color:#000;
+  font-weight:bold;
+  text-align:center;
+  border-radius:12px;
+  text-decoration:none;
+  transition:0.3s;
+}
+.main-btn:hover { opacity:0.85; }
 
 /* Footer */
 footer {
@@ -157,7 +173,7 @@ body.dark {
 <!-- Navigation -->
 <nav>
   <a href="index.html">Home</a>
-  <a href="about.html">Team</a>
+  <a href="team.html">Team</a>
   <a href="tos.html">ToS</a>
 </nav>
 
@@ -165,10 +181,12 @@ body.dark {
 <div id="menuToggle"><span></span><span></span><span></span></div>
 <div id="menu">
   <a href="index.html">Home</a>
+  <a href="team.html">Team</a>
   <a href="tos.html">Terms of Service</a>
-  <a href="about.html">Team</a>
-  <a href="#" id="discordLogin">Login with Discord</a>
+  <a href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank">Invite VoKi</a>
+  <a href="https://discord.gg/PKWJuRrgUd" target="_blank">Join Server</a>
   <div id="themeToggle">Toggle Theme</div>
+  <a href="#" id="discordLogin">Login with Discord</a>
 </div>
 
 <div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
@@ -191,7 +209,7 @@ body.dark {
     </div>
 
     <div class="card">
-      <h2>What’s New?</h2>
+      <h2>New Features</h2>
       <ul>
         <li><strong>Command Control:</strong> Enable/disable commands per server.</li>
         <li><strong>Activity Logging:</strong> Private edit tracking.</li>
@@ -199,12 +217,19 @@ body.dark {
         <li><strong>Roblox Integration:</strong> Tools for Roblox communities.</li>
       </ul>
     </div>
+
+    <div class="card">
+      <h2>Get Started</h2>
+      <p>Invite VoKi to your server or join our Discord community to explore more features, get help, and connect with other users.</p>
+      <a class="main-btn" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank">Invite VoKi</a>
+      <a class="main-btn" href="https://discord.gg/PKWJuRrgUd" target="_blank">Join Server</a>
+    </div>
   </div>
 
   <div class="card faq">
     <h2>FAQ</h2>
     <div class="question">How do I add VoKi to my server?</div>
-    <div class="answer">Click the "Invite" button on the VoKi website and select your server.</div>
+    <div class="answer">Click the "Invite" button and select your server.</div>
     <div class="question">Is my data safe with VoKi?</div>
     <div class="answer">Yes, VoKi only logs data locally in your server.</div>
   </div>
