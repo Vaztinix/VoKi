@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>VoKi – Your Discord Bot</title>
+<title>VoKi – Team</title>
 <style>
 :root {
   --primary-color: #aeefff;
@@ -12,9 +12,6 @@
   --nav-bg: rgba(0,0,0,0.7);
   --card-bg: rgba(255,255,255,0.08);
   --card-hover-bg: rgba(255,255,255,0.18);
-  --faq-question-bg: rgba(255,255,255,0.08);
-  --faq-question-hover: rgba(255,255,255,0.18);
-  --faq-answer-bg: rgba(255,255,255,0.06);
   --error-bg: rgba(0,0,0,0.9);
 }
 
@@ -92,27 +89,9 @@ nav a:hover { color: var(--primary-color); }
   gap:30px;
 }
 h1 { font-size:2.5rem; margin-bottom:10px; color:#e6f7ff; }
-p.lead { font-size:1.2rem; opacity:0.9; margin-bottom:15px; }
+p.lead { font-size:1.2rem; opacity:0.9; }
 
-/* Buttons below subtitle */
-.subtitle-buttons {
-  display:flex;
-  gap:15px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-.subtitle-buttons a {
-  padding:12px 24px;
-  background: var(--primary-color);
-  color:#000;
-  font-weight:bold;
-  border-radius:10px;
-  text-decoration:none;
-  transition:0.3s;
-}
-.subtitle-buttons a:hover { opacity:0.85; }
-
-/* Cards */
+/* Team Cards */
 .card-grid {
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
@@ -124,27 +103,15 @@ p.lead { font-size:1.2rem; opacity:0.9; margin-bottom:15px; }
   padding:25px;
   border-radius:20px;
   transition:background 0.3s, transform 0.3s;
-  text-align:left;
+  text-align:center;
   box-shadow:0 4px 12px rgba(0,0,0,0.25);
 }
 .card:hover { background: var(--card-hover-bg); transform:translateY(-6px); }
 .card h2 { color: var(--primary-color); margin-bottom:10px; }
-
-/* FAQ */
-.faq .question {
-  background: var(--faq-question-bg);
-  cursor:pointer; padding:12px;
-  border-radius:8px; margin-bottom:8px;
-  font-weight:bold;
-  transition:background 0.3s;
-}
-.faq .question:hover { background: var(--faq-question-hover); }
-.faq .answer {
-  display:none;
-  padding:12px 15px;
-  background: var(--faq-answer-bg);
-  border-radius:8px;
-  margin-bottom:10px;
+.card img {
+  width:100px; height:100px; border-radius:50%;
+  margin-bottom:15px;
+  object-fit:cover;
 }
 
 /* Footer */
@@ -165,9 +132,6 @@ body.dark {
   --nav-bg: rgba(30,30,30,0.85);
   --card-bg: rgba(50,50,50,0.4);
   --card-hover-bg: rgba(60,60,60,0.6);
-  --faq-question-bg: rgba(50,50,50,0.4);
-  --faq-question-hover: rgba(60,60,60,0.6);
-  --faq-answer-bg: rgba(60,60,60,0.3);
 }
 </style>
 </head>
@@ -194,56 +158,33 @@ body.dark {
 
 <!-- Main Content -->
 <div class="container">
-  <h1>Welcome to VoKi</h1>
-  <p class="lead"><strong>Privacy-First AI & Moderation Bot</strong> — keeping your Discord safe, positive, and secure.</p>
-
-  <!-- Invite & Join buttons below subtitle -->
-  <div class="subtitle-buttons">
-    <a href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank">Invite VoKi</a>
-    <a href="https://discord.gg/PKWJuRrgUd" target="_blank">Join Server</a>
-  </div>
+  <h1>Meet the Team</h1>
+  <p class="lead"><strong>VoKi is powered by dedicated developers and moderators</strong> — keeping the community safe and our bot running smoothly.</p>
 
   <div class="card-grid">
     <div class="card">
-      <h2>Why Choose VoKi?</h2>
-      <ul>
-        <li><strong>Community Safety:</strong> AI detects toxic content only when invoked.</li>
-        <li><strong>Privacy First:</strong> Logs stay inside your server.</li>
-        <li><strong>Customization:</strong> Create commands, relay messages, tailor moderation.</li>
-        <li><strong>Effortless Moderation:</strong> Multi-level access control.</li>
-        <li><strong>Global Support:</strong> Multilingual features coming soon.</li>
-      </ul>
+      <img src="https://via.placeholder.com/100" alt="Team Member">
+      <h2>VoKi Creator</h2>
+      <p>Lead Developer & AI Specialist</p>
     </div>
 
     <div class="card">
-      <h2>New Features</h2>
-      <ul>
-        <li><strong>Command Control:</strong> Enable/disable commands per server.</li>
-        <li><strong>Activity Logging:</strong> Private edit tracking.</li>
-        <li><strong>Content Monitoring:</strong> AI scans flagged content privately.</li>
-        <li><strong>Roblox Integration:</strong> Tools for Roblox communities.</li>
-      </ul>
+      <img src="https://via.placeholder.com/100" alt="Team Member">
+      <h2>Moderator Lead</h2>
+      <p>Community Management & Support</p>
     </div>
 
     <div class="card">
-      <h2>Get Started</h2>
-      <p>Explore VoKi's features, get help, and connect with other users through our website.</p>
+      <img src="https://via.placeholder.com/100" alt="Team Member">
+      <h2>UI/UX Designer</h2>
+      <p>Website & Interface Design</p>
     </div>
-  </div>
 
-  <div class="card faq">
-    <h2>FAQ</h2>
-    <div class="question">How do I add VoKi to my server?</div>
-    <div class="answer">Currently, adding VoKi requires the website dashboard or admin assistance.</div>
-    <div class="question">Is my data safe with VoKi?</div>
-    <div class="answer">Yes, VoKi only logs data locally in your server.</div>
-  </div>
-
-  <div class="card">
-    <h2>Contact & Support</h2>
-    <ul>
-      <li>Email: <a href="mailto:VoKi.io@outlook.com" style="color: var(--primary-color);">VoKi.io@outlook.com</a></li>
-    </ul>
+    <div class="card">
+      <img src="https://via.placeholder.com/100" alt="Team Member">
+      <h2>Bot Developer</h2>
+      <p>Feature Development & Maintenance</p>
+    </div>
   </div>
 </div>
 
@@ -276,14 +217,6 @@ discordLogin.addEventListener('click', e => {
   e.preventDefault();
   errorNotification.classList.add('show');
   setTimeout(() => errorNotification.classList.remove('show'), 4000);
-});
-
-// FAQ toggle
-document.querySelectorAll('.faq .question').forEach(q => {
-  q.addEventListener('click', () => {
-    const ans = q.nextElementSibling;
-    ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
-  });
 });
 </script>
 
