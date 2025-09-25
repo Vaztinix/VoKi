@@ -61,19 +61,19 @@ nav a:hover { color: var(--primary-color); }
 }
 .error-notification.show { opacity:1; pointer-events:auto; }
 
-.container { max-width:900px; margin:100px auto 50px; padding:0 20px; }
+.container { max-width:1000px; margin:100px auto 50px; padding:0 20px; }
 h1 { font-size:2.5rem; margin-bottom:20px; text-align:center; color:#e6f7ff; }
 h2 { font-size:2rem; margin-bottom:15px; color: var(--primary-color); }
 p, li { font-size:1.05rem; margin-bottom:10px; }
 ul { padding-left:20px; margin-bottom:20px; }
 
-.card { background: var(--card-bg); padding:20px; border-radius:12px; margin:20px 0; transition: background 0.3s; }
-.card:hover { background: var(--card-hover-bg); }
-
+.team-wrapper {
+  display:flex; flex-wrap:wrap; gap:20px; justify-content:center;
+}
 .team-card {
   display:flex; flex-direction:column; align-items:center;
   background: var(--card-bg); padding:20px; border-radius:12px;
-  max-width:250px; margin:20px auto; transition: background 0.3s, transform 0.3s;
+  width:220px; transition: background 0.3s, transform 0.3s;
 }
 .team-card:hover { background: var(--card-hover-bg); transform: translateY(-5px); }
 .profile-pic { width:100px; height:100px; border-radius:50%; background: rgba(255,255,255,0.1); margin-bottom:10px; }
@@ -81,8 +81,24 @@ ul { padding-left:20px; margin-bottom:20px; }
 .display-name { font-style:italic; color: var(--primary-color); margin-bottom:10px; }
 .links a { color: var(--primary-color); text-decoration:none; display:block; margin:5px 0; }
 .links a:hover { color:#fff; }
+.view-btn {
+  margin-top:10px; padding:8px 14px; border:none; border-radius:8px;
+  background: var(--primary-color); color:#000; font-weight:bold; cursor:pointer;
+  transition:0.3s;
+}
+.view-btn:hover { opacity:0.85; }
 
 footer { text-align:center; padding:20px; font-size:0.9rem; opacity:0.85; background: rgba(0,0,0,0.25); margin-top:50px; border-top:1px solid rgba(255,255,255,0.2); }
+
+/* Support Button */
+.support-btn {
+  display:block; margin:30px auto; padding:12px 20px;
+  background: var(--primary-color); color:#000;
+  font-weight:bold; text-align:center; border-radius:10px;
+  text-decoration:none; width:fit-content;
+  transition:0.3s;
+}
+.support-btn:hover { opacity:0.85; }
 
 body.dark {
   --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
@@ -92,6 +108,38 @@ body.dark {
   --card-hover-bg: rgba(60,60,60,0.6);
   --error-bg: rgba(0,0,0,0.9);
 }
+
+/* Fullscreen Modal */
+.modal {
+  position:fixed; top:0; left:0; width:100%; height:100%;
+  display:none; justify-content:center; align-items:center;
+  z-index:3000; color:#fff;
+  animation: fadeIn 0.5s ease;
+}
+.modal.active { display:flex; }
+.modal-bg {
+  position:absolute; top:0; left:0; width:100%; height:100%;
+  background: linear-gradient(135deg, #4facfe, #ffffff);
+  background-size: 300% 300%;
+  animation: gradientFlow 6s ease infinite;
+  z-index:-1;
+}
+.modal-content {
+  background: rgba(0,0,0,0.6); padding:30px; border-radius:16px; text-align:center;
+  max-width:500px; width:90%;
+}
+.close-btn {
+  margin-top:20px; padding:10px 20px; border:none; border-radius:8px;
+  background:#fff; color:#000; font-weight:bold; cursor:pointer;
+}
+.close-btn:hover { background:#ddd; }
+
+@keyframes gradientFlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
 </style>
 </head>
 <body>
@@ -118,24 +166,27 @@ body.dark {
   <h1>Meet the VoKi Team</h1>
   <p>Our team works hard to provide the best moderation, AI tools, and support for your Discord server.</p>
 
-  <!-- Vaztinix -->
-  <div class="team-card">
-    <div class="profile-pic"></div>
-    <div class="username">Vaztinix</div>
-    <div class="display-name">Founder & Developer</div>
-    <div class="links">
-      <a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube</a>
-      <a href="#" target="_blank">Discord</a>
+  <div class="team-wrapper">
+    <!-- Vaztinix -->
+    <div class="team-card">
+      <div class="profile-pic"></div>
+      <div class="username">Vaztinix</div>
+      <div class="display-name">Founder & Developer</div>
+      <div class="links">
+        <a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube</a>
+      </div>
+      <button class="view-btn" data-name="Vaztinix" data-role="Founder & Developer">View</button>
     </div>
-  </div>
 
-  <!-- solorads -->
-  <div class="team-card">
-    <div class="profile-pic"></div>
-    <div class="username">solorads</div>
-    <div class="display-name">Partner</div>
-    <div class="links">
-      <a href="https://www.roblox.com/games/17590556553/NEW-Military-Roleplay" target="_blank">Roblox Game</a>
+    <!-- solorads -->
+    <div class="team-card">
+      <div class="profile-pic"></div>
+      <div class="username">solorads</div>
+      <div class="display-name">Partner</div>
+      <div class="links">
+        <a href="https://www.roblox.com/games/17590556553/NEW-Military-Roleplay" target="_blank">Roblox Game</a>
+      </div>
+      <button class="view-btn" data-name="solorads" data-role="Partner">View</button>
     </div>
   </div>
 
@@ -157,9 +208,22 @@ body.dark {
       <li>Discord: <a href="https://discord.gg/PHKdvcYd" style="color: var(--primary-color);">Join our server</a></li>
     </ul>
   </div>
+
+  <!-- Extra Support Button -->
+  <a href="mailto:VoKi.io@outlook.com" class="support-btn">Need Help? Contact Support</a>
 </div>
 
 <footer>© 2025 VoKi — Building smarter communities together.</footer>
+
+<!-- Fullscreen Modal -->
+<div class="modal" id="profileModal">
+  <div class="modal-bg"></div>
+  <div class="modal-content">
+    <h2 id="modalName"></h2>
+    <p id="modalRole"></p>
+    <button class="close-btn">Close</button>
+  </div>
+</div>
 
 <script>
 const menuToggle = document.getElementById('menuToggle');
@@ -182,6 +246,21 @@ discordLogin.addEventListener('click', e => {
   errorNotification.classList.add('show');
   setTimeout(() => errorNotification.classList.remove('show'), 4000);
 });
+
+// Modal Logic
+const modal = document.getElementById("profileModal");
+const modalName = document.getElementById("modalName");
+const modalRole = document.getElementById("modalRole");
+const closeBtn = modal.querySelector(".close-btn");
+
+document.querySelectorAll(".view-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    modalName.textContent = btn.dataset.name;
+    modalRole.textContent = btn.dataset.role;
+    modal.classList.add("active");
+  });
+});
+closeBtn.addEventListener("click", () => modal.classList.remove("active"));
 </script>
 </body>
 </html>
