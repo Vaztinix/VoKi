@@ -92,7 +92,25 @@ nav a:hover { color: var(--primary-color); }
   gap:30px;
 }
 h1 { font-size:2.5rem; margin-bottom:10px; color:#e6f7ff; }
-p.lead { font-size:1.2rem; opacity:0.9; }
+p.lead { font-size:1.2rem; opacity:0.9; margin-bottom:15px; }
+
+/* Buttons below subtitle */
+.subtitle-buttons {
+  display:flex;
+  gap:15px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+.subtitle-buttons a {
+  padding:12px 24px;
+  background: var(--primary-color);
+  color:#000;
+  font-weight:bold;
+  border-radius:10px;
+  text-decoration:none;
+  transition:0.3s;
+}
+.subtitle-buttons a:hover { opacity:0.85; }
 
 /* Cards */
 .card-grid {
@@ -158,6 +176,7 @@ body.dark {
 <!-- Navigation -->
 <nav>
   <a href="index.html">Home</a>
+  <a href="team.html">Team</a>
   <a href="tos.html">ToS</a>
 </nav>
 
@@ -165,6 +184,7 @@ body.dark {
 <div id="menuToggle"><span></span><span></span><span></span></div>
 <div id="menu">
   <a href="index.html">Home</a>
+  <a href="team.html">Team</a>
   <a href="tos.html">Terms of Service</a>
   <div id="themeToggle">Toggle Theme</div>
   <a href="#" id="discordLogin">Login with Discord</a>
@@ -176,6 +196,12 @@ body.dark {
 <div class="container">
   <h1>Welcome to VoKi</h1>
   <p class="lead"><strong>Privacy-First AI & Moderation Bot</strong> — keeping your Discord safe, positive, and secure.</p>
+
+  <!-- Invite & Join buttons below subtitle -->
+  <div class="subtitle-buttons">
+    <a href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank">Invite VoKi</a>
+    <a href="https://discord.gg/PKWJuRrgUd" target="_blank">Join Server</a>
+  </div>
 
   <div class="card-grid">
     <div class="card">
