@@ -48,41 +48,42 @@ h1 { font-size:2.5rem; margin-bottom:20px; color:#e6f7ff; }
 /* Team Section */
 .team-wrapper {
   display:grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap:20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap:25px;
   margin-top:40px;
 }
 .team-card {
   background: var(--card-bg);
-  border-radius:16px;
-  padding:20px;
+  border-radius:20px;
+  padding:25px;
   text-align:center;
   transition: background 0.3s, transform 0.3s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 .team-card:hover {
   background: var(--card-hover-bg);
-  transform: translateY(-5px);
+  transform: translateY(-6px);
 }
 .profile-pic {
-  width:100px; height:100px;
+  width:110px; height:110px;
   border-radius:50%;
   background: rgba(255,255,255,0.15);
-  margin:0 auto 10px;
+  margin:0 auto 15px;
 }
-.username { font-weight:bold; font-size:1.2rem; margin-bottom:5px; }
-.display-name { font-style:italic; color: var(--primary-color); margin-bottom:10px; }
+.username { font-weight:bold; font-size:1.3rem; margin-bottom:5px; }
+.display-name { font-style:italic; color: var(--primary-color); margin-bottom:15px; }
 .links a {
   color: var(--primary-color);
   text-decoration:none;
   display:block;
-  margin:5px 0;
+  margin:6px 0;
 }
 .links a:hover { color:#fff; }
 .view-btn {
-  margin-top:12px;
-  padding:8px 16px;
+  margin-top:14px;
+  padding:10px 18px;
   border:none;
-  border-radius:8px;
+  border-radius:10px;
   background: var(--primary-color);
   color:#000; font-weight:bold;
   cursor:pointer;
@@ -93,11 +94,12 @@ h1 { font-size:2.5rem; margin-bottom:20px; color:#e6f7ff; }
 /* Features & Support Cards */
 .info-card {
   background: var(--card-bg);
-  border-radius:16px;
-  padding:20px;
-  margin:30px auto;
+  border-radius:20px;
+  padding:25px;
+  margin:40px auto;
   text-align:left;
   max-width:800px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
 .info-card h2 { color: var(--primary-color); margin-bottom:15px; }
 
@@ -105,12 +107,12 @@ h1 { font-size:2.5rem; margin-bottom:20px; color:#e6f7ff; }
 .support-btn {
   display:inline-block;
   margin:30px auto;
-  padding:12px 20px;
+  padding:14px 22px;
   background: var(--primary-color);
   color:#000;
   font-weight:bold;
   text-align:center;
-  border-radius:10px;
+  border-radius:12px;
   text-decoration:none;
   transition:0.3s;
 }
@@ -135,17 +137,18 @@ footer {
 }
 .modal.active { display:flex; }
 .modal-content {
-  background: rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.12);
   padding:30px;
-  border-radius:16px;
+  border-radius:20px;
   text-align:center;
   max-width:400px;
   width:90%;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
 }
 .modal-content h2 { margin-bottom:10px; }
 .close-btn {
   margin-top:20px; padding:10px 20px;
-  border:none; border-radius:8px;
+  border:none; border-radius:10px;
   background:#fff; color:#000;
   font-weight:bold; cursor:pointer;
 }
@@ -157,7 +160,6 @@ footer {
 <!-- Navigation -->
 <nav>
   <a href="index.html">Home</a>
-  <a href="about.html">About</a>
   <a href="team.html">Team</a>
   <a href="tos.html">ToS</a>
 </nav>
