@@ -3,182 +3,161 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>VoKi – Terms of Service & Privacy Policy</title>
+<title>VoKi – Terms of Service</title>
 <style>
 :root {
   --primary-color: #aeefff;
   --text-color: #fff;
   --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
   --nav-bg: rgba(0,0,0,0.7);
-  --card-bg: rgba(0,0,0,0.25);
-  --card-hover-bg: rgba(0,0,0,0.45);
-  --faq-question-bg: rgba(0,0,0,0.35);
-  --faq-question-hover: rgba(0,0,0,0.55);
-  --faq-answer-bg: rgba(0,0,0,0.25);
-  --error-bg: rgba(0,0,0,0.9);
 }
 
 body {
-  margin:0; font-family: Arial, sans-serif; background: var(--bg-gradient);
-  color: var(--text-color); line-height: 1.6; scroll-behavior: smooth; overflow-x: hidden;
-  transition: all 0.3s ease;
+  margin:0;
+  font-family: Arial, sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  line-height: 1.8;
+  scroll-behavior: smooth;
 }
 
 nav {
-  position: fixed; top: 0; left: 0; width: 100%; height: 60px;
-  background: var(--nav-bg); display: flex; justify-content: center; align-items: center;
-  gap: 25px; z-index: 1000; padding: 0 20px;
+  position: fixed; top:0; left:0; width:100%; height:60px;
+  background: var(--nav-bg);
+  display:flex; justify-content:center; align-items:center;
+  gap:25px; z-index:1000;
 }
-nav a { color: var(--text-color); font-weight: bold; text-decoration: none; transition: 0.3s; }
+nav a {
+  color: var(--text-color);
+  font-weight:bold;
+  text-decoration:none;
+  transition:0.3s;
+}
 nav a:hover { color: var(--primary-color); }
 
-#menuToggle {
-  position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px;
-  background: var(--primary-color); border-radius: 50%; display: flex;
-  flex-direction: column; justify-content: center; align-items: center;
-  cursor: pointer; z-index: 1001; transition: transform 0.3s ease;
+.container {
+  max-width:900px;
+  margin:100px auto 50px;
+  padding:0 20px;
 }
-#menuToggle span { display: block; width: 22px; height: 2px; background: #000; margin: 3px 0; }
-#menuToggle.shifted { transform: translateY(-260px); }
 
-#menu {
-  position: fixed; bottom: 0; left: 20px; width: 260px;
-  background: rgba(0,0,0,0.85); border-radius: 12px 12px 0 0;
-  padding: 20px; display: flex; flex-direction: column; gap: 12px;
-  transform: translateY(100%); transition: transform 0.3s ease; z-index: 1000;
+h1 { font-size:2.5rem; margin-bottom:20px; color:#e6f7ff; }
+h2 { margin-top:30px; color: var(--primary-color); }
+h3 { margin-top:20px; color:#bdefff; }
+p { margin-bottom:15px; }
+ul { margin-left:25px; margin-bottom:15px; }
+li { margin-bottom:10px; }
+
+footer {
+  text-align:center;
+  padding:20px;
+  font-size:0.9rem;
+  opacity:0.85;
+  background: rgba(0,0,0,0.25);
+  border-top:1px solid rgba(255,255,255,0.2);
+  margin-top:50px;
 }
-#menu.show { transform: translateY(0); }
-#menu a, #menu div { color: var(--primary-color); font-weight: bold; cursor: pointer;
-  padding: 8px 0; text-decoration: none; transition: color 0.3s; }
-#menu a:hover, #menu div:hover { color: #fff; }
 
-.error-notification {
-  position: fixed; top: 20px; right: 20px; background: var(--error-bg);
-  padding: 15px 20px; border-radius: 8px; color: #fff; font-weight: bold;
-  opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 2000;
-}
-.error-notification.show { opacity: 1; pointer-events: auto; }
-
-.container { max-width: 1000px; margin: 100px auto 50px; padding: 0 20px; }
-h1 { font-size: 2.5rem; margin-bottom: 20px; text-align: center; color: #e6f7ff; }
-h2 { font-size: 2rem; margin-bottom: 15px; color: var(--primary-color); }
-p, li { font-size: 1.05rem; margin-bottom: 10px; }
-ul { padding-left: 20px; margin-bottom: 20px; }
-.card { background: var(--card-bg); padding: 25px; border-radius: 12px; margin: 20px 0; transition: background 0.3s; }
-.card:hover { background: var(--card-hover-bg); }
-a.btn { display:inline-block; background: var(--primary-color); color:#000; font-weight:bold;
-  text-decoration:none; padding:12px 18px; border-radius:8px; transition: 0.3s; }
-a.btn:hover { opacity:0.85; }
-
-footer { text-align: center; padding: 20px; font-size: 0.9rem; opacity: 0.85;
-  background: rgba(0,0,0,0.25); margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.2); }
-
-body.dark {
-  --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
-  --text-color: #eee;
-  --nav-bg: rgba(30,30,30,0.85);
-  --card-bg: rgba(50,50,50,0.4);
-  --card-hover-bg: rgba(60,60,60,0.6);
-  --faq-question-bg: rgba(50,50,50,0.4);
-  --faq-question-hover: rgba(60,60,60,0.6);
-  --faq-answer-bg: rgba(60,60,60,0.3);
-  --error-bg: rgba(0,0,0,0.9);
-}
+a { color: var(--primary-color); text-decoration:none; }
+a:hover { text-decoration:underline; }
 </style>
 </head>
 <body>
 
+<!-- Navigation -->
 <nav>
   <a href="index.html">Home</a>
-  <a href="about.html">Team</a>
-  <a href="tos.html">Terms of Service</a>
+  <a href="team.html">Team</a>
+  <a href="tos.html">ToS</a>
 </nav>
 
-<div id="menuToggle"><span></span><span></span><span></span></div>
-
-<div id="menu">
-  <a href="index.html">Home</a>
-  <a href="about.html">Team</a>
-  <a href="tos.html">Terms of Service</a>
-  <a href="#" id="discordLogin">Login with Discord</a>
-  <div id="themeToggle">Toggle Theme</div>
-</div>
-
-<div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
-
+<!-- Main Content -->
 <div class="container">
-  <h1>VoKi – Terms of Service & Privacy Policy</h1>
-  <p><strong>Effective Date: September 24, 2025</strong></p>
+  <h1>Terms of Service (ToS)</h1>
+  <p>Welcome to VoKi. By using our bot, services, and any related tools, you agree to the following terms. These terms explain how VoKi interacts with users, how data is handled, and the expectations for responsible use. Please read carefully.</p>
 
-  <div class="card">
-    <h2>Terms of Service (TOS)</h2>
-    <ul>
-      <li>By using VoKi, you agree to comply with these Terms of Service and all applicable laws.</li>
-      <li>Do not use VoKi for illegal, malicious, or exploitative purposes.</li>
-      <li>Respect the rights of other users and communities.</li>
-      <li>VoKi is provided "as-is" with no guarantees; developers are not responsible for disruptions, damages, or misuse.</li>
-      <li>Regular updates may add new features including AI tools, moderation commands, analytics, and integrations.</li>
-      <li>Access may be revoked for violations or abuse of the system.</li>
-      <li>VoKi may restrict or disable certain features depending on server settings or region.</li>
-    </ul>
-  </div>
+  <h2>1. Purpose of VoKi</h2>
+  <p>VoKi is designed to provide AI-driven moderation and community management features. Its core purposes include:</p>
+  <ul>
+    <li>Enhancing server safety through moderation tools.</li>
+    <li>Providing AI-powered assistance for community engagement.</li>
+    <li>Ensuring privacy and transparency in data handling.</li>
+    <li>Supporting communities with optional features like logging and Roblox integrations.</li>
+  </ul>
 
-  <div class="card">
-    <h2>Privacy Policy</h2>
-    <ul>
-      <li>Minimal data is collected solely to provide features (moderation, logging, leveling).</li>
-      <li>AI responses are processed in real-time; personal messages are not permanently stored.</li>
-      <li>Users may request deletion of stored data at any time.</li>
-      <li>Server logs and analytics remain private and are only accessible to authorized users.</li>
-      <li>Third-party integrations do not share personal data without consent.</li>
-      <li>Opt-out options are available for analytics, leveling, and non-essential features.</li>
-      <li>Cookies or local storage may be used only for theme and session preferences.</li>
-    </ul>
-  </div>
+  <h2>2. Responsible Use</h2>
+  <p>Users are expected to act responsibly when using VoKi:</p>
+  <ul>
+    <li>Use commands only for their intended purpose.</li>
+    <li>Do not abuse moderation tools or AI features to harass or target others.</li>
+    <li>Respect all community members’ privacy.</li>
+    <li>Follow Discord’s Terms of Service in addition to VoKi’s ToS.</li>
+  </ul>
 
-  <div class="card">
-    <h2>Recent Updates</h2>
-    <ul>
-      <li>Enhanced logging system for server activity and moderation actions.</li>
-      <li>AI-powered Q&A integrated into moderation tools.</li>
-      <li>Leveling, ranking, and role assignment features for community growth.</li>
-      <li>Multilingual support including English, Spanish, and more coming soon.</li>
-      <li>User privacy opt-out for tracking, analytics, and AI processing.</li>
-      <li>Updated dark mode consistent across all pages.</li>
-    </ul>
-  </div>
+  <h2>3. AI and Automation Features</h2>
+  <p>VoKi's AI features are designed to assist, not replace, human judgment:</p>
+  <ul>
+    <li>AI interactions occur only when triggered by authorized users.</li>
+    <li>AI will analyze flagged content to provide suggestions or summaries.</li>
+    <li>AI results should be reviewed by human moderators before taking action.</li>
+    <li>VoKi does not proactively monitor private channels without explicit activation.</li>
+  </ul>
 
-  <p style="text-align:center; margin-top:20px;">
-    <a href="mailto:VoKi.io@outlook.com" class="btn">📧 Contact Support</a>
-  </p>
+  <h2>4. Privacy Commitment</h2>
+  <p>We follow a strict privacy-first approach:</p>
+  <ul>
+    <li>All data is stored locally within the server unless explicitly configured otherwise.</li>
+    <li>User messages are not sent to external servers unless necessary for optional integrations.</li>
+    <li>Logs of moderation actions, AI responses, or flagged content remain confidential.</li>
+    <li>No personal information is shared or sold to third parties.</li>
+  </ul>
+
+  <h2>5. Permissions and Access</h2>
+  <p>VoKi operates based on permissions assigned by server administrators:</p>
+  <ul>
+    <li>Roles and access levels determine who can perform moderation actions.</li>
+    <li>Unauthorized users cannot access sensitive logs or AI controls.</li>
+    <li>Server admins are responsible for granting appropriate permissions and monitoring their use.</li>
+  </ul>
+
+  <h2>6. Community Guidelines</h2>
+  <ul>
+    <li>Respect other users and VoKi's automated systems.</li>
+    <li>Do not attempt to bypass restrictions or exploit features.</li>
+    <li>Do not use VoKi to collect personal data or violate user privacy.</li>
+    <li>Report any bugs, errors, or unexpected behavior to VoKi developers promptly.</li>
+  </ul>
+
+  <h2>7. Logging and Data Handling</h2>
+  <p>VoKi may log activity based on server configuration:</p>
+  <ul>
+    <li>Edits, deletions, and flagged content may be stored for moderation purposes.</li>
+    <li>Logs remain private and accessible only to authorized staff.</li>
+    <li>Data retention periods are determined by server administrators.</li>
+  </ul>
+
+  <h2>8. Roblox & Other Integrations</h2>
+  <p>Optional integrations, like Roblox tools, follow the same privacy-first rules:</p>
+  <ul>
+    <li>All data stays within the integration’s scope and server permissions.</li>
+    <li>Users must use integrations responsibly and not violate external platform policies.</li>
+  </ul>
+
+  <h2>9. Updates and Changes</h2>
+  <p>VoKi may update features and terms at any time:</p>
+  <ul>
+    <li>Continued use of VoKi indicates acceptance of updated ToS.</li>
+    <li>Major changes will be announced in the official server or dashboard.</li>
+  </ul>
+
+  <h2>10. Support and Contact</h2>
+  <p>For questions regarding VoKi, its usage, or privacy, contact us at: <a href="mailto:VoKi.io@outlook.com">VoKi.io@outlook.com</a></p>
+
+  <p><strong>By using VoKi, you acknowledge that you have read, understood, and agreed to these terms.</strong></p>
 </div>
 
+<!-- Footer -->
 <footer>© 2025 VoKi — Building smarter communities together.</footer>
 
-<script>
-const menuToggle = document.getElementById('menuToggle');
-const menu = document.getElementById('menu');
-menuToggle.addEventListener('click', () => {
-  menu.classList.toggle('show'); 
-  menuToggle.classList.toggle('shifted');
-});
-
-const body = document.body;
-const themeToggle = document.getElementById('themeToggle');
-const savedTheme = localStorage.getItem('theme');
-if(savedTheme) body.classList.toggle('dark', savedTheme === 'dark');
-themeToggle.addEventListener('click', () => {
-  body.classList.toggle('dark');
-  localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
-});
-
-const discordLogin = document.getElementById('discordLogin');
-const errorNotification = document.getElementById('errorNotification');
-discordLogin.addEventListener('click', e => {
-  e.preventDefault();
-  errorNotification.classList.add('show');
-  setTimeout(() => errorNotification.classList.remove('show'), 4000);
-});
-</script>
 </body>
 </html>
