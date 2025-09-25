@@ -3,13 +3,13 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>VoKi – Terms of Service</title>
+<title>VoKi – Terms of Service & Privacy Policy</title>
 <style>
 :root {
   --primary-color: #aeefff;
   --text-color: #fff;
   --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
-  --nav-bg: rgba(0,0,0,0.6);
+  --nav-bg: rgba(0,0,0,0.7);
   --card-bg: rgba(0,0,0,0.25);
   --card-hover-bg: rgba(0,0,0,0.45);
   --faq-question-bg: rgba(0,0,0,0.35);
@@ -59,30 +59,19 @@ nav a:hover { color: var(--primary-color); }
 }
 .error-notification.show { opacity: 1; pointer-events: auto; }
 
-.container { max-width: 900px; margin: 100px auto 50px; padding: 0 20px; }
+.container { max-width: 1000px; margin: 100px auto 50px; padding: 0 20px; }
 h1 { font-size: 2.5rem; margin-bottom: 20px; text-align: center; color: #e6f7ff; }
 h2 { font-size: 2rem; margin-bottom: 15px; color: var(--primary-color); }
 p, li { font-size: 1.05rem; margin-bottom: 10px; }
 ul { padding-left: 20px; margin-bottom: 20px; }
-
-.card { background: var(--card-bg); padding: 20px; border-radius: 12px; margin: 20px 0; transition: background 0.3s; }
+.card { background: var(--card-bg); padding: 25px; border-radius: 12px; margin: 20px 0; transition: background 0.3s; }
 .card:hover { background: var(--card-hover-bg); }
-
-.team-card {
-  display: flex; flex-direction: column; align-items: center;
-  background: var(--card-bg); padding: 20px; border-radius: 12px;
-  max-width: 250px; margin: 20px auto; transition: background 0.3s, transform 0.3s;
-}
-.team-card:hover { background: var(--card-hover-bg); transform: translateY(-5px); }
-.profile-pic { width: 100px; height: 100px; border-radius: 50%; background: rgba(255,255,255,0.1); margin-bottom: 10px; }
-.username { font-weight: bold; margin-bottom: 5px; }
-.display-name { font-style: italic; color: var(--primary-color); margin-bottom: 10px; }
-.links a { color: var(--primary-color); text-decoration: none; display: block; margin: 5px 0; }
-.links a:hover { color: #fff; }
+a.btn { display:inline-block; background: var(--primary-color); color:#000; font-weight:bold;
+  text-decoration:none; padding:12px 18px; border-radius:8px; transition: 0.3s; }
+a.btn:hover { opacity:0.85; }
 
 footer { text-align: center; padding: 20px; font-size: 0.9rem; opacity: 0.85;
-  background: rgba(0,0,0,0.25); margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.2);
-}
+  background: rgba(0,0,0,0.25); margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.2); }
 
 body.dark {
   --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
@@ -119,58 +108,49 @@ body.dark {
 
 <div class="container">
   <h1>VoKi – Terms of Service & Privacy Policy</h1>
-  <p><strong>Effective Date: September 22, 2025</strong></p>
+  <p><strong>Effective Date: September 24, 2025</strong></p>
 
-  <h2>1. Overview</h2>
-  <p>VoKi is a Discord bot providing moderation, AI-powered tools, leveling, multilingual support, and advanced logging features. By using VoKi, you agree to follow this Terms of Service (TOS) and Privacy Policy.</p>
+  <div class="card">
+    <h2>Terms of Service (TOS)</h2>
+    <ul>
+      <li>By using VoKi, you agree to comply with these Terms of Service and all applicable laws.</li>
+      <li>Do not use VoKi for illegal, malicious, or exploitative purposes.</li>
+      <li>Respect the rights of other users and communities.</li>
+      <li>VoKi is provided "as-is" with no guarantees; developers are not responsible for disruptions, damages, or misuse.</li>
+      <li>Regular updates may add new features including AI tools, moderation commands, analytics, and integrations.</li>
+      <li>Access may be revoked for violations or abuse of the system.</li>
+      <li>VoKi may restrict or disable certain features depending on server settings or region.</li>
+    </ul>
+  </div>
 
-  <h2>2. Data Privacy & Security</h2>
-  <ul>
-    <li>VoKi only collects minimal data required for its features (moderation, logging, leveling).</li>
-    <li>AI responses are generated in real time and not permanently stored.</li>
-    <li>No private messages are stored beyond what is required for functionality.</li>
-    <li>Users may request deletion of any stored data.</li>
-  </ul>
-
-  <h2>3. User Responsibilities</h2>
-  <ul>
-    <li>Do not use VoKi for illegal, harmful, or exploitative purposes.</li>
-    <li>Ensure VoKi has the proper permissions before enabling moderation commands.</li>
-    <li>Abuse or attempts to bypass systems may result in removal of bot access.</li>
-  </ul>
-
-  <h2>4. Bot Updates & Features</h2>
-  <ul>
-    <li>Regular updates add features such as AI tools, moderation commands, support integration, and leveling systems.</li>
-    <li>Features like multilingual support and advanced analytics are part of ongoing development.</li>
-    <li>Updates will be announced through official Discord channels or the website.</li>
-  </ul>
-
-  <h2>5. Liability</h2>
-  <ul>
-    <li>VoKi is provided "as-is" with no guarantees.</li>
-    <li>Developers are not responsible for damages, disruptions, or misuse caused by the bot.</li>
-  </ul>
-
-  <h2>6. Support & Contact</h2>
-  <ul>
-    <li>Email: <a href="mailto:VoKi.io@outlook.com" style="color: var(--primary-color);">VoKi.io@outlook.com</a></li>
-    <li>Discord: <a href="https://discord.gg/PHKdvcYd" style="color: var(--primary-color);">Join our server</a></li>
-  </ul>
-  <p style="text-align:center; margin-top:20px;">
-    <a href="mailto:VoKi.io@outlook.com" style="background: var(--primary-color); color:#000; padding:10px 18px; border-radius:8px; font-weight:bold; text-decoration:none;">📧 Contact Support</a>
-  </p>
+  <div class="card">
+    <h2>Privacy Policy</h2>
+    <ul>
+      <li>Minimal data is collected solely to provide features (moderation, logging, leveling).</li>
+      <li>AI responses are processed in real-time; personal messages are not permanently stored.</li>
+      <li>Users may request deletion of stored data at any time.</li>
+      <li>Server logs and analytics remain private and are only accessible to authorized users.</li>
+      <li>Third-party integrations do not share personal data without consent.</li>
+      <li>Opt-out options are available for analytics, leveling, and non-essential features.</li>
+      <li>Cookies or local storage may be used only for theme and session preferences.</li>
+    </ul>
+  </div>
 
   <div class="card">
     <h2>Recent Updates</h2>
     <ul>
-      <li>Enhanced logging system for server activity.</li>
+      <li>Enhanced logging system for server activity and moderation actions.</li>
       <li>AI-powered Q&A integrated into moderation tools.</li>
-      <li>Leveling and ranking features for community growth.</li>
-      <li>Multilingual support added.</li>
-      <li>User privacy opt-out available.</li>
+      <li>Leveling, ranking, and role assignment features for community growth.</li>
+      <li>Multilingual support including English, Spanish, and more coming soon.</li>
+      <li>User privacy opt-out for tracking, analytics, and AI processing.</li>
+      <li>Updated dark mode consistent across all pages.</li>
     </ul>
   </div>
+
+  <p style="text-align:center; margin-top:20px;">
+    <a href="mailto:VoKi.io@outlook.com" class="btn">📧 Contact Support</a>
+  </p>
 </div>
 
 <footer>© 2025 VoKi — Building smarter communities together.</footer>
