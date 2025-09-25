@@ -94,6 +94,21 @@ nav a:hover { color: var(--primary-color); }
 h1 { font-size:2.5rem; margin-bottom:10px; color:#e6f7ff; }
 p.lead { font-size:1.2rem; opacity:0.9; }
 
+/* Call-to-action Buttons */
+.main-btn {
+  display:inline-block;
+  margin:10px;
+  padding:14px 22px;
+  background: var(--primary-color);
+  color:#000;
+  font-weight:bold;
+  text-align:center;
+  border-radius:12px;
+  text-decoration:none;
+  transition:0.3s;
+}
+.main-btn:hover { opacity:0.85; }
+
 /* Cards */
 .card-grid {
   display:grid;
@@ -179,7 +194,7 @@ body.dark {
   <h1>Welcome to VoKi</h1>
   <p class="lead"><strong>Privacy-First AI & Moderation Bot</strong> — keeping your Discord safe, positive, and secure.</p>
 
-  <!-- Call-to-action for Invite & Join Server, professional and below subtitle -->
+  <!-- Centered Invite & Join Buttons -->
   <div style="display:flex; justify-content:center; gap:15px; margin-bottom:30px;">
     <a class="main-btn" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank">Invite VoKi</a>
     <a class="main-btn" href="https://discord.gg/PKWJuRrgUd" target="_blank">Join Server</a>
@@ -205,11 +220,6 @@ body.dark {
         <li><strong>Content Monitoring:</strong> AI scans flagged content privately.</li>
         <li><strong>Roblox Integration:</strong> Tools for Roblox communities.</li>
       </ul>
-    </div>
-
-    <div class="card">
-      <h2>Get Started</h2>
-      <p>Explore VoKi's features, get help, and connect with other users through our website.</p>
     </div>
   </div>
 
