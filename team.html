@@ -24,6 +24,8 @@ body {
   background: var(--bg-gradient);
   color: var(--text-color);
   display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   scroll-behavior: smooth;
   transition: background 0.5s, color 0.5s;
 }
@@ -53,7 +55,7 @@ body {
 }
 
 /* Sidebar buttons */
-.sidebar a {
+.sidebar a, .sidebar button {
   display: block;
   color: var(--text-color);
   text-decoration: none;
@@ -65,14 +67,17 @@ body {
   text-align: center;
   transition: background 0.3s, color 0.3s;
   border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
 }
 
-.sidebar a:hover, .sidebar a.active {
+.sidebar a:hover, .sidebar a.active, .sidebar button:hover {
   background: var(--primary-color);
   color: #222;
   border-color: var(--primary-color);
 }
 
+/* Toggle Button */
 .toggle-btn {
   margin-top: auto;
   padding: 10px 15px;
@@ -90,63 +95,94 @@ body {
   color: #222;
 }
 
-/* Container */
-.container {
-  margin-left: 270px;
+/* Main Container */
+.main {
+  margin-left: 250px;
   padding: 50px 40px;
-  width: calc(100% - 300px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  flex: 1;
 }
 
 .container-content {
-  max-width: 900px;
-  background: var(--card-bg);
-  padding: 40px;
-  border-radius: 15px;
-  backdrop-filter: blur(6px);
-  transition: background 0.3s;
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
 }
 
-h1 { font-size: 2.5rem; margin-bottom: 10px; color: #e6f7ff; }
-p.lead { font-size:1.2rem; opacity:0.9; }
-
+/* Cards */
 .card-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px;
-  width:100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
 }
+
 .card {
   background: var(--card-bg);
-  padding:25px;
-  border-radius:20px;
-  transition:background 0.3s, transform 0.3s;
-  text-align:center;
-  box-shadow:0 4px 12px rgba(0,0,0,0.25);
+  padding: 25px;
+  border-radius: 20px;
+  transition: background 0.3s, transform 0.3s;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  width: 280px;
 }
-.card:hover { background: var(--card-hover-bg); transform:translateY(-6px); }
+
+.card:hover {
+  background: var(--card-hover-bg);
+  transform: translateY(-6px);
+}
+
 .card h2 { color: var(--primary-color); margin-bottom:10px; }
 .card img {
-  width:100px; height:100px; border-radius:50%;
-  margin-bottom:15px;
-  object-fit:cover;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  margin-bottom: 15px;
+  object-fit: cover;
 }
 .card a { color: var(--primary-color); text-decoration:none; font-weight:bold; }
-.card a:hover { text-decoration:underline; }
+.card a:hover { text-decoration: underline; }
+
+/* Buttons Container */
+.button-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.expandable {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+/* Sponsors & Development */
+.sponsors, .development {
+  background: var(--card-bg);
+  padding: 20px;
+  border-radius: 15px;
+  width: 100%;
+  text-align: center;
+  backdrop-filter: blur(6px);
+}
 
 footer {
-  text-align:center;
-  padding:20px;
-  font-size:0.9rem;
-  opacity:0.85;
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  opacity: 0.85;
   background: rgba(0,0,0,0.25);
-  border-top:1px solid rgba(255,255,255,0.2);
-  margin-top:50px;
-  border-radius:10px;
-  width: calc(100% - 270px);
-  margin-left: 270px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  margin-top: auto;
+  border-radius: 10px;
+  width: 100%;
 }
 
 /* Light Mode */
@@ -156,10 +192,10 @@ body.light {
   --sidebar-bg: rgba(0,0,0,0.7);
 }
 
-body.light a, body.light .toggle-btn {
+body.light a, body.light .toggle-btn, body.light button {
   color: #fff;
 }
-body.light .sidebar a:hover {
+body.light .sidebar a:hover, body.light button:hover {
   background: var(--primary-color);
   color: #222;
 }
@@ -169,7 +205,7 @@ body.dark {
   background: var(--dark-bg);
   color: var(--dark-text);
 }
-body.dark .container-content {
+body.dark .container-content, body.dark .sponsors, body.dark .development {
   background: var(--dark-card);
 }
 body.dark .sidebar {
@@ -182,17 +218,14 @@ body.dark .sidebar {
 <!-- Sidebar -->
 <div class="sidebar">
   <h2>VoKi</h2>
-
-  <!-- Page Navigation -->
   <a href="index.html">Home</a>
   <a href="team.html" class="active">Team</a>
   <a href="tos.html">Terms of Service</a>
-
   <button class="toggle-btn" onclick="toggleMode()">Toggle Light/Dark</button>
 </div>
 
 <!-- Main Content -->
-<div class="container">
+<div class="main">
   <div class="container-content">
     <h1>Meet the Team</h1>
     <p class="lead"><strong>VoKi is powered by dedicated developers and partners</strong> — keeping the community safe and our bot running smoothly.</p>
@@ -204,7 +237,6 @@ body.dark .sidebar {
         <p>Founder & Lead Developer</p>
         <p><a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube Channel</a></p>
       </div>
-
       <div class="card">
         <img src="https://via.placeholder.com/100" alt="Solorads">
         <h2>Solorads</h2>
@@ -212,6 +244,26 @@ body.dark .sidebar {
         <p><a href="https://www.roblox.com/games/17590556553/NEW-Military-Roleplay" target="_blank">Visit SMRP Game</a></p>
       </div>
     </div>
+
+    <div class="button-container">
+      <button id="inviteBtn">Invite VoKi</button>
+      <div class="expandable" id="inviteOptions">
+        <a href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=1&scope=applications.commands" target="_blank">User Install</a>
+        <a href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank">Server Install</a>
+      </div>
+      <a href="https://discord.gg/cXsZr3cMEB" target="_blank"><button>Join Our Support Server</button></a>
+    </div>
+
+    <div class="sponsors">
+      <h2>Sponsors</h2>
+      <p>Coming soon...</p>
+    </div>
+
+    <div class="development">
+      <h2>Notice</h2>
+      <p>This page is currently in development.</p>
+    </div>
+
   </div>
 </div>
 
@@ -222,6 +274,14 @@ function toggleMode() {
   document.body.classList.toggle('light');
   document.body.classList.toggle('dark');
 }
+
+// Expandable Invite Button
+const inviteBtn = document.getElementById('inviteBtn');
+const inviteOptions = document.getElementById('inviteOptions');
+inviteBtn.addEventListener('click', () => {
+  inviteOptions.style.display = inviteOptions.style.display === 'flex' ? 'none' : 'flex';
+  inviteOptions.style.flexDirection = 'column';
+});
 </script>
 
 </body>
