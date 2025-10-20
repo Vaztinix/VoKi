@@ -10,23 +10,24 @@
   --text-color: #fff;
   --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
   --sidebar-bg: rgba(0, 0, 0, 0.7);
-  --card-bg: rgba(255, 255, 255, 0.08);
-  --card-hover-bg: rgba(255, 255, 255, 0.18);
+  --card-bg: rgba(255,255,255,0.08);
+  --card-hover-bg: rgba(255,255,255,0.18);
   --dark-bg: #0a1a2f;
   --dark-card: #1f2e44;
   --dark-text: #d3d3d3;
+  --button-bg: #00c3ff;
+  --button-hover: #00a3d9;
 }
 
 /* Global */
 body {
-  margin: 0;
+  margin:0;
   font-family: 'Segoe UI', sans-serif;
   background: var(--bg-gradient);
   color: var(--text-color);
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
   scroll-behavior: smooth;
+  display: flex;
+  min-height: 100vh;
   transition: background 0.5s, color 0.5s;
 }
 
@@ -54,70 +55,58 @@ body {
   align-self: center;
 }
 
-/* Sidebar buttons */
 .sidebar a, .sidebar button {
-  display: block;
-  color: var(--text-color);
+  color: #fff;
   text-decoration: none;
   padding: 10px 15px;
   width: 100%;
   border-radius: 10px;
-  font-weight: bold;
-  margin-bottom: 5px;
-  text-align: center;
   transition: background 0.3s, color 0.3s;
-  border: 1px solid transparent;
+  font-weight: bold;
+  text-align: left;
+  border: none;
   background: transparent;
   cursor: pointer;
 }
 
-.sidebar a:hover, .sidebar a.active, .sidebar button:hover {
+.sidebar a:hover, .sidebar button:hover {
   background: var(--primary-color);
   color: #222;
-  border-color: var(--primary-color);
 }
 
 /* Toggle Button */
 .toggle-btn {
   margin-top: auto;
   padding: 10px 15px;
-  border: 1px solid var(--primary-color);
   border-radius: 8px;
   background: transparent;
   color: var(--primary-color);
   cursor: pointer;
-  transition: background 0.3s, color 0.3s;
+  border: 1px solid var(--primary-color);
+  transition: all 0.3s;
   align-self: center;
 }
-
 .toggle-btn:hover {
   background: var(--primary-color);
   color: #222;
 }
 
-/* Main Container */
-.main {
-  margin-left: 250px;
+/* Container */
+.container {
+  margin-left: 270px;
   padding: 50px 40px;
-  flex: 1;
-}
-
-.container-content {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: calc(100% - 270px);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 30px;
 }
 
-/* Cards */
 .card-grid {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
   gap: 20px;
   width: 100%;
+  justify-items: center;
 }
 
 .card {
@@ -127,90 +116,47 @@ body {
   transition: background 0.3s, transform 0.3s;
   text-align: center;
   box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  width: 280px;
+}
+.card:hover { background: var(--card-hover-bg); transform: translateY(-6px); }
+.card h2 { color: var(--primary-color); margin-bottom: 10px; }
+.card img { width:100px; height:100px; border-radius:50%; margin-bottom:15px; object-fit:cover; }
+
+/* Modern buttons */
+.modern-button {
+  background: var(--button-bg);
+  color: #fff;
+  border: none;
+  padding: 12px 25px;
+  margin: 5px 10px;
+  border-radius: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.modern-button:hover {
+  background: var(--button-hover);
+  transform: translateY(-2px);
 }
 
-.card:hover {
-  background: var(--card-hover-bg);
-  transform: translateY(-6px);
-}
-
-.card h2 { color: var(--primary-color); margin-bottom:10px; }
-.card img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 15px;
-  object-fit: cover;
-}
-.card a { color: var(--primary-color); text-decoration:none; font-weight:bold; }
-.card a:hover { text-decoration: underline; }
-
-/* Buttons Container */
-.button-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  width: 100%;
-  max-width: 400px;
-  text-align: center;
-}
-
-.expandable {
-  display: none;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 8px;
-}
-
-/* Sponsors & Development */
-.sponsors, .development {
-  background: var(--card-bg);
-  padding: 20px;
-  border-radius: 15px;
-  width: 100%;
-  text-align: center;
-  backdrop-filter: blur(6px);
-}
-
+/* Footer */
 footer {
+  width: 100%;
   text-align: center;
   padding: 20px;
   font-size: 0.9rem;
   opacity: 0.85;
-  background: rgba(0,0,0,0.25);
+  background: rgba(0, 0, 0, 0.25);
   border-top: 1px solid rgba(255,255,255,0.2);
   margin-top: auto;
-  border-radius: 10px;
-  width: 100%;
 }
 
-/* Light Mode */
-body.light {
-  --text-color: #fff;
-  --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
-  --sidebar-bg: rgba(0,0,0,0.7);
-}
-
-body.light a, body.light .toggle-btn, body.light button {
-  color: #fff;
-}
-body.light .sidebar a:hover, body.light button:hover {
-  background: var(--primary-color);
-  color: #222;
-}
-
-/* Dark Mode */
+/* Dark mode */
 body.dark {
   background: var(--dark-bg);
   color: var(--dark-text);
 }
-body.dark .container-content, body.dark .sponsors, body.dark .development {
-  background: var(--dark-card);
-}
-body.dark .sidebar {
-  background: rgba(15, 25, 40, 0.9);
-}
+body.dark .card { background: var(--dark-card); }
+body.dark .sidebar { background: rgba(15,25,40,0.9); }
 </style>
 </head>
 <body>
@@ -220,67 +166,64 @@ body.dark .sidebar {
   <h2>VoKi</h2>
   <a href="index.html">Home</a>
   <a href="team.html" class="active">Team</a>
-  <a href="tos.html">Terms of Service</a>
-  <button class="toggle-btn" onclick="toggleMode()">Toggle Light/Dark</button>
+  <a href="tos.html">ToS</a>
+  <button class="toggle-btn" id="themeToggle">Toggle Light/Dark</button>
 </div>
 
-<!-- Main Content -->
-<div class="main">
-  <div class="container-content">
-    <h1>Meet the Team</h1>
-    <p class="lead"><strong>VoKi is powered by dedicated developers and partners</strong> — keeping the community safe and our bot running smoothly.</p>
+<!-- Main content -->
+<div class="container">
+  <h1>Meet the Team</h1>
+  <p><strong>VoKi is powered by dedicated developers and partners</strong> — keeping the community safe and our bot running smoothly.</p>
 
-    <div class="card-grid">
-      <div class="card">
-        <img src="https://via.placeholder.com/100" alt="Vaztinix">
-        <h2>Vaztinix</h2>
-        <p>Founder & Lead Developer</p>
-        <p><a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube Channel</a></p>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/100" alt="Solorads">
-        <h2>Solorads</h2>
-        <p>VoKi Partner & Owner of SMRP</p>
-        <p><a href="https://www.roblox.com/games/17590556553/NEW-Military-Roleplay" target="_blank">Visit SMRP Game</a></p>
-      </div>
+  <!-- User cards -->
+  <div class="card-grid">
+    <div class="card">
+      <img src="https://via.placeholder.com/100" alt="Vaztinix">
+      <h2>Vaztinix</h2>
+      <p>Founder & Lead Developer</p>
+      <p><a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube Channel</a></p>
     </div>
-
-    <div class="button-container">
-      <button id="inviteBtn">Invite VoKi</button>
-      <div class="expandable" id="inviteOptions">
-        <a href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=1&scope=applications.commands" target="_blank">User Install</a>
-        <a href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank">Server Install</a>
-      </div>
-      <a href="https://discord.gg/cXsZr3cMEB" target="_blank"><button>Join Our Support Server</button></a>
+    <div class="card">
+      <img src="https://via.placeholder.com/100" alt="Solorads">
+      <h2>Solorads</h2>
+      <p>VoKi Partner & Owner of SMRP</p>
+      <p><a href="https://www.roblox.com/games/17590556553/NEW-Military-Roleplay" target="_blank">Visit SMRP Game</a></p>
     </div>
-
-    <div class="sponsors">
-      <h2>Sponsors</h2>
-      <p>Coming soon...</p>
-    </div>
-
-    <div class="development">
-      <h2>Notice</h2>
-      <p>This page is currently in development.</p>
-    </div>
-
   </div>
-</div>
 
-<footer>© 2025 VoKi — Building smarter communities together.</footer>
+  <!-- Action buttons -->
+  <div style="margin-top:30px;">
+    <button class="modern-button" id="inviteBtn">Invite VoKi</button>
+    <div id="inviteOptions" style="display:none; margin-top:10px;">
+      <a href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank" class="modern-button">Server Install</a>
+      <a href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=1&scope=applications.commands" target="_blank" class="modern-button">User Install</a>
+    </div>
+    <a href="https://discord.gg/cXsZr3cMEB" target="_blank" class="modern-button">Join Our Support Server</a>
+  </div>
+
+  <!-- Sponsors & Development -->
+  <div style="margin-top:50px; text-align:center;">
+    <h2>Sponsors</h2>
+    <p>This area is coming soon for sponsors.</p>
+    <h2>Development</h2>
+    <p>This page and features are currently in development.</p>
+  </div>
+
+  <footer>© 2025 VoKi — Building smarter communities together.</footer>
+</div>
 
 <script>
-function toggleMode() {
-  document.body.classList.toggle('light');
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+themeToggle.addEventListener('click', () => {
   document.body.classList.toggle('dark');
-}
+});
 
-// Expandable Invite Button
+// Invite expand
 const inviteBtn = document.getElementById('inviteBtn');
 const inviteOptions = document.getElementById('inviteOptions');
 inviteBtn.addEventListener('click', () => {
-  inviteOptions.style.display = inviteOptions.style.display === 'flex' ? 'none' : 'flex';
-  inviteOptions.style.flexDirection = 'column';
+  inviteOptions.style.display = inviteOptions.style.display === 'none' ? 'block' : 'none';
 });
 </script>
 
