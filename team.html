@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
 <meta charset="utf-8" />
@@ -9,193 +10,279 @@
   --primary-color: #aeefff;
   --text-color: #fff;
   --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
-  --nav-bg: rgba(0,0,0,0.7);
-  --card-bg: rgba(255,255,255,0.08);
-  --card-hover-bg: rgba(255,255,255,0.18);
-  --error-bg: rgba(0,0,0,0.9);
+  --sidebar-bg: rgba(0, 0, 0, 0.7);
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --dark-bg: #0a1a2f;
+  --dark-card: #1f2e44;
+  --dark-text: #d3d3d3;
 }
 
+/* Global */
 body {
-  margin:0;
-  font-family: Arial, sans-serif;
-  background: var(--bg-gradient);
-  color: var(--text-color);
-  line-height: 1.6;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  transition: background 0.8s ease, color 0.8s ease;
+margin: 0;
+font-family: 'Segoe UI', sans-serif;
+background: var(--bg-gradient);
+color: var(--text-color);
+display: flex;
+scroll-behavior: smooth;
+transition: background 0.5s, color 0.5s;
 }
 
-nav {
-  position: fixed; top:0; left:0; width:100%; height:60px;
-  background: var(--nav-bg);
-  display:flex; justify-content:center; align-items:center;
-  gap:25px; z-index:1000;
+/* Sidebar */
+.sidebar {
+position: fixed;
+top: 0;
+left: 0;
+width: 250px;
+height: 100%;
+background: var(--sidebar-bg);
+backdrop-filter: blur(8px);
+display: flex;
+flex-direction: column;
+align-items: flex-start;
+padding: 20px;
+box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+overflow-y: auto;
 }
-nav a {
-  color: var(--text-color); font-weight:bold;
-  text-decoration:none; transition:0.3s;
-}
-nav a:hover { color: var(--primary-color); }
 
-#menuToggle {
-  position: fixed; bottom:20px; left:20px; width:50px; height:50px;
-  background: var(--primary-color); border-radius:50%;
-  display:flex; flex-direction:column; justify-content:center; align-items:center;
-  cursor:pointer; z-index:1001; transition:transform 0.3s ease;
+.sidebar * {
+color: white !important;
 }
-#menuToggle span { display:block; width:22px; height:2px; background:#000; margin:3px 0; }
-#menuToggle.shifted { transform: translateY(-260px); }
 
-#menu {
-  position: fixed; bottom:0; left:20px; width:260px;
-  background: rgba(0,0,0,0.85);
-  border-radius:12px 12px 0 0;
-  padding:20px; display:flex; flex-direction:column; gap:12px;
-  transform:translateY(100%);
-  transition:transform 0.3s ease;
-  z-index:1000;
+.sidebar h2 {
+color: var(--primary-color) !important;
+font-size: 1.4rem;
+margin-bottom: 20px;
+align-self: center;
 }
-#menu.show { transform:translateY(0); }
-#menu a, #menu div {
-  color: var(--primary-color);
-  font-weight:bold; cursor:pointer;
-  padding:8px 0; text-decoration:none;
-  transition:color 0.3s;
-}
-#menu a:hover, #menu div:hover { color:#fff; }
 
-.error-notification {
-  position:fixed; top:20px; right:20px;
-  background: var(--error-bg);
-  padding:15px 20px; border-radius:8px;
-  color:#fff; font-weight:bold;
-  opacity:0; pointer-events:none;
-  transition:opacity 0.5s ease;
-  z-index:2000;
+.sidebar a {
+text-decoration: none;
+padding: 10px 15px;
+width: 100%;
+border-radius: 10px;
+transition: background 0.3s, color 0.3s;
+font-weight: bold;
+display: block;
 }
-.error-notification.show { opacity:1; pointer-events:auto; }
 
+.sidebar a:hover, .sidebar a.active {
+background: var(--primary-color);
+color: #222 !important;
+}
+
+.sidebar input {
+width: 90%;
+margin: 10px auto 20px;
+padding: 8px;
+border: none;
+border-radius: 8px;
+outline: none;
+text-align: center;
+}
+
+.toggle-btn {
+margin-top: auto;
+padding: 10px 15px;
+border: 1px solid var(--primary-color);
+border-radius: 8px;
+background: transparent;
+color: var(--primary-color);
+cursor: pointer;
+transition: background 0.3s;
+align-self: center;
+}
+
+.toggle-btn:hover {
+background: var(--primary-color);
+color: #222 !important;
+}
+
+/* Container */
 .container {
-  max-width:1200px;
-  margin:100px auto 50px;
-  padding:0 20px;
-  text-align:center;
-  display:flex; flex-direction:column; align-items:center;
-  gap:30px;
+margin-left: 270px;
+padding: 50px 40px;
+width: calc(100% - 300px);
+display: flex;
+flex-direction: column;
+align-items: center;
+text-align: center;
 }
-h1 { font-size:2.5rem; margin-bottom:10px; color:#e6f7ff; }
-p.lead { font-size:1.2rem; opacity:0.9; }
 
+.container-content {
+max-width: 1000px;
+background: var(--card-bg);
+padding: 40px;
+border-radius: 15px;
+backdrop-filter: blur(6px);
+transition: background 0.3s;
+}
+
+h1 {
+font-size: 2.5rem;
+margin-bottom: 10px;
+color: #e6f7ff;
+}
+
+p.lead {
+font-size: 1.2rem;
+opacity: 0.9;
+margin-bottom: 30px;
+}
+
+/* Team Cards */
 .card-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px;
-  width:100%;
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+gap: 20px;
+width: 100%;
 }
+
 .card {
-  background: var(--card-bg);
-  padding:25px;
-  border-radius:20px;
-  transition:background 0.3s, transform 0.3s;
-  text-align:center;
-  box-shadow:0 4px 12px rgba(0,0,0,0.25);
+background: var(--card-bg);
+padding: 25px;
+border-radius: 20px;
+transition: background 0.3s, transform 0.3s;
+text-align: center;
+box-shadow: 0 4px 12px rgba(0,0,0,0.25);
 }
-.card:hover { background: var(--card-hover-bg); transform:translateY(-6px); }
-.card h2 { color: var(--primary-color); margin-bottom:10px; }
+
+.card:hover {
+background: rgba(255,255,255,0.15);
+transform: translateY(-6px);
+}
+
+.card h2 {
+color: var(--primary-color);
+margin-bottom: 10px;
+}
+
 .card img {
-  width:100px; height:100px; border-radius:50%;
-  margin-bottom:15px;
-  object-fit:cover;
+width: 100px;
+height: 100px;
+border-radius: 50%;
+margin-bottom: 15px;
+object-fit: cover;
 }
-.card a { color: var(--primary-color); text-decoration:none; font-weight:bold; }
-.card a:hover { text-decoration:underline; }
 
+.card a {
+color: var(--primary-color);
+text-decoration: none;
+font-weight: bold;
+}
+.card a:hover {
+text-decoration: underline;
+}
+
+/* Footer */
 footer {
-  text-align:center;
-  padding:20px;
-  font-size:0.9rem;
-  opacity:0.85;
-  background: rgba(0,0,0,0.25);
-  border-top:1px solid rgba(255,255,255,0.2);
-  margin-top:50px;
+text-align: center;
+padding: 20px;
+font-size: 0.9rem;
+opacity: 0.85;
+background: rgba(0,0,0,0.25);
+border-top: 1px solid rgba(255,255,255,0.2);
+margin-top: 50px;
+border-radius: 10px;
 }
 
-body.dark {
-  --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
-  --text-color: #eee;
-  --nav-bg: rgba(30,30,30,0.85);
-  --card-bg: rgba(50,50,50,0.4);
-  --card-hover-bg: rgba(60,60,60,0.6);
+/* Light Mode */
+body.light {
+--text-color: #333;
+--sidebar-bg: rgba(255, 255, 255, 0.8);
+--bg-gradient: linear-gradient(to bottom right, #dbe9ff, #f2e4ff);
 }
-</style>
+body.light a, body.light .toggle-btn {
+color: #222;
+}
+body.light .sidebar a:hover {
+background: #4facfe;
+color: #fff !important;
+}
+
+/* Dark Mode */
+body.dark {
+background: var(--dark-bg);
+color: var(--dark-text);
+}
+body.dark .container-content {
+background: var(--dark-card);
+}
+body.dark .sidebar {
+background: rgba(15, 25, 40, 0.9);
+} </style>
+
 </head>
 <body>
 
-<nav>
-  <a href="index.html">Home</a>
-  <a href="team.html">Team</a>
-  <a href="tos.html">ToS</a>
-</nav>
+<!-- Sidebar -->
 
-<div id="menuToggle"><span></span><span></span><span></span></div>
-<div id="menu">
-  <a href="index.html">Home</a>
-  <a href="team.html">Team</a>
-  <a href="tos.html">Terms of Service</a>
-  <div id="themeToggle">Toggle Theme</div>
-  <a href="#" id="discordLogin">Login with Discord</a>
+<div class="sidebar">
+  <h2>VoKi</h2>
+  <input type="text" id="searchBox" placeholder="Find team member..." onkeyup="searchTeam()">
+
+<a href="index.html">Home</a> <a href="team.html" class="active">Team</a> <a href="tos.html">Terms of Service</a>
+
+  <hr style="width:90%; border:0.5px solid rgba(255,255,255,0.2); margin:15px auto;">
+
+<a href="#top">Top</a> <a href="#team">Our Members</a>
+
+<button class="toggle-btn" onclick="toggleMode()">Toggle Light/Dark</button>
+
 </div>
 
-<div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
+<!-- Main Content -->
 
-<div class="container">
-  <h1>Meet the Team</h1>
-  <p class="lead"><strong>VoKi is powered by dedicated developers and partners</strong> — keeping the community safe and our bot running smoothly.</p>
+<div class="container" id="top">
+  <div class="container-content" id="team">
+    <h1>Meet the Team</h1>
+    <p class="lead"><strong>VoKi is powered by dedicated developers and partners</strong> — keeping the community safe and our bot running smoothly.</p>
 
-  <div class="card-grid">
-    <div class="card">
-      <img src="https://via.placeholder.com/100" alt="Vaztinix">
-      <h2>Vaztinix</h2>
-      <p>Founder & Lead Developer</p>
-      <p><a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube Channel</a></p>
-    </div>
+```
+<div class="card-grid" id="teamGrid">
+  <div class="card">
+    <img src="https://via.placeholder.com/100" alt="Vaztinix">
+    <h2>Vaztinix</h2>
+    <p>Founder & Lead Developer</p>
+    <p><a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube Channel</a></p>
+  </div>
 
-    <div class="card">
-      <img src="https://via.placeholder.com/100" alt="Solorads">
-      <h2>Solorads</h2>
-      <p>VoKi Partner & Owner of SMRP</p>
-      <p><a href="https://www.roblox.com/games/17590556553/NEW-Military-Roleplay" target="_blank">Visit SMRP Game</a></p>
-    </div>
+  <div class="card">
+    <img src="https://via.placeholder.com/100" alt="Solorads">
+    <h2>Solorads</h2>
+    <p>VoKi Partner & Owner of SMRP</p>
+    <p><a href="https://www.roblox.com/games/17590556553/NEW-Military-Roleplay" target="_blank">Visit SMRP Game</a></p>
+  </div>
+</div>
+```
+
   </div>
 </div>
 
 <footer>© 2025 VoKi — Building smarter communities together.</footer>
 
 <script>
-const menuToggle = document.getElementById('menuToggle');
-const menu = document.getElementById('menu');
-menuToggle.addEventListener('click', () => {
-  menu.classList.toggle('show');
-  menuToggle.classList.toggle('shifted');
-});
+function toggleMode() {
+  document.body.classList.toggle("dark");
+  document.body.classList.toggle("light");
+  localStorage.setItem("theme", document.body.classList.contains("dark") ? "dark" : "light");
+}
 
-const themeToggle = document.getElementById('themeToggle');
-const body = document.body;
-const savedTheme = localStorage.getItem('theme');
-if(savedTheme) body.classList.toggle('dark', savedTheme === 'dark');
-themeToggle.addEventListener('click', () => {
-  body.classList.toggle('dark');
-  localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
-});
+const savedTheme = localStorage.getItem("theme");
+if(savedTheme) {
+  document.body.classList.add(savedTheme);
+} else {
+  document.body.classList.add("dark");
+}
 
-const discordLogin = document.getElementById('discordLogin');
-const errorNotification = document.getElementById('errorNotification');
-discordLogin.addEventListener('click', e => {
-  e.preventDefault();
-  errorNotification.classList.add('show');
-  setTimeout(() => errorNotification.classList.remove('show'), 4000);
-});
+function searchTeam() {
+  const input = document.getElementById("searchBox").value.toLowerCase();
+  const cards = document.querySelectorAll(".card");
+  cards.forEach(card => {
+    const name = card.querySelector("h2").textContent.toLowerCase();
+    card.style.display = name.includes(input) ? "block" : "none";
+  });
+}
 </script>
 
 </body>
