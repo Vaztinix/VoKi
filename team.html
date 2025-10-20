@@ -1,259 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>VoKi – Team</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VoKi – Team Blocked</title>
 <style>
-:root {
-  --primary-color: #aeefff;
-  --text-color: #fff;
-  --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
-  --sidebar-bg: rgba(0, 0, 0, 0.7);
-  --card-bg: rgba(255,255,255,0.08);
-  --card-hover-bg: rgba(255,255,255,0.18);
-  --dark-bg: #0a1a2f;
-  --dark-card: #1f2e44;
-  --dark-text: #d3d3d3;
-  --button-bg: #00c3ff;
-  --button-hover: #00a3d9;
-}
-
-/* Global */
-body {
-  margin:0;
+/* Reset & global */
+body, html {
+  margin: 0;
+  padding: 0;
   font-family: 'Segoe UI', sans-serif;
-  background: var(--bg-gradient);
-  color: var(--text-color);
-  scroll-behavior: smooth;
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
-  transition: background 0.5s, color 0.5s;
-}
-
-/* Sidebar */
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 250px;
   height: 100%;
-  background: var(--sidebar-bg);
-  backdrop-filter: blur(8px);
+  background: linear-gradient(to bottom right, #4facfe, #8e44ad);
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 20px;
-  box-shadow: 2px 0 10px rgba(0,0,0,0.2);
-  overflow-y: auto;
-}
-
-.sidebar h2 {
-  color: var(--primary-color);
-  font-size: 1.4rem;
-  margin-bottom: 20px;
-  align-self: center;
-}
-
-.sidebar a, .sidebar button {
-  color: #fff;
-  text-decoration: none;
-  padding: 10px 15px;
-  width: 100%;
-  border-radius: 10px;
-  transition: background 0.3s, color 0.3s;
-  font-weight: bold;
-  text-align: left;
-  border: none;
-  background: transparent;
-  cursor: pointer;
-}
-
-.sidebar a.active, .sidebar a:hover, .sidebar button:hover {
-  background: var(--primary-color);
-  color: #222;
-}
-
-/* Toggle Button */
-.toggle-btn {
-  margin-top: auto;
-  padding: 10px 15px;
-  border-radius: 8px;
-  background: transparent;
-  color: var(--primary-color);
-  cursor: pointer;
-  border: 1px solid var(--primary-color);
-  transition: all 0.3s;
-  align-self: center;
-}
-.toggle-btn:hover {
-  background: var(--primary-color);
-  color: #222;
-}
-
-/* Main Container */
-.container {
-  margin-left: 270px;
-  padding: 50px 40px;
-  width: calc(100% - 270px);
-  display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-/* Cards */
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 15px; /* reduced gap */
-  width: 100%;
-  justify-items: center;
-}
-
-.card {
-  background: var(--card-bg);
-  padding: 25px;
+/* Overlay container */
+.overlay-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  background: rgba(0,0,0,0.7);
+  padding: 40px 30px;
   border-radius: 20px;
-  transition: background 0.3s, transform 0.3s;
   text-align: center;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-}
-.card:hover {
-  background: var(--card-hover-bg);
-  transform: translateY(-6px);
-}
-.card h2 { color: var(--primary-color); margin-bottom: 10px; }
-.card img { width:100px; height:100px; border-radius:50%; margin-bottom:15px; object-fit:cover; }
-.card a { color: var(--primary-color); text-decoration:none; font-weight:bold; }
-.card a:hover { text-decoration: underline; }
-
-/* Modern Buttons */
-.modern-button {
-  background: var(--button-bg);
+  max-width: 500px;
   color: #fff;
-  border: none;
-  padding: 12px 25px;
-  margin: 5px 0;
-  border-radius: 12px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s;
-  text-align: center;
-  display: inline-block;
 }
-.modern-button:hover {
-  background: var(--button-hover);
+
+/* White circle with cross */
+.cross-circle {
+  width: 100px;
+  height: 100px;
+  border: 3px solid #fff;
+  border-radius: 50%;
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 0;
+  margin-bottom: 10px;
+}
+
+/* Message text */
+.overlay-container p {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+/* Navigation links */
+.overlay-container .nav-links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.overlay-container .nav-links a {
+  background: #00c3ff;
+  color: #fff;
+  padding: 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.3s;
+}
+
+.overlay-container .nav-links a:hover {
+  background: #00a3d9;
   transform: translateY(-2px);
 }
 
-/* Expandable */
-.expandable {
-  display: none;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 8px;
+/* Responsive */
+@media (max-width: 480px) {
+  .overlay-container {
+    padding: 30px 20px;
+  }
+  .cross-circle {
+    width: 80px;
+    height: 80px;
+    font-size: 2.5rem;
+  }
 }
-
-/* Footer */
-footer {
-  width: 100%;
-  text-align: center;
-  padding: 20px;
-  font-size: 0.9rem;
-  opacity: 0.85;
-  background: rgba(0, 0, 0, 0.25);
-  border-top: 1px solid rgba(255,255,255,0.2);
-  margin-top: auto;
-  border-radius: 10px;
-  flex-shrink: 0;
-}
-
-/* Dark mode */
-body.dark {
-  background: var(--dark-bg);
-  color: var(--dark-text);
-}
-body.dark .card { background: var(--dark-card); }
-body.dark .sidebar { background: rgba(15,25,40,0.9); }
-
 </style>
 </head>
-<body class="light">
+<body>
 
-<!-- Sidebar -->
-<div class="sidebar">
-  <h2>VoKi</h2>
-  <a href="index.html">Home</a>
-  <a href="team.html" class="active">Team</a>
-  <a href="tos.html">ToS</a>
-  <button class="toggle-btn" id="themeToggle">Toggle Light/Dark</button>
-</div>
-
-<!-- Main content -->
-<div class="container">
-  <h1>Meet the Team</h1>
-  <p><strong>VoKi is powered by dedicated developers and partners</strong> — keeping the community safe and our bot running smoothly.</p>
-
-  <!-- User Cards -->
-  <div class="card-grid">
-    <div class="card">
-      <img src="https://via.placeholder.com/100" alt="Vaztinix">
-      <h2>Vaztinix</h2>
-      <p>Founder & Lead Developer</p>
-      <p><a href="https://www.youtube.com/@Vaztinix" target="_blank">YouTube Channel</a></p>
-    </div>
-    <div class="card">
-      <img src="https://via.placeholder.com/100" alt="Solorads">
-      <h2>Solorads</h2>
-      <p>VoKi Partner & Owner of SMRP</p>
-      <p><a href="https://www.roblox.com/games/17590556553/NEW-Military-Roleplay" target="_blank">Visit SMRP Game</a></p>
-    </div>
-  </div>
-
-  <!-- Action Buttons -->
-  <div style="display:flex; flex-direction:column; align-items:center; margin-top:30px; gap:10px;">
-    <button class="modern-button" id="inviteBtn">Invite VoKi</button>
-    <div id="inviteOptions" class="expandable">
-      <a href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank" class="modern-button">Server Install</a>
-      <a href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=1&scope=applications.commands" target="_blank" class="modern-button">User Install</a>
-    </div>
-    <a href="https://discord.gg/cXsZr3cMEB" target="_blank" class="modern-button">Join Our Support Server</a>
-  </div>
-
-  <!-- Sponsors & Development Notice -->
-  <div style="margin-top:50px; text-align:center;">
-    <h2>Sponsors</h2>
-    <p>This area is coming soon for sponsors.</p>
-    <h2>Development</h2>
-    <p>This page and features are currently in development.</p>
+<div class="overlay-container">
+  <div class="cross-circle">✖</div>
+  <p>This page has been blocked until features have been restored and developed.</p>
+  
+  <!-- Navigation links -->
+  <div class="nav-links">
+    <a href="index.html">Go to Home</a>
+    <a href="tos.html">View Terms of Service</a>
+    <a href="contact.html">Contact Support</a>
   </div>
 </div>
 
-<footer>© 2025 VoKi — Building smarter communities together.</footer>
-
-<script>
-// Highlight active page
-document.querySelectorAll('.sidebar a').forEach(link => {
-  if(link.href === window.location.href){
-    link.classList.add('active');
-    link.style.backgroundColor = '#aeefff';
-    link.style.color = '#222';
-  }
-});
-
-// Theme toggle
-document.getElementById('themeToggle').addEventListener('click', () => {
-  document.body.classList.toggle('dark');
-  document.body.classList.toggle('light');
-});
-
-// Expandable invite buttons
-const inviteBtn = document.getElementById('inviteBtn');
-const inviteOptions = document.getElementById('inviteOptions');
-inviteBtn.addEventListener('click', () => {
-  inviteOptions.style.display = inviteOptions.style.display === 'flex' ? 'none' : 'flex';
-});
-</script>
 </body>
 </html>
