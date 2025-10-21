@@ -5,6 +5,68 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VoKi – Your Discord Bot</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    /* Modern button styles */
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      margin: 8px;
+      border-radius: 50px;
+      font-weight: bold;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--primary-color);
+      color: #000;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      opacity: 0.9;
+    }
+    .btn-outline {
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      background: transparent;
+    }
+    .btn-outline:hover {
+      background: var(--primary-color);
+      color: #000;
+    }
+
+    /* Hero section */
+    .hero {
+      margin-top: 100px;
+      text-align: center;
+      padding: 60px 20px;
+    }
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: #e6f7ff;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 30px;
+    }
+    .hero-buttons {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    /* Section headers */
+    .section-title {
+      text-align: center;
+      margin: 60px 0 30px;
+      font-size: 2rem;
+      color: var(--primary-color);
+    }
+  </style>
 </head>
 <body>
 
@@ -27,61 +89,78 @@
 
 <div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
 
-<!-- Main Content -->
-<div class="container">
-  <!-- Hero Section -->
+<!-- Hero Section -->
+<section class="hero">
   <h1>Welcome to VoKi</h1>
-  <p class="lead"><strong>Privacy‑First AI & Moderation Bot</strong> — keeping your Discord safe, positive, and secure.</p>
-
-  <!-- Call-to-action Buttons -->
-  <div style="display:flex; justify-content:center; gap:15px; margin-bottom:30px;">
-    <a class="main-btn" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank">Invite VoKi</a>
-    <a class="main-btn" href="https://discord.gg/PKWJuRrgUd" target="_blank">Join Server</a>
+  <p><strong>Privacy‑First AI & Moderation Bot</strong> — keeping your Discord safe, positive, and secure.</p>
+  <div class="hero-buttons">
+    <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank">🚀 Invite VoKi</a>
+    <a class="btn btn-outline" href="https://discord.gg/PKWJuRrgUd" target="_blank">💬 Join Server</a>
   </div>
+</section>
 
-  <!-- Feature Cards -->
-  <div class="card-grid">
-    <div class="card">
-      <h2>Why Choose VoKi?</h2>
-      <ul>
-        <li><strong>Community Safety:</strong> AI detects toxic content only when invoked.</li>
-        <li><strong>Privacy First:</strong> Logs stay inside your server.</li>
-        <li><strong>Customization:</strong> Create commands, relay messages, tailor moderation.</li>
-        <li><strong>Effortless Moderation:</strong> Multi-level access control.</li>
-        <li><strong>Global Support:</strong> Multilingual features coming soon.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>New Features</h2>
-      <ul>
-        <li><strong>Command Control:</strong> Enable/disable commands per server.</li>
-        <li><strong>Activity Logging:</strong> Private edit tracking.</li>
-        <li><strong>Content Monitoring:</strong> AI scans flagged content privately.</li>
-        <li><strong>Roblox Integration:</strong> Tools for Roblox communities.</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- FAQ Section -->
-  <div class="card faq">
-    <h2>FAQ</h2>
-    <div class="question">How do I add VoKi to my server?</div>
-    <div class="answer">Use the “Invite VoKi” button above to authorize the bot into your server.</div>
-    <div class="question">Is my data safe with VoKi?</div>
-    <div class="answer">Yes, VoKi only logs data locally in your server and never shares it externally.</div>
-    <div class="question">Does VoKi replace human moderators?</div>
-    <div class="answer">No, VoKi assists moderators with AI tools but final judgment is always human‑led.</div>
-  </div>
-
-  <!-- Contact Section -->
+<!-- Why Choose Section -->
+<h2 class="section-title">Why Choose VoKi?</h2>
+<div class="card-grid">
   <div class="card">
-    <h2>Contact & Support</h2>
-    <ul>
-      <li>Email: <a href="mailto:VoKi.io@outlook.com" style="color: var(--primary-color);">VoKi.io@outlook.com</a></li>
-      <li>Discord: <a href="https://discord.gg/PKWJuRrgUd" target="_blank" style="color: var(--primary-color);">Join our Support Server</a></li>
-    </ul>
+    <h2>Community Safety</h2>
+    <p>AI detects toxic content only when invoked, ensuring privacy and fairness.</p>
   </div>
+  <div class="card">
+    <h2>Privacy First</h2>
+    <p>Logs stay inside your server — no external data sharing.</p>
+  </div>
+  <div class="card">
+    <h2>Customization</h2>
+    <p>Create commands, relay messages, and tailor moderation to your needs.</p>
+  </div>
+  <div class="card">
+    <h2>Effortless Moderation</h2>
+    <p>Multi‑level access control for smooth community management.</p>
+  </div>
+</div>
+
+<!-- New Features Section -->
+<h2 class="section-title">New Features</h2>
+<div class="card-grid">
+  <div class="card">
+    <h2>Command Control</h2>
+    <p>Enable or disable commands per server with ease.</p>
+  </div>
+  <div class="card">
+    <h2>Activity Logging</h2>
+    <p>Track edits, deletions, and flagged content privately.</p>
+  </div>
+  <div class="card">
+    <h2>Content Monitoring</h2>
+    <p>AI scans flagged content privately for moderator review.</p>
+  </div>
+  <div class="card">
+    <h2>Roblox Integration</h2>
+    <p>Tools designed for Roblox communities and beyond.</p>
+  </div>
+</div>
+
+<!-- FAQ Section -->
+<h2 class="section-title">FAQ</h2>
+<div class="card faq">
+  <div class="question">What is VoKi?</div>
+  <div class="answer">VoKi is an AI‑powered Discord bot for moderation and community management.</div>
+  <div class="question">How does VoKi work?</div>
+  <div class="answer">VoKi responds to commands and assists moderators with AI‑driven tools.</div>
+  <div class="question">Is VoKi free?</div>
+  <div class="answer">Yes, VoKi is free to use with optional integrations.</div>
+  <div class="question">Can VoKi be customized?</div>
+  <div class="answer">Absolutely — admins can tailor commands, permissions, and integrations.</div>
+</div>
+
+<!-- Contact Section -->
+<h2 class="section-title">Contact & Support</h2>
+<div class="card">
+  <ul>
+    <li>Email: <a href="mailto:VoKiGlobal@outlook.com" style="color: var(--primary-color);">VoKiGlobal@outlook.com</a></li>
+    <li>Discord: <a href="https://discord.gg/PKWJuRrgUd" target="_blank" style="color: var(--primary-color);">Join our Support Server</a></li>
+  </ul>
 </div>
 
 <!-- Footer -->
