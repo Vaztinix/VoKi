@@ -6,11 +6,85 @@
   <title>VoKi – Your Discord Bot</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Modern button styles */
+    :root {
+      --primary-color: #aeefff;
+      --text-color: #fff;
+      --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
+      --sidebar-bg: rgba(0,0,0,0.85);
+      --card-bg: rgba(255,255,255,0.08);
+      --card-hover-bg: rgba(255,255,255,0.18);
+      --error-bg: rgba(0,0,0,0.9);
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg-gradient);
+      color: var(--text-color);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+      transition: background 0.5s, color 0.5s;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 240px;
+      height: 100%;
+      background: var(--sidebar-bg);
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+      z-index: 1000;
+    }
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+    }
+    .sidebar a, .sidebar div {
+      display: block;
+      text-align: center;
+      padding: 12px;
+      margin: 6px 0;
+      border-radius: 8px;
+      font-weight: bold;
+      text-decoration: none;
+      color: var(--primary-color);
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .sidebar a:hover, .sidebar div:hover {
+      background: var(--primary-color);
+      color: #000;
+    }
+
+    /* Container */
+    .container {
+      margin-left: 260px;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 15px;
+      color: #e6f7ff;
+    }
+    p.lead {
+      font-size: 1.2rem;
+      opacity: 0.9;
+      margin-bottom: 30px;
+    }
+
+    /* Buttons */
     .btn {
       display: inline-block;
       padding: 14px 28px;
-      margin: 8px;
+      margin: 10px;
       border-radius: 50px;
       font-weight: bold;
       text-decoration: none;
@@ -36,146 +110,112 @@
       color: #000;
     }
 
-    /* Hero section */
-    .hero {
-      margin-top: 100px;
+    /* Cards */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .card {
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 15px;
+      transition: background 0.3s, transform 0.3s;
       text-align: center;
-      padding: 60px 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     }
-    .hero h1 {
-      font-size: 3rem;
-      margin-bottom: 15px;
-      color: #e6f7ff;
+    .card:hover {
+      background: var(--card-hover-bg);
+      transform: translateY(-6px);
     }
-    .hero p {
-      font-size: 1.2rem;
-      opacity: 0.9;
-      margin-bottom: 30px;
-    }
-    .hero-buttons {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 15px;
+    .card h2 {
+      color: var(--primary-color);
+      margin-bottom: 10px;
     }
 
-    /* Section headers */
-    .section-title {
+    /* Error Notification */
+    .error-notification {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--error-bg);
+      padding: 15px 20px;
+      border-radius: 8px;
+      color: #fff;
+      font-weight: bold;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      z-index: 2000;
+    }
+    .error-notification.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    footer {
       text-align: center;
-      margin: 60px 0 30px;
-      font-size: 2rem;
-      color: var(--primary-color);
+      padding: 20px;
+      font-size: 0.9rem;
+      opacity: 0.85;
+      margin-top: 50px;
+    }
+
+    /* Dark Mode */
+    body.dark {
+      --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
+      --text-color: #eee;
+      --sidebar-bg: rgba(30,30,30,0.9);
+      --card-bg: rgba(50,50,50,0.4);
+      --card-hover-bg: rgba(60,60,60,0.6);
     }
   </style>
 </head>
-<body>
+<body class="dark">
 
-<!-- Navigation -->
-<nav>
-  <a href="index.html" class="active">Home</a>
-  <a href="team.html">Team</a>
-  <a href="tos.html">ToS</a>
-</nav>
-
-<!-- Floating Menu -->
-<div id="menuToggle"><span></span><span></span><span></span></div>
-<div id="menu">
+<!-- Sidebar -->
+<div class="sidebar">
+  <h2>VoKi</h2>
   <a href="index.html">Home</a>
   <a href="team.html">Team</a>
   <a href="tos.html">Terms of Service</a>
   <div id="themeToggle">Toggle Theme</div>
-  <a href="#" id="discordLogin">Login with Discord</a>
+  <div id="discordLogin">Login with Discord</div>
 </div>
 
 <div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
 
-<!-- Hero Section -->
-<section class="hero">
+<!-- Main Content -->
+<div class="container">
   <h1>Welcome to VoKi</h1>
-  <p><strong>Privacy‑First AI & Moderation Bot</strong> — keeping your Discord safe, positive, and secure.</p>
-  <div class="hero-buttons">
+  <p class="lead"><strong>Privacy‑First & Moderation‑First</strong> — keeping your Discord safe, private, and secure.</p>
+
+  <div>
     <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank">🚀 Invite VoKi</a>
     <a class="btn btn-outline" href="https://discord.gg/PKWJuRrgUd" target="_blank">💬 Join Server</a>
   </div>
-</section>
 
-<!-- Why Choose Section -->
-<h2 class="section-title">Why Choose VoKi?</h2>
-<div class="card-grid">
-  <div class="card">
-    <h2>Community Safety</h2>
-    <p>AI detects toxic content only when invoked, ensuring privacy and fairness.</p>
+  <h2 style="margin-top:50px; color:var(--primary-color);">Why Choose VoKi?</h2>
+  <div class="card-grid">
+    <div class="card"><h2>Community Safety</h2><p>Protect your server with versatile, evolving safety systems.</p></div>
+    <div class="card"><h2>Privacy First</h2><p>VoKi is designed to be private, secure, and safe.</p></div>
+    <div class="card"><h2>Customization</h2><p>Customize VoKi through settings and modules to suit your needs.</p></div>
+    <div class="card"><h2>Effortless Moderation</h2><p>VoKi is easy to use and works seamlessly with your community.</p></div>
   </div>
-  <div class="card">
-    <h2>Privacy First</h2>
-    <p>Logs stay inside your server — no external data sharing.</p>
+
+  <h2 style="margin-top:50px; color:var(--primary-color);">New Features</h2>
+  <div class="card-grid">
+    <div class="card"><h2>Command Logging</h2><p>Track command usage across your server.</p></div>
+    <div class="card"><h2>Activity Logging</h2><p>Monitor member activity privately.</p></div>
+    <div class="card"><h2>Feature Customization</h2><p>Fully supports personal settings.</p></div>
+    <div class="card"><h2>Media Integration</h2><p>Built‑in media moderation tools.</p></div>
   </div>
-  <div class="card">
-    <h2>Customization</h2>
-    <p>Create commands, relay messages, and tailor moderation to your needs.</p>
-  </div>
-  <div class="card">
-    <h2>Effortless Moderation</h2>
-    <p>Multi‑level access control for smooth community management.</p>
-  </div>
+
+  <footer>© 2025 VoKi — Building smarter communities together.</footer>
 </div>
 
-<!-- New Features Section -->
-<h2 class="section-title">New Features</h2>
-<div class="card-grid">
-  <div class="card">
-    <h2>Command Control</h2>
-    <p>Enable or disable commands per server with ease.</p>
-  </div>
-  <div class="card">
-    <h2>Activity Logging</h2>
-    <p>Track edits, deletions, and flagged content privately.</p>
-  </div>
-  <div class="card">
-    <h2>Content Monitoring</h2>
-    <p>AI scans flagged content privately for moderator review.</p>
-  </div>
-  <div class="card">
-    <h2>Roblox Integration</h2>
-    <p>Tools designed for Roblox communities and beyond.</p>
-  </div>
-</div>
-
-<!-- FAQ Section -->
-<h2 class="section-title">FAQ</h2>
-<div class="card faq">
-  <div class="question">What is VoKi?</div>
-  <div class="answer">VoKi is an AI‑powered Discord bot for moderation and community management.</div>
-  <div class="question">How does VoKi work?</div>
-  <div class="answer">VoKi responds to commands and assists moderators with AI‑driven tools.</div>
-  <div class="question">Is VoKi free?</div>
-  <div class="answer">Yes, VoKi is free to use with optional integrations.</div>
-  <div class="question">Can VoKi be customized?</div>
-  <div class="answer">Absolutely — admins can tailor commands, permissions, and integrations.</div>
-</div>
-
-<!-- Contact Section -->
-<h2 class="section-title">Contact & Support</h2>
-<div class="card">
-  <ul>
-    <li>Email: <a href="mailto:VoKiGlobal@outlook.com" style="color: var(--primary-color);">VoKiGlobal@outlook.com</a></li>
-    <li>Discord: <a href="https://discord.gg/PKWJuRrgUd" target="_blank" style="color: var(--primary-color);">Join our Support Server</a></li>
-  </ul>
-</div>
-
-<!-- Footer -->
-<footer>© 2025 VoKi — Building smarter communities together.</footer>
-
-<script src="script.js"></script>
 <script>
-// Floating menu toggle
-const menuToggle = document.getElementById('menuToggle');
-const menu = document.getElementById('menu');
-menuToggle.addEventListener('click', () => {
-  menu.classList.toggle('show');
-  menuToggle.classList.toggle('shifted');
-});
-
 // Theme toggle
 const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
@@ -186,23 +226,5 @@ themeToggle.addEventListener('click', () => {
   localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
 });
 
-// Login placeholder
-const discordLogin = document.getElementById('discordLogin');
-const errorNotification = document.getElementById('errorNotification');
-discordLogin.addEventListener('click', e => {
-  e.preventDefault();
-  errorNotification.classList.add('show');
-  setTimeout(() => errorNotification.classList.remove('show'), 4000);
-});
-
-// FAQ toggle
-document.querySelectorAll('.faq .question').forEach(q => {
-  q.addEventListener('click', () => {
-    const ans = q.nextElementSibling;
-    ans.style.display = ans.style.display === 'block' ? 'none' : 'block';
-  });
-});
-</script>
-
-</body>
-</html>
+// Login placeholder popup
+const discordLogin = document.getElement
