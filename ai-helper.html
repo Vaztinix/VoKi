@@ -43,8 +43,8 @@
       overflow: hidden;
     }
     .chat-messages {
-      padding: 1rem;
-      overflow-y: auto;
+      padding: 0;
+      overflow: hidden;
       flex: 1;
     }
     footer {
@@ -65,12 +65,14 @@
   <main>
     <div class="chat-box">
       <div class="chat-messages" id="chatMessages">
-        <!-- TinyChat AI widget will load here -->
-        <iframe 
-          src="https://tinychat.ai/embed/demo" 
-          width="100%" 
-          height="100%" 
-          style="border:none;">
+        <!-- LiveChatAI iframe embed -->
+        <iframe
+          src="https://app.livechatai.com/aibot-iframe/cmh17k99w0003jp04rx7q4vl6"
+          style="border:1px solid #EAEAEA"
+          width="100%"
+          height="100%"
+          frameborder="0"
+          allow="microphone">
         </iframe>
       </div>
     </div>
