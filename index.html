@@ -1,178 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>VoKi – Your Discord Bot</title>
-<style>
-:root {
-  --primary-color: #aeefff;
-  --text-color: #fff;
-  --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
-  --nav-bg: rgba(0,0,0,0.7);
-  --card-bg: rgba(255,255,255,0.08);
-  --card-hover-bg: rgba(255,255,255,0.18);
-  --faq-question-bg: rgba(255,255,255,0.08);
-  --faq-question-hover: rgba(255,255,255,0.18);
-  --faq-answer-bg: rgba(255,255,255,0.06);
-  --error-bg: rgba(0,0,0,0.9);
-}
-
-body {
-  margin:0;
-  font-family: Arial, sans-serif;
-  background: var(--bg-gradient);
-  color: var(--text-color);
-  line-height: 1.6;
-  scroll-behavior: smooth;
-  overflow-x: hidden;
-  transition: background 0.8s ease, color 0.8s ease;
-}
-
-/* Navigation */
-nav {
-  position: fixed; top:0; left:0; width:100%; height:60px;
-  background: var(--nav-bg);
-  display:flex; justify-content:center; align-items:center;
-  gap:25px; z-index:1000;
-}
-nav a {
-  color: var(--text-color); font-weight:bold;
-  text-decoration:none; transition:0.3s;
-}
-nav a:hover { color: var(--primary-color); }
-
-/* Floating Menu */
-#menuToggle {
-  position: fixed; bottom:20px; left:20px; width:50px; height:50px;
-  background: var(--primary-color); border-radius:50%;
-  display:flex; flex-direction:column; justify-content:center; align-items:center;
-  cursor:pointer; z-index:1001; transition:transform 0.3s ease;
-}
-#menuToggle span { display:block; width:22px; height:2px; background:#000; margin:3px 0; }
-#menuToggle.shifted { transform: translateY(-260px); }
-
-#menu {
-  position: fixed; bottom:0; left:20px; width:260px;
-  background: rgba(0,0,0,0.85);
-  border-radius:12px 12px 0 0;
-  padding:20px; display:flex; flex-direction:column; gap:12px;
-  transform:translateY(100%);
-  transition:transform 0.3s ease;
-  z-index:1000;
-}
-#menu.show { transform:translateY(0); }
-#menu a, #menu div {
-  color: var(--primary-color);
-  font-weight:bold; cursor:pointer;
-  padding:8px 0; text-decoration:none;
-  transition:color 0.3s;
-}
-#menu a:hover, #menu div:hover { color:#fff; }
-
-/* Error Notification */
-.error-notification {
-  position:fixed; top:20px; right:20px;
-  background: var(--error-bg);
-  padding:15px 20px; border-radius:8px;
-  color:#fff; font-weight:bold;
-  opacity:0; pointer-events:none;
-  transition:opacity 0.5s ease;
-  z-index:2000;
-}
-.error-notification.show { opacity:1; pointer-events:auto; }
-
-/* Main Content */
-.container {
-  max-width:1200px;
-  margin:100px auto 50px;
-  padding:0 20px;
-  text-align:center;
-  display:flex; flex-direction:column; align-items:center;
-  gap:30px;
-}
-h1 { font-size:2.5rem; margin-bottom:10px; color:#e6f7ff; }
-p.lead { font-size:1.2rem; opacity:0.9; }
-
-/* Call-to-action Buttons */
-.main-btn {
-  display:inline-block;
-  margin:10px;
-  padding:14px 22px;
-  background: var(--primary-color);
-  color:#000;
-  font-weight:bold;
-  text-align:center;
-  border-radius:12px;
-  text-decoration:none;
-  transition:0.3s;
-}
-.main-btn:hover { opacity:0.85; }
-
-/* Cards */
-.card-grid {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-  gap:20px;
-  width:100%;
-}
-.card {
-  background: var(--card-bg);
-  padding:25px;
-  border-radius:20px;
-  transition:background 0.3s, transform 0.3s;
-  text-align:left;
-  box-shadow:0 4px 12px rgba(0,0,0,0.25);
-}
-.card:hover { background: var(--card-hover-bg); transform:translateY(-6px); }
-.card h2 { color: var(--primary-color); margin-bottom:10px; }
-
-/* FAQ */
-.faq .question {
-  background: var(--faq-question-bg);
-  cursor:pointer; padding:12px;
-  border-radius:8px; margin-bottom:8px;
-  font-weight:bold;
-  transition:background 0.3s;
-}
-.faq .question:hover { background: var(--faq-question-hover); }
-.faq .answer {
-  display:none;
-  padding:12px 15px;
-  background: var(--faq-answer-bg);
-  border-radius:8px;
-  margin-bottom:10px;
-}
-
-/* Footer */
-footer {
-  text-align:center;
-  padding:20px;
-  font-size:0.9rem;
-  opacity:0.85;
-  background: rgba(0,0,0,0.25);
-  border-top:1px solid rgba(255,255,255,0.2);
-  margin-top:50px;
-}
-
-/* Dark Mode */
-body.dark {
-  --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
-  --text-color: #eee;
-  --nav-bg: rgba(30,30,30,0.85);
-  --card-bg: rgba(50,50,50,0.4);
-  --card-hover-bg: rgba(60,60,60,0.6);
-  --faq-question-bg: rgba(50,50,50,0.4);
-  --faq-question-hover: rgba(60,60,60,0.6);
-  --faq-answer-bg: rgba(60,60,60,0.3);
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VoKi – Your Discord Bot</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <!-- Navigation -->
 <nav>
-  <a href="index.html">Home</a>
+  <a href="index.html" class="active">Home</a>
   <a href="team.html">Team</a>
   <a href="tos.html">ToS</a>
 </nav>
@@ -191,15 +29,17 @@ body.dark {
 
 <!-- Main Content -->
 <div class="container">
+  <!-- Hero Section -->
   <h1>Welcome to VoKi</h1>
-  <p class="lead"><strong>Privacy-First AI & Moderation Bot</strong> — keeping your Discord safe, positive, and secure.</p>
+  <p class="lead"><strong>Privacy‑First AI & Moderation Bot</strong> — keeping your Discord safe, positive, and secure.</p>
 
-  <!-- Centered Invite & Join Buttons -->
+  <!-- Call-to-action Buttons -->
   <div style="display:flex; justify-content:center; gap:15px; margin-bottom:30px;">
     <a class="main-btn" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank">Invite VoKi</a>
     <a class="main-btn" href="https://discord.gg/PKWJuRrgUd" target="_blank">Join Server</a>
   </div>
 
+  <!-- Feature Cards -->
   <div class="card-grid">
     <div class="card">
       <h2>Why Choose VoKi?</h2>
@@ -223,18 +63,23 @@ body.dark {
     </div>
   </div>
 
+  <!-- FAQ Section -->
   <div class="card faq">
     <h2>FAQ</h2>
     <div class="question">How do I add VoKi to my server?</div>
-    <div class="answer">Currently, adding VoKi requires the website dashboard or admin assistance.</div>
+    <div class="answer">Use the “Invite VoKi” button above to authorize the bot into your server.</div>
     <div class="question">Is my data safe with VoKi?</div>
-    <div class="answer">Yes, VoKi only logs data locally in your server.</div>
+    <div class="answer">Yes, VoKi only logs data locally in your server and never shares it externally.</div>
+    <div class="question">Does VoKi replace human moderators?</div>
+    <div class="answer">No, VoKi assists moderators with AI tools but final judgment is always human‑led.</div>
   </div>
 
+  <!-- Contact Section -->
   <div class="card">
     <h2>Contact & Support</h2>
     <ul>
       <li>Email: <a href="mailto:VoKi.io@outlook.com" style="color: var(--primary-color);">VoKi.io@outlook.com</a></li>
+      <li>Discord: <a href="https://discord.gg/PKWJuRrgUd" target="_blank" style="color: var(--primary-color);">Join our Support Server</a></li>
     </ul>
   </div>
 </div>
@@ -242,8 +87,9 @@ body.dark {
 <!-- Footer -->
 <footer>© 2025 VoKi — Building smarter communities together.</footer>
 
+<script src="script.js"></script>
 <script>
-// Menu toggle
+// Floating menu toggle
 const menuToggle = document.getElementById('menuToggle');
 const menu = document.getElementById('menu');
 menuToggle.addEventListener('click', () => {
