@@ -1,33 +1,35 @@
 import express from "express";
-import cors from "cors";
 import fetch from "node-fetch";
 
 const app = express();
-app.use(cors());
 app.use(express.json());
 
-app.post("/chat", async (req, res) => {
-  const userMsg = req.body.message || "";
-  try {
-    const response = await fetch("http://localhost:11434/api/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "llama3",  // change model if desired
-        prompt: `You are a friendly, motivational AI that helps users debug and understand their Kite.onl setups. ${userMsg}`,
-      }),
-    });
+// Replace with a real AI API endpoint (OpenAI, Anthropic, etc.)
+const AI_ENDPOINT = "https://api.openai.com/v1/chat/completions";
+const API_KEY = process.env.OPENAI_API_KEY;
 
-    const data = await response.text();
-    // Ollama streams responses line-by-line, so we take the last JSON line
-    const lines = data.trim().split("\n");
-    const last = JSON.parse(lines[lines.length - 1]);
-    res.json({ reply: last.response || "Sorry, I couldn't generate a response." });
+app.post("/chat", async (req, res) => {
+  try {
+    const response = await fetch(AI_ENDPOINT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${API_KEY}`
+      },
+      body: JSON.stringify({
+        model: "gpt-4o-mini",
+        messages: [
+          { role: "system", content: "You are an assistant that answers questions about kite.onl." },
+          { role: "user", content: req.body.message }
+        ]
+      })
+    });
+    const data = await response.json();
+    res.json({ reply: data.choices[0].message.content });
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ reply: "There was an error connecting to the AI." });
+    res.status(500).json({ error: err.message });
   }
 });
 
-app.listen(3000, () => console.log("✅ Server running on http://localhost:3000"));
+app.listen(3000, () => console.log("AI backend running on http://localhost:3000"));
 
