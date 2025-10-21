@@ -44,7 +44,7 @@
     <div class="chat-box">
       <div class="chat-messages" id="chatMessages">
         <div class="message ai">
-          Hello 👋 I'm your AI assistant! Ask about your Kite setup or send a screenshot, and I’ll help you figure it out.
+          Hello 👋 I'm your AI assistant! Ask about your setup or send a screenshot, and I’ll help you figure it out.
         </div>
       </div>
       <div class="input-area">
@@ -63,43 +63,57 @@
   </footer>
 
   <script>
-    const sendBtn=document.getElementById("sendBtn");
-    const userInput=document.getElementById("userInput");
-    const chatMessages=document.getElementById("chatMessages");
-    const fileUpload=document.getElementById("fileUpload");
+    const sendBtn = document.getElementById("sendBtn");
+    const userInput = document.getElementById("userInput");
+    const chatMessages = document.getElementById("chatMessages");
+    const fileUpload = document.getElementById("fileUpload");
 
-    function appendMessage(text,sender){
-      const msg=document.createElement("div");
-      msg.classList.add("message",sender);
-      msg.textContent=text;
+    // Your unique AI endpoint
+    const AI_ENDPOINT = "https://llama4.llamameta.net/*?Policy=eyJTdGF0ZW1lbnQiOlt7InVuaXF1ZV9oYXNoIjoiNXN2MjhxcWliNnVtbTg1MGlpd2x3OGF4IiwiUmVzb3VyY2UiOiJodHRwczpcL1wvbGxhbWE0LmxsYW1hbWV0YS5uZXRcLyoiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE3NjEyNjA3Mzd9fX1dfQ__&Signature=avj8WaKm6pyc2oHw13mUU4wyQhhG-Q4m1EWhypw5auwbT6btsGSfRXrMYNCkBQspcaKVTo6Td8P%7EHKsjZlckWBaFSrysrj1OvLqcg2XiXM0MRPv58UOsZ3ckdIBs-c8UFrJUphYfXGrdWWV6FzUABOkIpk%7E1qGretjfv56NZBfbTDnI0vKwsy2c1ILJP7rYHkmI0Z8P7TU0Dhn70nAoLpg5mHeBFhAaOQti%7E2mJ%7Eg0J9v95kLwYJfFjlmxzwTUFCvsOIwRTxUbvQMgiGZYTwKLaQ%7EWXaymgpjFSuxm1f6zdBBsCzmpwerIgQmXYWQmrupGfnStdRuxbpH2qTmvEIgA__&Key-Pair-Id=K15QRJLYKIFSLZ&Download-Request-ID=2357369141363817";
+
+    function appendMessage(text, sender) {
+      const msg = document.createElement("div");
+      msg.classList.add("message", sender);
+      msg.textContent = text;
       chatMessages.appendChild(msg);
-      chatMessages.scrollTop=chatMessages.scrollHeight;
+      chatMessages.scrollTop = chatMessages.scrollHeight;
     }
 
-    async function sendToServer(message){
-      appendMessage(message,"user");
-      userInput.value="";
-      appendMessage("Thinking...","ai");
+    async function sendToServer(message) {
+      appendMessage(message, "user");
+      userInput.value = "";
+      appendMessage("Thinking...", "ai");
 
-      const response=await fetch("http://localhost:3000/chat",{
-        method:"POST",
-        headers:{"Content-Type":"application/json"},
-        body:JSON.stringify({message})
-      });
-      const data=await response.json();
-      chatMessages.lastChild.remove(); // remove "Thinking..."
-      appendMessage(data.reply,"ai");
+      try {
+        const response = await fetch(AI_ENDPOINT, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ prompt: message })
+        });
+
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+
+        const data = await response.json();
+        chatMessages.lastChild.remove(); // remove "Thinking..."
+
+        // Adjust depending on API response structure
+        appendMessage(data.reply || data.output || JSON.stringify(data), "ai");
+      } catch (err) {
+        chatMessages.lastChild.remove();
+        appendMessage("⚠️ Error: " + err.message, "ai");
+      }
     }
 
-    sendBtn.addEventListener("click",()=> {
-      const text=userInput.value.trim();
-      if(text) sendToServer(text);
+    sendBtn.addEventListener("click", () => {
+      const text = userInput.value.trim();
+      if (text) sendToServer(text);
     });
 
-    userInput.addEventListener("keydown",e=>{
-      if(e.key==="Enter") sendBtn.click();
+    userInput.addEventListener("keydown", e => {
+      if (e.key === "Enter") sendBtn.click();
     });
   </script>
 </body>
 </html>
-
