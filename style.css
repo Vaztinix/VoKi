@@ -1,9 +1,27 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
+/* ===== Root Theme Variables ===== */
+:root {
+  --primary-color: #aeefff;
+  --text-color: #fff;
+  --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
+  --sidebar-bg: rgba(0, 0, 0, 0.7);
+  --card-bg: rgba(255, 255, 255, 0.08);
+  --dark-bg: #0a1a2f;
+  --dark-card: #1f2e44;
+  --dark-text: #d3d3d3;
 }
 
+/* ===== Global ===== */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  line-height: 1.6;
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  scroll-behavior: smooth;
+  transition: background 0.5s, color 0.5s;
+}
+
+/* ===== Top Navbar (Home + Team) ===== */
 header {
   background: #222;
   color: #fff;
@@ -37,6 +55,7 @@ header {
   border: none;
   font-size: 24px;
   color: #fff;
+  cursor: pointer;
 }
 
 .hero {
@@ -52,8 +71,162 @@ footer {
   margin-top: 20px;
 }
 
-/* Mobile */
+/* ===== Sidebar (ToS Page) ===== */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100%;
+  background: var(--sidebar-bg);
+  backdrop-filter: blur(8px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.2);
+  overflow-y: auto;
+}
+
+.sidebar * {
+  color: white !important;
+}
+
+.sidebar h2 {
+  color: var(--primary-color) !important;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+  align-self: center;
+}
+
+.sidebar a {
+  text-decoration: none;
+  padding: 10px 15px;
+  width: 100%;
+  border-radius: 10px;
+  transition: background 0.3s, color 0.3s;
+  font-weight: bold;
+  display: block;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+  background: var(--primary-color);
+  color: #222 !important;
+}
+
+.sidebar input {
+  width: 90%;
+  margin: 10px auto 20px;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  text-align: center;
+}
+
+.toggle-btn {
+  margin-top: auto;
+  padding: 10px 15px;
+  border: 1px solid var(--primary-color);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: background 0.3s;
+  align-self: center;
+}
+
+.toggle-btn:hover {
+  background: var(--primary-color);
+  color: #222 !important;
+}
+
+/* ===== Container (ToS Content) ===== */
+.container {
+  margin-left: 270px;
+  padding: 50px 40px;
+  width: calc(100% - 300px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container-content {
+  max-width: 900px;
+  background: var(--card-bg);
+  padding: 40px;
+  border-radius: 15px;
+  backdrop-filter: blur(6px);
+  transition: background 0.3s;
+}
+
+.container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #e6f7ff;
+}
+.container h2 {
+  margin-top: 30px;
+  color: var(--primary-color);
+}
+.container h3 {
+  margin-top: 20px;
+  color: #bdefff;
+}
+.container p {
+  margin-bottom: 15px;
+}
+.container ul {
+  margin-left: 25px;
+  margin-bottom: 15px;
+}
+.container li {
+  margin-bottom: 10px;
+}
+
+.container footer {
+  text-align: center;
+  padding: 20px;
+  font-size: 0.9rem;
+  opacity: 0.85;
+  background: rgba(0, 0, 0, 0.25);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 50px;
+  border-radius: 10px;
+}
+
+/* ===== Light Mode ===== */
+body.light {
+  --text-color: #333;
+  --sidebar-bg: rgba(255, 255, 255, 0.8);
+  --bg-gradient: linear-gradient(to bottom right, #dbe9ff, #f2e4ff);
+}
+
+body.light a,
+body.light .toggle-btn {
+  color: #222;
+}
+body.light .sidebar a:hover {
+  background: #4facfe;
+  color: #fff !important;
+}
+
+/* ===== Dark Mode ===== */
+body.dark {
+  background: var(--dark-bg);
+  color: var(--dark-text);
+}
+body.dark .container-content {
+  background: var(--dark-card);
+}
+body.dark .sidebar {
+  background: rgba(15, 25, 40, 0.9);
+}
+
+/* ===== Responsive ===== */
 @media (max-width: 768px) {
+  /* Navbar collapse */
   .nav-links {
     display: none;
     flex-direction: column;
@@ -69,13 +242,13 @@ footer {
   .menu-toggle {
     display: block;
   }
-}
-/* Mobile sidebar */
-@media (max-width: 768px) {
+
+  /* Sidebar collapse */
   .sidebar {
     position: fixed;
     left: -260px;
     transition: left 0.3s;
+    z-index: 1000;
   }
   body.sidebar-open .sidebar {
     left: 0;
