@@ -12,3 +12,10 @@ document.querySelectorAll('a').forEach(link => {
     alert(`Oops! The page ${link.href} could not be loaded.`);
   });
 });
+// Sidebar toggle for mobile
+const sidebar = document.querySelector('.sidebar');
+const toggleBtn = document.querySelector('.toggle-btn');
+
+toggleBtn.addEventListener('click', () => {
+  document.body.classList.toggle('sidebar-open');
+});
