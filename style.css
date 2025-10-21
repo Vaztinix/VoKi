@@ -70,3 +70,19 @@ footer {
     display: block;
   }
 }
+/* Mobile sidebar */
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: -260px;
+    transition: left 0.3s;
+  }
+  body.sidebar-open .sidebar {
+    left: 0;
+  }
+  .container {
+    margin-left: 0;
+    width: 100%;
+    padding: 20px;
+  }
+}
