@@ -6,10 +6,9 @@
   <title>VoKi – Team & Sponsors</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    /* Extra styling for team page */
     .team-hero {
       text-align: center;
-      margin-top: 100px;
+      margin-top: 60px;
       margin-bottom: 40px;
     }
     .team-hero img {
@@ -56,23 +55,16 @@
     }
   </style>
 </head>
-<body>
+<body class="dark">
 
-<!-- Navigation -->
-<nav>
+<!-- Sidebar -->
+<div class="sidebar">
+  <h2>VoKi</h2>
   <a href="index.html">Home</a>
   <a href="team.html" class="active">Team</a>
-  <a href="tos.html">ToS</a>
-</nav>
-
-<!-- Floating Menu -->
-<div id="menuToggle"><span></span><span></span><span></span></div>
-<div id="menu">
-  <a href="index.html">Home</a>
-  <a href="team.html">Team</a>
   <a href="tos.html">Terms of Service</a>
   <div id="themeToggle">Toggle Theme</div>
-  <a href="#" id="discordLogin">Login with Discord</a>
+  <div id="discordLogin">Login with Discord</div>
 </div>
 
 <div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
@@ -96,7 +88,7 @@
       <p>Creator of VoKi, leading development and vision for AI‑driven moderation and community tools.</p>
     </div>
 
-    <!-- Example Sponsor Card -->
+    <!-- Sponsor Card -->
     <div class="team-card">
       <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi Sponsor Logo">
       <h3>Our Sponsors</h3>
@@ -104,21 +96,12 @@
       <p>Organizations and communities that support VoKi’s mission to keep Discord safe and engaging.</p>
     </div>
   </div>
-</div>
 
-<!-- Footer -->
-<footer>© 2025 VoKi — Building smarter communities together.</footer>
+  <footer>© 2025 VoKi — Building smarter communities together.</footer>
+</div>
 
 <script src="script.js"></script>
 <script>
-// Floating menu toggle
-const menuToggle = document.getElementById('menuToggle');
-const menu = document.getElementById('menu');
-menuToggle.addEventListener('click', () => {
-  menu.classList.toggle('show');
-  menuToggle.classList.toggle('shifted');
-});
-
 // Theme toggle
 const themeToggle = document.getElementById('themeToggle');
 const body = document.body;
@@ -129,7 +112,7 @@ themeToggle.addEventListener('click', () => {
   localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
 });
 
-// Login placeholder
+// Login placeholder popup
 const discordLogin = document.getElementById('discordLogin');
 const errorNotification = document.getElementById('errorNotification');
 discordLogin.addEventListener('click', e => {
