@@ -1,106 +1,143 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>VoKi – Team Blocked</title>
-<style>
-/* Reset & global */
-body, html {
-  margin: 0;
-  padding: 0;
-  font-family: 'Segoe UI', sans-serif;
-  height: 100%;
-  background: linear-gradient(to bottom right, #4facfe, #8e44ad);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Overlay container */
-.overlay-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 25px;
-  background: rgba(0,0,0,0.7);
-  padding: 40px 30px;
-  border-radius: 20px;
-  text-align: center;
-  max-width: 500px;
-  color: #fff;
-}
-
-/* White circle with cross */
-.cross-circle {
-  width: 100px;
-  height: 100px;
-  border: 3px solid #fff;
-  border-radius: 50%;
-  font-size: 3rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  line-height: 0;
-  margin-bottom: 10px;
-}
-
-/* Message text */
-.overlay-container p {
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
-/* Navigation links */
-.overlay-container .nav-links {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-top: 15px;
-  width: 100%;
-}
-
-.overlay-container .nav-links a {
-  background: #00c3ff;
-  color: #fff;
-  padding: 12px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: all 0.3s;
-}
-
-.overlay-container .nav-links a:hover {
-  background: #00a3d9;
-  transform: translateY(-2px);
-}
-
-/* Responsive */
-@media (max-width: 480px) {
-  .overlay-container {
-    padding: 30px 20px;
-  }
-  .cross-circle {
-    width: 80px;
-    height: 80px;
-    font-size: 2.5rem;
-  }
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>VoKi – Team & Sponsors</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Extra styling for team page */
+    .team-hero {
+      text-align: center;
+      margin-top: 100px;
+      margin-bottom: 40px;
+    }
+    .team-hero img {
+      width: 120px;
+      height: auto;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+      width: 100%;
+      margin-top: 20px;
+    }
+    .team-card {
+      background: var(--card-bg);
+      padding: 25px;
+      border-radius: 15px;
+      text-align: center;
+      transition: background 0.3s, transform 0.3s;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+    }
+    .team-card:hover {
+      background: var(--card-hover-bg);
+      transform: translateY(-6px);
+    }
+    .team-card img {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-bottom: 15px;
+      border: 3px solid var(--primary-color);
+    }
+    .team-card h3 {
+      margin-bottom: 8px;
+      color: var(--primary-color);
+    }
+    .team-card p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+  </style>
 </head>
 <body>
 
-<div class="overlay-container">
-  <div class="cross-circle">✖</div>
-  <p>This page has been blocked until features have been restored and developed.</p>
-  
-  <!-- Navigation links -->
-  <div class="nav-links">
-    <a href="index.html">Go to Home</a>
-    <a href="tos.html">View Terms of Service</a>
-    <a href="contact.html">Contact Support</a>
+<!-- Navigation -->
+<nav>
+  <a href="index.html">Home</a>
+  <a href="team.html" class="active">Team</a>
+  <a href="tos.html">ToS</a>
+</nav>
+
+<!-- Floating Menu -->
+<div id="menuToggle"><span></span><span></span><span></span></div>
+<div id="menu">
+  <a href="index.html">Home</a>
+  <a href="team.html">Team</a>
+  <a href="tos.html">Terms of Service</a>
+  <div id="themeToggle">Toggle Theme</div>
+  <a href="#" id="discordLogin">Login with Discord</a>
+</div>
+
+<div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
+
+<!-- Main Content -->
+<div class="container">
+  <!-- Hero Section -->
+  <div class="team-hero">
+    <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi Logo">
+    <h1>Meet the VoKi Team</h1>
+    <p class="lead">The people and partners behind VoKi — building smarter, safer communities together.</p>
+  </div>
+
+  <!-- Team Grid -->
+  <div class="team-grid">
+    <!-- Owner Card -->
+    <div class="team-card">
+      <img src="Vaztinix IMG/ReVaztinix.jpeg" alt="Vaztinix">
+      <h3>Vaztinix</h3>
+      <p><strong>Founder & Lead Developer</strong></p>
+      <p>Creator of VoKi, leading development and vision for AI‑driven moderation and community tools.</p>
+    </div>
+
+    <!-- Example Sponsor Card -->
+    <div class="team-card">
+      <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi Sponsor Logo">
+      <h3>Our Sponsors</h3>
+      <p><strong>Supporting Partners</strong></p>
+      <p>Organizations and communities that support VoKi’s mission to keep Discord safe and engaging.</p>
+    </div>
   </div>
 </div>
+
+<!-- Footer -->
+<footer>© 2025 VoKi — Building smarter communities together.</footer>
+
+<script src="script.js"></script>
+<script>
+// Floating menu toggle
+const menuToggle = document.getElementById('menuToggle');
+const menu = document.getElementById('menu');
+menuToggle.addEventListener('click', () => {
+  menu.classList.toggle('show');
+  menuToggle.classList.toggle('shifted');
+});
+
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+const body = document.body;
+const savedTheme = localStorage.getItem('theme');
+if(savedTheme) body.classList.toggle('dark', savedTheme === 'dark');
+themeToggle.addEventListener('click', () => {
+  body.classList.toggle('dark');
+  localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+});
+
+// Login placeholder
+const discordLogin = document.getElementById('discordLogin');
+const errorNotification = document.getElementById('errorNotification');
+discordLogin.addEventListener('click', e => {
+  e.preventDefault();
+  errorNotification.classList.add('show');
+  setTimeout(() => errorNotification.classList.remove('show'), 4000);
+});
+</script>
 
 </body>
 </html>
