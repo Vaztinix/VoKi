@@ -1,77 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Roboto, sans-serif;
-      color: #f5f5f5;
-      background: linear-gradient(135deg, #1e1e90 0%, #8e2de2 100%);
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-    header {
-      text-align: center;
-      padding: 1.5rem;
-      font-size: 2rem;
-      font-weight: bold;
-      background: rgba(0,0,0,0.5);
-      color: #ffffff;
-    }
-    main {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 1rem;
-    }
-    .chat-box {
-      background: rgba(0,0,0,.4);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 1rem;
-      width: 100%;
-      max-width: 900px;
-      height: 80vh;
-      box-shadow: 0 4px 20px rgba(0,0,0,.4);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    .chat-messages {
-      flex: 1;
-      overflow: hidden;
-    }
-    iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      font-size: .9rem;
-      background: rgba(0,0,0,.5);
-      border-top: 1px solid rgba(255,255,255,.15);
-    }
-    footer a {
-      color: #a5c9ff;
-      text-decoration: none;
-      margin: 0 .5rem;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>VoKi AI Assistant</title>
+<style>
+  :root {
+    --primary-color: #a5c9ff;
+    --menu-bg: rgba(0,0,0,0.85);
+    --transition-speed: 0.3s;
+    --menu-width: 220px;
+  }
+
+  body {
+    margin: 0;
+    font-family: "Segoe UI", Roboto, sans-serif;
+    color: #f5f5f5;
+    background: linear-gradient(135deg, #1e1e90 0%, #8e2de2 100%);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Header with menu button */
+  header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+  }
+
+  .menu-button {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    background: var(--primary-color);
+    color: #000;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.3s;
+  }
+  .menu-button:hover { transform: scale(1.05); }
+
+  /* Slide-in menu */
+  nav {
+    position: fixed;
+    top: 0;
+    left: -var(--menu-width);
+    width: var(--menu-width);
+    height: 100%;
+    background: var(--menu-bg);
+    display: flex;
+    flex-direction: column;
+    padding-top: 4rem;
+    gap: 1rem;
+    transition: left var(--transition-speed) ease;
+    z-index: 1000;
+  }
+  nav a {
+    color: var(--primary-color);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: background 0.3s;
+  }
+  nav a:hover {
+    background: var(--primary-color);
+    color: #000;
+    border-radius: 4px;
+  }
+  nav.open { left: 0; }
+
+  /* Main layout */
+  main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .chat-box {
+    background: rgba(0,0,0,.4);
+    backdrop-filter: blur(6px);
+    border: 1px solid rgba(255,255,255,.1);
+    border-radius: 1rem;
+    width: 100%;
+    max-width: 900px;
+    height: 80vh;
+    box-shadow: 0 4px 20px rgba(0,0,0,.4);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-messages { flex: 1; overflow: hidden; }
+
+  iframe { width: 100%; height: 100%; border: none; }
+
+  footer {
+    text-align: center;
+    padding: 1rem;
+    font-size: .9rem;
+    background: rgba(0,0,0,.5);
+    border-top: 1px solid rgba(255,255,255,.15);
+  }
+  footer a { color: var(--primary-color); text-decoration: none; margin: 0 .5rem; }
+</style>
 </head>
 <body>
-  <header>VoKi AI Assistant</header>
+  <header>
+    VoKi AI Assistant
+    <button class="menu-button" id="menuBtn">☰ Menu</button>
+  </header>
+
+  <nav id="sideMenu">
+    <a href="index.html">Home</a>
+    <a href="team.html">Team & Sponsors</a>
+    <a href="tos.html">Terms of Service</a>
+    <a href="support.html">Support</a>
+  </nav>
 
   <main>
     <div class="chat-box">
       <div class="chat-messages">
-        <!-- VoKi LiveChatAI iframe embed -->
         <iframe
           src="https://app.livechatai.com/aibot-iframe/cmhfv20al0001jr04y2933u0w"
           allow="microphone">
@@ -83,5 +139,15 @@
   <footer>
     <p>Created by <strong>@vaztinix</strong> — This site is <em>officially affiliated</em> with Discord | VoKi AI & Moderation.</p>
   </footer>
+
+<script>
+  const menuBtn = document.getElementById('menuBtn');
+  const sideMenu = document.getElementById('sideMenu');
+
+  menuBtn.addEventListener('click', () => {
+    sideMenu.classList.toggle('open');
+  });
+</script>
 </body>
 </html>
+
