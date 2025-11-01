@@ -72,10 +72,11 @@
 
     nav {
       display: flex;
+      align-items: center;
       gap: 1rem;
     }
 
-    nav a, nav div {
+    nav a {
       color: var(--primary);
       text-decoration: none;
       font-weight: bold;
@@ -85,9 +86,28 @@
       cursor: pointer;
     }
 
-    nav a:hover, nav div:hover {
+    nav a:hover {
       background: var(--primary);
       color: #000;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .separator {
+      width: 2px;
+      height: 24px;
+      background: var(--primary);
+      opacity: 0.6;
+    }
+
+    #themeToggle img {
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
     }
 
     .container {
@@ -166,8 +186,9 @@
 
     .error-notification {
       position: fixed;
-      top: 20px;
-      right: 20px;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
       background: var(--error-bg);
       padding: 15px 20px;
       border-radius: 8px;
@@ -176,6 +197,7 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.4s;
+      z-index: 1500;
     }
 
     .error-notification.show {
@@ -242,6 +264,11 @@
       h1 {
         font-size: 2rem;
       }
+
+      .nav-right {
+        width: 100%;
+        justify-content: flex-start;
+      }
     }
   </style>
 </head>
@@ -257,8 +284,11 @@
     <a href="#features">Features</a>
     <a href="#commands">Commands</a>
     <a href="#update">Update</a>
-    <div id="themeToggle">Toggle Theme</div>
-    <div id="loginBtn">Login</div>
+    <div class="nav-right">
+      <div id="themeToggle"><img src="moon-star-icon.png" alt="Toggle Theme"></div>
+      <div class="separator"></div>
+      <div id="loginBtn">Login</div>
+    </div>
   </nav>
 </header>
 
@@ -369,11 +399,7 @@
   const menuToggle = document.getElementById('menuToggle');
   const menuItems = document.getElementById('menuItems');
   menuToggle.addEventListener('click', () => {
-    if (menuItems.style.display === 'flex') {
-      menuItems.style.display = 'none';
-    } else {
-      menuItems.style.display = 'flex';
-    }
+    menuItems.style.display = menuItems.style.display === 'flex' ? 'none' : 'flex';
   });
 </script>
 
