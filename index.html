@@ -4,6 +4,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VoKi – Your Discord Bot</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="voki-logo.png" />
+
+  <!-- Embed Preview (Open Graph + Twitter) -->
+  <meta property="og:title" content="VoKi – Your Discord Bot" />
+  <meta property="og:description" content="Privacy-first moderation bot for Discord servers. Invite VoKi and keep your community safe." />
+  <meta property="og:image" content="https://yourdomain.com/voki-logo.png" />
+  <meta property="og:url" content="https://yourdomain.com/" />
+  <meta property="og:type" content="website" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="VoKi – Your Discord Bot" />
+  <meta name="twitter:description" content="Privacy-first moderation bot for Discord servers." />
+  <meta name="twitter:image" content="https://yourdomain.com/voki-logo.png" />
+
   <style>
     :root {
       --primary-color: #aeefff;
@@ -35,7 +50,19 @@
       z-index: 1000;
     }
 
-    header h2 {
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-title img {
+      height: 40px;
+      width: 40px;
+      border-radius: 8px;
+    }
+
+    .logo-title h2 {
       margin: 0;
       font-size: 1.5rem;
       color: var(--primary-color);
@@ -190,7 +217,10 @@
 <body>
 
 <header>
-  <h2>VoKi</h2>
+  <div class="logo-title">
+    <img src="voki-logo.png" alt="VoKi Logo">
+    <h2>VoKi</h2>
+  </div>
   <nav>
     <a href="index.html">Home</a>
     <a href="team.html">Team</a>
@@ -222,28 +252,4 @@
   <h2 style="margin-top:50px; color:var(--primary-color);">New Features</h2>
   <div class="card-grid">
     <div class="card"><h2>Command Logging</h2><p>Track command usage across your server.</p></div>
-    <div class="card"><h2>Activity Logging</h2><p>Monitor member activity privately.</p></div>
-    <div class="card"><h2>Feature Customization</h2><p>Fully supports personal settings.</p></div>
-    <div class="card"><h2>Media Integration</h2><p>Built‑in media moderation tools.</p></div>
-  </div>
-
-  <footer>© 2025 VoKi — Building smarter communities together.</footer>
-</div>
-
-<script>
-// Theme toggle
-const themeToggle = document.getElementById('themeToggle');
-const body = document.body;
-const savedTheme = localStorage.getItem('theme');
-if(savedTheme) body.classList.toggle('dark', savedTheme === 'dark');
-themeToggle.addEventListener('click', () => {
-  body.classList.toggle('dark');
-  localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
-});
-
-// Login placeholder popup
-const discordLogin = document.getElementById('discordLogin');
-discordLogin.addEventListener('click', () => {
-  const errorBox = document.getElementById('errorNotification');
-  errorBox.classList.add('show');
-  setTimeout(() => errorBox.classList.remove('show'), 3000);
+    <div class="card"><h2>Activity Logging</h2><p>Monitor member activity privately.</p></div
