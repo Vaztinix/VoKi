@@ -21,24 +21,27 @@
 
   <style>
     :root {
-      --primary-color: #aeefff;
-      --text-color: #fff;
+      --primary: #aeefff;
+      --accent: #6dc8ff;
       --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
-      --sidebar-bg: rgba(0,0,0,0.85);
-      --card-bg: rgba(255,255,255,0.08);
-      --card-hover: rgba(255,255,255,0.15);
+      --bg-dark: linear-gradient(to bottom right, #141e30, #243b55);
+      --text: #ffffff;
+      --card: rgba(255,255,255,0.08);
+      --card-hover: rgba(255,255,255,0.18);
+      --sidebar: rgba(0,0,0,0.85);
     }
 
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
       background: var(--bg-gradient);
-      color: var(--text-color);
+      color: var(--text);
       scroll-behavior: smooth;
+      transition: background 0.5s;
     }
 
     header {
-      background: var(--sidebar-bg);
+      background: var(--sidebar);
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
@@ -63,7 +66,7 @@
     .logo-title h2 {
       margin: 0;
       font-size: 1.5rem;
-      color: var(--primary-color);
+      color: var(--primary);
     }
 
     nav {
@@ -72,17 +75,17 @@
     }
 
     nav a, nav div {
-      color: var(--primary-color);
+      color: var(--primary);
       text-decoration: none;
       font-weight: bold;
       padding: 0.5rem 1rem;
       border-radius: 8px;
-      transition: background 0.3s;
+      transition: all 0.3s ease;
       cursor: pointer;
     }
 
     nav a:hover, nav div:hover {
-      background: var(--primary-color);
+      background: var(--primary);
       color: #000;
     }
 
@@ -92,7 +95,7 @@
       left: 0;
       width: 250px;
       height: calc(100% - 80px);
-      background: var(--sidebar-bg);
+      background: var(--sidebar);
       padding: 20px;
       overflow-y: auto;
       border-right: 1px solid rgba(255,255,255,0.15);
@@ -100,13 +103,13 @@
 
     .sidebar h3 {
       text-align: center;
-      color: var(--primary-color);
+      color: var(--primary);
       margin-bottom: 10px;
     }
 
     .sidebar a, .sidebar button {
       display: block;
-      color: var(--primary-color);
+      color: var(--primary);
       text-decoration: none;
       padding: 10px;
       margin: 5px 0;
@@ -118,7 +121,7 @@
     }
 
     .sidebar a:hover, .sidebar button:hover {
-      background: var(--primary-color);
+      background: var(--primary);
       color: #000;
     }
 
@@ -128,13 +131,13 @@
     }
 
     h1 {
-      color: var(--primary-color);
+      color: var(--primary);
       margin-bottom: 1rem;
       font-size: 2rem;
     }
 
     h2 {
-      color: var(--primary-color);
+      color: var(--primary);
       margin-top: 2rem;
     }
 
@@ -153,6 +156,51 @@
       font-size: 0.9rem;
       opacity: 0.8;
       margin-top: 60px;
+    }
+
+    /* Floating Menu */
+    #floatingMenu {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 2000;
+    }
+
+    #menuToggle {
+      width: 60px;
+      height: 60px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 30px;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    #menuItems {
+      display: none;
+      flex-direction: column;
+      margin-top: 10px;
+      gap: 10px;
+    }
+
+    .menu-item {
+      background: var(--card);
+      padding: 10px 15px;
+      border-radius: 25px;
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      transition: transform 0.3s, opacity 0.3s;
+    }
+
+    .menu-item:hover {
+      transform: translateY(-3px);
+      opacity: 0.9;
+      background: var(--card-hover);
     }
 
     @media (max-width: 900px) {
@@ -267,12 +315,24 @@
   </ul>
 
   <h2 id="support">10. Support</h2>
-  <p>Need help or have concerns? Visit our <a href="https://discord.gg/PKWJuRrgUd" target="_blank" style="color: var(--primary-color);">support server</a> for assistance.</p>
+  <p>Need help or have concerns? Visit our <a href="https://discord.gg/PKWJuRrgUd" target="_blank" style="color: var(--primary);">support server</a> for assistance.</p>
 </div>
 
 <footer>
   <p>© 2025 VoKi • Privacy-First Moderation for Discord</p>
 </footer>
+
+<!-- Floating Menu -->
+<div id="floatingMenu">
+  <div id="menuToggle">☰</div>
+  <div id="menuItems">
+    <a class="menu-item" href="index.html">Home</a>
+    <a class="menu-item" href="team.html">Team</a>
+    <a class="menu-item" href="AI.html">VoKi AI</a>
+    <a class="menu-item" href="ai-helper.html">Kite AI</a>
+    <a class="menu-item" href="tos.html">Legal</a>
+  </div>
+</div>
 
 <script>
   const themeToggle = document.getElementById('themeToggle');
@@ -283,6 +343,16 @@
   const discordLogin = document.getElementById('discordLogin');
   discordLogin.addEventListener('click', () => {
     alert("🔐 Discord login is coming soon!");
+  });
+
+  const menuToggle = document.getElementById('menuToggle');
+  const menuItems = document.getElementById('menuItems');
+  menuToggle.addEventListener('click', () => {
+    if (menuItems.style.display === 'flex') {
+      menuItems.style.display = 'none';
+    } else {
+      menuItems.style.display = 'flex';
+    }
   });
 </script>
 
