@@ -4,8 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VoKi – Terms of Service & Privacy Policy</title>
-
-  <!-- Favicon -->
   <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
 
   <meta property="og:title" content="VoKi – Terms of Service & Privacy Policy">
@@ -21,23 +19,25 @@
   <style>
     :root {
       --primary: #aeefff;
+      --accent: #6dc8ff;
       --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
-      --sidebar-bg: rgba(0,0,0,0.85);
-      --card-bg: rgba(255,255,255,0.08);
+      --bg-dark: linear-gradient(to bottom right, #141e30, #243b55);
+      --text: #ffffff;
+      --card: rgba(255,255,255,0.08);
       --card-hover: rgba(255,255,255,0.18);
-      --text-color: #fff;
+      --sidebar: rgba(0,0,0,0.85);
     }
 
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
       background: var(--bg-gradient);
-      color: var(--text-color);
+      color: var(--text);
       scroll-behavior: smooth;
     }
 
     header {
-      background: var(--sidebar-bg);
+      background: var(--sidebar);
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
@@ -91,7 +91,7 @@
       left: 0;
       width: 250px;
       height: calc(100% - 80px);
-      background: var(--sidebar-bg);
+      background: var(--sidebar);
       padding: 20px;
       overflow-y: auto;
       border-right: 1px solid rgba(255,255,255,0.15);
@@ -121,22 +121,40 @@
     .container {
       margin-left: 280px;
       padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      transition: background 0.3s, transform 0.3s;
+    }
+
+    .card:hover {
+      background: var(--card-hover);
+      transform: translateY(-3px);
     }
 
     h1 {
       color: var(--primary);
       margin-bottom: 1rem;
       font-size: 2rem;
+      text-align: center;
     }
 
     h2 {
       color: var(--primary);
-      margin-top: 2rem;
+      margin-bottom: 0.5rem;
     }
 
     p, li {
       color: #f8f8f8;
       opacity: 0.95;
+      line-height: 1.6;
     }
 
     ul {
@@ -151,7 +169,7 @@
       margin-top: 60px;
     }
 
-    /* Floating menu */
+    /* Floating Menu */
     #floatingMenu {
       position: fixed;
       bottom: 20px;
@@ -179,7 +197,7 @@
     }
 
     .menu-item {
-      background: var(--card-bg);
+      background: var(--card);
       padding: 10px 15px;
       border-radius: 25px;
       color: var(--primary);
@@ -248,66 +266,88 @@
 </div>
 
 <div class="container" id="top">
-  <h1>Terms of Service & Privacy Policy</h1>
-  <p>By using VoKi, you agree to these terms and conditions. Please review them carefully to understand your rights and responsibilities while using VoKi and its features.</p>
+  <div class="card">
+    <h1>Terms of Service & Privacy Policy</h1>
+    <p>By using VoKi, you agree to these terms and conditions. Please review them carefully to understand your rights and responsibilities while using VoKi and its features.</p>
+  </div>
 
-  <h2 id="purpose">1. Purpose</h2>
-  <ul>
-    <li>Provide moderation, AI assistance, and reliable community tools for Discord servers.</li>
-    <li>Support server safety, privacy, and responsible automation.</li>
-  </ul>
+  <div class="card" id="purpose">
+    <h2>1. Purpose</h2>
+    <ul>
+      <li>Provide moderation, AI assistance, and reliable community tools for Discord servers.</li>
+      <li>Support server safety, privacy, and responsible automation.</li>
+    </ul>
+  </div>
 
-  <h2 id="responsible">2. Responsible Use</h2>
-  <ul>
-    <li>Users must act respectfully and within the bot’s intended scope.</li>
-    <li>VoKi is not to be used for harassment, data mining, or server disruption.</li>
-    <li>All users must follow Discord’s Terms of Service.</li>
-  </ul>
+  <div class="card" id="responsible">
+    <h2>2. Responsible Use</h2>
+    <ul>
+      <li>Users must act respectfully and within the bot’s intended scope.</li>
+      <li>VoKi is not to be used for harassment, data mining, or server disruption.</li>
+      <li>All users must follow Discord’s Terms of Service.</li>
+    </ul>
+  </div>
 
-  <h2 id="ai">3. AI Features</h2>
-  <ul>
-    <li>AI systems assist moderation and user support but require human oversight.</li>
-    <li>AI decisions can be reviewed and overridden by authorized moderators.</li>
-  </ul>
+  <div class="card" id="ai">
+    <h2>3. AI Features</h2>
+    <ul>
+      <li>AI systems assist moderation and user support but require human oversight.</li>
+      <li>AI decisions can be reviewed and overridden by authorized moderators.</li>
+    </ul>
+  </div>
 
-  <h2 id="privacy">4. Privacy Policy</h2>
-  <ul>
-    <li>VoKi does not collect personal data without user or admin consent.</li>
-    <li>Data stored for moderation or logging is kept secure and private.</li>
-    <li>No data is shared or sold to third parties.</li>
-    <li>Users may request deletion of stored data through server administrators.</li>
-  </ul>
+  <div class="card" id="privacy">
+    <h2>4. Privacy Policy</h2>
+    <ul>
+      <li>VoKi does not collect personal data without user or admin consent.</li>
+      <li>Data stored for moderation or logging is kept secure and private.</li>
+      <li>No data is shared or sold to third parties.</li>
+      <li>Users may request deletion of stored data through server administrators.</li>
+    </ul>
+  </div>
 
-  <h2 id="permissions">5. Permissions</h2>
-  <ul>
-    <li>VoKi requires only the necessary permissions for moderation and automation.</li>
-    <li>Server administrators retain full control over bot access.</li>
-  </ul>
+  <div class="card" id="permissions">
+    <h2>5. Permissions</h2>
+    <ul>
+      <li>VoKi requires only the necessary permissions for moderation and automation.</li>
+      <li>Server administrators retain full control over bot access.</li>
+    </ul>
+  </div>
 
-  <h2 id="guidelines">6. Guidelines</h2>
-  <ul>
-    <li>Respect other users and VoKi’s systems.</li>
-    <li>Report issues, misuse, or bugs responsibly.</li>
-  </ul>
+  <div class="card" id="guidelines">
+    <h2>6. Guidelines</h2>
+    <ul>
+      <li>Respect other users and VoKi’s systems.</li>
+      <li>Report issues, misuse, or bugs responsibly.</li>
+    </ul>
+  </div>
 
-  <h2 id="logging">7. Logging</h2>
-  <ul>
-    <li>Moderation actions may be logged locally within the server for accountability.</li>
-  </ul>
+  <div class="card" id="logging">
+    <h2>7. Logging</h2>
+    <ul>
+      <li>Moderation actions may be logged locally within the server for accountability.</li>
+    </ul>
+  </div>
 
-  <h2 id="security">8. Security</h2>
-  <ul>
-    <li>VoKi employs secure practices and permissions handling.</li>
-    <li>We recommend verifying command access and permissions regularly.</li>
-  </ul>
+  <div class="card" id="security">
+    <h2>8. Security</h2>
+    <ul>
+      <li>VoKi employs secure practices and permissions handling.</li>
+      <li>We recommend verifying command access and permissions regularly.</li>
+    </ul>
+  </div>
 
-  <h2 id="updates">9. Updates</h2>
-  <ul>
-    <li>VoKi may receive updates to improve security, functionality, and AI moderation.</li>
-  </ul>
+  <div class="card" id="updates">
+    <h2>9. Updates</h2>
+    <ul>
+      <li>VoKi may receive updates to improve security, functionality, and AI moderation.</li>
+    </ul>
+  </div>
 
-  <h2 id="support">10. Support</h2>
-  <p>Need help or have concerns? Visit our <a href="https://discord.gg/PKWJuRrgUd" target="_blank" style="color: var(--primary);">support server</a> for assistance.</p>
+  <div class="card" id="support">
+    <h2>10. Support</h2>
+    <p>Need help or have concerns? Visit our <a href="https://discord.gg/PKWJuRrgUd" target="_blank" style="color: var(--primary);">support server</a> for assistance.</p>
+  </div>
 </div>
 
 <footer>
