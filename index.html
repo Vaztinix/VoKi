@@ -285,7 +285,9 @@
     <a href="#commands">Commands</a>
     <a href="#update">Update</a>
     <div class="nav-right">
-      <div id="themeToggle"><img src="VoKi Moon.png" alt="Toggle Theme"></div>
+      <div id="themeToggle">
+        <img id="themeIcon" src="VoKi Moon.png" alt="Toggle Theme">
+      </div>
       <div class="separator"></div>
       <div id="loginBtn">Login</div>
     </div>
@@ -380,6 +382,7 @@
 
 <script>
   const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
   const loginBtn = document.getElementById('loginBtn');
   const errorNote = document.getElementById('errorNotification');
 
@@ -388,7 +391,7 @@
     document.body.style.background = isDark
       ? 'linear-gradient(to bottom right, #141e30, #243b55)'
       : 'linear-gradient(to bottom right, #4facfe, #8e44ad)';
-    themeToggle.querySelector('img').src = isDark ? 'VoKi Sun.png' : 'VoKi Moon.png';
+    themeIcon.src = isDark ? 'VoKi Sun.png' : 'VoKi Moon.png';
   });
 
   loginBtn.addEventListener('click', () => {
@@ -396,7 +399,6 @@
     setTimeout(() => errorNote.classList.remove('show'), 3000);
   });
 
-  // Floating menu toggle
   const menuToggle = document.getElementById('menuToggle');
   const menuItems = document.getElementById('menuItems');
   menuToggle.addEventListener('click', () => {
