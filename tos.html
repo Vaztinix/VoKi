@@ -8,16 +8,16 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
 
-  <!-- Embed Preview -->
-  <meta property="og:title" content="VoKi – Terms of Service & Privacy Policy" />
-  <meta property="og:description" content="Review VoKi's Terms of Service and Privacy Policy to understand how your data is protected." />
-  <meta property="og:image" content="https://yourdomain.com/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
-  <meta property="og:url" content="https://yourdomain.com/tos.html" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="VoKi – Terms of Service & Privacy Policy" />
-  <meta name="twitter:description" content="Review VoKi's Terms of Service and Privacy Policy to understand how your data is protected." />
-  <meta name="twitter:image" content="https://yourdomain.com/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
+  <!-- Meta Embed -->
+  <meta property="og:title" content="VoKi – Terms of Service & Privacy Policy">
+  <meta property="og:description" content="Review VoKi’s Terms of Service and Privacy Policy to understand how your data and privacy are protected.">
+  <meta property="og:image" content="https://yourdomain.com/VoKi%20Logo%20(Updated%20Bot%20Logo).png">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yourdomain.com/tos.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="VoKi – Terms of Service & Privacy Policy">
+  <meta name="twitter:description" content="Review VoKi’s Terms of Service and Privacy Policy to understand how your data is protected.">
+  <meta name="twitter:image" content="https://yourdomain.com/VoKi%20Logo%20(Updated%20Bot%20Logo).png">
 
   <style>
     :root {
@@ -25,14 +25,16 @@
       --text-color: #fff;
       --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
       --sidebar-bg: rgba(0,0,0,0.85);
+      --card-bg: rgba(255,255,255,0.08);
+      --card-hover: rgba(255,255,255,0.15);
     }
 
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
+      font-family: "Segoe UI", Arial, sans-serif;
       background: var(--bg-gradient);
       color: var(--text-color);
-      line-height: 1.6;
+      scroll-behavior: smooth;
     }
 
     header {
@@ -64,36 +66,55 @@
       color: var(--primary-color);
     }
 
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav a, nav div {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      transition: background 0.3s;
+      cursor: pointer;
+    }
+
+    nav a:hover, nav div:hover {
+      background: var(--primary-color);
+      color: #000;
+    }
+
     .sidebar {
       position: fixed;
       top: 80px;
       left: 0;
-      width: 240px;
+      width: 250px;
       height: calc(100% - 80px);
       background: var(--sidebar-bg);
       padding: 20px;
       overflow-y: auto;
+      border-right: 1px solid rgba(255,255,255,0.15);
     }
 
-    .sidebar h2 {
+    .sidebar h3 {
       text-align: center;
       color: var(--primary-color);
-      margin-bottom: 15px;
+      margin-bottom: 10px;
     }
 
-    .sidebar a, .sidebar input, .sidebar button {
+    .sidebar a, .sidebar button {
       display: block;
-      width: 100%;
-      margin: 6px 0;
+      color: var(--primary-color);
+      text-decoration: none;
       padding: 10px;
+      margin: 5px 0;
       border-radius: 8px;
       background: transparent;
-      color: var(--primary-color);
       border: none;
-      font-weight: bold;
-      text-align: center;
-      cursor: pointer;
-      transition: background 0.3s;
+      font-weight: 600;
+      transition: all 0.3s;
     }
 
     .sidebar a:hover, .sidebar button:hover {
@@ -101,139 +122,169 @@
       color: #000;
     }
 
-    .sidebar input {
-      background: rgba(255,255,255,0.1);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.2);
-    }
-
     .container {
-      margin-left: 260px;
+      margin-left: 280px;
       padding: 2rem;
     }
 
-    .container-content h1 {
-      font-size: 2rem;
+    h1 {
+      color: var(--primary-color);
       margin-bottom: 1rem;
-      color: #e6f7ff;
+      font-size: 2rem;
     }
 
     h2 {
-      margin-top: 2rem;
       color: var(--primary-color);
+      margin-top: 2rem;
+    }
+
+    p, li {
+      color: #f8f8f8;
+      opacity: 0.95;
     }
 
     ul {
-      padding-left: 1.2rem;
+      padding-left: 1.5rem;
     }
 
     footer {
       text-align: center;
       padding: 2rem;
       font-size: 0.9rem;
-      opacity: 0.85;
-      margin-top: 50px;
+      opacity: 0.8;
+      margin-top: 60px;
     }
 
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
+    @media (max-width: 900px) {
       .sidebar {
         position: static;
         width: 100%;
         height: auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 1rem;
+        border: none;
       }
 
       .container {
         margin-left: 0;
         padding: 1rem;
       }
+
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
     }
   </style>
 </head>
-<body class="dark">
+<body>
 
-  <header>
-    <div class="logo-title">
-      <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi Logo">
-      <h2>VoKi</h2>
-    </div>
-  </header>
-
-  <div class="sidebar">
-    <h2>Navigation</h2>
-    <input type="text" id="searchBox" placeholder="Search..." onkeyup="searchTerms()">
+<header>
+  <div class="logo-title">
+    <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi Logo">
+    <h2>VoKi</h2>
+  </div>
+  <nav>
     <a href="index.html">Home</a>
     <a href="team.html">Team</a>
-    <a href="tos.html" class="active">Terms & Privacy</a>
-    <hr style="border:0.5px solid rgba(255,255,255,0.2); margin:15px 0;">
-    <a href="#top">Top</a>
-    <a href="#purpose">1. Purpose</a>
-    <a href="#responsible">2. Responsible Use</a>
-    <a href="#ai">3. AI Features</a>
-    <a href="#privacy">4. Privacy Policy</a>
-    <a href="#permissions">5. Permissions</a>
-    <a href="#guidelines">6. Guidelines</a>
-    <a href="#logging">7. Logging</a>
-    <a href="#roblox">8. Integrations</a>
-    <a href="#security">9. Security</a>
-    <a href="#updates">10. Updates</a>
-    <a href="#support">11. Support</a>
-    <button onclick="toggleMode()">Toggle Light/Dark</button>
-  </div>
+    <a href="tos.html" class="active">Terms</a>
+    <a href="AI.html">AI</a>
+    <div id="themeToggle">Toggle Theme</div>
+    <div id="discordLogin">Login</div>
+  </nav>
+</header>
 
-  <div class="container" id="top">
-    <div class="container-content">
-      <h1>Terms of Service (ToS) & Privacy Policy</h1>
-      <p>By using VoKi, you agree to the following terms and policies. These outline how VoKi operates, how data is handled, and the expectations for responsible use.</p>
+<div class="sidebar">
+  <h3>Quick Navigation</h3>
+  <a href="#top">Top</a>
+  <a href="#purpose">1. Purpose</a>
+  <a href="#responsible">2. Responsible Use</a>
+  <a href="#ai">3. AI Features</a>
+  <a href="#privacy">4. Privacy</a>
+  <a href="#permissions">5. Permissions</a>
+  <a href="#guidelines">6. Guidelines</a>
+  <a href="#logging">7. Logging</a>
+  <a href="#security">8. Security</a>
+  <a href="#updates">9. Updates</a>
+  <a href="#support">10. Support</a>
+</div>
 
-      <h2 id="purpose">1. Purpose</h2>
-      <ul>
-        <li>Provide AI-driven moderation and community tools for Discord servers.</li>
-        <li>Support server safety, privacy, and engagement.</li>
-      </ul>
+<div class="container" id="top">
+  <h1>Terms of Service & Privacy Policy</h1>
+  <p>By using VoKi, you agree to these terms and conditions. Please review them carefully to understand your rights and responsibilities while using VoKi and its features.</p>
 
-      <h2 id="responsible">2. Responsible Use</h2>
-      <ul>
-        <li>Use VoKi features respectfully and within intended scope.</li>
-        <li>Do not exploit, abuse, or harass others using VoKi tools.</li>
-        <li>Follow Discord’s Terms of Service in addition to VoKi’s.</li>
-      </ul>
+  <h2 id="purpose">1. Purpose</h2>
+  <ul>
+    <li>Provide moderation, AI assistance, and reliable community tools for Discord servers.</li>
+    <li>Support server safety, privacy, and responsible automation.</li>
+  </ul>
 
-      <h2 id="ai">3. AI Features</h2>
-      <ul>
-        <li>AI assists moderators but does not replace human judgment.</li>
-        <li>AI actions must be reviewed by authorized users.</li>
-      </ul>
+  <h2 id="responsible">2. Responsible Use</h2>
+  <ul>
+    <li>Users must act respectfully and within the bot’s intended scope.</li>
+    <li>VoKi is not to be used for harassment, data mining, or server disruption.</li>
+    <li>All users must follow Discord’s Terms of Service.</li>
+  </ul>
 
-      <h2 id="privacy">4. Privacy Policy</h2>
-      <ul>
-        <li>VoKi does not store personal data unless explicitly configured by server admins.</li>
-        <li>Logs and moderation records are kept private and local to the server.</li>
-        <li>No data is sold or shared with third parties.</li>
-        <li>Users may request deletion of stored data via server admins.</li>
-      </ul>
+  <h2 id="ai">3. AI Features</h2>
+  <ul>
+    <li>AI systems assist moderation and user support but require human oversight.</li>
+    <li>AI decisions can be reviewed and overridden by authorized moderators.</li>
+  </ul>
 
-      <h2 id="permissions">5. Permissions</h2>
-      <ul>
-        <li>VoKi operates based on permissions granted by server admins.</li>
-        <li>Unauthorized users cannot access sensitive features.</li>
-      </ul>
+  <h2 id="privacy">4. Privacy Policy</h2>
+  <ul>
+    <li>VoKi does not collect personal data without user or admin consent.</li>
+    <li>Data stored for moderation or logging is kept secure and private.</li>
+    <li>No data is shared or sold to third parties.</li>
+    <li>Users may request deletion of stored data through server administrators.</li>
+  </ul>
 
-      <h2 id="guidelines">6. Guidelines</h2>
-      <ul>
-        <li>Respect other users and VoKi’s systems.</li>
-        <li>Report bugs or misuse promptly.</li>
-      </ul>
+  <h2 id="permissions">5. Permissions</h2>
+  <ul>
+    <li>VoKi requires only the necessary permissions for moderation and automation.</li>
+    <li>Server administrators retain full control over bot access.</li>
+  </ul>
 
-      <h2 id="logging">7. Logging</h2>
-      <ul>
-        <li>Moderation actions may be logged for accountability.</li>
-        <li>Logs
+  <h2 id="guidelines">6. Guidelines</h2>
+  <ul>
+    <li>Respect other users and VoKi’s systems.</li>
+    <li>Report issues, misuse, or bugs responsibly.</li>
+  </ul>
+
+  <h2 id="logging">7. Logging</h2>
+  <ul>
+    <li>Moderation actions may be logged locally within the server for accountability.</li>
+  </ul>
+
+  <h2 id="security">8. Security</h2>
+  <ul>
+    <li>VoKi employs secure practices and permissions handling.</li>
+    <li>We recommend verifying command access and permissions regularly.</li>
+  </ul>
+
+  <h2 id="updates">9. Updates</h2>
+  <ul>
+    <li>VoKi may receive updates to improve security, functionality, and AI moderation.</li>
+  </ul>
+
+  <h2 id="support">10. Support</h2>
+  <p>Need help or have concerns? Visit our <a href="https://discord.gg/PKWJuRrgUd" target="_blank" style="color: var(--primary-color);">support server</a> for assistance.</p>
+</div>
+
+<footer>
+  <p>© 2025 VoKi • Privacy-First Moderation for Discord</p>
+</footer>
+
+<script>
+  const themeToggle = document.getElementById('themeToggle');
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+  });
+
+  const discordLogin = document.getElementById('discordLogin');
+  discordLogin.addEventListener('click', () => {
+    alert("🔐 Discord login is coming soon!");
+  });
+</script>
+
+</body>
+</html>
