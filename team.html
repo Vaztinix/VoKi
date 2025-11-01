@@ -1,232 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VoKi – Team & Sponsors</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>VoKi – Team & Sponsors</title>
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
+<!-- Favicon -->
+<link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png">
 
-  <!-- Embed Preview -->
-  <meta property="og:title" content="VoKi – Team & Sponsors" />
-  <meta property="og:description" content="Meet the creators and supporters behind VoKi — building smarter, safer Discord communities." />
-  <meta property="og:image" content="https://yourdomain.com/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
-  <meta property="og:url" content="https://yourdomain.com/team.html" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="VoKi – Team & Sponsors" />
-  <meta name="twitter:description" content="Meet the creators and supporters behind VoKi — building smarter, safer Discord communities." />
-  <meta name="twitter:image" content="https://yourdomain.com/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
+<!-- Open Graph & Twitter Embed -->
+<meta property="og:title" content="VoKi – Team & Sponsors">
+<meta property="og:description" content="Meet the creators and supporters behind VoKi — building smarter, safer Discord communities.">
+<meta property="og:image" content="https://yourdomain.com/VoKi%20Logo%20(Updated%20Bot%20Logo).png">
+<meta property="og:url" content="https://yourdomain.com/team.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="VoKi – Team & Sponsors">
+<meta name="twitter:description" content="Meet the creators and supporters behind VoKi — building smarter, safer Discord communities.">
+<meta name="twitter:image" content="https://yourdomain.com/VoKi%20Logo%20(Updated%20Bot%20Logo).png">
 
-  <style>
-    :root {
-      --primary-color: #aeefff;
-      --text-color: #fff;
-      --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
-      --sidebar-bg: rgba(0,0,0,0.85);
-      --card-bg: rgba(255,255,255,0.08);
-      --card-hover-bg: rgba(255,255,255,0.18);
-      --error-bg: rgba(0,0,0,0.9);
-    }
+<style>
+:root {
+  --primary-color: #aeefff;
+  --text-color: #fff;
+  --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
+  --sidebar-bg: rgba(0,0,0,0.85);
+  --card-bg: rgba(255,255,255,0.08);
+  --card-hover-bg: rgba(255,255,255,0.18);
+  --error-bg: rgba(0,0,0,0.9);
+}
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: var(--bg-gradient);
-      color: var(--text-color);
-      line-height: 1.6;
-    }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--bg-gradient);
+  color: var(--text-color);
+  line-height: 1.6;
+  transition: background 0.5s;
+}
 
-    header {
-      background: var(--sidebar-bg);
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+header {
+  background: var(--sidebar-bg);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
-    .logo-title {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+.logo-title { display: flex; align-items: center; gap: 10px; }
+.logo-title img { height: 40px; width: 40px; border-radius: 8px; }
+.logo-title h2 { margin: 0; font-size: 1.5rem; color: var(--primary-color); }
 
-    .logo-title img {
-      height: 40px;
-      width: 40px;
-      border-radius: 8px;
-    }
+.sidebar {
+  position: fixed; top: 80px; left: 0; width: 240px; height: calc(100% - 80px);
+  background: var(--sidebar-bg); padding: 20px; overflow-y: auto;
+}
+.sidebar h2 { text-align: center; color: var(--primary-color); margin-bottom: 15px; }
+.sidebar a, .sidebar div {
+  display: block; width: 100%; margin: 6px 0; padding: 10px;
+  border-radius: 8px; background: transparent; color: var(--primary-color);
+  font-weight: bold; text-align: center; cursor: pointer; transition: background 0.3s;
+}
+.sidebar a:hover, .sidebar div:hover { background: var(--primary-color); color: #000; }
 
-    .logo-title h2 {
-      margin: 0;
-      font-size: 1.5rem;
-      color: var(--primary-color);
-    }
+.container { margin-left: 260px; padding: 2rem; }
+.team-hero { text-align: center; margin-top: 60px; margin-bottom: 40px; }
+.team-hero img { width: 120px; height: auto; border-radius: 50%; margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: transform 0.4s ease; }
+.team-hero img:hover { transform: scale(1.05); }
+.team-hero h1 { font-size: 2rem; margin-bottom: 0.5rem; color: #e6f7ff; }
+.team-hero p.lead { font-size: 1.1rem; opacity: 0.9; }
 
-    .sidebar {
-      position: fixed;
-      top: 80px;
-      left: 0;
-      width: 240px;
-      height: calc(100% - 80px);
-      background: var(--sidebar-bg);
-      padding: 20px;
-      overflow-y: auto;
-    }
+.team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; margin-top: 20px; }
+.team-card {
+  background: var(--card-bg); padding: 25px; border-radius: 15px; text-align: center;
+  transition: background 0.3s, transform 0.3s, box-shadow 0.3s, opacity 0.5s;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  opacity: 0; transform: translateY(20px);
+}
+.team-card.visible { opacity: 1; transform: translateY(0); }
+.team-card:hover { background: var(--card-hover-bg); transform: translateY(-6px); box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
+.team-card img { width: 100px; height: 100px; object-fit: cover; border-radius: 50%; margin-bottom: 15px; border: 3px solid var(--primary-color); }
+.team-card h3 { margin-bottom: 8px; color: var(--primary-color); }
+.team-card p { font-size: 0.95rem; opacity: 0.9; }
 
-    .sidebar h2 {
-      text-align: center;
-      color: var(--primary-color);
-      margin-bottom: 15px;
-    }
+.error-notification {
+  position: fixed; top: 20px; right: 20px; background: var(--error-bg); padding: 15px 20px;
+  border-radius: 8px; color: #fff; font-weight: bold; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 2000;
+}
+.error-notification.show { opacity: 1; pointer-events: auto; }
 
-    .sidebar a, .sidebar div {
-      display: block;
-      width: 100%;
-      margin: 6px 0;
-      padding: 10px;
-      border-radius: 8px;
-      background: transparent;
-      color: var(--primary-color);
-      font-weight: bold;
-      text-align: center;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
+footer { text-align: center; padding: 2rem; font-size: 0.9rem; opacity: 0.85; margin-top: 50px; }
 
-    .sidebar a:hover, .sidebar div:hover {
-      background: var(--primary-color);
-      color: #000;
-    }
-
-    .container {
-      margin-left: 260px;
-      padding: 2rem;
-    }
-
-    .team-hero {
-      text-align: center;
-      margin-top: 60px;
-      margin-bottom: 40px;
-    }
-
-    .team-hero img {
-      width: 120px;
-      height: auto;
-      border-radius: 50%;
-      margin-bottom: 15px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-
-    .team-hero h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-      color: #e6f7ff;
-    }
-
-    .team-hero p.lead {
-      font-size: 1.1rem;
-      opacity: 0.9;
-    }
-
-    .team-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
-      margin-top: 20px;
-    }
-
-    .team-card {
-      background: var(--card-bg);
-      padding: 25px;
-      border-radius: 15px;
-      text-align: center;
-      transition: background 0.3s, transform 0.3s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    }
-
-    .team-card:hover {
-      background: var(--card-hover-bg);
-      transform: translateY(-6px);
-    }
-
-    .team-card img {
-      width: 100px;
-      height: 100px;
-      object-fit: cover;
-      border-radius: 50%;
-      margin-bottom: 15px;
-      border: 3px solid var(--primary-color);
-    }
-
-    .team-card h3 {
-      margin-bottom: 8px;
-      color: var(--primary-color);
-    }
-
-    .team-card p {
-      font-size: 0.95rem;
-      opacity: 0.9;
-    }
-
-    .error-notification {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: var(--error-bg);
-      padding: 15px 20px;
-      border-radius: 8px;
-      color: #fff;
-      font-weight: bold;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.5s ease;
-      z-index: 2000;
-    }
-
-    .error-notification.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      opacity: 0.85;
-      margin-top: 50px;
-    }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .sidebar {
-        position: static;
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        padding: 1rem;
-      }
-
-      .container {
-        margin-left: 0;
-        padding: 1rem;
-      }
-
-      .team-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-  </style>
+@media (max-width: 768px) {
+  header { flex-direction: column; align-items: flex-start; }
+  .sidebar { position: static; width: 100%; height: auto; display: flex; flex-wrap: wrap; justify-content: center; padding: 1rem; }
+  .container { margin-left: 0; padding: 1rem; }
+  .team-grid { grid-template-columns: 1fr; }
+}
+</style>
 </head>
 <body class="dark">
 
@@ -265,4 +139,49 @@
 
     <div class="team-card">
       <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi Sponsor Logo">
-      <h3
+      <h3>VoKi Sponsor</h3>
+      <p><strong>Main Sponsor</strong></p>
+      <p>Supporting VoKi’s growth and privacy-first community tools.</p>
+    </div>
+
+    <div class="team-card">
+      <img src="solorads_pfp.png" alt="Solorads">
+      <h3>Solorads</h3>
+      <p><strong>Partner & Sponsor</strong></p>
+      <p>Supporting VoKi’s mission to provide secure, privacy-first moderation tools for Discord communities.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 VoKi • Privacy-First Moderation for Discord</p>
+</footer>
+
+<script>
+// Theme toggle
+document.getElementById('themeToggle').addEventListener('click', () => {
+  document.body.classList.toggle('light-mode');
+});
+
+// Discord login placeholder
+document.getElementById('discordLogin').addEventListener('click', () => {
+  const error = document.getElementById('errorNotification');
+  error.classList.add('show');
+  setTimeout(() => error.classList.remove('show'), 2500);
+});
+
+// Scroll reveal animation for team cards
+const cards = document.querySelectorAll('.team-card');
+const revealOnScroll = () => {
+  const triggerBottom = window.innerHeight * 0.85;
+  cards.forEach(card => {
+    const cardTop = card.getBoundingClientRect().top;
+    if(cardTop < triggerBottom) card.classList.add('visible');
+  });
+};
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('load', revealOnScroll);
+</script>
+
+</body>
+</html>
