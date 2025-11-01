@@ -26,6 +26,7 @@
       --card: rgba(255,255,255,0.08);
       --card-hover: rgba(255,255,255,0.18);
       --sidebar: rgba(0,0,0,0.85);
+      --error-bg: rgba(0,0,0,0.9);
     }
 
     body {
@@ -34,6 +35,7 @@
       background: var(--bg-gradient);
       color: var(--text);
       scroll-behavior: smooth;
+      transition: background 0.5s;
     }
 
     header {
@@ -85,6 +87,7 @@
       color: #000;
     }
 
+    /* Sidebar */
     .sidebar {
       position: fixed;
       top: 80px;
@@ -118,6 +121,7 @@
       color: #000;
     }
 
+    /* Content */
     .container {
       margin-left: 280px;
       padding: 2rem;
@@ -245,7 +249,7 @@
     <a href="team.html">Team</a>
     <a href="tos.html" class="active">Terms</a>
     <a href="AI.html">AI</a>
-    <div id="themeToggle">Toggle Theme</div>
+    <div id="themeToggle"><img src="VoKi_Moon.png" alt="Toggle Theme" style="width:28px;"></div>
     <div id="discordLogin">Login</div>
   </nav>
 </header>
@@ -268,85 +272,89 @@
 <div class="container" id="top">
   <div class="card">
     <h1>Terms of Service & Privacy Policy</h1>
-    <p>By using VoKi, you agree to these terms and conditions. Please review them carefully to understand your rights and responsibilities while using VoKi and its features.</p>
+    <p>By using VoKi, you agree to these terms and conditions. This page clarifies your responsibilities, rights, and how your data is protected.</p>
   </div>
 
   <div class="card" id="purpose">
     <h2>1. Purpose</h2>
     <ul>
-      <li>Provide moderation, AI assistance, and reliable community tools for Discord servers.</li>
+      <li>Provide AI-assisted moderation and community tools for Discord.</li>
       <li>Support server safety, privacy, and responsible automation.</li>
+      <li>Direct users toward secure and positive community interaction.</li>
     </ul>
   </div>
 
   <div class="card" id="responsible">
     <h2>2. Responsible Use</h2>
     <ul>
-      <li>Users must act respectfully and within the bot’s intended scope.</li>
-      <li>VoKi is not to be used for harassment, data mining, or server disruption.</li>
-      <li>All users must follow Discord’s Terms of Service.</li>
+      <li>Users must act respectfully and use VoKi within intended purposes.</li>
+      <li>Do not use VoKi for harassment, spam, or unauthorized data collection.</li>
+      <li>All users must adhere to Discord’s Terms of Service.</li>
     </ul>
   </div>
 
   <div class="card" id="ai">
     <h2>3. AI Features</h2>
     <ul>
-      <li>AI systems assist moderation and user support but require human oversight.</li>
-      <li>AI decisions can be reviewed and overridden by authorized moderators.</li>
+      <li>AI assists moderation, decision-making, and support, but human oversight is required.</li>
+      <li>Authorized moderators can review or override AI actions.</li>
+      <li>AI recommendations aim to maintain fairness and transparency.</li>
     </ul>
   </div>
 
   <div class="card" id="privacy">
     <h2>4. Privacy Policy</h2>
     <ul>
-      <li>VoKi does not collect personal data without user or admin consent.</li>
-      <li>Data stored for moderation or logging is kept secure and private.</li>
-      <li>No data is shared or sold to third parties.</li>
-      <li>Users may request deletion of stored data through server administrators.</li>
+      <li>VoKi does not collect personal data without consent.</li>
+      <li>Stored moderation or logging data remains within the server.</li>
+      <li>No data is shared or sold externally.</li>
+      <li>Users may request deletion of stored data via server admins.</li>
     </ul>
   </div>
 
   <div class="card" id="permissions">
     <h2>5. Permissions</h2>
     <ul>
-      <li>VoKi requires only the necessary permissions for moderation and automation.</li>
-      <li>Server administrators retain full control over bot access.</li>
+      <li>VoKi only requests permissions needed for moderation and automation.</li>
+      <li>Server admins maintain full control of bot access and privileges.</li>
     </ul>
   </div>
 
   <div class="card" id="guidelines">
     <h2>6. Guidelines</h2>
     <ul>
-      <li>Respect other users and VoKi’s systems.</li>
-      <li>Report issues, misuse, or bugs responsibly.</li>
+      <li>Follow community standards and respect VoKi systems.</li>
+      <li>Report bugs, misuse, or feature requests responsibly.</li>
     </ul>
   </div>
 
   <div class="card" id="logging">
     <h2>7. Logging</h2>
     <ul>
-      <li>Moderation actions may be logged locally within the server for accountability.</li>
+      <li>Moderation actions may be logged locally in the server for transparency.</li>
+      <li>Logs help with dispute resolution and moderation accountability.</li>
     </ul>
   </div>
 
   <div class="card" id="security">
     <h2>8. Security</h2>
     <ul>
-      <li>VoKi employs secure practices and permissions handling.</li>
-      <li>We recommend verifying command access and permissions regularly.</li>
+      <li>VoKi employs secure coding practices and permission handling.</li>
+      <li>Admins are encouraged to review access and command permissions periodically.</li>
     </ul>
   </div>
 
   <div class="card" id="updates">
     <h2>9. Updates</h2>
     <ul>
-      <li>VoKi may receive updates to improve security, functionality, and AI moderation.</li>
+      <li>VoKi may be updated to improve functionality, security, or AI moderation capabilities.</li>
+      <li>Major changes will be communicated via Discord server announcements.</li>
     </ul>
   </div>
 
   <div class="card" id="support">
     <h2>10. Support</h2>
-    <p>Need help or have concerns? Visit our <a href="https://discord.gg/PKWJuRrgUd" target="_blank" style="color: var(--primary);">support server</a> for assistance.</p>
+    <p>Need assistance or have concerns? Visit our <a href="https://discord.gg/PKWJuRrgUd" target="_blank" style="color: var(--primary);">support server</a> for help and community guidance.</p>
   </div>
 </div>
 
@@ -367,8 +375,15 @@
 </div>
 
 <script>
-  document.getElementById('themeToggle').addEventListener('click', () => {
-    document.body.classList.toggle('light-mode');
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = themeToggle.querySelector('img');
+
+  themeToggle.addEventListener('click', () => {
+    const isDark = document.body.classList.toggle('light-mode');
+    document.body.style.background = isDark
+      ? 'linear-gradient(to bottom right, #141e30, #243b55)'
+      : 'linear-gradient(to bottom right, #4facfe, #8e44ad)';
+    themeIcon.src = isDark ? 'VoKi_Sun.png' : 'VoKi_Moon.png';
   });
 
   document.getElementById('discordLogin').addEventListener('click', () => {
