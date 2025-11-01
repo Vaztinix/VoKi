@@ -4,7 +4,6 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>VoKi – Your Discord Bot</title>
-  <link rel="stylesheet" href="style.css">
   <style>
     :root {
       --primary-color: #aeefff;
@@ -23,64 +22,61 @@
       color: var(--text-color);
       line-height: 1.6;
       scroll-behavior: smooth;
-      transition: background 0.5s, color 0.5s;
     }
 
-    /* Sidebar */
-    .sidebar {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 240px;
-      height: 100%;
+    header {
       background: var(--sidebar-bg);
+      padding: 1rem 2rem;
       display: flex;
-      flex-direction: column;
-      padding: 20px;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.3);
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
       z-index: 1000;
     }
-    .sidebar h2 {
-      text-align: center;
-      margin-bottom: 20px;
+
+    header h2 {
+      margin: 0;
+      font-size: 1.5rem;
       color: var(--primary-color);
     }
-    .sidebar a, .sidebar div {
-      display: block;
-      text-align: center;
-      padding: 12px;
-      margin: 6px 0;
-      border-radius: 8px;
-      font-weight: bold;
+
+    nav {
+      display: flex;
+      gap: 1rem;
+    }
+
+    nav a, nav div {
+      color: var(--primary-color);
       text-decoration: none;
-      color: var(--primary-color);
-      cursor: pointer;
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
       transition: background 0.3s;
+      cursor: pointer;
     }
-    .sidebar a:hover, .sidebar div:hover {
+
+    nav a:hover, nav div:hover {
       background: var(--primary-color);
       color: #000;
     }
 
-    /* Container */
     .container {
-      margin-left: 260px;
-      padding: 40px 20px;
+      padding: 2rem;
       text-align: center;
     }
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 15px;
-      color: #e6f7ff;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
     }
+
     p.lead {
       font-size: 1.2rem;
       opacity: 0.9;
-      margin-bottom: 30px;
+      margin-bottom: 2rem;
     }
 
-    /* Buttons */
     .btn {
       display: inline-block;
       padding: 14px 28px;
@@ -91,32 +87,33 @@
       transition: all 0.3s ease;
       cursor: pointer;
     }
+
     .btn-primary {
       background: var(--primary-color);
       color: #000;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     }
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      opacity: 0.9;
-    }
+
     .btn-outline {
       border: 2px solid var(--primary-color);
       color: var(--primary-color);
       background: transparent;
     }
-    .btn-outline:hover {
+
+    .btn-primary:hover, .btn-outline:hover {
+      transform: translateY(-3px);
+      opacity: 0.9;
       background: var(--primary-color);
       color: #000;
     }
 
-    /* Cards */
     .card-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
       margin-top: 30px;
     }
+
     .card {
       background: var(--card-bg);
       padding: 25px;
@@ -125,16 +122,17 @@
       text-align: center;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
     }
+
     .card:hover {
       background: var(--card-hover-bg);
       transform: translateY(-6px);
     }
+
     .card h2 {
       color: var(--primary-color);
       margin-bottom: 10px;
     }
 
-    /* Error Notification */
     .error-notification {
       position: fixed;
       top: 20px;
@@ -149,6 +147,7 @@
       transition: opacity 0.5s ease;
       z-index: 2000;
     }
+
     .error-notification.show {
       opacity: 1;
       pointer-events: auto;
@@ -156,37 +155,53 @@
 
     footer {
       text-align: center;
-      padding: 20px;
+      padding: 2rem;
       font-size: 0.9rem;
       opacity: 0.85;
       margin-top: 50px;
     }
 
-    /* Dark Mode */
-    body.dark {
-      --bg-gradient: linear-gradient(to bottom right, #1e1e1e, #2c2c2c);
-      --text-color: #eee;
-      --sidebar-bg: rgba(30,30,30,0.9);
-      --card-bg: rgba(50,50,50,0.4);
-      --card-hover-bg: rgba(60,60,60,0.6);
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        flex-direction: column;
+        width: 100%;
+      }
+
+      .container {
+        padding: 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+
+      .btn {
+        width: 100%;
+        max-width: 300px;
+      }
     }
   </style>
 </head>
-<body class="dark">
+<body>
 
-<!-- Sidebar -->
-<div class="sidebar">
+<header>
   <h2>VoKi</h2>
-  <a href="index.html">Home</a>
-  <a href="team.html">Team</a>
-  <a href="tos.html">Terms of Service</a>
-  <div id="themeToggle">Toggle Theme</div>
-  <div id="discordLogin">Login with Discord</div>
-</div>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="team.html">Team</a>
+    <a href="tos.html">Terms</a>
+    <div id="themeToggle">Toggle Theme</div>
+    <div id="discordLogin">Login with Discord</div>
+  </nav>
+</header>
 
 <div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
 
-<!-- Main Content -->
 <div class="container">
   <h1>Welcome to VoKi</h1>
   <p class="lead"><strong>Privacy‑First & Moderation‑First</strong> — keeping your Discord safe, private, and secure.</p>
@@ -227,4 +242,8 @@ themeToggle.addEventListener('click', () => {
 });
 
 // Login placeholder popup
-const discordLogin = document.getElement
+const discordLogin = document.getElementById('discordLogin');
+discordLogin.addEventListener('click', () => {
+  const errorBox = document.getElementById('errorNotification');
+  errorBox.classList.add('show');
+  setTimeout(() => errorBox.classList.remove('show'), 3000);
