@@ -8,7 +8,6 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
 
-  <!-- Meta Embed -->
   <meta property="og:title" content="VoKi – Terms of Service & Privacy Policy">
   <meta property="og:description" content="Review VoKi’s Terms of Service and Privacy Policy to understand how your data and privacy are protected.">
   <meta property="og:image" content="https://yourdomain.com/VoKi%20Logo%20(Updated%20Bot%20Logo).png">
@@ -22,26 +21,23 @@
   <style>
     :root {
       --primary: #aeefff;
-      --accent: #6dc8ff;
       --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
-      --bg-dark: linear-gradient(to bottom right, #141e30, #243b55);
-      --text: #ffffff;
-      --card: rgba(255,255,255,0.08);
+      --sidebar-bg: rgba(0,0,0,0.85);
+      --card-bg: rgba(255,255,255,0.08);
       --card-hover: rgba(255,255,255,0.18);
-      --sidebar: rgba(0,0,0,0.85);
+      --text-color: #fff;
     }
 
     body {
       margin: 0;
       font-family: "Segoe UI", Arial, sans-serif;
       background: var(--bg-gradient);
-      color: var(--text);
+      color: var(--text-color);
       scroll-behavior: smooth;
-      transition: background 0.5s;
     }
 
     header {
-      background: var(--sidebar);
+      background: var(--sidebar-bg);
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
@@ -95,7 +91,7 @@
       left: 0;
       width: 250px;
       height: calc(100% - 80px);
-      background: var(--sidebar);
+      background: var(--sidebar-bg);
       padding: 20px;
       overflow-y: auto;
       border-right: 1px solid rgba(255,255,255,0.15);
@@ -107,20 +103,17 @@
       margin-bottom: 10px;
     }
 
-    .sidebar a, .sidebar button {
+    .sidebar a {
       display: block;
       color: var(--primary);
       text-decoration: none;
       padding: 10px;
       margin: 5px 0;
       border-radius: 8px;
-      background: transparent;
-      border: none;
-      font-weight: 600;
       transition: all 0.3s;
     }
 
-    .sidebar a:hover, .sidebar button:hover {
+    .sidebar a:hover {
       background: var(--primary);
       color: #000;
     }
@@ -158,7 +151,7 @@
       margin-top: 60px;
     }
 
-    /* Floating Menu */
+    /* Floating menu */
     #floatingMenu {
       position: fixed;
       bottom: 20px;
@@ -176,7 +169,6 @@
       justify-content: center;
       font-size: 30px;
       cursor: pointer;
-      transition: all 0.3s;
     }
 
     #menuItems {
@@ -187,7 +179,7 @@
     }
 
     .menu-item {
-      background: var(--card);
+      background: var(--card-bg);
       padding: 10px 15px;
       border-radius: 25px;
       color: var(--primary);
@@ -335,24 +327,17 @@
 </div>
 
 <script>
-  const themeToggle = document.getElementById('themeToggle');
-  themeToggle.addEventListener('click', () => {
+  document.getElementById('themeToggle').addEventListener('click', () => {
     document.body.classList.toggle('light-mode');
   });
 
-  const discordLogin = document.getElementById('discordLogin');
-  discordLogin.addEventListener('click', () => {
+  document.getElementById('discordLogin').addEventListener('click', () => {
     alert("🔐 Discord login is coming soon!");
   });
 
-  const menuToggle = document.getElementById('menuToggle');
-  const menuItems = document.getElementById('menuItems');
-  menuToggle.addEventListener('click', () => {
-    if (menuItems.style.display === 'flex') {
-      menuItems.style.display = 'none';
-    } else {
-      menuItems.style.display = 'flex';
-    }
+  document.getElementById('menuToggle').addEventListener('click', () => {
+    const items = document.getElementById('menuItems');
+    items.style.display = items.style.display === 'flex' ? 'none' : 'flex';
   });
 </script>
 
