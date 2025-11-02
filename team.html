@@ -95,6 +95,13 @@ footer { text-align:center; padding:28px 1.5rem; color:rgba(255,255,255,.8); mar
 /* TOAST */
 .toast { position:fixed; right:50%; transform:translateX(50%); top:60px; background:var(--error-bg); padding:12px 16px; border-radius:10px; color:#fff; box-shadow:0 8px 30px rgba(0,0,0,.4); opacity:0; transition:opacity .2s, transform .2s; z-index:2000; }
 
+/* FLOATING MENU */
+#floatingMenu { position:fixed; bottom:24px; right:24px; display:flex; flex-direction:column-reverse; align-items:flex-end; z-index:1500; }
+#floatingMenu .menu-toggle { width:56px; height:56px; border-radius:28px; background:var(--primary); color:#000; font-size:28px; border:none; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,0.3); }
+#floatingMenu .menu-items { display:none; flex-direction:column; margin-bottom:12px; }
+#floatingMenu .menu-items a { background:var(--card); padding:10px 16px; margin:4px 0; border-radius:14px; text-decoration:none; color:var(--text); font-weight:600; transition: all .18s ease; }
+#floatingMenu .menu-items a:hover { background:var(--card-hover); }
+
 /* RESPONSIVE */
 @media(max-width:840px){ .container{padding:2rem 1rem;} nav{gap:8px;} .brand h1{display:inline-block;} }
 </style>
@@ -158,6 +165,12 @@ footer { text-align:center; padding:28px 1.5rem; color:rgba(255,255,255,.8); mar
   <p>© 2025 VoKi • Privacy‑First Moderation for Discord</p>
 </footer>
 
+<!-- FLOATING MENU -->
+<div id="floatingMenu">
+  <div class="menu-items" id="menuItems"></div>
+  <button class="menu-toggle" id="menuToggle">☰</button>
+</div>
+
 <div id="toast" class="toast"></div>
 
 <script>
@@ -188,6 +201,29 @@ const revealOnScroll = () => {
 };
 window.addEventListener('scroll', revealOnScroll);
 window.addEventListener('load', revealOnScroll);
+
+// Floating Menu
+const floatingLinks = [
+  {title:'Home',href:'index.html'},
+  {title:'Team',href:'team.html'},
+  {title:'Legal',href:'tos.html'}
+];
+const menuItems = document.getElementById('menuItems');
+menuItems.innerHTML='';
+floatingLinks.forEach(l=>{ 
+  const a=document.createElement('a'); a.textContent=l.title; a.href=l.href; menuItems.appendChild(a); 
+});
+let menuOpen=false;
+document.getElementById('menuToggle').addEventListener('click',()=>{
+  if(!menuOpen){
+    menuItems.style.display='flex';
+    [...menuItems.children].forEach((el,i)=>setTimeout(()=>{el.style.opacity='1'; el.style.transform='translateY(0)';},i*45));
+  }else{
+    [...menuItems.children].forEach((el,i)=>setTimeout(()=>{el.style.opacity='0'; el.style.transform='translateY(12px)';},i*25));
+    setTimeout(()=>menuItems.style.display='none',200);
+  }
+  menuOpen=!menuOpen;
+});
 </script>
 </body>
 </html>
