@@ -1,444 +1,599 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VoKi – Privacy-First AI Discord Bot</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VoKi – Privacy-First AI Discord Bot</title>
+<link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
+<!-- Open Graph / Twitter -->
+<meta property="og:title" content="VoKi – Privacy-First AI Discord Bot" />
+<meta property="og:description" content="A privacy-first, AI-powered moderation bot for Discord — giving communities control, safety, and trust." />
+<meta property="og:image" content="https://vaztinix.github.io/VoKi/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
+<meta property="og:url" content="https://vaztinix.github.io/VoKi/" />
+<meta property="og:type" content="website" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="VoKi – Privacy-First AI Discord Bot" />
+<meta name="twitter:description" content="AI moderation you can trust — privacy-first, transparent, and secure." />
+<meta name="twitter:image" content="https://vaztinix.github.io/VoKi/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
 
-  <!-- Meta Embed -->
-  <meta property="og:title" content="VoKi – Privacy-First AI Discord Bot" />
-  <meta property="og:description" content="A privacy-first, AI-powered moderation bot for Discord — giving communities control, safety, and trust." />
-  <meta property="og:image" content="https://vaztinix.github.io/VoKi/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
-  <meta property="og:url" content="https://vaztinix.github.io/VoKi/" />
-  <meta property="og:type" content="website" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="VoKi – Privacy-First AI Discord Bot" />
-  <meta name="twitter:description" content="AI moderation you can trust — privacy-first, transparent, and secure." />
-  <meta name="twitter:image" content="https://vaztinix.github.io/VoKi/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
+<style>
+:root{
+  --primary:#aeefff;
+  --accent:#6dc8ff;
+  --bg-gradient:linear-gradient(135deg,#4facfe,#6fa1ff,#8e44ad);
+  --bg-dark:linear-gradient(135deg,#141e30,#1f2a45,#243b55);
+  --text:#fff;
+  --card:rgba(255,255,255,0.08);
+  --card-hover:rgba(255,255,255,0.18);
+  --nav:rgba(0,0,0,0.85);
+  --error-bg:rgba(0,0,0,0.9);
+  --radius:14px;
+}
 
-  <style>
-    :root {
-      --primary: #aeefff;
-      --accent: #6dc8ff;
-      --bg-gradient: linear-gradient(135deg, #4facfe, #6fa1ff, #8e44ad);
-      --bg-dark: linear-gradient(135deg, #141e30, #1f2a45, #243b55);
-      --text: #ffffff;
-      --card: rgba(255,255,255,0.08);
-      --card-hover: rgba(255,255,255,0.18);
-      --sidebar: rgba(0,0,0,0.85);
-      --error-bg: rgba(0,0,0,0.9);
-    }
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Arial,sans-serif;
+  color:var(--text);
+  background:var(--bg-gradient);
+  background-size:400% 400%;
+  animation:flow 25s ease infinite;
+  -webkit-font-smoothing:antialiased;
+  scroll-behavior:smooth;
+  min-height:100vh;
+}
 
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: var(--bg-gradient);
-      background-size: 400% 400%;
-      animation: gradientFlow 25s ease infinite;
-      color: var(--text);
-      transition: background 0.5s;
-      scroll-behavior: smooth;
-    }
+/* background animation */
+@keyframes flow{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
 
-    @keyframes gradientFlow {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
+/* Header */
+header{
+  position:sticky;
+  top:0;
+  z-index:1000;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  padding:1rem 2rem;
+  background:var(--nav);
+  border-bottom:1px solid rgba(255,255,255,0.04);
+  backdrop-filter:blur(6px);
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:44px;height:44px;border-radius:10px;object-fit:cover}
+.brand h1{margin:0;font-size:1.25rem;color:var(--primary);letter-spacing:0.5px}
 
-    header {
-      background: var(--sidebar);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+/* Nav */
+nav{display:flex;align-items:center;gap:12px}
+.nav-links{display:flex;gap:8px;align-items:center}
+.nav-links a{
+  color:var(--primary);
+  text-decoration:none;
+  padding:8px 12px;
+  border-radius:10px;
+  font-weight:600;
+  transition:all .18s ease;
+  display:inline-block;
+}
+.nav-links a:hover{background:var(--primary);color:#000;transform:translateY(-3px)}
+/* callouts */
+.actions{display:flex;gap:10px;align-items:center}
+.icon-btn{
+  width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;
+  background:transparent;border:1px solid rgba(255,255,255,0.04);cursor:pointer;
+}
+.sep{width:2px;height:26px;background:var(--primary);opacity:.6;border-radius:3px}
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+/* hero / content */
+.container{max-width:1100px;margin:0 auto;padding:3.2rem 1.5rem;text-align:center}
+.hero{padding:40px 0}
+h1{color:var(--primary);margin:0 0 .6rem;font-size:2.1rem}
+.lead{max-width:820px;margin:0 auto;color:rgba(255,255,255,.95);opacity:.95;font-size:1.05rem}
+.buttons{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{
+  border-radius:999px;padding:12px 20px;font-weight:700;border:0;cursor:pointer;transition:transform .22s ease,opacity .18s;
+  text-decoration:none;display:inline-flex;align-items:center;gap:8px;
+  box-shadow:0 6px 18px rgba(0,0,0,0.28);
+}
+.btn-primary{background:var(--primary);color:#000}
+.btn-outline{background:transparent;border:2px solid var(--primary);color:var(--primary)}
+.btn:hover{transform:translateY(-4px);opacity:.98}
 
-    .logo img {
-      height: 40px;
-      width: 40px;
-      border-radius: 8px;
-    }
+/* sections */
+.section{padding:48px 1.5rem;text-align:center}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;max-width:1100px;margin:22px auto 0}
+.card{
+  background:var(--card);padding:20px;border-radius:var(--radius);
+  transition:transform .25s ease,background .18s;box-shadow:0 10px 30px rgba(0,0,0,.25)
+}
+.card:hover{transform:translateY(-6px);background:var(--card-hover)}
 
-    .logo h1 {
-      font-size: 1.4rem;
-      color: var(--primary);
-      margin: 0;
-    }
+/* footer */
+footer{text-align:center;padding:28px 1.5rem;color:rgba(255,255,255,.8)}
 
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+/* floating menu */
+#floatingMenu{position:fixed;bottom:28px;left:20px;display:flex;flex-direction:column;gap:10px;z-index:1500}
+.menu-toggle{width:56px;height:56px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-size:24px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.28)}
+.menu-items{display:none;flex-direction:column;gap:8px;margin-bottom:8px}
+.menu-link{padding:10px 14px;border-radius:999px;background:var(--card);text-decoration:none;color:var(--primary);font-weight:700;box-shadow:0 8px 20px rgba(0,0,0,.2);transform:translateY(8px);opacity:0;transition:all .25s ease}
 
-    nav a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: bold;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
+/* subtle page entrance */
+.fade-in{opacity:0;transform:translateY(12px);animation:enter .6s forwards .08s}
+@keyframes enter{to{opacity:1;transform:none}}
 
-    nav a:hover {
-      background: var(--primary);
-      color: #000;
-    }
+/* small toast error */
+.toast{
+  position:fixed;right:20px;top:22px;background:var(--error-bg);padding:12px 16px;border-radius:10px;color:#fff;box-shadow:0 8px 30px rgba(0,0,0,.4);
+  opacity:0;transform:translateY(-8px);transition:opacity .2s,transform .2s;z-index:2000
+}
+.toast.show{opacity:1;transform:none}
 
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .separator {
-      width: 2px;
-      height: 24px;
-      background: var(--primary);
-      opacity: 0.6;
-    }
-
-    #themeToggle img {
-      width: 28px;
-      height: 28px;
-      cursor: pointer;
-    }
-
-    .container {
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-
-    h1, h2 {
-      color: var(--primary);
-    }
-
-    .lead {
-      font-size: 1.1rem;
-      opacity: 0.9;
-      max-width: 700px;
-      margin: 0 auto 2rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 30px;
-      margin: 8px;
-      border-radius: 40px;
-      font-weight: bold;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #000;
-    }
-
-    .btn-outline {
-      border: 2px solid var(--primary);
-      color: var(--primary);
-    }
-
-    .btn-primary:hover, .btn-outline:hover {
-      transform: translateY(-3px);
-      opacity: 0.9;
-    }
-
-    .section {
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      margin-top: 30px;
-    }
-
-    .card {
-      background: var(--card);
-      border-radius: 15px;
-      padding: 25px;
-      transition: 0.3s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    }
-
-    .card:hover {
-      background: var(--card-hover);
-      transform: translateY(-6px);
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      opacity: 0.85;
-    }
-
-    .error-notification {
-      position: fixed;
-      top: 100px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--error-bg);
-      padding: 15px 20px;
-      border-radius: 8px;
-      color: #fff;
-      font-weight: bold;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s;
-      z-index: 1500;
-    }
-
-    .error-notification.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /* Floating Menu */
-    #floatingMenu {
-      position: fixed;
-      bottom: 40px;
-      left: 20px;
-      z-index: 2000;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
-
-    #menuToggle {
-      width: 60px;
-      height: 60px;
-      background: var(--primary);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    #menuItems {
-      display: none;
-      flex-direction: column;
-      margin-bottom: 10px;
-      gap: 10px;
-    }
-
-    .menu-item {
-      background: var(--card);
-      padding: 10px 15px;
-      border-radius: 25px;
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      opacity: 0;
-      transform: translateY(10px);
-      transition: transform 0.3s, opacity 0.3s;
-    }
-
-    .menu-item.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    .menu-item.hide {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav {
-        flex-direction: column;
-        width: 100%;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      .nav-right {
-        width: 100%;
-        justify-content: flex-start;
-      }
-    }
-  </style>
+/* responsive */
+@media (max-width:840px){
+  .brand h1{display:inline-block}
+  nav{gap:8px}
+  .container{padding:2rem 1rem}
+  .menu-items{left:12px}
+}
+</style>
 </head>
 <body>
 
 <header>
-  <div class="logo">
-    <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi Logo">
+  <div class="brand">
+    <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi logo">
     <h1>VoKi</h1>
   </div>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#features">Features</a>
-    <a href="#commands">Commands</a>
-    <a href="#update">Update</a>
-    <div class="nav-right">
-      <div id="themeToggle">
-        <img id="themeIcon" src="VoKi_Moon.png" alt="Toggle Theme">
-      </div>
-      <div class="separator"></div>
-      <div id="loginBtn">Login</div>
+
+  <nav aria-label="Main navigation">
+    <div class="nav-links" role="menu">
+      <a href="https://vaztinix.github.io/VoKi/" class="nav-link" data-target="/">Home</a>
+      <a href="https://vaztinix.github.io/VoKi/team.html" class="nav-link" data-target="/team.html">Team</a>
+      <a href="https://vaztinix.github.io/VoKi/ai-helper.html" class="nav-link" data-target="/ai-helper.html">Kite AI</a>
+      <a href="https://vaztinix.github.io/VoKi/AI" class="nav-link" data-target="/AI">VoKi AI</a>
+      <a href="https://vaztinix.github.io/VoKi/tos.html" class="nav-link" data-target="/tos.html">Legal</a>
+    </div>
+
+    <div class="actions" style="margin-left:12px">
+      <!-- theme toggle (image optional) -->
+      <button id="themeToggle" class="icon-btn" aria-label="Toggle theme" title="Toggle theme">
+        <img id="themeIcon" src="VoKi_Moon.png" alt="theme" style="width:18px;height:18px">
+      </button>
+      <div class="sep" aria-hidden="true"></div>
+      <a id="loginBtn" class="btn btn-outline" href="#" role="button">Login</a>
     </div>
   </nav>
 </header>
 
-<div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
+<!-- Toast -->
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-<!-- Hero -->
-<section class="container" id="hero">
-  <h1>Privacy-First AI Moderation for Discord</h1>
-  <p class="lead">Keep your community safe, positive, and transparent — with complete control over your data and moderation tools.</p>
+<main class="container" id="mainContent">
+  <section class="hero fade-in" id="heroSection">
+    <h1>Privacy-First AI Moderation for Discord</h1>
+    <p class="lead">Keep your community safe, positive, and transparent — with complete control over your data and moderation tools.</p>
 
-  <a class="btn btn-primary" href="#" target="_blank">🚀 Invite VoKi</a>
-  <a class="btn btn-outline" href="#" target="_blank">💬 Join Server</a>
-  <a class="btn btn-primary" href="#" target="_blank">🤖 Launch VoKi AI</a>
-</section>
-
-<!-- About -->
-<section class="section" id="about">
-  <h2>About VoKi</h2>
-  <p class="lead">VoKi is a privacy-first Discord moderation bot designed to give communities safety and trust without sacrificing control.  
-  All data stays in your server — even VoKi’s developers can’t see user data. Users can view or delete their data anytime through the in-bot privacy command.</p>
-</section>
-
-<!-- Features -->
-<section class="section" id="features">
-  <h2>Core Features</h2>
-  <div class="card-grid">
-    <div class="card">
-      <h3>🔒 Privacy-First Logging</h3>
-      <p>All data is stored safely within your server — no external tracking, no developer access.</p>
+    <div class="buttons" id="heroButtons">
+      <!-- these use full URLs you requested and open in new tabs -->
+      <a class="btn btn-primary" id="inviteBtn" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549" target="_blank" rel="noopener noreferrer">🚀 Invite VoKi</a>
+      <a class="btn btn-outline" id="joinBtn" href="https://discord.gg/cXsZr3cMEB" target="_blank" rel="noopener noreferrer">💬 Join Server</a>
+      <a class="btn btn-primary" id="aiBtn" href="https://vaztinix.github.io/VoKi/AI" target="_blank" rel="noopener noreferrer">🤖 Open VoKi AI</a>
     </div>
-    <div class="card">
-      <h3>🤖 Smart AI Moderation</h3>
-      <p>AI learns from past conversations to provide smoother, more consistent moderation.</p>
-    </div>
-    <div class="card">
-      <h3>⚙️ Custom Command Control</h3>
-      <p>Enable or disable commands per-server for full flexibility and customization.</p>
-    </div>
-    <div class="card">
-      <h3>🧠 Community-Driven AI</h3>
-      <p>VoKi’s AI is designed with your feedback and real community experiences in mind.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- Commands -->
-<section class="section" id="commands">
-  <h2>Command Showcase</h2>
-  <p class="lead">VoKi includes everything you need to moderate efficiently and fairly.</p>
-  <div class="card-grid">
-    <div class="card"><h3>/ban</h3><p>Ban a member from your server.</p></div>
-    <div class="card"><h3>/mute</h3><p>Temporarily mute a user for set durations.</p></div>
-    <div class="card"><h3>/ask</h3><p>Ask VoKi’s AI questions or get help on moderation tasks.</p></div>
-    <div class="card"><h3>/support</h3><p>Open a staff support ticket for community help.</p></div>
-    <div class="card"><h3>/privacy</h3><p>View or delete your saved data instantly — full transparency.</p></div>
-  </div>
-</section>
+  <section class="section fade-in" id="about">
+    <h2>About VoKi</h2>
+    <p class="lead">VoKi is a privacy-first Discord moderation bot designed to give communities safety and trust without sacrificing control. All data stays in your server — even VoKi’s developers cannot read member data. Users can view or delete stored data via the in-bot privacy command.</p>
+  </section>
 
-<!-- Update -->
-<section class="section" id="update">
-  <h2>Latest Update – October 2025</h2>
-  <p class="lead">We’ve taken privacy even further. Logging of message edits and deletions has been removed, Roblox connections discontinued, and multilingual support paused for optimization.  
-  The new <strong>/privacy</strong> command gives users full control to view or delete their stored data — ensuring total user independence.</p>
-</section>
+  <section class="section fade-in" id="features">
+    <h2>Core Features</h2>
+    <div class="card-grid" id="featuresGrid">
+      <div class="card">
+        <h3>🔒 Privacy-First Logging</h3>
+        <p>All data is stored safely within your server — no external tracking, no developer access.</p>
+      </div>
+      <div class="card">
+        <h3>🤖 Smart AI Moderation</h3>
+        <p>AI remembers short-term context for smoother, more accurate moderation decisions.</p>
+      </div>
+      <div class="card">
+        <h3>⚙️ Command Control</h3>
+        <p>Enable or disable commands per server for granular moderation control (coming soon).</p>
+      </div>
+      <div class="card">
+        <h3>🧭 Community-Driven</h3>
+        <p>Designed with feedback from real community moderators and server staff.</p>
+      </div>
+    </div>
+  </section>
 
-<!-- Voting & Links -->
-<section class="section" id="vote">
-  <h2>Support VoKi</h2>
-  <p class="lead">If you’re enjoying VoKi, please consider leaving a review!</p>
-  <a class="btn btn-primary" href="#" target="_blank">⭐ Review on Top.gg</a>
-  <a class="btn btn-outline" href="#" target="_blank">💎 Vote on Discords.com</a>
-</section>
+  <section class="section fade-in" id="commands">
+    <h2>Command Showcase</h2>
+    <div class="card-grid">
+      <div class="card"><h3>/ban</h3><p>Ban a member from your server.</p></div>
+      <div class="card"><h3>/mute</h3><p>Temporarily mute a user for set durations.</p></div>
+      <div class="card"><h3>/ask</h3><p>Ask VoKi’s AI questions or get help on moderation tasks.</p></div>
+      <div class="card"><h3>/support</h3><p>Open a staff support ticket for community help.</p></div>
+      <div class="card"><h3>/privacy</h3><p>View or delete your saved data instantly — full transparency.</p></div>
+    </div>
+  </section>
+
+  <section class="section fade-in" id="update">
+    <h2>Latest Update — October 2025</h2>
+    <p class="lead">Privacy improvements, removal of some logs, discontinued Roblox connections, and new in-bot privacy controls. For details, visit the <a href="https://vaztinix.github.io/VoKi/tos.html" target="_blank" rel="noopener noreferrer">Legal page</a>.</p>
+  </section>
+</main>
 
 <footer>
-  <p>© 2025 VoKi. All rights reserved.</p>
+  <p>© 2025 VoKi • Privacy-First Moderation for Discord</p>
 </footer>
 
-<!-- Floating Menu -->
-<div id="floatingMenu">
-  <div id="menuItems">
-    <a class="menu-item" href="index.html">Home</a>
-    <a class="menu-item" href="team.html">Team</a>
-    <a class="menu-item" href="ai-helper.html">Kite AI</a>
-    <a class="menu-item" href="AI">VoKi AI</a>
-    <a class="menu-item" href="tos.html">Legal</a>
-  </div>
-  <div id="menuToggle">☰</div>
+<!-- Floating menu -->
+<div id="floatingMenu" aria-hidden="false">
+  <div class="menu-items" id="menuItems" aria-hidden="true"></div>
+  <button class="menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
 </div>
 
 <script>
-  const themeToggle = document.getElementById('themeToggle');
-  const themeIcon = document.getElementById('themeIcon');
-  const loginBtn = document.getElementById('loginBtn');
-  const errorNote = document.getElementById('errorNotification');
+/* ============================
+   Configuration - edit only locally
+   ============================
+   Put your real webhook URL into WEBHOOK_URL in your local copy.
+   DO NOT commit a public webhook to public code.
+*/
+const WEBHOOK_URL = 'PASTE_YOUR_DISCORD_WEBHOOK_HERE'; // <<--- replace in your private copy
 
-  themeToggle.addEventListener('click', () => {
-    const isDark = document.body.classList.toggle('dark');
-    document.body.style.background = isDark
-      ? 'linear-gradient(135deg, #141e30, #1f2a45, #243b55)'
-      : 'linear-gradient(135deg, #4facfe, #6fa1ff, #8e44ad)';
-    themeIcon.src = isDark ? 'VoKi_Sun.png' : 'VoKi_Moon.png';
+/* ============================
+   Small utilities
+   ============================ */
+const toastEl = document.getElementById('toast');
+function showToast(msg, timeout=3500){
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  setTimeout(()=> toastEl.classList.remove('show'), timeout);
+}
+
+/* ============================
+   Fix nav button behaviour (prevent anchor to "#" kind of issues)
+   ============================ */
+document.querySelectorAll('a[href="#"]').forEach(a=>{
+  a.addEventListener('click', e=>{
+    e.preventDefault();
+    showToast('Link not available yet.');
   });
+});
 
-  loginBtn.addEventListener('click', () => {
-    errorNote.classList.add('show');
-    setTimeout(() => errorNote.classList.remove('show'), 3000);
+/* Ensure header links open correct targets (they already do) but fix any accidental reload behavior */
+document.querySelectorAll('.nav-link').forEach(a=>{
+  a.addEventListener('click', (e)=>{
+    // If the anchor points to the current page with no external effect, still allow normal navigation.
+    // Keep behavior simple: allow default.
   });
+});
 
-  // Floating Menu with open/close animation
-  const menuToggle = document.getElementById('menuToggle');
-  const menuItems = document.getElementById('menuItems');
-  const menuLinks = document.querySelectorAll('.menu-item');
+/* ============================
+   Floating menu logic with open/close animation
+   ============================ */
+const menuToggle = document.getElementById('menuToggle');
+const menuItems = document.getElementById('menuItems');
 
-  let menuOpen = false;
+const floatingLinks = [
+  {title:'Home', href:'https://vaztinix.github.io/VoKi/'},
+  {title:'Team', href:'https://vaztinix.github.io/VoKi/team.html'},
+  {title:'Kite AI', href:'https://vaztinix.github.io/VoKi/ai-helper.html'},
+  {title:'VoKi AI', href:'https://vaztinix.github.io/VoKi/AI'},
+  {title:'Legal', href:'https://vaztinix.github.io/VoKi/tos.html'}
+];
 
-  menuToggle.addEventListener('click', () => {
-    if (!menuOpen) {
-      menuItems.style.display = 'flex';
-      menuLinks.forEach((link, i) => {
-        setTimeout(() => link.classList.add('show'), i*50);
-      });
-    } else {
-      menuLinks.forEach((link, i) => {
-        setTimeout(() => link.classList.remove('show'), i*50);
-      });
-      setTimeout(() => {
-        menuItems.style.display = 'none';
-      }, 300);
+floatingLinks.forEach((l, i)=>{
+  const a = document.createElement('a');
+  a.className = 'menu-link';
+  a.href = l.href;
+  a.textContent = l.title;
+  a.target = '_blank';
+  a.rel = 'noopener noreferrer';
+  a.style.transitionDelay = `${i*45}ms`;
+  menuItems.appendChild(a);
+});
+
+let menuOpen=false;
+menuToggle.addEventListener('click', ()=>{
+  if(!menuOpen){
+    menuItems.style.display = 'flex';
+    menuItems.setAttribute('aria-hidden','false');
+    [...menuItems.children].forEach((el, i)=> {
+      setTimeout(()=> el.style.transform='translateY(0)', 20 + i*45);
+      setTimeout(()=> el.style.opacity=1, 20 + i*45);
+    });
+  } else {
+    [...menuItems.children].forEach((el, i)=> {
+      setTimeout(()=> { el.style.opacity=0; el.style.transform='translateY(8px)'; }, i*45);
+    });
+    setTimeout(()=> { menuItems.style.display='none'; menuItems.setAttribute('aria-hidden','true'); }, 250);
+  }
+  menuOpen = !menuOpen;
+});
+
+/* ============================
+   Theme toggle
+   ============================ */
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+let dark = (localStorage.getItem('voki_dark') === '1') || prefersDark;
+function applyTheme(){
+  if(dark){
+    document.documentElement.style.setProperty('--bg-gradient','var(--bg-dark)');
+    themeIcon && (themeIcon.src = 'VoKi_Sun.png');
+  } else {
+    document.documentElement.style.setProperty('--bg-gradient','linear-gradient(135deg,#4facfe,#6fa1ff,#8e44ad)');
+    themeIcon && (themeIcon.src = 'VoKi_Moon.png');
+  }
+  localStorage.setItem('voki_dark', dark ? '1' : '0');
+}
+applyTheme();
+themeToggle && themeToggle.addEventListener('click', ()=>{
+  dark = !dark;
+  applyTheme();
+});
+
+/* ============================
+   Fix hero buttons accidentally reopening same page
+   (ensure they use full URL and open new tab) already set in HTML;
+   but also prevent accidental reloads for same-tab buttons */
+document.querySelectorAll('.btn').forEach(btn=>{
+  btn.addEventListener('click', (e)=>{
+    // If button is anchor with href and target _blank, allow — nothing to do.
+    // If it's anchor that would reload current page, prevent and open in new tab to avoid user reloading site.
+    const href = btn.getAttribute('href') || '';
+    if(href && (href.startsWith('#') || href === window.location.pathname || href === window.location.href)){
+      e.preventDefault();
+      window.open(href, '_blank', 'noopener');
     }
-    menuOpen = !menuOpen;
   });
+});
+
+/* ============================
+   Error capturing for reporting
+   ============================ */
+const collectedErrors = [];
+window.addEventListener('error', function(ev){
+  const err = {
+    message: ev.message,
+    filename: ev.filename,
+    lineno: ev.lineno,
+    colno: ev.colno,
+    stack: ev.error && ev.error.stack ? ev.error.stack : null,
+    ts: Date.now()
+  };
+  collectedErrors.push(err);
+  console.error('Captured error:', err);
+});
+window.addEventListener('unhandledrejection', function(ev){
+  const err = {
+    message: ev.reason ? (ev.reason.message || String(ev.reason)) : 'Unhandled rejection',
+    stack: ev.reason && ev.reason.stack ? ev.reason.stack : null,
+    ts: Date.now()
+  };
+  collectedErrors.push(err);
+  console.error('Captured unhandledrejection:', err);
+});
+
+/* ============================
+   Simple visit counting per client (local)
+   - store timestamps of loads in localStorage
+   - compute pageViews in last 30 minutes
+   ============================ */
+const VISIT_KEY = 'voki_visits_v1';
+function recordVisit(){
+  try{
+    const now = Date.now();
+    const raw = localStorage.getItem(VISIT_KEY);
+    let arr = raw ? JSON.parse(raw) : [];
+    // push timestamp
+    arr.push(now);
+    // prune >30 minutes (1800000 ms)
+    const cutoff = now - (30*60*1000);
+    arr = arr.filter(ts => ts >= cutoff);
+    // store back
+    localStorage.setItem(VISIT_KEY, JSON.stringify(arr));
+    return arr.length;
+  }catch(e){
+    console.warn('visit record error', e);
+    return 1;
+  }
+}
+
+/* ============================
+   small function to measure event-loop lag (proxy for CPU)
+   returns average lag in ms over N samples
+   ============================ */
+function measureEventLoopLag(samples=5, delay=200){
+  return new Promise((res)=>{
+    const lags = [];
+    let i=0;
+    function step(){
+      const start = performance.now();
+      setTimeout(()=>{
+        const end = performance.now();
+        const lag = Math.max(0, end - start - delay);
+        lags.push(lag);
+        i++;
+        if(i < samples) step();
+        else {
+          const avg = lags.reduce((a,b)=>a+b,0)/lags.length;
+          res(Math.round(avg));
+        }
+      }, delay);
+    }
+    step();
+  });
+}
+
+/* ============================
+   Reporter: send a JSON payload to your webhook every 30 minutes
+   Payload per client includes:
+     - clientId (local)
+     - pageViews in last 30 minutes (per this client)
+     - device info (navigator.hardwareConcurrency, deviceMemory if available)
+     - eventLoopLag (ms avg)
+     - collectedErrors
+     - page path, userAgent (truncated)
+   NOTE: replace WEBHOOK_URL in a local/private copy before publishing
+   ============================ */
+const CLIENT_ID_KEY = 'voki_client_id_v1';
+function getClientId(){
+  let id = localStorage.getItem(CLIENT_ID_KEY);
+  if(!id){
+    id = 'voki-' + Math.random().toString(36).slice(2,12);
+    localStorage.setItem(CLIENT_ID_KEY, id);
+  }
+  return id;
+}
+
+async function buildReport(){
+  const clientId = getClientId();
+  const pageViews = recordVisit();
+
+  // device info
+  const cores = navigator.hardwareConcurrency || null;
+  const deviceMemory = navigator.deviceMemory || null;
+  const ua = navigator.userAgent || 'unknown';
+  const path = window.location.pathname + window.location.search;
+
+  // event loop lag sample
+  let lag = null;
+  try{ lag = await measureEventLoopLag(4, 180); }catch(e){ lag = null; }
+
+  const recentErrors = collectedErrors.splice(0); // consume
+
+  const payload = {
+    clientId,
+    ts: new Date().toISOString(),
+    page: path,
+    pageViewsLast30Min: pageViews,
+    device: {cores, deviceMemory},
+    eventLoopLagMs: lag,
+    errors: recentErrors,
+    userAgent: ua.slice(0,240)
+  };
+
+  return payload;
+}
+
+async function sendReport(){
+  // skip if webhook not set
+  if(!WEBHOOK_URL || WEBHOOK_URL === 'PASTE_YOUR_DISCORD_WEBHOOK_HERE'){
+    // no webhook configured locally — just log to console
+    console.info('Webhook not set. Report payload will be logged to console instead.');
+    try{
+      const report = await buildReport();
+      console.log('REPORT (local placeholder):', report);
+    }catch(e){ console.error('report build error', e) }
+    return;
+  }
+
+  try{
+    const report = await buildReport();
+    // prepare a Discord-friendly JSON body (send as embed-like content)
+    const content = {
+      username: "VoKi-Reporter",
+      avatar_url: "",
+      embeds: [{
+        title: "VoKi Periodic Client Report",
+        color: 3447003,
+        fields: [
+          {name:"Client ID", value: report.clientId, inline:true},
+          {name:"Page", value: report.page, inline:true},
+          {name:"PageViews (30m)", value: String(report.pageViewsLast30Min), inline:true},
+          {name:"Cores", value: String(report.device.cores||'N/A'), inline:true},
+          {name:"DeviceMemory (GB)", value: String(report.device.deviceMemory||'N/A'), inline:true},
+          {name:"Event Loop Lag (ms)", value: String(report.eventLoopLagMs||'N/A'), inline:true},
+          {name:"Timestamp", value: report.ts, inline:false},
+        ],
+        footer: {text:'VoKi client-side reporter (per visitor)'}
+      }]
+    };
+
+    // If there are errors, include a short summary
+    if(report.errors && report.errors.length){
+      const errs = report.errors.slice(0,3).map(e=> {
+        const m = e.message || 'error';
+        return `${m}${e.lineno?` @ ${e.filename}:${e.lineno}`:''}`;
+      }).join('\n');
+      content.embeds[0].fields.push({name:'Errors (sample)', value: errs, inline:false});
+    }
+
+    // Use sendBeacon when possible for reliability on page unload
+    if(navigator.sendBeacon){
+      const blob = new Blob([JSON.stringify(content)], {type:'application/json'});
+      navigator.sendBeacon(WEBHOOK_URL, blob);
+    } else {
+      // fallback to fetch
+      await fetch(WEBHOOK_URL, {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body:JSON.stringify(content)
+      });
+    }
+    console.log('Report sent', report);
+  }catch(err){
+    console.error('Failed sending report', err);
+    // store a local error and show toast for debug (not intrusive)
+    collectedErrors.push({message:'report-send-failed:'+String(err), ts:Date.now()});
+  }
+}
+
+/* start periodic reporting: send immediately on load, then every 30 minutes */
+(async function initReporting(){
+  try{
+    // immediate small report (no webhook? logs to console)
+    await sendReport();
+  }catch(e){
+    console.error('initial report error', e);
+  }
+  // schedule every 30 minutes (30*60*1000 = 1800000)
+  const interval = 30 * 60 * 1000;
+  setInterval(() => {
+    sendReport().catch(e=> console.error('report interval error', e));
+  }, interval);
+})();
+
+/* ============================
+   404 handling note:
+   If you want visitors who enter unknown subpaths (e.g. vaztinix.github.io/VoKi/unknown)
+   to see a friendly page automatically, create a `404.html` in the repository root.
+   GitHub Pages will serve that automatically for invalid paths. Client-side redirects
+   cannot reliably intercept server 404 responses for direct requests.
+   ============================ */
+
+/* small entrance animation wiring */
+window.addEventListener('DOMContentLoaded', ()=>{
+  document.querySelectorAll('.fade-in').forEach((el, i)=>{
+    el.style.animationDelay = `${i*80}ms`;
+    el.classList.add('fade-in');
+  });
+});
+
+/* rough accessibility: keyboard open menu with Enter/Space */
+menuToggle.addEventListener('keydown', (ev) => {
+  if(ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); menuToggle.click(); }
+});
+
+/* prevent accidental reload for nav links when target is same origin but we want a new tab */
+document.querySelectorAll('nav a').forEach(a=>{
+  // if link points to external domain or has target _blank we let it be
+  a.addEventListener('click', (e)=>{
+    // nothing else required here; anchors use full URLs and will behave normally
+  });
+});
 </script>
 
 </body>
