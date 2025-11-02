@@ -9,6 +9,9 @@ let serverStartTime = Date.now();
 let errorLog = [];
 let requestCount = 0;
 let totalResponseTime = 0;
+let lastCPUUsage = 0;
+let restartNotified = false;
+const WEBHOOK_URL = 'https://discord.com/api/webhooks/1434331220250202164/-dqQ-YjTFDyNIb7rY4HxLml6L1SZOxvZsgFnZSiIpAgN1KKDHRgQVLz2jP7Kv061QUW4';
 
 // ===== Middleware to Track Requests =====
 app.use((req, res, next) => {
@@ -48,8 +51,9 @@ app.get('/', (req, res) => {
 });
 
 // ===== Start Server =====
-app.listen(port, () => {
+app.listen(port, async () => {
   console.log(`Server running on port ${port}`);
+  await sendRestartNotice();
 });
 
 // ===== System Info Helper =====
@@ -68,7 +72,69 @@ function getCPUUsage() {
   return usagePercent.toFixed(2);
 }
 
-// ===== Discord Webhook Hourly Report =====
+// ===== Discord Webhook: Restart Alert =====
+async function sendRestartNotice() {
+  if (restartNotified) return;
+  restartNotified = true;
+
+  const embed = {
+    username: "VoKi Server Monitor",
+    avatar_url: "https://i.imgur.com/AfFp7pu.png",
+    embeds: [
+      {
+        title: "🔁 Server Restart Detected",
+        description: "The VoKi server has restarted successfully.",
+        color: 0xffcc00,
+        timestamp: new Date(),
+        fields: [
+          { name: "Node Version", value: process.version, inline: true },
+          { name: "System", value: `${os.type()} ${os.release()} (${os.arch()})`, inline: true },
+          { name: "Hostname", value: os.hostname(), inline: true },
+          { name: "Memory Usage", value: `${(process.memoryUsage().rss / 1024 / 1024).toFixed(2)} MB`, inline: true }
+        ],
+        footer: { text: "VoKi Monitoring System | Auto Restart Alert" }
+      }
+    ]
+  };
+
+  try {
+    await axios.post(WEBHOOK_URL, embed);
+    console.log('⚠️ Restart alert sent to Discord.');
+  } catch (err) {
+    console.error('❌ Failed to send restart alert:', err.message);
+  }
+}
+
+// ===== Discord Webhook: Slow Performance Alert =====
+async function sendPerformanceAlert(cpu, avgResponse) {
+  const embed = {
+    username: "VoKi Server Monitor",
+    avatar_url: "https://i.imgur.com/AfFp7pu.png",
+    embeds: [
+      {
+        title: "🚨 Performance Warning",
+        color: 0xe74c3c,
+        timestamp: new Date(),
+        fields: [
+          { name: "CPU Usage", value: `${cpu}%`, inline: true },
+          { name: "Avg Response", value: `${avgResponse} ms`, inline: true },
+          { name: "Memory", value: `${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB`, inline: true },
+          { name: "Action", value: "Investigate load or restart system if lag persists.", inline: false }
+        ],
+        footer: { text: "VoKi Monitoring System | Slow Performance Alert" }
+      }
+    ]
+  };
+
+  try {
+    await axios.post(WEBHOOK_URL, embed);
+    console.log('⚠️ Performance alert sent to Discord.');
+  } catch (err) {
+    console.error('❌ Failed to send performance alert:', err.message);
+  }
+}
+
+// ===== Hourly Report =====
 async function sendHourlyReport() {
   const uptimeMs = Date.now() - serverStartTime;
   const uptimeHours = Math.floor(uptimeMs / 3600000);
@@ -111,10 +177,7 @@ async function sendHourlyReport() {
   };
 
   try {
-    await axios.post(
-      'https://discord.com/api/webhooks/1434331220250202164/-dqQ-YjTFDyNIb7rY4HxLml6L1SZOxvZsgFnZSiIpAgN1KKDHRgQVLz2jP7Kv061QUW4',
-      embed
-    );
+    await axios.post(WEBHOOK_URL, embed);
     console.log('✅ Hourly report sent successfully!');
     // Reset hourly counters
     errorLog = [];
@@ -125,5 +188,16 @@ async function sendHourlyReport() {
   }
 }
 
-// ===== Send Report Every Hour =====
-setInterval(sendHourlyReport, 1000 * 60 * 60); // every 1 hour
+// ===== Performance Check Every 5 Minutes =====
+setInterval(() => {
+  const cpuUsage = parseFloat(getCPUUsage());
+  const avgResponse = requestCount > 0 ? (totalResponseTime / requestCount).toFixed(2) : 0;
+
+  if (cpuUsage > 85 || avgResponse > 1000) {
+    sendPerformanceAlert(cpuUsage, avgResponse);
+  }
+  lastCPUUsage = cpuUsage;
+}, 1000 * 60 * 5); // every 5 minutes
+
+// ===== Send Hourly Report =====
+setInterval(sendHourlyReport, 1000 * 60 * 60); // every hour
