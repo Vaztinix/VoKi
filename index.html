@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VoKi – Privacy-First AI Discord Bot</title>
+  <title>VoKi – Privacy-First AI Discord Bot (Reference)</title>
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
@@ -20,391 +20,376 @@
   <meta name="twitter:image" content="https://vaztinix.github.io/VoKi/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
 
   <style>
-    :root {
+    /* =========================
+       VoKi Reference Theme CSS
+       Apply these classes across all pages
+       ========================= */
+
+    :root{
       --primary: #aeefff;
       --accent: #6dc8ff;
-      --bg-gradient: linear-gradient(to bottom right, #4facfe, #8e44ad);
-      --bg-dark: linear-gradient(to bottom right, #141e30, #243b55);
+      --bg-gradient: linear-gradient(135deg,#4facfe 0%, #8e44ad 100%);
+      --bg-dark: linear-gradient(135deg,#141e30 0%, #243b55 100%);
       --text: #ffffff;
-      --card: rgba(255,255,255,0.08);
-      --card-hover: rgba(255,255,255,0.18);
-      --sidebar: rgba(0,0,0,0.85);
-      --error-bg: rgba(0,0,0,0.9);
+      --muted: rgba(255,255,255,0.85);
+      --card: rgba(255,255,255,0.06);
+      --card-hover: rgba(255,255,255,0.12);
+      --nav-bg: rgba(3,12,27,0.75);
+      --glass: rgba(255,255,255,0.04);
+      --rounded: 14px;
+      --shadow: 0 8px 30px rgba(10,10,20,0.35);
+      --ease: cubic-bezier(.16,.84,.36,1);
+      --max-width: 1200px;
+      --menu-width: 220px;
     }
 
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: var(--bg-gradient);
-      color: var(--text);
-      transition: background 0.5s;
-      scroll-behavior: smooth;
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      :root { --ease: cubic-bezier(.5,.5,.5,.5); }
+      * { transition: none !important; animation: none !important; }
     }
 
-    header {
-      background: var(--sidebar);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
+    html,body{height:100%;margin:0;font-family:"Segoe UI", Arial, sans-serif;background:var(--bg-gradient);color:var(--text);-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* ---------- Header / Nav ---------- */
+    header{
+      position:sticky;top:0;z-index:1200;
+      backdrop-filter: blur(6px);
+      background: linear-gradient(180deg, rgba(1,8,20,0.6), rgba(1,8,20,0.35));
+      border-bottom: 1px solid rgba(255,255,255,0.03);
+      padding: 14px 28px;
     }
+    .nav-inner{max-width:var(--max-width);margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+    .logo{display:flex;align-items:center;gap:12px}
+    .logo img{height:42px;width:42px;border-radius:8px;box-shadow:0 4px 14px rgba(0,0,0,0.35)}
+    .brand{font-weight:700;color:var(--primary);font-size:1.15rem}
+    nav.desktop{display:flex;align-items:center;gap:12px}
+    nav.desktop a{color:var(--muted);padding:8px 12px;border-radius:10px;font-weight:600;transition:transform .22s var(--ease), background .22s var(--ease);}
+    nav.desktop a:hover{background:var(--card-hover);color:#000;transform:translateY(-3px) scale(1.01)}
+    .nav-right{display:flex;align-items:center;gap:12px}
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+    /* theme icon */
+    #themeToggle{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:var(--glass)}
+    #themeToggle img{width:24px;height:24px;display:block}
+
+    /* login button */
+    #loginBtn{padding:8px 14px;border-radius:999px;background:transparent;border:1px solid rgba(255,255,255,0.06);font-weight:700;color:var(--muted);cursor:pointer}
+    #loginBtn:hover{background:var(--primary);color:#000}
+
+    /* ---------- Hero ---------- */
+    .hero{max-width:var(--max-width);margin:40px auto 24px;padding:48px 28px;text-align:center;display:flex;flex-direction:column;gap:18px;align-items:center}
+    .hero h1{font-size:2.25rem;margin:0;color:var(--primary);text-shadow:0 6px 30px rgba(0,0,0,0.25)}
+    .lead{max-width:760px;color:rgba(255,255,255,0.92);opacity:.95;margin:0 auto;font-size:1.05rem}
+    .hero-ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:8px}
+    .btn{border-radius:999px;padding:12px 26px;font-weight:800;cursor:pointer;box-shadow:0 8px 30px rgba(0,0,0,0.25);transition:transform .28s var(--ease), box-shadow .28s var(--ease);}
+    .btn-primary{background:linear-gradient(90deg,var(--primary),var(--accent));color:#000}
+    .btn-outline{background:transparent;border:2px solid rgba(255,255,255,0.12);color:var(--text)}
+    .btn:hover{transform:translateY(-6px);}
+
+    /* ---------- Sections & cards ---------- */
+    .section{padding:54px 20px 70px}
+    .content{max-width:var(--max-width);margin:0 auto;padding:0 20px}
+    .section h2{color:var(--primary);margin:10px 0 16px;text-align:center;font-size:1.35rem}
+    .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;margin-top:28px}
+    .card{background:var(--card);border-radius:14px;padding:22px;box-shadow:var(--shadow);transform:translateY(6px);transition:transform .36s var(--ease), box-shadow .36s var(--ease), background .28s var(--ease);opacity:0;will-change:transform,opacity}
+    .card.visible{opacity:1;transform:none}
+    .card:hover{transform:translateY(-10px);background:var(--card-hover);box-shadow:0 20px 40px rgba(10,10,30,0.35)}
+
+    /* card header */
+    .card h3{margin:0 0 8px;color:var(--primary);font-size:1.05rem}
+    .card p{margin:0;color:rgba(255,255,255,0.9)}
+
+    /* ---------- Floating menu (animated) ---------- */
+    #floatingMenu{position:fixed;left:22px;bottom:22px;z-index:1200;display:flex;flex-direction:column;gap:10px;align-items:flex-start}
+    #menuToggle{width:62px;height:62px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,0.25);transition:transform .24s var(--ease)}
+    #menuToggle:hover{transform:scale(1.06)}
+    #menuItems{display:flex;flex-direction:column;gap:10px;margin-top:8px;align-items:flex-start;opacity:0;transform:translateY(10px) scale(.98);pointer-events:none;transition:opacity .28s var(--ease),transform .28s var(--ease)}
+    #menuItems.open{opacity:1;transform:none;pointer-events:auto}
+    .menu-item{background:var(--card);padding:10px 16px;border-radius:999px;color:var(--primary);font-weight:700;box-shadow:0 8px 22px rgba(0,0,0,0.2);transition:transform .22s var(--ease),opacity .22s linear}
+    .menu-item:hover{transform:translateY(-4px);background:var(--card-hover)}
+
+    /* stagger animation helper for the menu links */
+    .menu-item[data-order="1"]{transition-delay:.03s}
+    .menu-item[data-order="2"]{transition-delay:.06s}
+    .menu-item[data-order="3"]{transition-delay:.09s}
+    .menu-item[data-order="4"]{transition-delay:.12s}
+    .menu-item[data-order="5"]{transition-delay:.15s}
+
+    /* ---------- Footer ---------- */
+    footer{padding:32px 18px;background:transparent;text-align:center;color:rgba(255,255,255,0.85)}
+
+    /* ---------- Utility: reveal animation for sections ---------- */
+    .reveal-up{opacity:0;transform:translateY(16px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+    .reveal-up.visible{opacity:1;transform:none}
+
+    /* ---------- Responsive ---------- */
+    @media (max-width:900px){
+      .hero h1{font-size:1.85rem}
+      header{padding:12px 16px}
+      .logo img{height:36px;width:36px}
+      .nav-right{gap:8px}
+      .card-grid{gap:16px}
+      #floatingMenu{left:14px;bottom:16px}
     }
-
-    .logo img {
-      height: 40px;
-      width: 40px;
-      border-radius: 8px;
-    }
-
-    .logo h1 {
-      font-size: 1.4rem;
-      color: var(--primary);
-      margin: 0;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    nav a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: bold;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
-
-    nav a:hover {
-      background: var(--primary);
-      color: #000;
-    }
-
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .separator {
-      width: 2px;
-      height: 24px;
-      background: var(--primary);
-      opacity: 0.6;
-    }
-
-    #themeToggle img {
-      width: 28px;
-      height: 28px;
-      cursor: pointer;
-    }
-
-    .container {
-      padding: 3rem 2rem;
-      text-align: center;
-    }
-
-    h1, h2 {
-      color: var(--primary);
-    }
-
-    .lead {
-      font-size: 1.1rem;
-      opacity: 0.9;
-      max-width: 700px;
-      margin: 0 auto 2rem;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 30px;
-      margin: 8px;
-      border-radius: 40px;
-      font-weight: bold;
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-    }
-
-    .btn-primary {
-      background: var(--primary);
-      color: #000;
-    }
-
-    .btn-outline {
-      border: 2px solid var(--primary);
-      color: var(--primary);
-    }
-
-    .btn-primary:hover, .btn-outline:hover {
-      transform: translateY(-3px);
-      opacity: 0.9;
-    }
-
-    .section {
-      padding: 4rem 2rem;
-      text-align: center;
-    }
-
-    .card-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 25px;
-      margin-top: 30px;
-    }
-
-    .card {
-      background: var(--card);
-      border-radius: 15px;
-      padding: 25px;
-      transition: 0.3s;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-    }
-
-    .card:hover {
-      background: var(--card-hover);
-      transform: translateY(-6px);
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      opacity: 0.85;
-    }
-
-    .error-notification {
-      position: fixed;
-      top: 80px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--error-bg);
-      padding: 15px 20px;
-      border-radius: 8px;
-      color: #fff;
-      font-weight: bold;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s;
-      z-index: 1500;
-    }
-
-    .error-notification.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    /* Floating Menu Styles */
-    #floatingMenu {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      z-index: 2000;
-    }
-
-    #menuToggle {
-      width: 60px;
-      height: 60px;
-      background: var(--primary);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    #menuItems {
-      display: none;
-      flex-direction: column;
-      margin-top: 10px;
-      gap: 10px;
-    }
-
-    .menu-item {
-      background: var(--card);
-      padding: 10px 15px;
-      border-radius: 25px;
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      transition: transform 0.3s, opacity 0.3s;
-    }
-
-    .menu-item:hover {
-      transform: translateY(-3px);
-      opacity: 0.9;
-      background: var(--card-hover);
-    }
-
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      nav {
-        flex-direction: column;
-        width: 100%;
-      }
-
-      h1 {
-        font-size: 2rem;
-      }
-
-      .nav-right {
-        width: 100%;
-        justify-content: flex-start;
-      }
+    @media (max-width:640px){
+      nav.desktop{display:none} /* hide desktop nav on small screens in favour of floating menu */
+      .hero{padding:28px 18px}
+      .btn{padding:10px 18px}
     }
   </style>
 </head>
-<body>
+<body class="reference-page">
 
-<header>
-  <div class="logo">
-    <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi Logo">
-    <h1>VoKi</h1>
-  </div>
-  <nav>
-    <a href="#about">About</a>
-    <a href="#features">Features</a>
-    <a href="#commands">Commands</a>
-    <a href="#update">Update</a>
-    <div class="nav-right">
-      <div id="themeToggle">
-        <img id="themeIcon" src="VoKi_Moon.png" alt="Toggle Theme">
+  <!-- HEADER -->
+  <header>
+    <div class="nav-inner">
+      <div class="logo" aria-label="VoKi brand">
+        <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi Logo">
+        <div class="brand">VoKi</div>
       </div>
-      <div class="separator"></div>
-      <div id="loginBtn">Login</div>
+
+      <nav class="desktop" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#features">Features</a>
+        <a href="#commands">Commands</a>
+        <a href="#update">Update</a>
+      </nav>
+
+      <div class="nav-right" role="region" aria-label="Actions">
+        <div id="themeToggle" aria-pressed="false" title="Toggle theme">
+          <img id="themeIcon" src="VoKi_Moon.png" alt="Theme">
+        </div>
+        <div class="separator" style="width:2px;height:28px;background:rgba(255,255,255,0.08);"></div>
+        <div id="loginBtn" role="button" tabindex="0">Login</div>
+      </div>
     </div>
-  </nav>
-</header>
+  </header>
 
-<div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
+  <!-- ERROR NOTIFICATION -->
+  <div class="error-notification" id="errorNotification" role="alert">⚠️ This feature is not available yet.</div>
 
-<!-- Hero -->
-<section class="container" id="hero">
-  <h1>Privacy-First AI Moderation for Discord</h1>
-  <p class="lead">Keep your community safe, positive, and transparent — with complete control over your data and moderation tools.</p>
+  <!-- HERO -->
+  <main>
+    <section class="hero" id="hero">
+      <h1>Privacy-First AI Moderation for Discord</h1>
+      <p class="lead">Keep your community safe, positive, and transparent — with complete control over your data and moderation tools.</p>
 
-  <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank">🚀 Invite VoKi</a>
-  <a class="btn btn-outline" href="https://discord.gg/PKWJuRrgUd" target="_blank">💬 Join Server</a>
-  <a class="btn btn-primary" href="https://vaztinix.github.io/VoKi/AI" target="_blank">🤖 Launch VoKi AI</a>
-</section>
+      <div class="hero-ctas" aria-hidden="false">
+        <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank" rel="noopener">🚀 Invite VoKi</a>
+        <a class="btn btn-outline" href="https://discord.gg/PKWJuRrgUd" target="_blank" rel="noopener">💬 Join Server</a>
+        <a class="btn btn-primary" href="https://vaztinix.github.io/VoKi/AI" target="_blank" rel="noopener">🤖 Launch VoKi AI</a>
+      </div>
+    </section>
 
-<!-- About -->
-<section class="section" id="about">
-  <h2>About VoKi</h2>
-  <p class="lead">VoKi is a privacy-first Discord moderation bot designed to give communities safety and trust without sacrificing control.  
-  All data stays in your server — even VoKi’s developers can’t see user data. Users can view or delete their data anytime through the in-bot privacy command.</p>
-</section>
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="content">
+        <div class="reveal-up" style="text-align:center;max-width:880px;margin:0 auto">
+          <h2>About VoKi</h2>
+          <p class="lead">VoKi is a privacy-first Discord moderation bot designed to give communities safety and trust without sacrificing control. All data stays in your server — even VoKi’s developers can’t see user data. Users can view or delete their data anytime through the in-bot privacy command.</p>
+        </div>
+      </div>
+    </section>
 
-<!-- Features -->
-<section class="section" id="features">
-  <h2>Core Features</h2>
-  <div class="card-grid">
-    <div class="card">
-      <h3>🔒 Privacy-First Logging</h3>
-      <p>All data is stored safely within your server — no external tracking, no developer access.</p>
-    </div>
-    <div class="card">
-      <h3>🤖 Smart AI Moderation</h3>
-      <p>AI learns from past conversations to provide smoother, more consistent moderation.</p>
-    </div>
-    <div class="card">
-      <h3>⚙️ Custom Command Control</h3>
-      <p>Enable or disable commands per-server for full flexibility and customization.</p>
-    </div>
-    <div class="card">
-      <h3>🧠 Community-Driven AI</h3>
-      <p>VoKi’s AI is designed with your feedback and real community experiences in mind.</p>
+    <!-- FEATURES -->
+    <section class="section" id="features" aria-labelledby="features-heading">
+      <div class="content">
+        <h2 id="features-heading">Core Features</h2>
+        <div class="card-grid" id="featureGrid">
+          <article class="card reveal-up" role="article">
+            <h3>🔒 Privacy-First Logging</h3>
+            <p>All data is stored safely within your server — no external tracking, no developer access.</p>
+          </article>
+
+          <article class="card reveal-up" role="article">
+            <h3>🤖 Smart AI Moderation</h3>
+            <p>AI learns from past conversations to provide smoother, more consistent moderation.</p>
+          </article>
+
+          <article class="card reveal-up" role="article">
+            <h3>⚙️ Custom Command Control</h3>
+            <p>Enable or disable commands per-server for full flexibility and customization.</p>
+          </article>
+
+          <article class="card reveal-up" role="article">
+            <h3>🧠 Community-Driven AI</h3>
+            <p>VoKi’s AI is designed with your feedback and real community experiences in mind.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMANDS -->
+    <section class="section" id="commands">
+      <div class="content">
+        <h2>Command Showcase</h2>
+        <p class="lead">VoKi includes everything you need to moderate efficiently and fairly.</p>
+        <div class="card-grid" id="commandsGrid">
+          <div class="card reveal-up"><h3>/ban</h3><p>Ban a member from your server.</p></div>
+          <div class="card reveal-up"><h3>/mute</h3><p>Temporarily mute a user for set durations.</p></div>
+          <div class="card reveal-up"><h3>/ask</h3><p>Ask VoKi’s AI questions or get help on moderation tasks.</p></div>
+          <div class="card reveal-up"><h3>/support</h3><p>Open a staff support ticket for community help.</p></div>
+          <div class="card reveal-up"><h3>/privacy</h3><p>View or delete your saved data instantly — full transparency.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- UPDATE -->
+    <section class="section" id="update">
+      <div class="content">
+        <h2>Latest Update – October 2025</h2>
+        <p class="lead">We’ve taken privacy even further. Logging of message edits and deletions has been removed, Roblox connections discontinued, and multilingual support paused for optimization. The new <strong>/privacy</strong> command gives users full control to view or delete their stored data — ensuring total user independence.</p>
+      </div>
+    </section>
+
+    <!-- VOTE -->
+    <section class="section" id="vote">
+      <div class="content" style="text-align:center">
+        <h2>Support VoKi</h2>
+        <p class="lead">If you’re enjoying VoKi, please consider leaving a review!</p>
+        <div style="margin-top:12px">
+          <a class="btn btn-primary" href="https://top.gg/bot/1375943730951098549#reviews" target="_blank" rel="noopener">⭐ Review on Top.gg</a>
+          <a class="btn btn-outline" href="https://discords.com/bots/bot/1375943730951098549" target="_blank" rel="noopener">💎 Vote on Discords.com</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2025 VoKi. All rights reserved.</p>
+  </footer>
+
+  <!-- FLOATING MENU -->
+  <div id="floatingMenu" aria-hidden="false">
+    <div id="menuToggle" aria-label="Open menu" role="button" tabindex="0">☰</div>
+    <div id="menuItems" aria-hidden="true" role="menu" aria-label="Quick links">
+      <a class="menu-item" data-order="1" href="index.html">Home</a>
+      <a class="menu-item" data-order="2" href="team.html">Team</a>
+      <a class="menu-item" data-order="3" href="ai-helper.html">Kite AI</a>
+      <a class="menu-item" data-order="4" href="AI">VoKi AI</a>
+      <a class="menu-item" data-order="5" href="tos.html">Legal</a>
     </div>
   </div>
-</section>
 
-<!-- Commands -->
-<section class="section" id="commands">
-  <h2>Command Showcase</h2>
-  <p class="lead">VoKi includes everything you need to moderate efficiently and fairly.</p>
-  <div class="card-grid">
-    <div class="card"><h3>/ban</h3><p>Ban a member from your server.</p></div>
-    <div class="card"><h3>/mute</h3><p>Temporarily mute a user for set durations.</p></div>
-    <div class="card"><h3>/ask</h3><p>Ask VoKi’s AI questions or get help on moderation tasks.</p></div>
-    <div class="card"><h3>/support</h3><p>Open a staff support ticket for community help.</p></div>
-    <div class="card"><h3>/privacy</h3><p>View or delete your saved data instantly — full transparency.</p></div>
-  </div>
-</section>
+  <script>
+    // ===== Core interactive behaviors for reference template =====
 
-<!-- Update -->
-<section class="section" id="update">
-  <h2>Latest Update – October 2025</h2>
-  <p class="lead">We’ve taken privacy even further. Logging of message edits and deletions has been removed, Roblox connections discontinued, and multilingual support paused for optimization.  
-  The new <strong>/privacy</strong> command gives users full control to view or delete their stored data — ensuring total user independence.</p>
-</section>
+    (function(){
+      const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-<!-- Voting & Links -->
-<section class="section" id="vote">
-  <h2>Support VoKi</h2>
-  <p class="lead">If you’re enjoying VoKi, please consider leaving a review!</p>
-  <a class="btn btn-primary" href="https://top.gg/bot/1375943730951098549#reviews" target="_blank">⭐ Review on Top.gg</a>
-  <a class="btn btn-outline" href="https://discords.com/bots/bot/1375943730951098549" target="_blank">💎 Vote on Discords.com</a>
-</section>
+      // Theme toggle
+      const themeToggle = document.getElementById('themeToggle');
+      const themeIcon = document.getElementById('themeIcon');
+      const storedTheme = localStorage.getItem('voki_theme');
+      function applyTheme(theme){
+        if(theme === 'light'){
+          document.body.style.background = 'linear-gradient(135deg,#dbe9ff 0%, #f2e4ff 100%)';
+          document.body.classList.remove('dark');
+          themeIcon.src = 'VoKi_Sun.png';
+          themeToggle.setAttribute('aria-pressed','true');
+        } else {
+          document.body.style.background = 'linear-gradient(to bottom right, #4facfe, #8e44ad)';
+          document.body.classList.add('dark');
+          themeIcon.src = 'VoKi_Moon.png';
+          themeToggle.setAttribute('aria-pressed','false');
+        }
+        localStorage.setItem('voki_theme', theme);
+      }
+      applyTheme(storedTheme || 'dark');
+      themeToggle.addEventListener('click', () => {
+        const current = (localStorage.getItem('voki_theme') === 'light') ? 'dark' : 'light';
+        applyTheme(current);
+      });
 
-<footer>
-  <p>© 2025 VoKi. All rights reserved.</p>
-</footer>
+      // Login button (showing a notification for now)
+      const loginBtn = document.getElementById('loginBtn');
+      const note = document.getElementById('errorNotification');
+      function showTemporaryNotification(text = '⚠️ This feature is not available yet.'){
+        note.textContent = text;
+        note.classList.add('show');
+        setTimeout(()=> note.classList.remove('show'), 3000);
+      }
+      loginBtn.addEventListener('click', () => showTemporaryNotification());
 
-<!-- Floating Menu -->
-<div id="floatingMenu">
-  <div id="menuToggle">☰</div>
-  <div id="menuItems">
-    <a class="menu-item" href="index.html">Home</a>
-    <a class="menu-item" href="team.html">Team</a>
-    <a class="menu-item" href="ai-helper.html">Kite AI</a>
-    <a class="menu-item" href="AI">VoKi AI</a>
-    <a class="menu-item" href="tos.html">Legal</a>
-  </div>
-</div>
+      // Floating menu open/close with aria updates and staggered reveal
+      const menuToggle = document.getElementById('menuToggle');
+      const menuItems = document.getElementById('menuItems');
+      let menuOpen = false;
+      function openMenu(){ 
+        menuItems.classList.add('open'); 
+        menuItems.setAttribute('aria-hidden','false');
+        menuOpen = true;
+      }
+      function closeMenu(){ 
+        menuItems.classList.remove('open'); 
+        menuItems.setAttribute('aria-hidden','true');
+        menuOpen = false;
+      }
+      menuToggle.addEventListener('click', () => menuOpen ? closeMenu() : openMenu());
+      // close menu when clicking outside
+      document.addEventListener('click', (e) => {
+        if(menuOpen && !document.getElementById('floatingMenu').contains(e.target)){
+          closeMenu();
+        }
+      });
 
-<script>
-  const themeToggle = document.getElementById('themeToggle');
-  const themeIcon = document.getElementById('themeIcon');
-  const loginBtn = document.getElementById('loginBtn');
-  const errorNote = document.getElementById('errorNotification');
+      // Staggered hover focus for accessibility (respect reduced motion)
+      if(!prefersReduced){
+        const items = menuItems.querySelectorAll('.menu-item');
+        items.forEach((el, i) => {
+          el.style.transitionDelay = (i * 40) + 'ms';
+        });
+      }
 
-  themeToggle.addEventListener('click', () => {
-    const isDark = document.body.classList.toggle('dark');
-    document.body.style.background = isDark
-      ? 'linear-gradient(to bottom right, #141e30, #243b55)'
-      : 'linear-gradient(to bottom right, #4facfe, #8e44ad)';
-    themeIcon.src = isDark ? 'VoKi_Sun.png' : 'VoKi_Moon.png';
-  });
+      // Intersection Observer for reveal animations
+      const revealElements = document.querySelectorAll('.reveal-up, .card');
+      if('IntersectionObserver' in window && !prefersReduced){
+        const obs = new IntersectionObserver((entries, observer) => {
+          entries.forEach(entry => {
+            if(entry.isIntersecting){
+              entry.target.classList.add('visible');
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealElements.forEach(el => obs.observe(el));
+      } else {
+        // fallback: reveal all immediately
+        revealElements.forEach(el => el.classList.add('visible'));
+      }
 
-  loginBtn.addEventListener('click', () => {
-    errorNote.classList.add('show');
-    setTimeout(() => errorNote.classList.remove('show'), 3000);
-  });
+      // Smooth anchor scroll for nav links
+      document.querySelectorAll('a[href^="#"]').forEach(a=>{
+        a.addEventListener('click', (e) => {
+          const targetId = a.getAttribute('href').slice(1);
+          const target = document.getElementById(targetId);
+          if(target){
+            e.preventDefault();
+            target.scrollIntoView({behavior: prefersReduced ? 'auto' : 'smooth', block: 'start'});
+            // close floating menu on mobile after clicking
+            if(menuOpen) closeMenu();
+          }
+        });
+      });
 
-  const menuToggle = document.getElementById('menuToggle');
-  const menuItems = document.getElementById('menuItems');
-  menuToggle.addEventListener('click', () => {
-    menuItems.style.display = menuItems.style.display === 'flex' ? 'none' : 'flex';
-  });
-</script>
+      // keyboard accessibility for menu toggle
+      menuToggle.addEventListener('keydown', (e) => {
+        if(e.key === 'Enter' || e.key === ' ') { e.preventDefault(); menuOpen ? closeMenu() : openMenu(); }
+      });
 
+      // small enhancement: animate CTA buttons on load
+      window.addEventListener('load', () => {
+        if(!prefersReduced){
+          document.querySelectorAll('.btn').forEach((b,i)=> {
+            b.style.transition = 'transform .6s var(--ease) ' + (i*80) + 'ms';
+            b.style.transform = 'translateY(0)';
+          });
+        }
+      });
+    })();
+  </script>
 </body>
 </html>
