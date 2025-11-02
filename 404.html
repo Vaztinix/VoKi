@@ -1,173 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>404 – Page Not Found | VoKi</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>404 – Page Not Found | VoKi</title>
+<link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
+<style>
+:root {
+  --primary: #aeefff;
+  --accent: #6dc8ff;
+  --bg-gradient: linear-gradient(135deg, #4facfe, #6fa1ff, #8e44ad);
+  --bg-dark: linear-gradient(135deg, #141e30, #1f2a45, #243b55);
+  --text: #ffffff;
+}
 
-  <style>
-    :root {
-      --primary: #aeefff;
-      --accent: #6dc8ff;
-      --bg-gradient: linear-gradient(135deg, #4facfe, #6fa1ff, #8e44ad);
-      --bg-dark: linear-gradient(135deg, #141e30, #1f2a45, #243b55);
-      --text: #ffffff;
-      --card: rgba(255,255,255,0.08);
-      --card-hover: rgba(255,255,255,0.18);
-      --sidebar: rgba(0,0,0,0.85);
-      --error-bg: rgba(0,0,0,0.9);
-    }
+body {
+  margin:0; font-family:"Segoe UI",Arial,sans-serif; color:var(--text);
+  background: var(--bg-gradient); background-size:400% 400%;
+  animation: gradientFlow 25s ease infinite;
+  display:flex; justify-content:center; align-items:center; flex-direction:column;
+  min-height:100vh; text-align:center;
+}
+@keyframes gradientFlow { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
 
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: var(--bg-gradient);
-      background-size: 400% 400%;
-      animation: gradientFlow 25s ease infinite;
-      color: var(--text);
-      text-align: center;
-    }
+.error-section h1 {
+  font-size:8rem; color:var(--accent); margin-bottom:0.5rem;
+}
+.error-section p {
+  font-size:1.3rem; margin-bottom:1.5rem; opacity:0.9;
+}
+.home-btn {
+  padding:0.75rem 2rem; background-color:var(--primary); color:#000;
+  border:none; border-radius:40px; cursor:pointer; font-size:1.1rem;
+  font-weight:bold; text-decoration:none; transition: all 0.3s ease;
+}
+.home-btn:hover { transform:translateY(-3px); opacity:0.9; }
 
-    @keyframes gradientFlow {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
-
-    header {
-      background: var(--sidebar);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .logo img {
-      height: 40px;
-      width: 40px;
-      border-radius: 8px;
-    }
-
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    nav a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: bold;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-    }
-
-    nav a:hover {
-      background: var(--primary);
-      color: #000;
-    }
-
-    .error-section {
-      margin-top: 15vh;
-      animation: fadeIn 1.5s ease;
-    }
-
-    .error-section h1 {
-      font-size: 8rem;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
-    }
-
-    .error-section p {
-      font-size: 1.3rem;
-      margin-bottom: 1.5rem;
-      color: #d0d0d0;
-    }
-
-    .home-btn {
-      padding: 0.75rem 2rem;
-      background-color: var(--primary);
-      color: #000;
-      border: none;
-      border-radius: 40px;
-      cursor: pointer;
-      font-size: 1.1rem;
-      font-weight: bold;
-      text-decoration: none;
-      transition: all 0.3s ease;
-    }
-
-    .home-btn:hover {
-      transform: translateY(-3px);
-      opacity: 0.9;
-    }
-
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      opacity: 0.85;
-    }
-
-    footer a {
-      color: var(--primary);
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-  </style>
+@keyframes fadeIn {
+  from { opacity:0; transform:translateY(30px); }
+  to { opacity:1; transform:translateY(0); }
+}
+</style>
 </head>
 <body>
-  <!-- Header -->
-  <header>
-    <div class="logo">
-      <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi Logo">
-      <h1>VoKi</h1>
-    </div>
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="team.html">Team</a>
-      <a href="tos.html">Legal</a>
-      <a href="https://discord.com/oauth2/authorize?client_id=1375943730951098549">Invite VoKi</a>
-      <a href="https://discord.gg/cXsZr3cMEB">Join Server</a>
-    </nav>
-  </header>
 
-  <!-- 404 Section -->
-  <section class="error-section">
-    <h1>404</h1>
-    <p>Oops! The page you’re looking for doesn’t exist or has been moved.</p>
-    <a href="index.html" class="home-btn">Return Home</a>
-  </section>
+<section class="error-section">
+  <h1>404</h1>
+  <p>Oops! The page you’re looking for doesn’t exist or has been moved.</p>
+  <a href="index.html" class="home-btn">Return Home</a>
+</section>
 
-  <!-- Footer -->
-  <footer>
-    © <span id="year"></span> VoKi. All rights reserved. | 
-    <a href="tos.html">Legal</a>
-  </footer>
+<script>
+// Apply dark/light theme based on user's preference
+let dark = localStorage.getItem('voki_dark')==='1' ? true : (localStorage.getItem('voki_dark')==='0' ? false : window.matchMedia('(prefers-color-scheme: dark)').matches);
+if(dark){ document.body.style.background='var(--bg-dark)'; }
+</script>
 
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
 </body>
 </html>
