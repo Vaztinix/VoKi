@@ -39,6 +39,7 @@
       color: var(--text);
       scroll-behavior: smooth;
       transition: background 0.5s;
+      display: flex;
     }
 
     @keyframes gradientFlow {
@@ -47,15 +48,19 @@
       100% {background-position: 0% 50%;}
     }
 
+    /* Top Navbar */
     header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
       background: var(--sidebar);
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 1rem 2rem;
-      position: sticky;
-      top: 0;
       z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
     .logo {
@@ -103,6 +108,12 @@
       gap: 10px;
     }
 
+    #themeToggle img {
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+    }
+
     .separator {
       width: 2px;
       height: 24px;
@@ -110,26 +121,49 @@
       opacity: 0.6;
     }
 
-    #themeToggle img {
-      width: 28px;
-      height: 28px;
+    #loginBtn {
       cursor: pointer;
     }
 
-    .container {
-      padding: 3rem 2rem;
-      max-width: 1000px;
-      margin: 0 auto;
+    /* Floating Quick Nav */
+    .quick-nav {
+      position: fixed;
+      top: 100px;
+      left: 20px;
+      width: 200px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: var(--sidebar);
+      padding: 15px;
+      border-radius: 12px;
+      z-index: 900;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+
+    .quick-nav a {
+      color: var(--primary);
+      text-decoration: none;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .quick-nav a:hover {
+      background: var(--primary);
+      color: #000;
+    }
+
+    /* Main Content */
+    .main-content {
+      margin-left: 250px; /* width of quick nav + spacing */
+      padding: 120px 2rem 2rem 2rem;
+      max-width: 900px;
+      flex-grow: 1;
     }
 
     h1, h2 {
       color: var(--primary);
-    }
-
-    .lead {
-      font-size: 1.1rem;
-      opacity: 0.9;
-      margin-bottom: 1.5rem;
     }
 
     .card {
@@ -154,8 +188,10 @@
       padding: 2rem;
       font-size: 0.9rem;
       opacity: 0.85;
+      margin-top: 40px;
     }
 
+    /* Error Notification */
     .error-notification {
       position: fixed;
       top: 100px;
@@ -231,24 +267,18 @@
       transform: translateY(10px);
     }
 
-    @media (max-width: 768px) {
-      header {
-        flex-direction: column;
-        align-items: flex-start;
+    /* Responsive */
+    @media (max-width: 900px) {
+      .quick-nav {
+        display: none;
       }
-
-      .container {
-        padding: 2rem 1rem;
+      .main-content {
+        margin-left: 0;
+        padding-top: 140px;
       }
 
       nav {
-        flex-direction: column;
-        width: 100%;
-      }
-
-      .nav-right {
-        width: 100%;
-        justify-content: flex-start;
+        flex-wrap: wrap;
       }
     }
   </style>
@@ -275,9 +305,22 @@
   </nav>
 </header>
 
-<div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
+<!-- Left Floating Quick Nav -->
+<div class="quick-nav">
+  <a href="#purpose">1. Purpose</a>
+  <a href="#responsible">2. Responsible Use</a>
+  <a href="#ai">3. AI Features</a>
+  <a href="#privacy">4. Privacy Policy</a>
+  <a href="#permissions">5. Permissions</a>
+  <a href="#guidelines">6. Guidelines</a>
+  <a href="#logging">7. Logging</a>
+  <a href="#security">8. Security</a>
+  <a href="#updates">9. Updates</a>
+  <a href="#support">10. Support</a>
+</div>
 
-<div class="container">
+<!-- Main Content -->
+<div class="main-content">
   <div class="card">
     <h1>Terms of Service & Privacy Policy</h1>
     <p>By using VoKi, you agree to these terms and conditions. This page clarifies your responsibilities, rights, and how your data is protected.</p>
@@ -382,10 +425,12 @@
   <div id="menuToggle">☰</div>
 </div>
 
+<div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
+
 <script>
   const themeToggle = document.getElementById('themeToggle');
   const themeIcon = document.getElementById('themeIcon');
-  const loginBtn = document.getElementById('loginBtn') || document.getElementById('loginBtn') || document.getElementById('loginBtn');
+  const loginBtn = document.getElementById('loginBtn');
   const errorNote = document.getElementById('errorNotification');
 
   themeToggle.addEventListener('click', () => {
@@ -401,26 +446,19 @@
     setTimeout(() => errorNote.classList.remove('show'), 3000);
   });
 
-  // Floating Menu with open/close animation
+  // Floating Menu
   const menuToggle = document.getElementById('menuToggle');
   const menuItems = document.getElementById('menuItems');
   const menuLinks = document.querySelectorAll('.menu-item');
-
   let menuOpen = false;
 
   menuToggle.addEventListener('click', () => {
     if (!menuOpen) {
       menuItems.style.display = 'flex';
-      menuLinks.forEach((link, i) => {
-        setTimeout(() => link.classList.add('show'), i*50);
-      });
+      menuLinks.forEach((link, i) => setTimeout(() => link.classList.add('show'), i*50));
     } else {
-      menuLinks.forEach((link, i) => {
-        setTimeout(() => link.classList.remove('show'), i*50);
-      });
-      setTimeout(() => {
-        menuItems.style.display = 'none';
-      }, 300);
+      menuLinks.forEach((link, i) => setTimeout(() => link.classList.remove('show'), i*50));
+      setTimeout(() => menuItems.style.display = 'none', 300);
     }
     menuOpen = !menuOpen;
   });
