@@ -1,235 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>VoKi – Terms of Service & Privacy Policy</title>
-  <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VoKi – Terms of Service & Privacy Policy</title>
+<link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
 
-  <!-- Meta Embed -->
-  <meta property="og:title" content="VoKi – Terms of Service & Privacy Policy" />
-  <meta property="og:description" content="Review VoKi’s Terms of Service and Privacy Policy to understand how your data and privacy are protected." />
-  <meta property="og:image" content="https://yourdomain.com/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
-  <meta property="og:type" content="website" />
-  <meta property="og:url" content="https://yourdomain.com/tos.html" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="VoKi – Terms of Service & Privacy Policy" />
-  <meta name="twitter:description" content="Review VoKi’s Terms of Service and Privacy Policy to understand how your data is protected." />
-  <meta name="twitter:image" content="https://yourdomain.com/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
+<!-- Meta Embed -->
+<meta property="og:title" content="VoKi – Terms of Service & Privacy Policy" />
+<meta property="og:description" content="Review VoKi’s Terms of Service and Privacy Policy to understand how your data and privacy are protected." />
+<meta property="og:image" content="https://yourdomain.com/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://yourdomain.com/tos.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="VoKi – Terms of Service & Privacy Policy" />
+<meta name="twitter:description" content="Review VoKi’s Terms of Service and Privacy Policy to understand how your data is protected." />
+<meta name="twitter:image" content="https://yourdomain.com/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
 
-  <style>
-    :root {
-      --primary: #aeefff;
-      --bg-gradient: linear-gradient(135deg, #4facfe, #6fa1ff, #8e44ad);
-      --bg-dark: linear-gradient(135deg, #141e30, #1f2a45, #243b55);
-      --text: #ffffff;
-      --card: rgba(255,255,255,0.08);
-      --card-hover: rgba(255,255,255,0.18);
-      --sidebar: rgba(0,0,0,0.85);
-      --error-bg: rgba(0,0,0,0.9);
-    }
+<style>
+:root {
+  --primary: #aeefff;
+  --bg-gradient: linear-gradient(135deg, #4facfe, #6fa1ff, #8e44ad);
+  --bg-dark: linear-gradient(135deg, #141e30, #1f2a45, #243b55);
+  --text: #ffffff;
+  --card: rgba(255,255,255,0.08);
+  --card-hover: rgba(255,255,255,0.18);
+  --sidebar: rgba(0,0,0,0.85);
+  --error-bg: rgba(0,0,0,0.9);
+}
 
-    body {
-      margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: var(--bg-gradient);
-      background-size: 400% 400%;
-      animation: gradientFlow 25s ease infinite;
-      color: var(--text);
-      scroll-behavior: smooth;
-      display: flex;
-    }
+body {
+  margin: 0;
+  font-family: "Segoe UI", Arial, sans-serif;
+  background: var(--bg-gradient);
+  background-size: 400% 400%;
+  animation: gradientFlow 25s ease infinite;
+  color: var(--text);
+  scroll-behavior: smooth;
+  display: block;
+  min-height: 100vh;
+  padding-top: 80px; /* header height */
+}
 
-    @keyframes gradientFlow {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
+@keyframes gradientFlow {
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}
+  100% {background-position: 0% 50%;}
+}
 
-    /* Top Navbar */
-    header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      background: var(--sidebar);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 1rem 2rem;
-      z-index: 1000;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    }
+/* Top Navbar */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: var(--sidebar);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  z-index: 1000;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
-    .logo img { height: 40px; width: 40px; border-radius: 8px; }
-    .logo h1 { font-size: 1.4rem; color: var(--primary); margin: 0; }
+.logo img { height: 40px; width: 40px; border-radius: 8px; }
+.logo h1 { font-size: 1.4rem; color: var(--primary); margin: 0; }
 
-    nav {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
 
-    nav a, nav div {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: bold;
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-      cursor: pointer;
-    }
+.nav-left, .nav-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
 
-    nav a.active, nav a:hover, nav div:hover {
-      background: var(--primary);
-      color: #000;
-    }
+.nav-left a, .nav-right div, .nav-right a {
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
 
-    .nav-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-left: 15px;
-    }
+.nav-left a.active, .nav-left a:hover, .nav-right div:hover {
+  background: var(--primary);
+  color: #000;
+}
 
-    #themeToggle img { width: 28px; height: 28px; cursor: pointer; }
-    .separator { width: 2px; height: 24px; background: var(--primary); opacity: 0.6; }
-    #loginBtn { cursor: pointer; }
+.nav-right { margin-left: 15px; }
 
-    /* Left Floating Quick Nav */
-    .quick-nav {
-      position: fixed;
-      top: 100px;
-      left: 20px;
-      width: 200px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      background: var(--sidebar);
-      padding: 15px;
-      border-radius: 12px;
-      z-index: 900;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
+#themeToggle img { width: 28px; height: 28px; cursor: pointer; }
+.separator { width: 2px; height: 24px; background: var(--primary); opacity: 0.6; }
+#loginBtn { cursor: pointer; }
 
-    .quick-nav a {
-      color: var(--primary);
-      text-decoration: none;
-      padding: 8px 12px;
-      border-radius: 8px;
-      transition: all 0.3s ease;
-    }
+/* Left Floating Quick Nav */
+.quick-nav {
+  position: fixed;
+  top: 100px;
+  left: 20px;
+  width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: var(--sidebar);
+  padding: 15px;
+  border-radius: 12px;
+  z-index: 900;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
 
-    .quick-nav a:hover { background: var(--primary); color: #000; }
+.quick-nav a {
+  color: var(--primary);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+.quick-nav a:hover { background: var(--primary); color: #000; }
 
-    /* Main Content */
-    .main-content {
-      margin-left: 250px;
-      padding: 120px 2rem 2rem 2rem;
-      max-width: 900px;
-      flex-grow: 1;
-    }
+/* Main Content */
+.main-content {
+  margin-left: 250px;
+  padding: 20px 2rem 2rem 2rem;
+  max-width: 900px;
+}
 
-    h1, h2 { color: var(--primary); }
+h1, h2 { color: var(--primary); }
 
-    .card {
-      background: var(--card);
-      border-radius: 15px;
-      padding: 25px;
-      margin-bottom: 20px;
-      transition: background 0.3s, transform 0.3s;
-    }
+.card {
+  background: var(--card);
+  border-radius: 15px;
+  padding: 25px;
+  margin-bottom: 20px;
+  transition: background 0.3s, transform 0.3s;
+}
+.card:hover { background: var(--card-hover); transform: translateY(-3px); }
 
-    .card:hover { background: var(--card-hover); transform: translateY(-3px); }
+ul { padding-left: 1.5rem; }
 
-    ul { padding-left: 1.5rem; }
+footer {
+  text-align: center;
+  padding: 2rem;
+  font-size: 0.9rem;
+  opacity: 0.85;
+  margin-top: 40px;
+}
 
-    footer {
-      text-align: center;
-      padding: 2rem;
-      font-size: 0.9rem;
-      opacity: 0.85;
-      margin-top: 40px;
-    }
+/* Error Notification */
+.error-notification {
+  position: fixed;
+  top: 100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--error-bg);
+  padding: 15px 20px;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s;
+  z-index: 1500;
+}
+.error-notification.show { opacity: 1; pointer-events: auto; }
 
-    /* Error Notification */
-    .error-notification {
-      position: fixed;
-      top: 100px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--error-bg);
-      padding: 15px 20px;
-      border-radius: 8px;
-      color: #fff;
-      font-weight: bold;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s;
-      z-index: 1500;
-    }
+/* Floating Bottom Menu */
+#floatingMenu {
+  position: fixed;
+  bottom: 40px;
+  left: 20px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
 
-    .error-notification.show { opacity: 1; pointer-events: auto; }
+#menuToggle {
+  width: 60px;
+  height: 60px;
+  background: var(--primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 30px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
 
-    /* Floating Bottom Menu */
-    #floatingMenu {
-      position: fixed;
-      bottom: 40px;
-      left: 20px;
-      z-index: 2000;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-    }
+#menuItems {
+  display: none;
+  flex-direction: column;
+  margin-bottom: 10px;
+  gap: 10px;
+}
 
-    #menuToggle {
-      width: 60px;
-      height: 60px;
-      background: var(--primary);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 30px;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
+.menu-item {
+  background: var(--card);
+  padding: 10px 15px;
+  border-radius: 25px;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: transform 0.3s, opacity 0.3s;
+}
 
-    #menuItems {
-      display: none;
-      flex-direction: column;
-      margin-bottom: 10px;
-      gap: 10px;
-    }
+.menu-item.show { opacity: 1; transform: translateY(0); }
+.menu-item.hide { opacity: 0; transform: translateY(10px); }
 
-    .menu-item {
-      background: var(--card);
-      padding: 10px 15px;
-      border-radius: 25px;
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: bold;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-      opacity: 0;
-      transform: translateY(10px);
-      transition: transform 0.3s, opacity 0.3s;
-    }
-
-    .menu-item.show { opacity: 1; transform: translateY(0); }
-    .menu-item.hide { opacity: 0; transform: translateY(10px); }
-
-    @media (max-width: 900px) {
-      .quick-nav { display: none; }
-      .main-content { margin-left: 0; padding-top: 140px; }
-      nav { flex-wrap: wrap; justify-content: center; }
-    }
-  </style>
+@media (max-width: 900px) {
+  .quick-nav { display: none; }
+  .main-content { margin-left: 0; padding-top: 140px; }
+  nav { flex-wrap: wrap; justify-content: center; }
+}
+</style>
 </head>
 <body>
 
@@ -239,10 +239,12 @@
     <h1>VoKi</h1>
   </div>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="team.html">Team</a>
-    <a href="tos.html" class="active">Terms</a>
-    <a href="AI.html">VoKi AI</a>
+    <div class="nav-left">
+      <a href="index.html">Home</a>
+      <a href="team.html">Team</a>
+      <a href="tos.html" class="active">Terms</a>
+      <a href="AI.html">VoKi AI</a>
+    </div>
     <div class="nav-right">
       <div id="themeToggle"><img id="themeIcon" src="VoKi_Moon.png" alt="Toggle Theme"></div>
       <div class="separator"></div>
@@ -362,39 +364,39 @@
 <div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
 
 <script>
-  const themeToggle = document.getElementById('themeToggle');
-  const themeIcon = document.getElementById('themeIcon');
-  const loginBtn = document.getElementById('loginBtn');
-  const errorNote = document.getElementById('errorNotification');
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+const loginBtn = document.getElementById('loginBtn');
+const errorNote = document.getElementById('errorNotification');
 
-  themeToggle.addEventListener('click', () => {
-    const isDark = document.body.classList.toggle('light-mode');
-    document.body.style.background = isDark
-      ? 'linear-gradient(135deg, #141e30, #1f2a45, #243b55)'
-      : 'linear-gradient(135deg, #4facfe, #6fa1ff, #8e44ad)';
-    themeIcon.src = isDark ? 'VoKi_Sun.png' : 'VoKi_Moon.png';
-  });
+themeToggle.addEventListener('click', () => {
+  const isDark = document.body.classList.toggle('light-mode');
+  document.body.style.background = isDark
+    ? 'linear-gradient(135deg, #141e30, #1f2a45, #243b55)'
+    : 'linear-gradient(135deg, #4facfe, #6fa1ff, #8e44ad)';
+  themeIcon.src = isDark ? 'VoKi_Sun.png' : 'VoKi_Moon.png';
+});
 
-  loginBtn.addEventListener('click', () => {
-    errorNote.classList.add('show');
-    setTimeout(() => errorNote.classList.remove('show'), 3000);
-  });
+loginBtn.addEventListener('click', () => {
+  errorNote.classList.add('show');
+  setTimeout(() => errorNote.classList.remove('show'), 3000);
+});
 
-  const menuToggle = document.getElementById('menuToggle');
-  const menuItems = document.getElementById('menuItems');
-  const menuLinks = document.querySelectorAll('.menu-item');
-  let menuOpen = false;
+const menuToggle = document.getElementById('menuToggle');
+const menuItems = document.getElementById('menuItems');
+const menuLinks = document.querySelectorAll('.menu-item');
+let menuOpen = false;
 
-  menuToggle.addEventListener('click', () => {
-    if (!menuOpen) {
-      menuItems.style.display = 'flex';
-      menuLinks.forEach((link, i) => setTimeout(() => link.classList.add('show'), i*50));
-    } else {
-      menuLinks.forEach((link, i) => setTimeout(() => link.classList.remove('show'), i*50));
-      setTimeout(() => menuItems.style.display = 'none', 300);
-    }
-    menuOpen = !menuOpen;
-  });
+menuToggle.addEventListener('click', () => {
+  if (!menuOpen) {
+    menuItems.style.display = 'flex';
+    menuLinks.forEach((link, i) => setTimeout(() => link.classList.add('show'), i*50));
+  } else {
+    menuLinks.forEach((link, i) => setTimeout(() => link.classList.remove('show'), i*50));
+    setTimeout(() => menuItems.style.display = 'none', 300);
+  }
+  menuOpen = !menuOpen;
+});
 </script>
 
 </body>
