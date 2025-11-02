@@ -6,7 +6,7 @@
 <title>VoKi – Team & Sponsors</title>
 <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png">
 
-<!-- Meta -->
+<!-- Open Graph / Twitter -->
 <meta property="og:title" content="VoKi – Team & Sponsors">
 <meta property="og:description" content="Meet the creators and supporters behind VoKi — building smarter, safer Discord communities.">
 <meta property="og:image" content="https://yourdomain.com/VoKi%20Logo%20(Updated%20Bot%20Logo).png">
@@ -20,156 +20,113 @@
 <style>
 :root {
   --primary: #aeefff;
-  --bg-gradient: linear-gradient(135deg, #4facfe, #6fa1ff, #8e44ad);
-  --bg-dark: linear-gradient(135deg, #141e30, #1f2a45, #243b55);
+  --accent: #6dc8ff;
+  --bg-gradient: linear-gradient(135deg,#4facfe,#6fa1ff,#8e44ad);
+  --bg-dark: linear-gradient(135deg,#141e30,#1f2a45,#243b55);
   --text: #ffffff;
   --card: rgba(255,255,255,0.08);
   --card-hover: rgba(255,255,255,0.18);
-  --sidebar: rgba(0,0,0,0.85);
+  --nav: rgba(0,0,0,0.85);
   --error-bg: rgba(0,0,0,0.9);
+  --radius: 14px;
 }
 
+/* ============================== GLOBAL ============================== */
+* { box-sizing:border-box; }
 body {
-  margin: 0;
-  font-family: "Segoe UI", Arial, sans-serif;
-  background: var(--bg-gradient);
-  background-size: 400% 400%;
-  animation: gradientFlow 25s ease infinite;
-  color: var(--text);
-  scroll-behavior: smooth;
-  min-height: 100vh;
-  padding-top: 80px;
+  margin:0; font-family:"Segoe UI",Arial,sans-serif; color:var(--text);
+  background: var(--bg-gradient); background-size:400% 400%;
+  animation:flow 25s ease infinite; scroll-behavior: smooth; min-height:100vh;
 }
+@keyframes flow { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
 
-@keyframes gradientFlow {
-  0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}
-  100% {background-position: 0% 50%;}
-}
-
-/* Header */
+/* ============================== HEADER ============================== */
 header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background: var(--sidebar);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.8rem 2rem;
-  z-index: 1000;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  position: sticky; top:0; z-index:1000;
+  display:flex; justify-content:space-between; align-items:center; gap:1rem;
+  padding:1rem 2rem; background:var(--nav); border-bottom:1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(6px);
 }
+.brand { display:flex; align-items:center; gap:12px; }
+.brand img { width:44px; height:44px; border-radius:10px; object-fit:cover; }
+.brand h1 { margin:0; font-size:1.25rem; color:var(--primary); letter-spacing:0.5px; }
+nav { display:flex; align-items:center; gap:12px; }
+.nav-links { display:flex; gap:8px; align-items:center; }
+.nav-links a { color:var(--primary); text-decoration:none; padding:8px 12px; border-radius:10px; font-weight:600; transition: all 0.18s ease; }
+.nav-links a:hover, .nav-links a.active { background:var(--primary); color:#000; transform:translateY(-2px); }
+.actions { display:flex; gap:10px; align-items:center; }
+.icon-btn { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:transparent; border:1px solid rgba(255,255,255,0.04); cursor:pointer; }
+.sep { width:2px; height:26px; background:var(--primary); opacity:0.6; border-radius:3px; }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-.logo img { height: 40px; width: 40px; border-radius: 8px; }
-.logo h1 { font-size: 1.4rem; color: var(--primary); margin: 0; }
+/* ============================== MAIN CONTENT ============================== */
+.container { max-width:1200px; margin:0 auto; padding:3.2rem 1.5rem; text-align:center; }
 
-nav {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
+.hero {
+  text-align:center; margin-bottom:50px;
 }
-nav a, #themeToggle, #discordLogin {
-  padding: 0.5rem 1rem;
-  border-radius: 6px;
-  color: var(--primary);
-  font-weight: bold;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.3s ease;
+.hero img {
+  width:120px; height:120px; border-radius:50%;
+  box-shadow:0 6px 18px rgba(0,0,0,0.3); margin-bottom:15px;
+  transition: transform 0.3s ease;
 }
-nav a.active, nav a:hover, #themeToggle:hover, #discordLogin:hover {
-  background: var(--primary);
-  color: #000;
-}
-
-/* Main Content */
-.main-content {
-  margin: 0 auto;
-  padding: 2rem;
-  max-width: 1100px;
-}
-
-.team-hero {
-  text-align: center;
-  margin-bottom: 40px;
-}
-.team-hero img {
-  width: 120px; height: 120px; border-radius: 50%;
-  margin-bottom: 15px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: transform 0.4s ease;
-}
-.team-hero img:hover { transform: scale(1.05); }
-.team-hero h1 { font-size: 2rem; margin-bottom: 0.5rem; color: var(--primary); }
-.team-hero p.lead { font-size: 1.1rem; opacity: 0.9; }
+.hero img:hover { transform: scale(1.05); }
+.hero h1 { font-size:2rem; color:var(--primary); margin-bottom:0.5rem; }
+.hero p { opacity:0.9; font-size:1.1rem; }
 
 /* Team Grid */
-.team-grid { 
-  display: grid; 
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
-  gap: 25px; 
+.team-grid {
+  display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:30px;
 }
 .team-card {
-  background: var(--card);
-  padding: 25px;
-  border-radius: 15px;
-  text-align: center;
-  transition: background 0.3s, transform 0.3s, box-shadow 0.3s, opacity 0.5s;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.25);
-  opacity: 0;
-  transform: translateY(20px);
+  background:var(--card); padding:28px; border-radius:var(--radius);
+  text-align:center; transition: transform .25s ease, background .18s, opacity .4s;
+  box-shadow:0 10px 30px rgba(0,0,0,.25); opacity:0; transform:translateY(20px);
 }
-.team-card.visible { opacity: 1; transform: translateY(0); }
-.team-card:hover { background: var(--card-hover); transform: translateY(-6px); box-shadow: 0 8px 20px rgba(0,0,0,0.35); }
-.team-card img { width: 100px; height: 100px; object-fit: cover; border-radius: 50%; margin-bottom: 15px; border: 3px solid var(--primary); }
-.team-card h3 { margin-bottom: 8px; color: var(--primary); }
-.team-card p { font-size: 0.95rem; opacity: 0.9; }
+.team-card.visible { opacity:1; transform:translateY(0); }
+.team-card:hover { transform:translateY(-6px); background:var(--card-hover); box-shadow:0 12px 32px rgba(0,0,0,.35); }
+.team-card img { width:100px; height:100px; object-fit:cover; border-radius:50%; margin-bottom:15px; border:3px solid var(--primary); }
+.team-card h3 { margin-bottom:8px; color:var(--primary); }
+.team-card p { opacity:0.9; line-height:1.5; font-size:0.95rem; }
 
-/* Error Notification */
-.error-notification {
-  position: fixed; top: 20px; right: 20px; background: var(--error-bg); padding: 15px 20px;
-  border-radius: 8px; color: #fff; font-weight: bold; opacity: 0; pointer-events: none; transition: opacity 0.5s ease; z-index: 2000;
-}
-.error-notification.show { opacity: 1; pointer-events: auto; }
+/* ============================== FOOTER ============================== */
+footer { text-align:center; padding:28px 1.5rem; color:rgba(255,255,255,.8); margin-top:50px; }
 
-footer {
-  text-align: center; padding: 2rem; font-size: 0.9rem; opacity: 0.85; margin-top: 50px;
-}
+/* ============================== ERROR NOTIFICATION ============================== */
+.toast { position:fixed; right:50%; transform:translateX(50%); top:60px; background:var(--error-bg); padding:12px 16px; border-radius:10px; color:#fff; box-shadow:0 8px 30px rgba(0,0,0,.4); opacity:0; transition:opacity .2s, transform .2s; z-index:2000; }
 
-@media (max-width: 768px) {
-  .team-grid { grid-template-columns: 1fr; }
-}
+/* ============================== RESPONSIVE ============================== */
+@media(max-width:840px){ .container{padding:2rem 1rem;} nav{gap:8px;} .brand h1{display:inline-block;} }
 </style>
 </head>
+
 <body>
 
 <header>
-  <div class="logo">
-    <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi Logo">
+  <div class="brand">
+    <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi logo">
     <h1>VoKi</h1>
   </div>
   <nav>
-    <a href="index.html">Home</a>
-    <a href="team.html" class="active">Team</a>
-    <a href="tos.html">Terms</a>
-    <div id="themeToggle">Toggle Theme</div>
-    <div id="discordLogin">Login</div>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="team.html" class="active">Team</a>
+      <a href="tos.html">Legal</a>
+    </div>
+    <div class="actions">
+      <button id="themeToggle" class="icon-btn" title="Toggle theme">
+        <img id="themeIcon" src="VoKi_Moon.png" alt="theme" style="width:18px;height:18px">
+      </button>
+      <div class="sep"></div>
+      <a class="btn btn-outline" href="#" id="loginBtn">Login</a>
+    </div>
   </nav>
 </header>
 
-<div class="error-notification" id="errorNotification">⚠️ This feature is not available yet.</div>
-
-<div class="main-content">
-  <div class="team-hero">
+<main class="container">
+  <div class="hero">
     <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi Logo">
     <h1>Meet the VoKi Team</h1>
-    <p class="lead">The people and partners behind VoKi — building smarter, safer communities together.</p>
+    <p>The people and partners behind VoKi — building smarter, safer communities together.</p>
   </div>
 
   <div class="team-grid">
@@ -194,26 +151,32 @@ footer {
       <p>Supporting VoKi’s mission to provide secure, privacy-first moderation tools for Discord communities.</p>
     </div>
   </div>
-</div>
+</main>
 
 <footer>
-  <p>© 2025 VoKi • Privacy-First Moderation for Discord</p>
+  <p>© 2025 VoKi • Privacy‑First Moderation for Discord</p>
 </footer>
 
+<div id="toast" class="toast"></div>
+
 <script>
-// Theme toggle
-document.getElementById('themeToggle').addEventListener('click', () => {
-  document.body.classList.toggle('light-mode');
-});
+// Theme Toggle
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+let dark = localStorage.getItem('voki_dark')==='1' ? true : (localStorage.getItem('voki_dark')==='0' ? false : window.matchMedia('(prefers-color-scheme: dark)').matches);
+function applyTheme(){ 
+  if(dark){ document.body.style.background='var(--bg-dark)'; themeIcon.src='VoKi_Sun.png'; }
+  else{ document.body.style.background='var(--bg-gradient)'; themeIcon.src='VoKi_Moon.png'; }
+  localStorage.setItem('voki_dark', dark?'1':'0');
+}
+applyTheme();
+themeToggle.addEventListener('click',()=>{ dark=!dark; applyTheme(); });
 
-// Discord login placeholder
-document.getElementById('discordLogin').addEventListener('click', () => {
-  const error = document.getElementById('errorNotification');
-  error.classList.add('show');
-  setTimeout(() => error.classList.remove('show'), 2500);
-});
+// Toast for login button
+const toast = document.getElementById('toast');
+document.getElementById('loginBtn').addEventListener('click', e=>{ e.preventDefault(); toast.textContent='Login is in development and unavailable.'; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),3500); });
 
-// Scroll reveal animation for team cards
+// Scroll reveal animation
 const cards = document.querySelectorAll('.team-card');
 const revealOnScroll = () => {
   const triggerBottom = window.innerHeight * 0.85;
@@ -225,6 +188,5 @@ const revealOnScroll = () => {
 window.addEventListener('scroll', revealOnScroll);
 window.addEventListener('load', revealOnScroll);
 </script>
-
 </body>
 </html>
