@@ -230,9 +230,9 @@
       <h2>Core Features</h2>
       <div class="card-grid">
         <div class="card"><h3>🔒 Privacy‑First Logging</h3><p>All data is stored within your server — no external tracking, no developer access.</p></div>
-        <div class="card"><h3>🤖 Smart AI Moderation</h3><p>AI features detect and filter toxic or negative messages, helping keep your server safe and welcoming. :contentReference[oaicite:2]{index=2}</p></div>
-        <div class="card"><h3>⚙️ Command Control</h3><p>Administrators will soon be able to enable or disable commands per server — full flexibility. :contentReference[oaicite:3]{index=3}</p></div>
-        <div class="card"><h3>🧭 Community‑Driven</h3><p>Designed with feedback from real community moderators and server staff. :contentReference[oaicite:4]{index=4}</p></div>
+        <div class="card"><h3>🤖 Smart AI Moderation</h3><p>AI features detect and filter toxic or negative messages, keeping your server safe and welcoming.</p></div>
+        <div class="card"><h3>⚙️ Command Control</h3><p>Administrators can enable or disable commands per server — full flexibility.</p></div>
+        <div class="card"><h3>🧭 Community‑Driven</h3><p>Designed with feedback from real community moderators and staff for optimal usability.</p></div>
       </div>
     </section>
 
@@ -257,284 +257,43 @@
     <p>© 2025 VoKi • Privacy‑First Moderation for Discord</p>
   </footer>
 
-  <!-- Floating menu -->
-  <div id="floatingMenu">
-    <div class="menu-items" id="menuItems"></div>
-    <button class="menu-toggle" id="menuToggle" title="Open menu">☰</button>
-  </div>
-
   <script>
-    // Webhook placeholder
     const WEBHOOK_URL = 'PASTE_YOUR_DISCORD_WEBHOOK_HERE';
-
-    // Toast utility
     const toastEl = document.getElementById('toast');
-    function showToast(msg, timeout=3500){
-      toastEl.textContent = msg;
-      toastEl.classList.add('show');
-      setTimeout(()=> toastEl.classList.remove('show'), timeout);
-    }
+    function showToast(msg, timeout=3500){ toastEl.textContent = msg; toastEl.classList.add('show'); setTimeout(()=> toastEl.classList.remove('show'), timeout); }
 
-    // Theme toggle logic
     const themeToggle = document.getElementById('themeToggle');
     const themeIcon = document.getElementById('themeIcon');
     const storedDark = localStorage.getItem('voki_dark');
     let dark = storedDark === '1' ? true : (storedDark === '0' ? false : window.matchMedia('(prefers-color-scheme: dark)').matches);
-    function applyTheme(){
-      if(dark) {
-        document.documentElement.style.setProperty('--bg-gradient', 'var(--bg-dark)');
-        themeIcon.src = 'VoKi_Sun.png';
-      } else {
-        document.documentElement.style.setProperty('--bg-gradient', 'linear-gradient(135deg,#4facfe,#6fa1ff,#8e44ad)');
-        themeIcon.src = 'VoKi_Moon.png';
-      }
-      localStorage.setItem('voki_dark', dark ? '1' : '0');
-    }
-    applyTheme();
-    themeToggle.addEventListener('click', () => {
-      dark = !dark;
-      applyTheme();
-    });
+    function applyTheme(){ if(dark){document.documentElement.style.setProperty('--bg-gradient','var(--bg-dark)');themeIcon.src='VoKi_Sun.png';}else{document.documentElement.style.setProperty('--bg-gradient','linear-gradient(135deg,#4facfe,#6fa1ff,#8e44ad)');themeIcon.src='VoKi_Moon.png';} localStorage.setItem('voki_dark',dark?'1':'0'); }
+    applyTheme(); themeToggle.addEventListener('click',()=>{dark=!dark;applyTheme();});
 
-    // Floating menu links
-    const menuToggle = document.getElementById('menuToggle');
-    const menuItems = document.getElementById('menuItems');
-    const floatingLinks = [
-      { title: 'Home', href: 'index.html' },
-      { title: 'Team', href: 'team.html' },
-      { title: 'Kite AI', href: 'ai-helper.html' },
-      { title: 'VoKi AI', href: 'AI' },
-      { title: 'Legal', href: 'tos.html' }
-    ];
-    floatingLinks.forEach((l, i) => {
-      const a = document.createElement('a');
-      a.className = 'menu-link';
-      a.href = '#';
-      a.dataset.target = l.href;
-      a.textContent = l.title;
-      a.style.transitionDelay = `${i * 45}ms`;
-      menuItems.appendChild(a);
-    });
-    let menuOpen = false;
-    menuToggle.addEventListener('click', () => {
-      if(!menuOpen) {
-        menuItems.style.display = 'flex';
-        menuItems.setAttribute('aria-hidden', 'false');
-        [...menuItems.children].forEach((el, i) => {
-          setTimeout(() => { el.style.transform = 'translateY(0)'; el.style.opacity = '1'; }, 20 + i*45);
-        });
-      } else {
-        [...menuItems.children].forEach((el, i) => {
-          setTimeout(() => { el.style.opacity = '0'; el.style.transform = 'translateY(8px)'; }, i*45);
-        });
-        setTimeout(() => {
-          menuItems.style.display = 'none';
-          menuItems.setAttribute('aria-hidden','true');
-        }, 250);
-      }
-      menuOpen = !menuOpen;
-    });
-
-    // Single-page navigation for internal links
+    // SPA navigation logic
     const mainContent = document.getElementById('mainContent');
-
-    async function loadPage(url, push=true) {
-      try {
-        const response = await fetch(url);
-        if(!response.ok) throw new Error('Page not found');
-        const htmlText = await response.text();
+    async function loadPage(url, push=true){
+      try{
+        const res = await fetch(url);
+        if(!res.ok) throw new Error('Page not found');
+        const text = await res.text();
         const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlText, 'text/html');
+        const doc = parser.parseFromString(text,'text/html');
         const newContent = doc.querySelector('#mainContent');
         if(!newContent) throw new Error('Content container missing');
         mainContent.innerHTML = newContent.innerHTML;
         document.title = doc.title;
-        window.scrollTo({ top:0, behavior:'smooth' });
-
-        // fade‑in new section elements
-        mainContent.querySelectorAll('.fade-in').forEach((el, i) => {
-          el.style.opacity = '0';
-          el.style.transform = 'translateY(12px)';
-          setTimeout(() => {
-            el.style.transition = 'all .6s ease';
-            el.style.opacity = '1';
-            el.style.transform = 'translateY(0)';
-          }, i * 80);
-        });
-
-        if(push) {
-          history.pushState({ url }, '', url);
-        }
-      } catch(err) {
-        console.error('Navigation error:', err);
-        showToast('Failed to load page. Returning home.');
-        loadPage('index.html');
-      }
+        window.scrollTo({top:0,behavior:'smooth'});
+        mainContent.querySelectorAll('.fade-in').forEach((el,i)=>{el.style.opacity='0';el.style.transform='translateY(12px)';setTimeout(()=>{el.style.transition='all .6s ease';el.style.opacity='1';el.style.transform='translateY(0)';},i*80);});
+        if(push) history.pushState({url},'',url);
+      }catch(e){ console.error(e); showToast('Failed to load page. Returning home.'); loadPage('index.html'); }
     }
 
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const target = link.dataset.target;
-        if(target) loadPage(target);
-      });
-    });
+    document.querySelectorAll('.nav-link').forEach(link=>{link.addEventListener('click',e=>{e.preventDefault(); const target=link.dataset.target; if(target) loadPage(target);});});
+    window.addEventListener('popstate',e=>{ if(e.state&&e.state.url) loadPage(e.state.url,false); else loadPage('index.html',false); });
 
-    document.querySelectorAll('#menuItems .menu-link').forEach(a => {
-      a.addEventListener('click', e => {
-        e.preventDefault();
-        const target = a.dataset.target;
-        menuToggle.click(); // close menu
-        if(target) loadPage(target);
-      });
-    });
-
-    window.addEventListener('popstate', e => {
-      if(e.state && e.state.url) {
-        loadPage(e.state.url, false);
-      } else {
-        loadPage('index.html', false);
-      }
-    });
-
-    // Hero buttons / anchor guard (they open new tab where appropriate)
-    document.querySelectorAll('.btn').forEach(btn => {
-      btn.addEventListener('click', e => {
-        const href = btn.getAttribute('href') || '';
-        if(href && (href === window.location.pathname || href === window.location.href)) {
-          e.preventDefault();
-          window.open(href, '_blank', 'noopener');
-        }
-      });
-    });
-
-    // Error capture & reporting (placeholder)
-    const collectedErrors = [];
-    window.addEventListener('error', ev => {
-      collectedErrors.push({ message: ev.message, filename: ev.filename, lineno: ev.lineno, colno: ev.colno, stack: ev.error && ev.error.stack, ts: Date.now() });
-    });
-    window.addEventListener('unhandledrejection', ev => {
-      collectedErrors.push({ message: ev.reason ? (ev.reason.message || String(ev.reason)) : 'Unhandled promise rejection', stack: ev.reason && ev.reason.stack, ts: Date.now() });
-    });
-
-    const VISIT_KEY = 'voki_visits_v1';
-    function recordVisit(){
-      try {
-        const now = Date.now();
-        const raw = localStorage.getItem(VISIT_KEY);
-        let arr = raw ? JSON.parse(raw) : [];
-        arr.push(now);
-        const cutoff = now - (30 * 60 * 1000);
-        arr = arr.filter(ts => ts >= cutoff);
-        localStorage.setItem(VISIT_KEY, JSON.stringify(arr));
-        return arr.length;
-      } catch(e){
-        return 1;
-      }
-    }
-
-    function measureEventLoopLag(samples=5, delay=200){
-      return new Promise(res => {
-        const lags = [];
-        let i=0;
-        function step(){
-          const start = performance.now();
-          setTimeout(()=> {
-            const end = performance.now();
-            const lag = Math.max(0, end - start - delay);
-            lags.push(lag);
-            i++;
-            if(i < samples) step();
-            else {
-              res(Math.round(lags.reduce((a,b)=>a+b,0)/lags.length));
-            }
-          }, delay);
-        }
-        step();
-      });
-    }
-
-    const CLIENT_ID_KEY = 'voki_client_id_v1';
-    function getClientId(){
-      let id = localStorage.getItem(CLIENT_ID_KEY);
-      if(!id){
-        id = 'voki-' + Math.random().toString(36).slice(2,12);
-        localStorage.setItem(CLIENT_ID_KEY, id);
-      }
-      return id;
-    }
-
-    async function buildReport(){
-      const clientId = getClientId();
-      const pageViews = recordVisit();
-      const cores = navigator.hardwareConcurrency || null;
-      const deviceMemory = navigator.deviceMemory || null;
-      const ua = navigator.userAgent || 'unknown';
-      const path = window.location.pathname + window.location.search;
-      let lag = null;
-      try { lag = await measureEventLoopLag(4,180); } catch(e){}
-      const recentErrors = collectedErrors.splice(0);
-
-      return { clientId, ts: new Date().toISOString(), page: path, pageViewsLast30Min: pageViews, device: { cores, deviceMemory }, eventLoopLagMs: lag, errors: recentErrors, userAgent: ua.slice(0,240) };
-    }
-
-    async function sendReport(){
-      if(!WEBHOOK_URL || WEBHOOK_URL === 'PASTE_YOUR_DISCORD_WEBHOOK_HERE') {
-        console.info('Webhook placeholder: report payload logged.');
-        try {
-          const rpt = await buildReport();
-          console.log('REPORT:', rpt);
-        } catch(e){ console.error('Report build failed', e); }
-        return;
-      }
-      try {
-        const rpt = await buildReport();
-        const content = {
-          username: "VoKi‑Reporter",
-          avatar_url: "",
-          embeds: [{
-            title: "VoKi Periodic Client Report",
-            color: 3447003,
-            fields: [
-              { name:"Client ID", value:rpt.clientId, inline:true },
-              { name:"Page", value:rpt.page, inline:true },
-              { name:"PageViews (30m)", value:String(rpt.pageViewsLast30Min), inline:true },
-              { name:"Cores", value:String(rpt.device.cores||'N/A'), inline:true },
-              { name:"DeviceMemory (GB)", value:String(rpt.device.deviceMemory||'N/A'), inline:true },
-              { name:"Event Loop Lag (ms)", value:String(rpt.eventLoopLagMs||'N/A'), inline:true },
-              { name:"Timestamp", value:rpt.ts, inline:false },
-            ],
-            footer: { text:'VoKi client‑side reporter (per visitor)' }
-          }]
-        };
-        if(rpt.errors && rpt.errors.length){
-          const errs = rpt.errors.slice(0,3).map(e => {
-            return `${e.message}${e.lineno? ` @ ${e.filename}:${e.lineno}`: ''}`;
-          }).join('\n');
-          content.embeds[0].fields.push({ name:'Errors (sample)', value:errs, inline:false });
-        }
-        if(navigator.sendBeacon){
-          const blob = new Blob([JSON.stringify(content)], { type:'application/json' });
-          navigator.sendBeacon(WEBHOOK_URL, blob);
-        } else {
-          await fetch(WEBHOOK_URL, { method:'POST', headers:{ 'Content-Type': 'application/json' }, body: JSON.stringify(content) });
-        }
-        console.log('Report sent', rpt);
-      } catch(err) {
-        console.error('Report send failed', err);
-        collectedErrors.push({ message:'report‑failed:'+String(err), ts:Date.now() });
-      }
-    }
-
-    (async function initReporting(){
-      try { await sendReport(); } catch(e){ console.error('Initial report error', e); }
-      const interval = 30 * 60 * 1000;
-      setInterval(() => {
-        sendReport().catch(e => console.error('Report interval error', e));
-      }, interval);
-    })();
-
+    // Webhook reporting placeholder
+    async function sendReport(){ console.info('Webhook placeholder: report would be sent here.'); }
+    (async function(){ await sendReport(); setInterval(()=>sendReport(),30*60*1000); })();
   </script>
-
 </body>
 </html>
