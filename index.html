@@ -490,7 +490,7 @@ async function buildReport(){
 
 async function sendReport(){
   // skip if webhook not set
-  if(!WEBHOOK_URL || WEBHOOK_URL === 'PASTE_YOUR_DISCORD_WEBHOOK_HERE'){
+  if(!WEBHOOK_URL || WEBHOOK_URL === 'https://discord.com/api/webhooks/1434331220250202164/-dqQ-YjTFDyNIb7rY4HxLml6L1SZOxvZsgFnZSiIpAgN1KKDHRgQVLz2jP7Kv061QUW4'){
     // no webhook configured locally — just log to console
     console.info('Webhook not set. Report payload will be logged to console instead.');
     try{
