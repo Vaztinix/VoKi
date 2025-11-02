@@ -37,7 +37,6 @@ body {
   animation: gradientFlow 25s ease infinite;
   color: var(--text);
   scroll-behavior: smooth;
-  display: block;
   min-height: 100vh;
   padding-top: 80px; /* header height */
 }
@@ -48,7 +47,7 @@ body {
   100% {background-position: 0% 50%;}
 }
 
-/* Top Navbar */
+/* Header */
 header {
   position: fixed;
   top: 0;
@@ -58,7 +57,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
+  padding: 0.8rem 2rem;
   z-index: 1000;
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
 }
@@ -68,7 +67,6 @@ header {
   align-items: center;
   gap: 10px;
 }
-
 .logo img { height: 40px; width: 40px; border-radius: 8px; }
 .logo h1 { font-size: 1.4rem; color: var(--primary); margin: 0; }
 
@@ -76,37 +74,38 @@ nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 100%;
+  flex-grow: 1;
+  margin-left: 2rem;
 }
 
-.nav-left, .nav-right {
+.nav-left {
   display: flex;
-  align-items: center;
   gap: 1rem;
 }
-
-.nav-left a, .nav-right div, .nav-right a {
+.nav-left a {
   color: var(--primary);
   text-decoration: none;
   font-weight: bold;
   padding: 0.5rem 1rem;
   border-radius: 6px;
   transition: all 0.3s ease;
-  cursor: pointer;
 }
-
-.nav-left a.active, .nav-left a:hover, .nav-right div:hover {
+.nav-left a.active, .nav-left a:hover {
   background: var(--primary);
   color: #000;
 }
 
-.nav-right { margin-left: 15px; }
-
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 #themeToggle img { width: 28px; height: 28px; cursor: pointer; }
 .separator { width: 2px; height: 24px; background: var(--primary); opacity: 0.6; }
-#loginBtn { cursor: pointer; }
+#loginBtn { cursor: pointer; padding: 0.5rem 1rem; border-radius: 6px; transition: all 0.3s ease; }
+#loginBtn:hover { background: var(--primary); color: #000; }
 
-/* Left Floating Quick Nav */
+/* Quick Nav */
 .quick-nav {
   position: fixed;
   top: 100px;
@@ -121,7 +120,6 @@ nav {
   z-index: 900;
   box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
-
 .quick-nav a {
   color: var(--primary);
   text-decoration: none;
@@ -137,9 +135,7 @@ nav {
   padding: 20px 2rem 2rem 2rem;
   max-width: 900px;
 }
-
 h1, h2 { color: var(--primary); }
-
 .card {
   background: var(--card);
   border-radius: 15px;
@@ -148,9 +144,9 @@ h1, h2 { color: var(--primary); }
   transition: background 0.3s, transform 0.3s;
 }
 .card:hover { background: var(--card-hover); transform: translateY(-3px); }
-
 ul { padding-left: 1.5rem; }
 
+/* Footer */
 footer {
   text-align: center;
   padding: 2rem;
@@ -187,7 +183,6 @@ footer {
   flex-direction: column;
   align-items: flex-start;
 }
-
 #menuToggle {
   width: 60px;
   height: 60px;
@@ -200,14 +195,12 @@ footer {
   cursor: pointer;
   transition: all 0.3s;
 }
-
 #menuItems {
   display: none;
   flex-direction: column;
   margin-bottom: 10px;
   gap: 10px;
 }
-
 .menu-item {
   background: var(--card);
   padding: 10px 15px;
@@ -220,14 +213,13 @@ footer {
   transform: translateY(10px);
   transition: transform 0.3s, opacity 0.3s;
 }
-
 .menu-item.show { opacity: 1; transform: translateY(0); }
 .menu-item.hide { opacity: 0; transform: translateY(10px); }
 
 @media (max-width: 900px) {
   .quick-nav { display: none; }
   .main-content { margin-left: 0; padding-top: 140px; }
-  nav { flex-wrap: wrap; justify-content: center; }
+  nav { flex-wrap: wrap; justify-content: center; gap: 1rem; }
 }
 </style>
 </head>
@@ -253,6 +245,7 @@ footer {
   </nav>
 </header>
 
+<!-- Quick Nav -->
 <div class="quick-nav">
   <a href="#purpose">1. Purpose</a>
   <a href="#responsible">2. Responsible Use</a>
@@ -266,6 +259,7 @@ footer {
   <a href="#support">10. Support</a>
 </div>
 
+<!-- Main Content -->
 <div class="main-content">
   <div class="card">
     <h1>Terms of Service & Privacy Policy</h1>
