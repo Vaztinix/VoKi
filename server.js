@@ -1,35 +1,66 @@
-import express from "express";
-import fetch from "node-fetch";
-
+const express = require('express');
+const axios = require('axios');
 const app = express();
-app.use(express.json());
+const port = process.env.PORT || 3000;
 
-// Replace with a real AI API endpoint (OpenAI, Anthropic, etc.)
-const AI_ENDPOINT = "https://api.openai.com/v1/chat/completions";
-const API_KEY = process.env.OPENAI_API_KEY;
+// ===== Track Uptime & Errors =====
+let serverStartTime = Date.now();
+let errorLog = [];
 
-app.post("/chat", async (req, res) => {
-  try {
-    const response = await fetch(AI_ENDPOINT, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${API_KEY}`
-      },
-      body: JSON.stringify({
-        model: "gpt-4o-mini",
-        messages: [
-          { role: "system", content: "You are an assistant that answers questions about kite.onl." },
-          { role: "user", content: req.body.message }
-        ]
-      })
-    });
-    const data = await response.json();
-    res.json({ reply: data.choices[0].message.content });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
+// Catch unhandled errors
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception:', err);
+  errorLog.push({ type: 'Exception', message: err.message, stack: err.stack, time: new Date() });
 });
 
-app.listen(3000, () => console.log("AI backend running on http://localhost:3000"));
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+  errorLog.push({ type: 'Rejection', message: reason?.message || reason, stack: reason?.stack || null, time: new Date() });
+});
 
+// ===== Express Routes =====
+app.get('/', (req, res) => {
+  res.send('VoKi AI Website is running!');
+});
+
+// ===== Start Server =====
+app.listen(port, () => {
+  console.log(`Server running on port ${port}`);
+});
+
+// ===== Discord Webhook Report Function =====
+async function sendHourlyReport() {
+  const uptime = Date.now() - serverStartTime;
+  const memoryUsage = process.memoryUsage();
+  const nodeVersion = process.version;
+
+  const embed = {
+    username: "VoKi Server Monitor",
+    avatar_url: "https://i.imgur.com/AfFp7pu.png", // optional bot avatar
+    embeds: [
+      {
+        title: "Hourly Server Report",
+        color: 0x1abc9c,
+        timestamp: new Date(),
+        fields: [
+          { name: "Uptime", value: `${Math.floor(uptime / 1000 / 60)} minutes`, inline: true },
+          { name: "Memory Usage", value: `RSS: ${(memoryUsage.rss / 1024 / 1024).toFixed(2)} MB\nHeap Used: ${(memoryUsage.heapUsed / 1024 / 1024).toFixed(2)} MB`, inline: true },
+          { name: "Node Version", value: nodeVersion, inline: true },
+          { name: "Errors This Hour", value: errorLog.length > 0 ? errorLog.map((e, i) => `${i+1}. [${e.type}] ${e.message}`).join("\n") : "No errors", inline: false }
+        ]
+      }
+    ]
+  };
+
+  try {
+    await axios.post('https://discord.com/api/webhooks/1434331220250202164/-dqQ-YjTFDyNIb7rY4HxLml6L1SZOxvZsgFnZSiIpAgN1KKDHRgQVLz2jP7Kv061QUW4', embed);
+    console.log('Hourly report sent successfully!');
+    // Reset error log after sending report
+    errorLog = [];
+  } catch (err) {
+    console.error('Failed to send hourly report:', err.message);
+  }
+}
+
+// ===== Send Report Every Hour =====
+setInterval(sendHourlyReport, 1000 * 60 * 60); // 1 hour interval
