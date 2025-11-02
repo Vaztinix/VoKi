@@ -20,7 +20,6 @@
   <style>
     :root {
       --primary: #aeefff;
-      --accent: #6dc8ff;
       --bg-gradient: linear-gradient(135deg, #4facfe, #6fa1ff, #8e44ad);
       --bg-dark: linear-gradient(135deg, #141e30, #1f2a45, #243b55);
       --text: #ffffff;
@@ -38,7 +37,6 @@
       animation: gradientFlow 25s ease infinite;
       color: var(--text);
       scroll-behavior: smooth;
-      transition: background 0.5s;
       display: flex;
     }
 
@@ -69,17 +67,8 @@
       gap: 10px;
     }
 
-    .logo img {
-      height: 40px;
-      width: 40px;
-      border-radius: 8px;
-    }
-
-    .logo h1 {
-      font-size: 1.4rem;
-      color: var(--primary);
-      margin: 0;
-    }
+    .logo img { height: 40px; width: 40px; border-radius: 8px; }
+    .logo h1 { font-size: 1.4rem; color: var(--primary); margin: 0; }
 
     nav {
       display: flex;
@@ -97,7 +86,7 @@
       cursor: pointer;
     }
 
-    nav a:hover, nav div:hover {
+    nav a.active, nav a:hover, nav div:hover {
       background: var(--primary);
       color: #000;
     }
@@ -106,26 +95,14 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      margin-left: 15px;
     }
 
-    #themeToggle img {
-      width: 28px;
-      height: 28px;
-      cursor: pointer;
-    }
+    #themeToggle img { width: 28px; height: 28px; cursor: pointer; }
+    .separator { width: 2px; height: 24px; background: var(--primary); opacity: 0.6; }
+    #loginBtn { cursor: pointer; }
 
-    .separator {
-      width: 2px;
-      height: 24px;
-      background: var(--primary);
-      opacity: 0.6;
-    }
-
-    #loginBtn {
-      cursor: pointer;
-    }
-
-    /* Floating Quick Nav */
+    /* Left Floating Quick Nav */
     .quick-nav {
       position: fixed;
       top: 100px;
@@ -149,22 +126,17 @@
       transition: all 0.3s ease;
     }
 
-    .quick-nav a:hover {
-      background: var(--primary);
-      color: #000;
-    }
+    .quick-nav a:hover { background: var(--primary); color: #000; }
 
     /* Main Content */
     .main-content {
-      margin-left: 250px; /* width of quick nav + spacing */
+      margin-left: 250px;
       padding: 120px 2rem 2rem 2rem;
       max-width: 900px;
       flex-grow: 1;
     }
 
-    h1, h2 {
-      color: var(--primary);
-    }
+    h1, h2 { color: var(--primary); }
 
     .card {
       background: var(--card);
@@ -174,14 +146,9 @@
       transition: background 0.3s, transform 0.3s;
     }
 
-    .card:hover {
-      background: var(--card-hover);
-      transform: translateY(-3px);
-    }
+    .card:hover { background: var(--card-hover); transform: translateY(-3px); }
 
-    ul {
-      padding-left: 1.5rem;
-    }
+    ul { padding-left: 1.5rem; }
 
     footer {
       text-align: center;
@@ -208,12 +175,9 @@
       z-index: 1500;
     }
 
-    .error-notification.show {
-      opacity: 1;
-      pointer-events: auto;
-    }
+    .error-notification.show { opacity: 1; pointer-events: auto; }
 
-    /* Floating Menu */
+    /* Floating Bottom Menu */
     #floatingMenu {
       position: fixed;
       bottom: 40px;
@@ -257,29 +221,13 @@
       transition: transform 0.3s, opacity 0.3s;
     }
 
-    .menu-item.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
+    .menu-item.show { opacity: 1; transform: translateY(0); }
+    .menu-item.hide { opacity: 0; transform: translateY(10px); }
 
-    .menu-item.hide {
-      opacity: 0;
-      transform: translateY(10px);
-    }
-
-    /* Responsive */
     @media (max-width: 900px) {
-      .quick-nav {
-        display: none;
-      }
-      .main-content {
-        margin-left: 0;
-        padding-top: 140px;
-      }
-
-      nav {
-        flex-wrap: wrap;
-      }
+      .quick-nav { display: none; }
+      .main-content { margin-left: 0; padding-top: 140px; }
+      nav { flex-wrap: wrap; justify-content: center; }
     }
   </style>
 </head>
@@ -293,19 +241,16 @@
   <nav>
     <a href="index.html">Home</a>
     <a href="team.html">Team</a>
-    <a href="tos.html">Terms</a>
+    <a href="tos.html" class="active">Terms</a>
     <a href="AI.html">VoKi AI</a>
     <div class="nav-right">
-      <div id="themeToggle">
-        <img id="themeIcon" src="VoKi_Moon.png" alt="Toggle Theme">
-      </div>
+      <div id="themeToggle"><img id="themeIcon" src="VoKi_Moon.png" alt="Toggle Theme"></div>
       <div class="separator"></div>
       <div id="loginBtn">Login</div>
     </div>
   </nav>
 </header>
 
-<!-- Left Floating Quick Nav -->
 <div class="quick-nav">
   <a href="#purpose">1. Purpose</a>
   <a href="#responsible">2. Responsible Use</a>
@@ -319,13 +264,11 @@
   <a href="#support">10. Support</a>
 </div>
 
-<!-- Main Content -->
 <div class="main-content">
   <div class="card">
     <h1>Terms of Service & Privacy Policy</h1>
     <p>By using VoKi, you agree to these terms and conditions. This page clarifies your responsibilities, rights, and how your data is protected.</p>
   </div>
-
   <div class="card" id="purpose">
     <h2>1. Purpose</h2>
     <ul>
@@ -334,7 +277,6 @@
       <li>Direct users toward secure and positive community interaction.</li>
     </ul>
   </div>
-
   <div class="card" id="responsible">
     <h2>2. Responsible Use</h2>
     <ul>
@@ -343,7 +285,6 @@
       <li>All users must adhere to Discord’s Terms of Service.</li>
     </ul>
   </div>
-
   <div class="card" id="ai">
     <h2>3. AI Features</h2>
     <ul>
@@ -352,7 +293,6 @@
       <li>AI recommendations aim to maintain fairness and transparency.</li>
     </ul>
   </div>
-
   <div class="card" id="privacy">
     <h2>4. Privacy Policy</h2>
     <ul>
@@ -362,7 +302,6 @@
       <li>Users may request deletion of stored data via server admins.</li>
     </ul>
   </div>
-
   <div class="card" id="permissions">
     <h2>5. Permissions</h2>
     <ul>
@@ -370,7 +309,6 @@
       <li>Server admins maintain full control of bot access and privileges.</li>
     </ul>
   </div>
-
   <div class="card" id="guidelines">
     <h2>6. Guidelines</h2>
     <ul>
@@ -378,7 +316,6 @@
       <li>Report bugs, misuse, or feature requests responsibly.</li>
     </ul>
   </div>
-
   <div class="card" id="logging">
     <h2>7. Logging</h2>
     <ul>
@@ -386,7 +323,6 @@
       <li>Logs help with dispute resolution and moderation accountability.</li>
     </ul>
   </div>
-
   <div class="card" id="security">
     <h2>8. Security</h2>
     <ul>
@@ -394,7 +330,6 @@
       <li>Admins are encouraged to review access and command permissions periodically.</li>
     </ul>
   </div>
-
   <div class="card" id="updates">
     <h2>9. Updates</h2>
     <ul>
@@ -402,10 +337,9 @@
       <li>Major changes will be communicated via Discord server announcements.</li>
     </ul>
   </div>
-
   <div class="card" id="support">
     <h2>10. Support</h2>
-    <p>Need assistance or have concerns? Visit our <a href="https://discord.gg/PKWJuRrgUd" target="_blank" style="color: var(--primary);">support server</a> for help and community guidance.</p>
+    <p>Need assistance or have concerns? Visit our <a href="https://discord.gg/PKWJuRrgUd" target="_blank" style="color: var(--primary);">support server</a>.</p>
   </div>
 </div>
 
@@ -413,7 +347,7 @@
   <p>© 2025 VoKi • Privacy-First Moderation for Discord</p>
 </footer>
 
-<!-- Floating Menu -->
+<!-- Floating Bottom Menu -->
 <div id="floatingMenu">
   <div id="menuItems">
     <a class="menu-item" href="index.html">Home</a>
@@ -446,7 +380,6 @@
     setTimeout(() => errorNote.classList.remove('show'), 3000);
   });
 
-  // Floating Menu
   const menuToggle = document.getElementById('menuToggle');
   const menuItems = document.getElementById('menuItems');
   const menuLinks = document.querySelectorAll('.menu-item');
