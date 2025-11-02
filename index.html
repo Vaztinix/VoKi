@@ -194,7 +194,7 @@
 
     .error-notification {
       position: fixed;
-      top: 100px; /* below nav */
+      top: 100px;
       left: 50%;
       transform: translateX(-50%);
       background: var(--error-bg);
@@ -213,10 +213,10 @@
       pointer-events: auto;
     }
 
-    /* Floating Menu Styles */
+    /* Floating Menu */
     #floatingMenu {
       position: fixed;
-      bottom: 40px; /* lowered */
+      bottom: 40px;
       left: 20px;
       z-index: 2000;
       display: flex;
@@ -242,12 +242,6 @@
       flex-direction: column;
       margin-bottom: 10px;
       gap: 10px;
-      animation: slideUp 0.3s ease forwards;
-    }
-
-    @keyframes slideUp {
-      from {opacity: 0; transform: translateY(10px);}
-      to {opacity: 1; transform: translateY(0);}
     }
 
     .menu-item {
@@ -258,13 +252,19 @@
       text-decoration: none;
       font-weight: bold;
       box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+      opacity: 0;
+      transform: translateY(10px);
       transition: transform 0.3s, opacity 0.3s;
     }
 
-    .menu-item:hover {
-      transform: translateY(-3px);
-      opacity: 0.9;
-      background: var(--card-hover);
+    .menu-item.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .menu-item.hide {
+      opacity: 0;
+      transform: translateY(10px);
     }
 
     @media (max-width: 768px) {
@@ -318,9 +318,9 @@
   <h1>Privacy-First AI Moderation for Discord</h1>
   <p class="lead">Keep your community safe, positive, and transparent — with complete control over your data and moderation tools.</p>
 
-  <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549&integration_type=0&scope=bot%20applications.commands&permissions=8" target="_blank">🚀 Invite VoKi</a>
-  <a class="btn btn-outline" href="https://discord.gg/PKWJuRrgUd" target="_blank">💬 Join Server</a>
-  <a class="btn btn-primary" href="https://vaztinix.github.io/VoKi/AI" target="_blank">🤖 Launch VoKi AI</a>
+  <a class="btn btn-primary" href="#" target="_blank">🚀 Invite VoKi</a>
+  <a class="btn btn-outline" href="#" target="_blank">💬 Join Server</a>
+  <a class="btn btn-primary" href="#" target="_blank">🤖 Launch VoKi AI</a>
 </section>
 
 <!-- About -->
@@ -377,8 +377,8 @@
 <section class="section" id="vote">
   <h2>Support VoKi</h2>
   <p class="lead">If you’re enjoying VoKi, please consider leaving a review!</p>
-  <a class="btn btn-primary" href="https://top.gg/bot/1375943730951098549#reviews" target="_blank">⭐ Review on Top.gg</a>
-  <a class="btn btn-outline" href="https://discords.com/bots/bot/1375943730951098549" target="_blank">💎 Vote on Discords.com</a>
+  <a class="btn btn-primary" href="#" target="_blank">⭐ Review on Top.gg</a>
+  <a class="btn btn-outline" href="#" target="_blank">💎 Vote on Discords.com</a>
 </section>
 
 <footer>
@@ -416,14 +416,28 @@
     setTimeout(() => errorNote.classList.remove('show'), 3000);
   });
 
+  // Floating Menu with open/close animation
   const menuToggle = document.getElementById('menuToggle');
   const menuItems = document.getElementById('menuItems');
+  const menuLinks = document.querySelectorAll('.menu-item');
+
+  let menuOpen = false;
+
   menuToggle.addEventListener('click', () => {
-    if (menuItems.style.display === 'flex') {
-      menuItems.style.display = 'none';
-    } else {
+    if (!menuOpen) {
       menuItems.style.display = 'flex';
+      menuLinks.forEach((link, i) => {
+        setTimeout(() => link.classList.add('show'), i*50);
+      });
+    } else {
+      menuLinks.forEach((link, i) => {
+        setTimeout(() => link.classList.remove('show'), i*50);
+      });
+      setTimeout(() => {
+        menuItems.style.display = 'none';
+      }, 300);
     }
+    menuOpen = !menuOpen;
   });
 </script>
 
