@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>404 – Page Not Found | VoKi</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot).png" />
+
+  <!-- Font & Style -->
+  <style>
+    :root {
+      --bg-gradient: radial-gradient(circle at top left, #0f2027, #203a43, #2c5364);
+      --accent-color: #00aaff;
+      --text-color: #ffffff;
+      --transition-speed: 0.3s;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: var(--bg-gradient);
+      color: var(--text-color);
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-x: hidden;
+    }
+
+    /* Navigation Bar */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 0.8rem 2rem;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(12px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      z-index: 1000;
+    }
+
+    .nav-left, .nav-right {
+      display: flex;
+      align-items: center;
+    }
+
+    .nav-left a, .nav-right a {
+      color: var(--text-color);
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: 500;
+      transition: color var(--transition-speed);
+    }
+
+    .nav-left a:hover, .nav-right a:hover {
+      color: var(--accent-color);
+    }
+
+    .divider {
+      width: 1px;
+      height: 25px;
+      background: rgba(255, 255, 255, 0.25);
+      margin: 0 1rem;
+    }
+
+    .logo {
+      height: 30px;
+      margin-right: 0.75rem;
+    }
+
+    /* 404 Section */
+    .error-section {
+      text-align: center;
+      margin-top: 12%;
+      animation: fadeIn 1.5s ease;
+    }
+
+    .error-section h1 {
+      font-size: 7rem;
+      color: var(--accent-color);
+      margin-bottom: 0.5rem;
+    }
+
+    .error-section p {
+      font-size: 1.3rem;
+      margin-bottom: 1.5rem;
+      color: #d0d0d0;
+    }
+
+    .home-btn {
+      padding: 0.75rem 1.5rem;
+      background-color: var(--accent-color);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: background-color var(--transition-speed);
+      text-decoration: none;
+    }
+
+    .home-btn:hover {
+      background-color: #0077cc;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1rem 0;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(10px);
+      font-size: 0.9rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ccc;
+    }
+
+    footer a {
+      color: var(--accent-color);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <div class="nav-left">
+      <img src="VoKi Logo (Updated Bot).png" alt="VoKi Logo" class="logo">
+      <a href="index.html">Home</a>
+      <a href="team.html">Team</a>
+      <a href="tos.html">Terms</a>
+      <a href="privacy.html">Privacy</a>
+    </div>
+    <div class="nav-right">
+      <div class="divider"></div>
+      <a href="https://discord.com/oauth2/authorize?client_id=YOUR_BOT_ID">Login</a>
+    </div>
+  </nav>
+
+  <!-- 404 Section -->
+  <section class="error-section">
+    <h1>404</h1>
+    <p>Oops! The page you’re looking for doesn’t exist or has been moved.</p>
+    <a href="index.html" class="home-btn">Return Home</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © <span id="year"></span> VoKi. All rights reserved. |
+    <a href="tos.html">Terms</a> • <a href="privacy.html">Privacy Policy</a>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
