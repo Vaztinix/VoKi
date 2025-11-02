@@ -68,14 +68,12 @@ h1,h2 { color:var(--primary); }
 a { color:var(--primary); }
 p, li { opacity:0.95; }
 section { margin-bottom:40px; }
-.fade-in { opacity:0; transform:translateY(12px); transition: all .6s ease; }
 
 /* ============================== FOOTER ============================== */
 footer { text-align:center; padding:28px 1.5rem; color:rgba(255,255,255,.8); }
 
 /* ============================== TOAST ============================== */
 .toast { position:fixed; right:50%; transform:translateX(50%); top:60px; background:var(--error-bg); padding:12px 16px; border-radius:10px; color:#fff; box-shadow:0 8px 30px rgba(0,0,0,.4); opacity:0; transition:opacity .2s, transform .2s; z-index:2000; }
-.toast.show { opacity:1; transform:none; }
 
 /* ============================== FLOATING MENU ============================== */
 #floatingMenu { position:fixed; bottom:24px; right:24px; display:flex; flex-direction:column-reverse; align-items:flex-end; z-index:1500; }
@@ -115,103 +113,102 @@ footer { text-align:center; padding:28px 1.5rem; color:rgba(255,255,255,.8); }
 </header>
 
 <main class="container">
-  <section class="fade-in">
-    <div class="card">
-      <h1>Terms of Service & Privacy Policy</h1>
-      <p>Welcome to VoKi. By using our services, you agree to the following terms and policies.</p>
-    </div>
+  <!-- Removed fade-in section wrapper -->
+  <div class="card">
+    <h1>Terms of Service & Privacy Policy</h1>
+    <p>Welcome to VoKi. By using our services, you agree to the following terms and policies.</p>
+  </div>
 
-    <div class="card">
-      <h2>1. Purpose</h2>
-      <ul>
-        <li>Provide privacy-first AI moderation tools for Discord communities.</li>
-        <li>Enhance server safety, trust, and fairness through automation.</li>
-        <li>Support secure, positive interactions among all users.</li>
-      </ul>
-    </div>
+  <div class="card">
+    <h2>1. Purpose</h2>
+    <ul>
+      <li>Provide privacy-first AI moderation tools for Discord communities.</li>
+      <li>Enhance server safety, trust, and fairness through automation.</li>
+      <li>Support secure, positive interactions among all users.</li>
+    </ul>
+  </div>
 
-    <div class="card">
-      <h2>2. Responsible Use</h2>
-      <ul>
-        <li>Use VoKi only for intended purposes and respect others.</li>
-        <li>No harassment, spamming, or unauthorized data collection.</li>
-        <li>Compliance with Discord Terms of Service is required.</li>
-        <li>Admins configure bot according to server rules.</li>
-      </ul>
-    </div>
+  <div class="card">
+    <h2>2. Responsible Use</h2>
+    <ul>
+      <li>Use VoKi only for intended purposes and respect others.</li>
+      <li>No harassment, spamming, or unauthorized data collection.</li>
+      <li>Compliance with Discord Terms of Service is required.</li>
+      <li>Admins configure bot according to server rules.</li>
+    </ul>
+  </div>
 
-    <div class="card">
-      <h2>3. AI Features</h2>
-      <ul>
-        <li>AI assists moderation and support; human oversight is required.</li>
-        <li>Short-term context memory improves accuracy.</li>
-        <li>Moderators can review, adjust, or override AI actions.</li>
-        <li>Transparency and fairness are prioritized.</li>
-      </ul>
-    </div>
+  <div class="card">
+    <h2>3. AI Features</h2>
+    <ul>
+      <li>AI assists moderation and support; human oversight is required.</li>
+      <li>Short-term context memory improves accuracy.</li>
+      <li>Moderators can review, adjust, or override AI actions.</li>
+      <li>Transparency and fairness are prioritized.</li>
+    </ul>
+  </div>
 
-    <div class="card">
-      <h2>4. Privacy Policy</h2>
-      <ul>
-        <li>No personal data collected without consent.</li>
-        <li>All data remains on your server; developers do not access it.</li>
-        <li>Users may view and delete data with the User Data command.</li>
-        <li>Removed logging of message edits, deletions, and leaves to protect privacy.</li>
-      </ul>
-    </div>
+  <div class="card">
+    <h2>4. Privacy Policy</h2>
+    <ul>
+      <li>No personal data collected without consent.</li>
+      <li>All data remains on your server; developers do not access it.</li>
+      <li>Users may view and delete data with the User Data command.</li>
+      <li>Removed logging of message edits, deletions, and leaves to protect privacy.</li>
+    </ul>
+  </div>
 
-    <div class="card">
-      <h2>5. Permissions</h2>
-      <ul>
-        <li>VoKi requests only necessary permissions for moderation.</li>
-        <li>Server admins control bot access and privileges.</li>
-        <li>Command management per server coming soon.</li>
-      </ul>
-    </div>
+  <div class="card">
+    <h2>5. Permissions</h2>
+    <ul>
+      <li>VoKi requests only necessary permissions for moderation.</li>
+      <li>Server admins control bot access and privileges.</li>
+      <li>Command management per server coming soon.</li>
+    </ul>
+  </div>
 
-    <div class="card">
-      <h2>6. Guidelines</h2>
-      <ul>
-        <li>Follow community standards and respect VoKi’s systems.</li>
-        <li>Report bugs, misuse, or requests responsibly.</li>
-        <li>Admins should review permissions periodically.</li>
-      </ul>
-    </div>
+  <div class="card">
+    <h2>6. Guidelines</h2>
+    <ul>
+      <li>Follow community standards and respect VoKi’s systems.</li>
+      <li>Report bugs, misuse, or requests responsibly.</li>
+      <li>Admins should review permissions periodically.</li>
+    </ul>
+  </div>
 
-    <div class="card">
-      <h2>7. Logging</h2>
-      <ul>
-        <li>Moderation actions logged locally for transparency and accountability.</li>
-        <li>No sensitive message content is stored externally.</li>
-        <li>Logs help in dispute resolution and management.</li>
-      </ul>
-    </div>
+  <div class="card">
+    <h2>7. Logging</h2>
+    <ul>
+      <li>Moderation actions logged locally for transparency and accountability.</li>
+      <li>No sensitive message content is stored externally.</li>
+      <li>Logs help in dispute resolution and management.</li>
+    </ul>
+  </div>
 
-    <div class="card">
-      <h2>8. Security</h2>
-      <ul>
-        <li>Secure coding practices and permission handling applied.</li>
-        <li>Admins should review access and commands periodically.</li>
-        <li>Server interactions minimize data exposure.</li>
-      </ul>
-    </div>
+  <div class="card">
+    <h2>8. Security</h2>
+    <ul>
+      <li>Secure coding practices and permission handling applied.</li>
+      <li>Admins should review access and commands periodically.</li>
+      <li>Server interactions minimize data exposure.</li>
+    </ul>
+  </div>
 
-    <div class="card">
-      <h2>9. Updates</h2>
-      <ul>
-        <li>VoKi receives updates to improve functionality, AI moderation, and security.</li>
-        <li>Major changes communicated via Discord announcements.</li>
-        <li>Roblox integrations removed; focus is on Discord moderation.</li>
-        <li>Multilingual support temporarily paused for improvements.</li>
-      </ul>
-    </div>
+  <div class="card">
+    <h2>9. Updates</h2>
+    <ul>
+      <li>VoKi receives updates to improve functionality, AI moderation, and security.</li>
+      <li>Major changes communicated via Discord announcements.</li>
+      <li>Roblox integrations removed; focus is on Discord moderation.</li>
+      <li>Multilingual support temporarily paused for improvements.</li>
+    </ul>
+  </div>
 
-    <div class="card">
-      <h2>10. Support</h2>
-      <p>Visit our <a href="https://discord.gg/PKWJuRrgUd" target="_blank">support server</a> for assistance.</p>
-      <p>Leave a review on Top.gg: <a href="https://top.gg/bot/1375943730951098549#reviews" target="_blank">Top.gg Reviews</a></p>
-    </div>
-  </section>
+  <div class="card">
+    <h2>10. Support</h2>
+    <p>Visit our <a href="https://discord.gg/PKWJuRrgUd" target="_blank">support server</a> for assistance.</p>
+    <p>Leave a review on Top.gg: <a href="https://top.gg/bot/1375943730951098549#reviews" target="_blank">Top.gg Reviews</a></p>
+  </div>
 </main>
 
 <footer>
@@ -219,13 +216,7 @@ footer { text-align:center; padding:28px 1.5rem; color:rgba(255,255,255,.8); }
 </footer>
 
 <div id="floatingMenu">
-  <div class="menu-items" id="menuItems">
-    <a href="index.html">Home</a>
-    <a href="team.html">Team</a>
-    <a href="ai-helper.html">Kite AI</a>
-    <a href="AI.html">VoKi AI</a>
-    <a href="tos.html">Legal</a>
-  </div>
+  <div class="menu-items" id="menuItems"></div>
   <button class="menu-toggle" id="menuToggle">☰</button>
 </div>
 
