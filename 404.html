@@ -6,89 +6,88 @@
   <title>404 – Page Not Found | VoKi</title>
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot).png" />
+  <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
 
-  <!-- Font & Style -->
   <style>
     :root {
-      --bg-gradient: radial-gradient(circle at top left, #0f2027, #203a43, #2c5364);
-      --accent-color: #00aaff;
-      --text-color: #ffffff;
-      --transition-speed: 0.3s;
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      --primary: #aeefff;
+      --accent: #6dc8ff;
+      --bg-gradient: linear-gradient(135deg, #4facfe, #6fa1ff, #8e44ad);
+      --bg-dark: linear-gradient(135deg, #141e30, #1f2a45, #243b55);
+      --text: #ffffff;
+      --card: rgba(255,255,255,0.08);
+      --card-hover: rgba(255,255,255,0.18);
+      --sidebar: rgba(0,0,0,0.85);
+      --error-bg: rgba(0,0,0,0.9);
     }
 
     body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
       background: var(--bg-gradient);
-      color: var(--text-color);
-      height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      overflow-x: hidden;
+      background-size: 400% 400%;
+      animation: gradientFlow 25s ease infinite;
+      color: var(--text);
+      text-align: center;
     }
 
-    /* Navigation Bar */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 0.8rem 2rem;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(12px);
+    @keyframes gradientFlow {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+
+    header {
+      background: var(--sidebar);
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
       z-index: 1000;
     }
 
-    .nav-left, .nav-right {
+    .logo {
       display: flex;
       align-items: center;
+      gap: 10px;
     }
 
-    .nav-left a, .nav-right a {
-      color: var(--text-color);
+    .logo img {
+      height: 40px;
+      width: 40px;
+      border-radius: 8px;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    nav a {
+      color: var(--primary);
       text-decoration: none;
-      margin: 0 1rem;
-      font-weight: 500;
-      transition: color var(--transition-speed);
+      font-weight: bold;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      transition: all 0.3s ease;
     }
 
-    .nav-left a:hover, .nav-right a:hover {
-      color: var(--accent-color);
+    nav a:hover {
+      background: var(--primary);
+      color: #000;
     }
 
-    .divider {
-      width: 1px;
-      height: 25px;
-      background: rgba(255, 255, 255, 0.25);
-      margin: 0 1rem;
-    }
-
-    .logo {
-      height: 30px;
-      margin-right: 0.75rem;
-    }
-
-    /* 404 Section */
     .error-section {
-      text-align: center;
-      margin-top: 12%;
+      margin-top: 15vh;
       animation: fadeIn 1.5s ease;
     }
 
     .error-section h1 {
-      font-size: 7rem;
-      color: var(--accent-color);
+      font-size: 8rem;
+      color: var(--accent);
       margin-bottom: 0.5rem;
     }
 
@@ -99,63 +98,60 @@
     }
 
     .home-btn {
-      padding: 0.75rem 1.5rem;
-      background-color: var(--accent-color);
-      color: white;
+      padding: 0.75rem 2rem;
+      background-color: var(--primary);
+      color: #000;
       border: none;
-      border-radius: 8px;
+      border-radius: 40px;
       cursor: pointer;
-      font-size: 1rem;
-      font-weight: 500;
-      transition: background-color var(--transition-speed);
+      font-size: 1.1rem;
+      font-weight: bold;
       text-decoration: none;
+      transition: all 0.3s ease;
     }
 
     .home-btn:hover {
-      background-color: #0077cc;
+      transform: translateY(-3px);
+      opacity: 0.9;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Footer */
     footer {
       text-align: center;
-      padding: 1rem 0;
-      background: rgba(0, 0, 0, 0.45);
-      backdrop-filter: blur(10px);
+      padding: 2rem;
       font-size: 0.9rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.15);
-      color: #ccc;
+      opacity: 0.85;
     }
 
     footer a {
-      color: var(--accent-color);
+      color: var(--primary);
       text-decoration: none;
     }
 
     footer a:hover {
       text-decoration: underline;
     }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
-  <!-- Navigation Bar -->
-  <nav>
-    <div class="nav-left">
-      <img src="VoKi Logo (Updated Bot).png" alt="VoKi Logo" class="logo">
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi Logo">
+      <h1>VoKi</h1>
+    </div>
+    <nav>
       <a href="index.html">Home</a>
       <a href="team.html">Team</a>
-      <a href="tos.html">Terms</a>
-      <a href="privacy.html">Privacy</a>
-    </div>
-    <div class="nav-right">
-      <div class="divider"></div>
-      <a href="https://discord.com/oauth2/authorize?client_id=YOUR_BOT_ID">Login</a>
-    </div>
-  </nav>
+      <a href="tos.html">Legal</a>
+      <a href="https://discord.com/oauth2/authorize?client_id=1375943730951098549">Invite VoKi</a>
+      <a href="https://discord.gg/cXsZr3cMEB">Join Server</a>
+    </nav>
+  </header>
 
   <!-- 404 Section -->
   <section class="error-section">
@@ -166,11 +162,10 @@
 
   <!-- Footer -->
   <footer>
-    © <span id="year"></span> VoKi. All rights reserved. |
-    <a href="tos.html">Terms</a> • <a href="privacy.html">Privacy Policy</a>
+    © <span id="year"></span> VoKi. All rights reserved. | 
+    <a href="tos.html">Legal</a>
   </footer>
 
-  <!-- Script -->
   <script>
     document.getElementById("year").textContent = new Date().getFullYear();
   </script>
