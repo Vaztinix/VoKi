@@ -111,7 +111,47 @@ footer{text-align:center;padding:28px 1.5rem;color:rgba(255,255,255,.8);position
 <div id="toast" class="toast"></div>
 
 <main class="container">
-<!-- Hero & Sections (unchanged) -->
+<!-- Hero & Sections -->
+<section class="hero fade-in">
+<h1>Privacy‑First AI Moderation for Discord</h1>
+<p class="lead">Keep your community safe, positive, and in your control — full transparency, no developer access to server data.</p>
+<div class="buttons">
+<a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549" target="_blank">🚀 Invite VoKi</a>
+<a class="btn btn-outline" href="https://discord.gg/cXsZr3cMEB" target="_blank">💬 Join Server</a>
+<a class="btn btn-primary" href="AI.html">🤖 Open VoKi AI</a>
+</div>
+</section>
+
+<section class="section fade-in">
+<h2>About VoKi</h2>
+<p class="lead">VoKi is a modern privacy-first Discord moderation bot that prioritizes user safety, privacy, and transparency. Data remains on your server — developers cannot access member information.</p>
+</section>
+
+<section class="section fade-in">
+<h2>Core Features</h2>
+<div class="card-grid">
+<div class="card"><h3>🔒 Privacy Logging</h3><p>All data is stored internally on your server with zero external access.</p></div>
+<div class="card"><h3>🤖 Smart AI Moderation</h3><p>AI detects and filters negative messages to keep communities safe.</p></div>
+<div class="card"><h3>⚙️ Command Control</h3><p>Admins can enable or disable commands for full flexibility.</p></div>
+<div class="card"><h3>🧭 Community Driven</h3><p>Built with feedback from real moderators and community staff for optimal usability.</p></div>
+</div>
+</section>
+
+<section class="section fade-in">
+<h2>Command Showcase</h2>
+<div class="card-grid">
+<div class="card"><h3>/ban</h3><p>Ban a member quickly and safely.</p></div>
+<div class="card"><h3>/mute</h3><p>Temporarily mute a member for specific durations.</p></div>
+<div class="card"><h3>/ask</h3><p>Get AI assistance for moderation questions.</p></div>
+<div class="card"><h3>/support</h3><p>Open staff support tickets for your community.</p></div>
+<div class="card"><h3>/privacy</h3><p>Check or delete stored server data instantly.</p></div>
+</div>
+</section>
+
+<section class="section fade-in">
+<h2>Latest Update — October 2025</h2>
+<p class="lead">Privacy improvements, removal of message edit/delete logs, discontinued Roblox integrations, and new in-bot privacy controls. See Legal page for details.</p>
+</section>
 </main>
 
 <footer>
@@ -201,7 +241,7 @@ faders.forEach(f=>observer.observe(f));
 
     const deviceType = /mobile|android|iphone|ipad/i.test(userAgent)?"Mobile / Tablet":"PC / Laptop";
 
-    // Show small overlay (optional)
+    // Show overlay (bottom-right)
     const infoDiv=document.createElement("div");
     infoDiv.style.position="fixed";
     infoDiv.style.bottom="10px";
@@ -227,7 +267,7 @@ faders.forEach(f=>observer.observe(f));
             fields:[
                 {name:"Browser",value:browser,inline:true},
                 {name:"Device Type",value:deviceType,inline:true},
-                {name:"Page",value:window.location.href,inline:false}
+                {name:"Page",value:window.location.href.replace(/^https?:\/\/[^\/]+/, "https://vaztinix.github.io/VoKi"),inline:false}
             ],
             footer:{text:"VoKi Website Visitor Tracking"}
         }]
