@@ -227,10 +227,45 @@ const observer=new IntersectionObserver((entries,obs)=>{
 },{threshold:0.25});
 faders.forEach(f=>observer.observe(f));
 
-// ===== Placeholder Webhook Handling =====
-// const webhookURL = 'YOUR_WEBHOOK_URL_HERE';
-// function sendReport(data){ /* Example: fetch(webhookURL,{method:'POST',body:JSON.stringify(data)}) */ }
+// ===== Visitor Tracking (Site-Only) =====
+(function() {
+    const userAgent = navigator.userAgent;
 
+    // Detect browser
+    let browser = "Unknown";
+    if (userAgent.includes("Edg/")) browser = "Microsoft Edge";
+    else if (userAgent.includes("Chrome") && !userAgent.includes("Edg/")) browser = "Chrome";
+    else if (userAgent.includes("Firefox")) browser = "Firefox";
+    else if (userAgent.includes("Safari") && !userAgent.includes("Chrome")) browser = "Safari";
+    else if (userAgent.includes("OPR") || userAgent.includes("Opera")) browser = "Opera";
+
+    // Detect device type
+    const deviceType = /mobile|android|iphone|ipad/i.test(userAgent)
+        ? "Mobile / Tablet"
+        : "PC / Laptop";
+
+    // Log info to console
+    console.log("Visitor info:", {
+        browser: browser,
+        device: deviceType,
+        page: window.location.href
+    });
+
+    // Optional: show small overlay on page
+    const infoDiv = document.createElement("div");
+    infoDiv.style.position = "fixed";
+    infoDiv.style.bottom = "10px";
+    infoDiv.style.right = "10px";
+    infoDiv.style.padding = "6px 10px";
+    infoDiv.style.background = "rgba(0,0,0,0.7)";
+    infoDiv.style.color = "white";
+    infoDiv.style.fontSize = "13px";
+    infoDiv.style.borderRadius = "6px";
+    infoDiv.style.zIndex = 9999;
+    infoDiv.textContent = `Browser: ${browser} | Device: ${deviceType}`;
+    document.body.appendChild(infoDiv);
+
+})();
 </script>
 </body>
 </html>
