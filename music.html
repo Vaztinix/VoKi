@@ -1,1 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>VoKi | Music Player</title>
+<link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png">
+
+<style>
+:root{
+  --primary:#aeefff;
+  --accent:#6dc8ff;
+  --bg-gradient:linear-gradient(135deg,#4facfe,#6fa1ff,#8e44ad);
+  --bg-dark:linear-gradient(135deg,#141e30,#1f2a45,#243b55);
+  --text:#ffffff;
+  --card:rgba(255,255,255,0.08);
+  --card-hover:rgba(255,255,255,0.18);
+  --nav:rgba(0,0,0,0.85);
+  --radius:14px;
+  --shadow:0 10px 30px rgba(0,0,0,.25);
+}
+
+/* Base */
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:var(--text);
+  background:var(--bg-gradient);background-size:400% 400%;animation:flow 25s ease infinite;
+  -webkit-font-smoothing:antialiased;min-height:100vh;transition:background .5s ease;}
+@keyframes flow{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+a{color:inherit;text-decoration:none}
+
+/* Header */
+header{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;
+  padding:1rem 2rem;background:var(--nav);border-bottom:1px solid rgba(255,255,255,0.04);backdrop-filter:blur(6px)}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:44px;height:44px;border-radius:10px;object-fit:cover}
+.brand h1{color:var(--primary);font-size:1.25rem}
+.nav-links{display:flex;gap:8px;align-items:center}
+.nav-links a{padding:8px 12px;border-radius:10px;font-weight:600;transition:all .18s ease}
+.nav-links a:hover{background:var(--primary);color:#000;transform:translateY(-3px)}
+.actions{display:flex;gap:10px;align-items:center}
+.icon-btn{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(255,255,255,0.04);cursor:pointer}
+.sep{width:2px;height:26px;background:var(--primary);opacity:0.6;border-radius:3px}
+
+/* Page layout */
+.container{max-width:1100px;margin:2.5rem auto;padding:1.5rem}
+.page-head{text-align:center;margin-bottom:18px}
+.page-head h1{color:var(--primary);margin-bottom:6px;font-size:1.9rem}
+.page-head p{opacity:.9;margin:0;max-width:900px;margin-left:auto;margin-right:auto}
+
+/* Player area */
+.player-panel{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:start;margin-top:18px}
+@media(max-width:920px){.player-panel{grid-template-columns:1fr;}}
+.player-card{background:var(--card);padding:18px;border-radius:var(--radius);box-shadow:var(--shadow);transition:background .2s}
+.player-main{min-height:200px;display:flex;flex-direction:column;gap:10px;align-items:center;justify-content:center}
+.player-cover{width:180px;height:180px;border-radius:12px;overflow:hidden;box-shadow:0 8px 24px rgba(0,0,0,.35)}
+.player-cover img{width:100%;height:100%;object-fit:cover;display:block}
+.player-meta{text-align:center}
+.player-meta .title{font-weight:700;font-size:1.1rem;color:var(--primary)}
+.player-meta .sub{opacity:.9;font-size:.95rem;margin-top:4px}
+
+/* Playlist grid */
+.controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center;margin-bottom:12px}
+.chip{padding:8px 12px;border-radius:999px;background:rgba(255,255,255,0.06);cursor:pointer;font-weight:600;border:1px solid rgba(255,255,255,0.02)}
+.chip.active{background:var(--primary);color:#000}
+.search-wrap{display:flex;justify-content:center;margin-bottom:14px}
+.search-wrap input{width:420px;max-width:100%;padding:10px 12px;border-radius:10px;border:0;background:rgba(255,255,255,0.06);color:var(--text);outline:none}
+
+/* Library */
+.library{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-top:12px}
+.card{background:var(--card);padding:12px;border-radius:12px;display:flex;gap:12px;align-items:center;cursor:pointer;transition:transform .14s,background .14s;box-shadow:0 8px 20px rgba(0,0,0,.22)}
+.card:hover{transform:translateY(-6px);background:var(--card-hover)}
+.card img{width:72px;height:72px;border-radius:8px;object-fit:cover}
+.card .meta{flex:1}
+.card .meta .t{font-weight:700}
+.card .meta .a{opacity:.85;font-size:.95rem;margin-top:4px}
+
+/* Footer & floating menu */
+footer{text-align:center;padding:28px 1.5rem;color:rgba(255,255,255,.8);margin-top:24px}
+#floatingMenu{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column-reverse;align-items:flex-end;z-index:1500}
+#floatingMenu .menu-toggle{width:56px;height:56px;border-radius:28px;background:var(--primary);color:#000;font-size:28px;border:none;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,0.3)}
+#floatingMenu .menu-items{display:none;flex-direction:column;margin-bottom:12px}
+#floatingMenu .menu-items a{background:var(--card);padding:10px 16px;margin:4px 0;border-radius:14px;font-weight:600;transition:all .18s ease}
+#floatingMenu .menu-items a:hover{background:var(--card-hover)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi logo">
+    <h1>VoKi</h1>
+  </div>
+
+  <nav style="display:flex;align-items:center;gap:12px">
+    <div class="nav-links" aria-label="Primary">
+      <a href="index.html">Home</a>
+      <a href="team.html">Team</a>
+      <a href="ai-helper.html">Kite AI</a>
+      <a href="AI.html">VoKi AI</a>
+      <a href="tos.html">Legal</a>
+      <a href="music.html" style="background:rgba(255,255,255,0.04);padding:8px 12px;border-radius:10px">Music</a>
+    </div>
+
+    <div class="actions" style="margin-left:16px">
+      <button id="themeToggle" class="icon-btn" title="Toggle theme">
+        <img id="themeIcon" src="VoKi_Moon.png" alt="theme" style="width:18px;height:18px">
+      </button>
+      <div class="sep" style="margin-left:8px;margin-right:8px"></div>
+      <a class="btn btn-outline" href="#" id="loginBtn" style="padding:8px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.06)">Login</a>
+    </div>
+  </nav>
+</header>
+
+<main class="container">
+  <div class="page-head">
+    <h1>VoKi | Music Player</h1>
+    <p>Discover and play tracks legally via Spotify. Click a card to load the official Spotify player for that selection.</p>
+  </div>
+
+  <div class="player-panel">
+    <!-- Left: Library / controls -->
+    <div>
+      <div class="player-card player-main">
+        <div id="playerCover" class="player-cover">
+          <img src="VoKi Logo (Updated Bot Logo).png" alt="Cover" id="coverImg">
+        </div>
+        <div class="player-meta">
+          <div class="title" id="playerTitle">Select a track or playlist</div>
+          <div class="sub" id="playerSub">Spotify player will appear to the right</div>
+        </div>
+      </div>
+
+      <div class="player-card" style="margin-top:12px">
+        <div class="controls">
+          <div class="chip active" data-tag="all">All</div>
+          <div class="chip" data-tag="chill">Chill</div>
+          <div class="chip" data-tag="lofi">Lo-fi</div>
+          <div class="chip" data-tag="pop">Pop</div>
+          <div class="chip" data-tag="edm">EDM</div>
+        </div>
+
+        <div class="search-wrap">
+          <input id="searchInput" placeholder="Search title or artist (press Enter)" aria-label="Search music">
+        </div>
+
+        <div class="library" id="library"></div>
+      </div>
+    </div>
+
+    <!-- Right: Spotify embed -->
+    <aside>
+      <div class="player-card" style="height:100%;display:flex;flex-direction:column;gap:12px;align-items:stretch">
+        <div style="font-weight:700;color:var(--primary)">Player</div>
+        <div id="embedWrapper" style="flex:1;min-height:220px;display:flex;align-items:center;justify-content:center">
+          <!-- iframe will be inserted here -->
+          <div style="opacity:.9;text-align:center">No selection • Click a card to play</div>
+        </div>
+        <div style="opacity:.85;font-size:.9rem">Note: Spotify player requires the user to have access to Spotify. Playback control and ads are handled by Spotify.</div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<footer>
+  <p>© 2025 VoKi • Privacy-First Moderation for Discord</p>
+</footer>
+
+<!-- Floating Menu -->
+<div id="floatingMenu">
+  <div class="menu-items" id="menuItems"></div>
+  <button class="menu-toggle" id="menuToggle" title="Open menu">☰</button>
+</div>
+
+<script>
+/* === Library configuration ===
+   You can replace the items below with any Spotify embed URL (playlist / album / track).
+   The embed URL format is: https://open.spotify.com/embed/playlist/PLAYLIST_ID
+   or https://open.spotify.com/embed/track/TRACK_ID, or album.
+*/
+const libraryItems = [
+  {
+    id: 'top-hits',
+    tag: 'pop',
+    title: "Today's Top Hits",
+    artist: "Spotify",
+    img: "https://i.scdn.co/image/ab67706f00000002c0593b2a5e6f5f7a4f0f2a0b",
+    embed: "https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M"
+  },
+  {
+    id: 'chill-hits',
+    tag: 'chill',
+    title: "Chill Hits",
+    artist: "Spotify",
+    img: "https://i.scdn.co/image/ab67706f00000003c234b6f29d7f3e2a7b8a9f56",
+    embed: "https://open.spotify.com/embed/playlist/37i9dQZF1DX4WYpdgoIcn6"
+  },
+  {
+    id: 'lofi-beats',
+    tag: 'lofi',
+    title: "Lo-fi Beats",
+    artist: "Spotify",
+    img: "https://i.scdn.co/image/ab67706f00000003b5d6c9f4b7f0b2c2f5b8a7c9",
+    embed: "https://open.spotify.com/embed/playlist/37i9dQZF1DXdPec7aLTmlC"
+  },
+  {
+    id: 'edm-drops',
+    tag: 'edm',
+    title: "Mint",
+    artist: "Spotify",
+    img: "https://i.scdn.co/image/ab67706f000000022b7a2f0fef4c4fcf1a1a2b3c",
+    embed: "https://open.spotify.com/embed/playlist/37i9dQZF1DX4dyzvuaRJ0n"
+  }
+];
+
+/* ===== Utility and UI code ===== */
+const libraryEl = document.getElementById('library');
+const embedWrapper = document.getElementById('embedWrapper');
+const playerTitle = document.getElementById('playerTitle');
+const playerSub = document.getElementById('playerSub');
+const coverImg = document.getElementById('coverImg');
+const chips = Array.from(document.querySelectorAll('.chip'));
+const searchInput = document.getElementById('searchInput');
+
+function renderLibrary(items){
+  libraryEl.innerHTML = '';
+  items.forEach(it=>{
+    const card = document.createElement('div');
+    card.className='card';
+    card.dataset.id = it.id;
+    card.dataset.tag = it.tag;
+    card.innerHTML = `
+      <img src="${it.img}" alt="${escapeHtml(it.title)} cover" />
+      <div class="meta">
+        <div class="t">${escapeHtml(it.title)}</div>
+        <div class="a">${escapeHtml(it.artist)}</div>
+      </div>
+    `;
+    card.addEventListener('click', ()=> loadEmbed(it));
+    libraryEl.appendChild(card);
+  });
+}
+
+function loadEmbed(item){
+  // Update player meta
+  playerTitle.textContent = item.title;
+  playerSub.textContent = item.artist;
+  coverImg.src = item.img;
+
+  // Create iframe
+  embedWrapper.innerHTML = '';
+  const iframe = document.createElement('iframe');
+  iframe.src = item.embed;
+  iframe.width = '100%';
+  iframe.height = '380';
+  iframe.frameBorder = '0';
+  iframe.allow = 'autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture';
+  iframe.loading = 'lazy';
+  iframe.style.borderRadius = '8px';
+  embedWrapper.appendChild(iframe);
+  // Scroll player into view on small screens
+  iframe.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+/* Basic filtering & search */
+function applyFilter(tag){
+  chips.forEach(c=>c.classList.toggle('active', c.dataset.tag===tag || tag==='all' && c.dataset.tag==='all'));
+  const results = libraryItems.filter(it=>{
+    if(tag !== 'all' && it.tag !== tag) return false;
+    const q = searchInput.value.trim().toLowerCase();
+    if(!q) return true;
+    return it.title.toLowerCase().includes(q) || it.artist.toLowerCase().includes(q);
+  });
+  renderLibrary(results);
+}
+
+/* Escape helper */
+function escapeHtml(str){ return String(str).replace(/[&<>"']/g, s=>({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' })[s]); }
+
+/* Wire up chips */
+chips.forEach(ch=>{
+  ch.addEventListener('click', ()=>{
+    chips.forEach(c=>c.classList.remove('active'));
+    ch.classList.add('active');
+    const tag = ch.dataset.tag || 'all';
+    // show 'all' if none
+    applyFilter(tag);
+  });
+});
+
+/* Search enter */
+searchInput.addEventListener('keydown', (e)=>{
+  if(e.key === 'Enter'){ applyFilter(document.querySelector('.chip.active')?.dataset.tag || 'all'); }
+});
+
+/* Floating menu build (matched to site) */
+const floatingLinks=[
+  {title:'Home',href:'index.html'},
+  {title:'Team',href:'team.html'},
+  {title:'Kite AI',href:'ai-helper.html'},
+  {title:'VoKi AI',href:'AI.html'},
+  {title:'Legal',href:'tos.html'},
+  {title:'Music',href:'music.html'}
+];
+const menuItems = document.getElementById('menuItems');
+floatingLinks.forEach(l=>{
+  const a=document.createElement('a');
+  a.textContent = l.title;
+  a.href = l.href;
+  a.style.opacity = '0';
+  a.style.transform = 'translateY(12px)';
+  menuItems.appendChild(a);
+});
+let menuOpen=false;
+document.getElementById('menuToggle').addEventListener('click', ()=>{
+  if(!menuOpen){
+    menuItems.style.display='flex';
+    [...menuItems.children].forEach((el,i)=>setTimeout(()=>{el.style.opacity='1';el.style.transform='translateY(0)';}, i*50));
+  } else {
+    [...menuItems.children].forEach((el,i)=>setTimeout(()=>{el.style.opacity='0';el.style.transform='translateY(12px)';}, i*30));
+    setTimeout(()=>menuItems.style.display='none', 300);
+  }
+  menuOpen = !menuOpen;
+});
+
+/* Theme toggle (keeps same behavior as main site) */
+const themeToggle = document.getElementById('themeToggle');
+const themeIcon = document.getElementById('themeIcon');
+let dark = localStorage.getItem('voki_dark')==='1' ? true : (localStorage.getItem('voki_dark')==='0' ? false : window.matchMedia('(prefers-color-scheme: dark)').matches);
+function applyTheme(){
+  if(dark){
+    document.documentElement.style.setProperty('--bg-gradient','var(--bg-dark)');
+    themeIcon.src='VoKi_Sun.png';
+  } else {
+    document.documentElement.style.setProperty('--bg-gradient','linear-gradient(135deg,#4facfe,#6fa1ff,#8e44ad)');
+    themeIcon.src='VoKi_Moon.png';
+  }
+  localStorage.setItem('voki_dark', dark ? '1' : '0');
+}
+applyTheme();
+themeToggle.addEventListener('click', ()=>{ dark = !dark; applyTheme(); });
+
+/* Initialize */
+renderLibrary(libraryItems);
+applyFilter('all');
+
+</script>
+</body>
+</html>
 
