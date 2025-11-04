@@ -16,57 +16,62 @@
     --card: rgba(255,255,255,0.08);
     --card-hover: rgba(255,255,255,0.18);
     --nav: rgba(0,0,0,0.85);
-    --radius:14px;
+    --radius: 14px;
 }
 
 /* Global */
 *{box-sizing:border-box;}
-body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:var(--text);background:var(--bg-gradient);background-size:400% 400%;animation:flow 25s ease infinite;scroll-behavior:smooth;min-height:100vh;transition:background 0.5s ease;}
+body{margin:0;font-family:"Segoe UI",Arial,sans-serif;color:var(--text);background:var(--bg-gradient);background-size:400% 400%;animation:flow 25s ease infinite;-webkit-font-smoothing:antialiased;scroll-behavior:smooth;min-height:100vh;transition:background 0.5s ease;}
 @keyframes flow{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
 h1,h2,h3,p{margin:0;padding:0;}
 a{color:inherit;text-decoration:none;}
 
 /* Header & Nav */
-header{position:sticky;top:0;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:var(--nav);border-bottom:1px solid rgba(255,255,255,0.04);backdrop-filter:blur(6px);}
+header{position:sticky;top:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:var(--nav);border-bottom:1px solid rgba(255,255,255,0.04);backdrop-filter:blur(6px);}
 .brand{display:flex;align-items:center;gap:12px;}
-.brand img{width:44px;height:44px;border-radius:10px;}
-.brand h1{color:var(--primary);font-size:1.25rem;}
+.brand img{width:44px;height:44px;border-radius:10px;object-fit:cover;}
+.brand h1{color:var(--primary);font-size:1.25rem;letter-spacing:0.5px;}
 nav{display:flex;align-items:center;gap:12px;}
-.nav-links{display:flex;gap:8px;}
+.nav-links{display:flex;gap:8px;align-items:center;}
 .nav-links a{padding:8px 12px;border-radius:10px;font-weight:600;transition:all 0.18s ease;}
-.nav-links a:hover{background:var(--primary);color:#000;}
+.nav-links a:hover{background:var(--primary);color:#000;transform:translateY(-3px);}
 .actions{display:flex;gap:10px;align-items:center;}
 .icon-btn{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:transparent;border:1px solid rgba(255,255,255,0.04);cursor:pointer;}
 .sep{width:2px;height:26px;background:var(--primary);opacity:0.6;border-radius:3px;}
 
-/* Main container */
+/* Container & Hero */
 .container{max-width:1100px;margin:0 auto;padding:3.2rem 1.5rem;text-align:center;}
 h1{color:var(--primary);margin-bottom:0.6rem;font-size:2.1rem;}
 .lead{max-width:820px;margin:0 auto;color:rgba(255,255,255,.95);opacity:.95;font-size:1.05rem;}
-.buttons{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
-.btn{border-radius:999px;padding:12px 20px;font-weight:700;border:0;cursor:pointer;transition:transform .22s ease,opacity .18s;display:inline-flex;align-items:center;gap:8px;box-shadow:0 6px 18px rgba(0,0,0,0.28);}
-.btn-primary{background:var(--primary);color:#000;}
-.btn-outline{background:transparent;border:2px solid var(--primary);}
-.btn:hover{transform:translateY(-4px);opacity:0.98;}
 
-/* Tabs */
-.tab-buttons{display:flex;justify-content:center;gap:12px;margin-bottom:24px;}
-.tab-buttons button{padding:10px 16px;border-radius:12px;border:0;cursor:pointer;font-weight:600;transition:all .18s ease;}
-.tab-buttons button.active{background:var(--primary);color:#000;}
-.tab-content{display:none;}
-.tab-content.active{display:block;}
-
-/* Music Cards */
-.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;}
+/* Sections & Cards */
+.section{padding:48px 1.5rem;text-align:center;}
+.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;max-width:1100px;margin:22px auto 0;}
 .card{background:var(--card);padding:20px;border-radius:var(--radius);transition:transform .25s ease,background .18s;box-shadow:0 10px 30px rgba(0,0,0,.25);}
 .card:hover{transform:translateY(-6px);background:var(--card-hover);}
 
-/* Footer */
-footer{text-align:center;padding:28px 1.5rem;color:rgba(255,255,255,.8);}
+/* Music Player */
+.player{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:20px;}
+.track-info{display:flex;flex-direction:column;align-items:center;gap:6px;}
+.track-info img{width:180px;height:180px;border-radius:14px;object-fit:cover;}
+.track-info h3, .track-info p{margin:0;color:#fff;}
+.controls{display:flex;gap:12px;align-items:center;margin-top:12px;}
+.controls button{background:var(--primary);border:none;color:#000;padding:10px 16px;border-radius:12px;cursor:pointer;transition:transform 0.2s ease;}
+.controls button:hover{transform:translateY(-2px);}
+input[type="range"]{width:200px;}
 
-/* Player */
-#audioPlayer{position:fixed;bottom:0;left:0;width:100%;background:var(--nav);padding:12px 20px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 -6px 20px rgba(0,0,0,0.5);}
-#audioPlayer button{background:var(--primary);border:none;border-radius:8px;padding:8px 12px;color:#000;cursor:pointer;transition:opacity .18s ease;}
+/* Search */
+#searchBar{width:100%;max-width:400px;padding:8px 12px;border-radius:12px;border:2px solid var(--primary);margin-top:20px;}
+
+/* Footer */
+footer{text-align:center;padding:28px 1.5rem;color:rgba(255,255,255,.8);position:relative;bottom:0;width:100%;}
+
+/* Floating Menu */
+#floatingMenu{position:fixed;bottom:24px;right:24px;display:flex;flex-direction:column-reverse;align-items:flex-end;z-index:1500;}
+#floatingMenu .menu-toggle{width:56px;height:56px;border-radius:28px;background:var(--primary);color:#000;font-size:28px;border:none;cursor:pointer;box-shadow:0 8px 20px rgba(0,0,0,0.3);}
+#floatingMenu .menu-items{display:none;flex-direction:column;margin-bottom:12px;}
+#floatingMenu .menu-items a{background:var(--card);padding:10px 16px;margin:4px 0;border-radius:14px;font-weight:600;transition:all .18s ease;}
+#floatingMenu .menu-items a:hover{background:var(--card-hover);}
 </style>
 </head>
 <body>
@@ -82,112 +87,141 @@ footer{text-align:center;padding:28px 1.5rem;color:rgba(255,255,255,.8);}
 <a href="tos.html">Legal</a>
 </div>
 <div class="actions">
-<button id="themeToggle" class="icon-btn">🌓</button>
-<div class="sep"></div>
-<button id="loginBtn" class="btn btn-outline">Login Spotify</button>
+<button id="themeToggle" class="icon-btn" title="Toggle theme">🌓</button>
 </div>
 </nav>
 </header>
 
 <main class="container">
-<section class="hero fade-in">
-<h1>VoKi | Music Player</h1>
-<p class="lead">Stream free music and your Spotify library — no storage, temporary session login.</p>
+<section class="section fade-in">
+<h1>VoKi Music Player</h1>
+<p class="lead">Search, preview, and play music. Full tracks require Spotify Premium.</p>
 
-<div class="tab-buttons">
-<button class="active" data-tab="free">Free Tracks</button>
-<button data-tab="spotify">Spotify Tracks</button>
-</div>
+<input type="text" id="searchBar" placeholder="Search for songs, artists, or albums">
 
-<div id="free" class="tab-content active">
-<div class="card-grid" id="freeTracks">
-<!-- Free tracks inserted here -->
-</div>
-</div>
+<div class="card-grid" id="songGrid"></div>
 
-<div id="spotify" class="tab-content">
-<p id="spotifyStatus">Login with Spotify to see your tracks.</p>
-<div class="card-grid" id="spotifyTracks"></div>
+<div class="player" id="player" style="display:none;">
+<div class="track-info">
+<img src="" id="trackCover" alt="Cover">
+<h3 id="trackTitle"></h3>
+<p id="trackArtist"></p>
+</div>
+<div class="controls">
+<button id="prevBtn">⏮️</button>
+<button id="playPauseBtn">▶️</button>
+<button id="nextBtn">⏭️</button>
+<audio id="audioPlayer" preload="metadata"></audio>
+</div>
 </div>
 </section>
 </main>
 
 <footer>
-<p>© 2025 VoKi • Music Player</p>
+<p>© 2025 VoKi • Privacy‑First Moderation for Discord</p>
 </footer>
 
-<!-- Floating Audio Player -->
-<div id="audioPlayer">
-<span id="currentTrack">No track playing</span>
-<div>
-<button id="prevBtn">⏮️</button>
-<button id="playBtn">▶️</button>
-<button id="nextBtn">⏭️</button>
-</div>
-<audio id="player" src="" preload="auto"></audio>
+<!-- Floating Menu -->
+<div id="floatingMenu">
+<div class="menu-items" id="menuItems"></div>
+<button class="menu-toggle" id="menuToggle" title="Open menu">☰</button>
 </div>
 
 <script>
 // ===== Theme Toggle =====
 const themeToggle=document.getElementById('themeToggle');
 let dark=false;
-function applyTheme(){document.body.style.background=dark?'var(--bg-dark)':'var(--bg-gradient)';}
-applyTheme();
+function applyTheme(){document.body.style.background=dark?"linear-gradient(135deg,#141e30,#1f2a45,#243b55)":"linear-gradient(135deg,#4facfe,#6fa1ff,#8e44ad)";}
 themeToggle.addEventListener('click',()=>{dark=!dark;applyTheme();});
+applyTheme();
 
-// ===== Tabs =====
-const tabs=document.querySelectorAll('.tab-buttons button');
-const contents=document.querySelectorAll('.tab-content');
-tabs.forEach(tab=>tab.addEventListener('click',()=>{
-    tabs.forEach(t=>t.classList.remove('active'));
-    contents.forEach(c=>c.classList.remove('active'));
-    tab.classList.add('active');
-    document.getElementById(tab.dataset.tab).classList.add('active');
-}));
+// ===== Floating Menu =====
+const floatingLinks=[{title:'Home',href:'index.html'},{title:'Team',href:'team.html'},{title:'Kite AI',href:'ai-helper.html'},{title:'VoKi AI',href:'AI.html'},{title:'Legal',href:'tos.html'}];
+const menuItems=document.getElementById('menuItems');
+floatingLinks.forEach(l=>{const a=document.createElement('a');a.textContent=l.title;a.href=l.href;menuItems.appendChild(a);});
+let menuOpen=false;
+document.getElementById('menuToggle').addEventListener('click',()=>{menuItems.style.display=menuOpen?'none':'flex';menuOpen=!menuOpen;});
 
-// ===== Free Tracks =====
-const freeTracks=[
-{name:"Epic Chill",artist:"Vaztinix",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"},
-{name:"Sunny Vibes",artist:"Vaztinix",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"},
-{name:"Night Drive",artist:"Vaztinix",url:"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-3.mp3"}
-];
-const freeGrid=document.getElementById('freeTracks');
-freeTracks.forEach(track=>{
-    const card=document.createElement('div');
-    card.className='card';
-    card.innerHTML=`<h3>${track.name}</h3><p>${track.artist}</p><button class="btn btn-primary" onclick="playTrack('${track.url}','${track.name}')">▶️ Play</button>`;
-    freeGrid.appendChild(card);
-});
+// ===== Spotify API =====
+const clientId = "537a23da3f4e4ac687c1768534637c2f";
+const redirectUri = window.location.href.split('#')[0]; // redirect back to this page
+let accessToken = null;
 
-// ===== Audio Player =====
-const player=document.getElementById('player');
-const currentTrack=document.getElementById('currentTrack');
-function playTrack(url,name){player.src=url;player.play();currentTrack.textContent=name;}
-
-// ===== Play/Pause Controls =====
-document.getElementById('playBtn').addEventListener('click',()=>{if(player.paused)player.play();else player.pause();});
-document.getElementById('prevBtn').addEventListener('click',()=>{alert('Previous track not implemented yet');});
-document.getElementById('nextBtn').addEventListener('click',()=>{alert('Next track not implemented yet');});
-
-// ===== Spotify Login =====
-const loginBtn=document.getElementById('loginBtn');
-loginBtn.addEventListener('click',()=>{
-    const clientId="YOUR_SPOTIFY_CLIENT_ID";
-    const redirectUri=window.location.href;
-    const scopes="user-read-private user-read-email streaming";
-    const url=`https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}`;
-    window.location.href=url;
-});
-
-// ===== Handle Spotify Token from URL =====
-const hash=window.location.hash;
-if(hash.includes("access_token")){
-    const token=hash.match(/access_token=([^&]*)/)[1];
-    sessionStorage.setItem('spotifyToken',token);
-    window.location.hash='';
-    document.getElementById('spotifyStatus').textContent='Logged in! Your Spotify tracks appear below.';
-    // TODO: Integrate Spotify Web Playback SDK
+function authenticateSpotify(){
+    const scopes = 'user-read-private user-read-email streaming';
+    const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=${encodeURIComponent(redirectUri)}&scope=${encodeURIComponent(scopes)}`;
+    window.location = authUrl;
 }
+
+// Parse token from URL
+if(window.location.hash){
+    const params = new URLSearchParams(window.location.hash.substring(1));
+    accessToken = params.get('access_token');
+    if(accessToken) window.history.replaceState({}, document.title, window.location.pathname);
+}
+
+// ===== Music Search & Preview =====
+const searchBar=document.getElementById('searchBar');
+const songGrid=document.getElementById('songGrid');
+const audioPlayer=document.getElementById('audioPlayer');
+const player=document.getElementById('player');
+const trackCover=document.getElementById('trackCover');
+const trackTitle=document.getElementById('trackTitle');
+const trackArtist=document.getElementById('trackArtist');
+const playPauseBtn=document.getElementById('playPauseBtn');
+
+let currentTrack = 0;
+let trackList = [];
+
+searchBar.addEventListener('keypress', e=>{
+    if(e.key==='Enter') searchSpotify(searchBar.value);
+});
+
+function searchSpotify(query){
+    songGrid.innerHTML='Loading...';
+    fetch(`https://api.spotify.com/v1/search?q=${encodeURIComponent(query)}&type=track&limit=12`, {
+        headers:{Authorization:`Bearer ${accessToken}`}
+    })
+    .then(res=>res.json())
+    .then(data=>{
+        songGrid.innerHTML='';
+        trackList = data.tracks.items.filter(t=>t.preview_url);
+        trackList.forEach((track,i)=>{
+            const card=document.createElement('div'); card.className='card';
+            card.innerHTML=`<img src="${track.album.images[0]?.url}" style="width:100%;border-radius:12px;"><h3>${track.name}</h3><p>${track.artists.map(a=>a.name).join(', ')}</p>`;
+            card.addEventListener('click', ()=>{playTrack(i);});
+            songGrid.appendChild(card);
+        });
+    }).catch(err=>{
+        songGrid.innerHTML=`<p style="color:#fff;">Error fetching tracks. <button onclick="authenticateSpotify()">Login to Spotify</button></p>`;
+        console.error(err);
+    });
+}
+
+function playTrack(index){
+    const track = trackList[index];
+    if(!track) return;
+    currentTrack=index;
+    audioPlayer.src=track.preview_url;
+    trackCover.src=track.album.images[0]?.url||'';
+    trackTitle.textContent=track.name;
+    trackArtist.textContent=track.artists.map(a=>a.name).join(', ');
+    audioPlayer.play();
+    player.style.display='flex';
+    playPauseBtn.textContent='⏸️';
+}
+
+playPauseBtn.addEventListener('click', ()=>{
+    if(audioPlayer.paused){audioPlayer.play(); playPauseBtn.textContent='⏸️';}
+    else{audioPlayer.pause(); playPauseBtn.textContent='▶️';}
+});
+
+document.getElementById('prevBtn').addEventListener('click', ()=>{
+    if(currentTrack>0) playTrack(currentTrack-1);
+});
+document.getElementById('nextBtn').addEventListener('click', ()=>{
+    if(currentTrack<trackList.length-1) playTrack(currentTrack+1);
+});
 </script>
 
 </body>
