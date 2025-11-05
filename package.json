@@ -1,9 +1,9 @@
 {
-  "name": "ai-helper",
-  "type": "module",
+  "name": "voki-backend",
+  "version": "1.0.0",
+  "private": true,
   "dependencies": {
-    "express": "^4.19.2",
-    "cors": "^2.8.5",
-    "node-fetch": "^3.3.2"
+    "jsonwebtoken": "^9.0.0",
+    "node-fetch": "^3.4.1"
   }
 }
