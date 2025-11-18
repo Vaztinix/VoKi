@@ -6,7 +6,6 @@
 <title>VoKi – Privacy-First AI Discord Bot</title>
 <link rel="icon" href="VoKi Logo (Updated Bot Logo).png" />
 
-<!-- Open Graph / Twitter -->
 <meta property="og:title" content="VoKi – Privacy-First AI Discord Bot">
 <meta property="og:description" content="Privacy-first AI moderation that keeps your Discord safe, positive, and in your control.">
 <meta property="og:image" content="https://vaztinix.github.io/VoKi/VoKi%20Logo%20(Updated%20Bot%20Logo).png">
@@ -22,13 +21,16 @@
   --glass-bg: rgba(255,255,255,0.06);
   --glass-bg-2: rgba(255,255,255,0.10);
   --text:#eaf6ff;
+  --muted: rgba(234,246,255,0.66);
   --card-radius:18px;
   --glass-blur:14px;
   --card-shadow: 0 8px 30px rgba(2,6,23,0.6);
-  --accent-glow: 0 6px 30px rgba(109,200,255,0.14);
+  --accent-glow: 0 10px 40px rgba(109,200,255,0.14);
+  --sheen: linear-gradient(90deg, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0.02) 50%, rgba(255,255,255,0.12) 100%);
+  --glass-border: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
 }
 
-/* Page background gradient animation */
+/* Reset + base */
 html,body{height:100%;}
 *{box-sizing:border-box}
 body{
@@ -40,28 +42,42 @@ body{
   -moz-osx-font-smoothing:grayscale;
   min-height:100vh;
   overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
 }
 
-/* subtle animated radial 'liquid' overlay using blend-mode */
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .bg-liquid .blob,
+  .liquid-ripple,
+  .card:hover,
+  .btn { transition: none !important; animation: none !important; }
+}
+
+/* Liquid background / blobs */
 .bg-liquid {
   position:fixed;
   inset:0;
   pointer-events:none;
   z-index:0;
   mix-blend-mode:screen;
-  opacity:0.65;
+  opacity:0.7;
+  filter: saturate(1.05) contrast(1.02);
 }
 .bg-liquid .blob {
   position:absolute;
   width:520px;height:520px;border-radius:50%;
-  filter:blur(80px);
+  filter:blur(86px) saturate(1.1);
   transform-origin:center;
-  animation:float 10s ease-in-out infinite;
-  opacity:0.9;
+  animation:float 16s ease-in-out infinite;
+  opacity:0.95;
+  will-change: transform, opacity;
 }
-.blob.one{left:-10%;top:5%;background:linear-gradient(135deg,#3aa7ff66,#8e44ad66);animation-duration:18s;}
-.blob.two{right:-8%;bottom:5%;background:linear-gradient(135deg,#7de1ff66,#2b9eff66);animation-duration:14s;animation-delay:2s;}
+.blob.one{left:-12%;top:2%;background:radial-gradient(closest-side, rgba(62,168,255,0.35), rgba(138,43,226,0.12));animation-duration:20s;}
+.blob.two{right:-8%;bottom:2%;background:radial-gradient(closest-side, rgba(125,225,255,0.32), rgba(43,158,255,0.12));animation-duration:14s;animation-delay:2s;}
 @keyframes float{0%{transform:translateY(0) scale(1)}50%{transform:translateY(-18px) scale(1.03)}100%{transform:translateY(0) scale(1)}}
+
+/* Subtle parallax using pointer movement (will be disabled by reduced-motion pref) */
+:root { --pointerX: 0; --pointerY: 0; }
 
 /* header */
 header{
@@ -69,7 +85,7 @@ header{
   display:flex;align-items:center;justify-content:space-between;
   padding:14px 20px;
   background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px) saturate(1.05);
   border-bottom:1px solid rgba(255,255,255,0.03);
 }
 .brand{display:flex;align-items:center;gap:12px}
@@ -81,9 +97,11 @@ nav{display:flex;gap:12px;align-items:center}
 .nav-links{display:flex;gap:8px}
 .nav-links a{
   padding:8px 12px;border-radius:12px;font-weight:600;color:inherit;text-decoration:none;
-  transition:transform .18s ease, background .18s ease, color .18s ease;
+  transition:transform .18s ease, background .18s ease, color .18s ease, box-shadow .18s ease;
+  outline-offset:4px;
 }
-.nav-links a:hover{
+.nav-links a:hover,
+.nav-links a:focus{
   transform:translateY(-4px);
   background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
   color:#fff;
@@ -92,19 +110,27 @@ nav{display:flex;gap:12px;align-items:center}
 
 /* container & hero */
 .container{max-width:1100px;margin:0 auto;padding:3rem 1rem;position:relative;z-index:10}
-.hero{padding:44px 0;text-align:center}
-.hero h1{font-size:2.2rem;margin-bottom:10px;color:var(--primary)}
-.lead{max-width:860px;margin:0 auto;color:rgba(234,246,255,0.9);font-size:1.05rem;line-height:1.5}
+.hero{padding:44px 0;text-align:center;position:relative}
+.hero h1{
+  font-size:2.2rem;margin-bottom:10px;color:var(--primary);
+  letter-spacing:0.2px;
+  line-height:1.05;
+}
+.lead{max-width:860px;margin:0 auto;color:var(--muted);font-size:1.05rem;line-height:1.5}
 
 /* buttons */
 .buttons{margin-top:18px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
 .btn{
   border-radius:999px;padding:12px 20px;font-weight:700;border:0;cursor:pointer;display:inline-flex;gap:10px;align-items:center;
-  transition:transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s;
+  transition:transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s, background .18s;
   box-shadow: 0 6px 18px rgba(0,0,0,0.32);
+  text-decoration:none;color:inherit;
 }
+.btn:focus{outline:3px solid rgba(139,233,255,0.12);outline-offset:4px}
 .btn-primary{background:linear-gradient(90deg,var(--primary),var(--accent));color:#022;box-shadow:var(--accent-glow)}
+.btn-primary:hover{transform:translateY(-6px) scale(1.01);box-shadow:0 22px 60px rgba(15,40,80,0.48)}
 .btn-outline{background:transparent;border:2px solid rgba(174,239,255,0.12);color:var(--primary)}
+.btn-outline:hover{transform:translateY(-6px);background:rgba(255,255,255,0.02);box-shadow:var(--accent-glow)}
 
 /* glass card grid */
 .section{padding:44px 1rem;position:relative}
@@ -116,33 +142,46 @@ nav{display:flex;gap:12px;align-items:center}
   position:relative;overflow:hidden;border-radius:var(--card-radius);
   background:linear-gradient(180deg,var(--glass-bg), rgba(255,255,255,0.02));
   border:1px solid rgba(255,255,255,0.05);
-  backdrop-filter: blur(var(--glass-blur));
-  padding:18px;transition:transform .32s cubic-bezier(.2,.9,.3,1), box-shadow .32s;
+  backdrop-filter: blur(var(--glass-blur)) saturate(1.06);
+  padding:20px;transition:transform .36s cubic-bezier(.2,.9,.3,1), box-shadow .36s;
   box-shadow:var(--card-shadow);
+  transform-style: preserve-3d;
 }
-.card:hover{transform:translateY(-10px) rotateX(6deg);box-shadow:0 18px 50px rgba(2,6,23,0.7)}
+.card:hover{
+  transform:translateY(-12px) rotateX(6deg) translateZ(8px);
+  box-shadow:0 26px 70px rgba(2,6,23,0.75);
+}
 
-/* liquid sheen pseudo - for glass shine */
+/* sheen overlay and dynamic sheen movement */
 .card::before{
-  content:"";position:absolute;inset:0;
-  background: linear-gradient(120deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015));
-  pointer-events:none;
+  content:"";position:absolute;left:-60%;top:-40%;width:220%;height:200%;
+  background: var(--sheen);
+  transform: translateX(calc(var(--pointerX) * 0.02)) translateY(calc(var(--pointerY) * 0.02)) rotate(12deg);
+  opacity:0.18;filter:blur(12px);
+  pointer-events:none;transition:transform .45s cubic-bezier(.2,.9,.3,1);
 }
 .card .lg-border{
-  position:absolute;inset:-1px;
+  position:absolute;inset:-1px;border-radius:inherit;
   background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(174,239,255,0.04));
-  mask: linear-gradient(#000, #000);
-  pointer-events:none;
+  mix-blend-mode:overlay;pointer-events:none;
 }
 
-/* glass ripple using SVG filter (liquid effect) */
+/* liquid ripple SVG (subtle) */
 .liquid-ripple{
-  position:absolute;left:-20%;top:-60%;width:300%;height:300%;opacity:0.25;mix-blend-mode:screen;pointer-events:none;
+  position:absolute;left:-20%;top:-60%;width:300%;height:300%;opacity:0.22;mix-blend-mode:screen;pointer-events:none;
   animation:liquidMove 12s linear infinite;
+  will-change: transform;
 }
 @keyframes liquidMove{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(6%) rotate(8deg)}100%{transform:translateY(0) rotate(0)}}
 
-/* toast */
+/* card content */
+.card h3{margin:0 0 8px;font-size:1.05rem}
+.card p{margin:0;color:var(--muted)}
+
+/* smaller command cards */
+.card-grid > .card:nth-child(n+5){padding:16px}
+
+/* toast (kept for local notifications only) */
 .toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);padding:12px 16px;border-radius:12px;color:#fff;box-shadow:0 8px 30px rgba(0,0,0,0.5);opacity:0;transition:opacity .25s,transform .25s;z-index:2000}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
@@ -155,11 +194,15 @@ nav{display:flex;gap:12px;align-items:center}
 .fade-in{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
 .fade-in.show{opacity:1;transform:translateY(0)}
 
+/* focus states for keyboard users */
+a:focus, button:focus { outline: 3px solid rgba(174,239,255,0.14); outline-offset:4px; }
+
 /* responsive */
 @media (max-width:860px){
   .hero h1{font-size:1.6rem}
   header{padding:10px 12px}
   .nav-links{display:none}
+  .card:hover{transform:none;box-shadow:var(--card-shadow)}
 }
 </style>
 </head>
@@ -167,8 +210,8 @@ nav{display:flex;gap:12px;align-items:center}
 
 <!-- decorative liquid blobs -->
 <div class="bg-liquid" aria-hidden="true">
-  <div class="blob one"></div>
-  <div class="blob two"></div>
+  <div class="blob one" data-layer="1"></div>
+  <div class="blob two" data-layer="2"></div>
 </div>
 
 <header>
@@ -187,11 +230,11 @@ nav{display:flex;gap:12px;align-items:center}
   </nav>
 </header>
 
-<div id="toast" class="toast" role="status" aria-live="polite"></div>
+<div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
 <main class="container" id="pageContent">
-  <section class="hero fade-in">
-    <h1>Privacy-First AI Moderation for Discord</h1>
+  <section class="hero fade-in" aria-labelledby="hero-title">
+    <h1 id="hero-title">Privacy-First AI Moderation for Discord</h1>
     <p class="lead">Keep your community safe, positive, and in your control — full transparency, no developer access to server data.</p>
     <div class="buttons" role="group" aria-label="Primary actions">
       <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549" target="_blank" rel="noopener">🚀 Invite VoKi</a>
@@ -200,16 +243,16 @@ nav{display:flex;gap:12px;align-items:center}
     </div>
   </section>
 
-  <section class="section fade-in" id="about">
-    <h2 style="color:var(--primary);margin-bottom:8px">About VoKi</h2>
+  <section class="section fade-in" id="about" aria-labelledby="about-title">
+    <h2 id="about-title" style="color:var(--primary);margin-bottom:8px">About VoKi</h2>
     <p class="lead">VoKi is a modern privacy-first Discord moderation bot that prioritizes user safety, privacy, and transparency. Data remains on your server — developers cannot access member information.</p>
   </section>
 
   <section class="section fade-in" aria-labelledby="features">
     <h2 id="features" style="color:var(--primary);margin-bottom:8px">Core Features</h2>
-    <div class="card-grid">
-      <article class="card" role="article" aria-label="Privacy Logging">
-        <div class="lg-border"></div>
+    <div class="card-grid" role="list">
+      <article class="card" role="article" aria-label="Privacy Logging" tabindex="0">
+        <div class="lg-border" aria-hidden="true"></div>
         <svg class="liquid-ripple" viewBox="0 0 800 600" preserveAspectRatio="none" aria-hidden="true">
           <defs>
             <filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="40" result="blur" /><feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" /></filter>
@@ -223,34 +266,34 @@ nav{display:flex;gap:12px;align-items:center}
         <p>All data is stored locally to your server; no external access by developers.</p>
       </article>
 
-      <article class="card" role="article" aria-label="AI Moderation">
-        <div class="lg-border"></div>
+      <article class="card" role="article" aria-label="AI Moderation" tabindex="0">
+        <div class="lg-border" aria-hidden="true"></div>
         <h3>🤖 Smart AI Moderation</h3>
         <p>AI detects and filters negative messages to keep communities safe — with human-reviewed options.</p>
       </article>
 
-      <article class="card" role="article" aria-label="Command Control">
-        <div class="lg-border"></div>
+      <article class="card" role="article" aria-label="Command Control" tabindex="0">
+        <div class="lg-border" aria-hidden="true"></div>
         <h3>⚙️ Command Control</h3>
         <p>Admins can enable or disable commands for full flexibility and auditability.</p>
       </article>
 
-      <article class="card" role="article" aria-label="Community Driven">
-        <div class="lg-border"></div>
+      <article class="card" role="article" aria-label="Community Driven" tabindex="0">
+        <div class="lg-border" aria-hidden="true"></div>
         <h3>🧭 Community Driven</h3>
         <p>Built with feedback from moderators and staff for real moderation needs.</p>
       </article>
     </div>
   </section>
 
-  <section class="section fade-in">
-    <h2 style="color:var(--primary)">Command Showcase</h2>
+  <section class="section fade-in" aria-labelledby="commands">
+    <h2 id="commands" style="color:var(--primary)">Command Showcase</h2>
     <div class="card-grid">
-      <div class="card"><h3>/ban</h3><p>Ban a member quickly and safely.</p></div>
-      <div class="card"><h3>/mute</h3><p>Temporarily mute a member for specific durations.</p></div>
-      <div class="card"><h3>/ask</h3><p>Get AI assistance for moderation questions.</p></div>
-      <div class="card"><h3>/support</h3><p>Open staff support tickets for your community.</p></div>
-      <div class="card"><h3>/privacy</h3><p>Check or delete stored server data instantly.</p></div>
+      <div class="card" tabindex="0"><h3>/ban</h3><p>Ban a member quickly and safely.</p></div>
+      <div class="card" tabindex="0"><h3>/mute</h3><p>Temporarily mute a member for specific durations.</p></div>
+      <div class="card" tabindex="0"><h3>/ask</h3><p>Get AI assistance for moderation questions.</p></div>
+      <div class="card" tabindex="0"><h3>/support</h3><p>Open staff support tickets for your community.</p></div>
+      <div class="card" tabindex="0"><h3>/privacy</h3><p>Check or delete stored server data instantly.</p></div>
     </div>
   </section>
 
@@ -271,9 +314,9 @@ nav{display:flex;gap:12px;align-items:center}
 </div>
 
 <script>
-/* -------------------------
+/* ===========================
    Theme toggle (light/dark)
-   ------------------------- */
+   =========================== */
 const themeToggle = document.getElementById('themeToggle');
 let dark = localStorage.getItem('voki_dark') === '1' ? true :
            (localStorage.getItem('voki_dark') === '0' ? false :
@@ -282,12 +325,12 @@ let dark = localStorage.getItem('voki_dark') === '1' ? true :
 function applyTheme() {
   if (dark) {
     document.documentElement.style.setProperty('--primary','#8be8ff');
-    document.documentElement.style.background = 'linear-gradient(135deg,#06101b 0%, #081627 100%)';
+    document.body.style.background = 'linear-gradient(135deg,#06101b 0%, #081627 100%)';
     themeToggle.textContent = '☀️';
     themeToggle.setAttribute('aria-pressed','true');
   } else {
     document.documentElement.style.setProperty('--primary','#aeefff');
-    document.documentElement.style.background = '';
+    document.body.style.background = 'linear-gradient(135deg,#06101b 0%, #112033 35%, #0b1530 100%)';
     themeToggle.textContent = '🌙';
     themeToggle.setAttribute('aria-pressed','false');
   }
@@ -296,9 +339,9 @@ function applyTheme() {
 applyTheme();
 themeToggle.addEventListener('click', () => { dark = !dark; applyTheme(); });
 
-/* -------------------------
-   Toast utility
-   ------------------------- */
+/* ===========================
+   Toast utility (local-only)
+   =========================== */
 const toastEl = document.getElementById('toast');
 let toastTimer = null;
 function showToast(msg, timeout = 3500) {
@@ -307,19 +350,10 @@ function showToast(msg, timeout = 3500) {
   toastEl.classList.add('show');
   toastTimer = setTimeout(() => toastEl.classList.remove('show'), timeout);
 }
-document.querySelectorAll('.btn-outline').forEach(b => {
-  b.addEventListener('click', e => {
-    // login is placeholder
-    if (b.textContent.trim().toLowerCase().includes('login')) {
-      e.preventDefault();
-      showToast('Login is in development and unavailable.');
-    }
-  });
-});
 
-/* -------------------------
-   Floating menu (smooth)
-   ------------------------- */
+/* ===========================
+   Floating menu items (UI only)
+   =========================== */
 const floatingLinks = [
   {title:'Home', href:'index.html'},
   {title:'Team', href:'team.html'},
@@ -336,19 +370,20 @@ floatingLinks.forEach((l, i) => {
   a.style.transform = 'translateY(8px)';
   a.href = l.href;
   a.textContent = l.title;
+  a.setAttribute('role','menuitem');
   menuItems.appendChild(a);
-  // staggered reveal
   setTimeout(()=>{ a.style.opacity='1'; a.style.transform='translateY(0)' }, 60 * i + 180);
 });
 let menuOpen = false;
 document.getElementById('menuToggle').addEventListener('click', () => {
   menuOpen = !menuOpen;
   menuItems.style.display = menuOpen ? 'flex' : 'none';
+  menuItems.setAttribute('aria-hidden', (!menuOpen).toString());
 });
 
-/* -------------------------
-   Intersection Observer fade-ins
-   ------------------------- */
+/* ===========================
+   Intersection Observer for fade-ins
+   =========================== */
 const faders = document.querySelectorAll('.fade-in');
 const observer = new IntersectionObserver((entries, obs) => {
   entries.forEach(entry => {
@@ -357,70 +392,70 @@ const observer = new IntersectionObserver((entries, obs) => {
       obs.unobserve(entry.target);
     }
   });
-}, {threshold:0.25});
+}, {threshold:0.2});
 faders.forEach(f => observer.observe(f));
 
-/* -------------------------
-   Visitor tracking (client-side minimal)
-   - WARNING: DO NOT embed real webhook URLs client-side in production.
-   - Prefer: send to your own server endpoint which forwards to the webhook.
-   ------------------------- */
+/* ===========================
+   Pointer-parallax for blobs & sheen
+   - Local-only, no tracking or outbound requests
+   =========================== */
 (function(){
-  try {
-    const ua = navigator.userAgent || 'Unknown';
-    let browser = 'Unknown';
-    if (ua.includes('Edg/')) browser = 'Microsoft Edge';
-    else if (ua.includes('Chrome') && !ua.includes('Edg/')) browser = 'Chrome';
-    else if (ua.includes('Firefox')) browser = 'Firefox';
-    else if (ua.includes('Safari') && !ua.includes('Chrome')) browser = 'Safari';
-    else if (ua.includes('OPR') || ua.includes('Opera')) browser = 'Opera';
+  const blobs = document.querySelectorAll('.bg-liquid .blob');
+  const cards = document.querySelectorAll('.card');
 
-    const device = /mobile|android|iphone|ipad/i.test(ua) ? 'Mobile/Tablet' : 'PC/Laptop';
+  function onPointer(e) {
+    // normalize pointer position to -1..1
+    const x = (e.clientX / window.innerWidth) * 2 - 1;
+    const y = (e.clientY / window.innerHeight) * 2 - 1;
 
-    // show non-identifying overlay (local only)
-    const infoDiv = document.createElement('div');
-    infoDiv.style.position='fixed';
-    infoDiv.style.bottom='10px';
-    infoDiv.style.left='10px';
-    infoDiv.style.padding='8px 10px';
-    infoDiv.style.background='rgba(0,0,0,0.55)';
-    infoDiv.style.color='#fff';
-    infoDiv.style.fontSize='12px';
-    infoDiv.style.borderRadius='8px';
-    infoDiv.style.zIndex=9999;
-    infoDiv.textContent = `Browser: ${browser} • Device: ${device}`;
-    document.body.appendChild(infoDiv);
+    // move blobs slightly for a liquid parallax
+    blobs.forEach((b, idx) => {
+      const depth = idx === 0 ? 12 : 8;
+      const tx = x * depth;
+      const ty = y * depth * -1;
+      b.style.transform = `translate3d(${tx}px, ${ty}px, 0) scale(${1 + (idx === 0 ? 0.02 : 0.01)})`;
+    });
 
-    // Prepare embed payload (minimal, privacy-first)
-    const payload = {
-      username: "VoKi Visitor Tracker",
-      // avatar_url: "https://i.imgur.com/AfFp7pu.png", // optional
-      embeds: [{
-        title: "New Visitor (privacy-first)",
-        color: 0x44c0ff,
-        timestamp: new Date().toISOString(),
-        fields: [
-          { name: "Browser", value: browser, inline: true },
-          { name: "Device", value: device, inline: true },
-          { name: "Page", value: window.location.pathname || "/", inline: false }
-        ],
-        footer: { text: "VoKi Website" }
-      }]
-    };
+    // update custom properties for sheen movement
+    document.documentElement.style.setProperty('--pointerX', (x * 100).toFixed(2));
+    document.documentElement.style.setProperty('--pointerY', (y * 100).toFixed(2));
+    cards.forEach(c => {
+      c.style.setProperty('--pointerX', (x * 100).toFixed(2));
+      c.style.setProperty('--pointerY', (y * 100).toFixed(2));
+    });
+  }
 
-    // IMPORTANT: Replace this with your server endpoint that forwards to the actual webhook.
-    const trackingEndpoint = "/.netlify/functions/forwardWebhook"; // <<-- example server-side forwarder
-    // If you want to test locally only, you can temporarily set webhookURL below, but **never** commit a real webhook publically.
-    // const webhookURL = "https://discord.com/api/webhooks/ID/TOKEN"; // DO NOT use client-side in production
-
-    // If you have a server endpoint, uncomment the fetch call and send payload to server.
-    // fetch(trackingEndpoint, { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) })
-    //   .catch(err => console.warn('Visitor tracking forward failed:', err));
-
-  } catch (err) {
-    console.warn('Visitor tracking failed', err);
+  // Only enable pointer effects when not using reduced motion
+  const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduce) {
+    window.addEventListener('pointermove', onPointer, {passive:true});
+    // subtle idle movement for mobile (tilt)
+    window.addEventListener('deviceorientation', (ev) => {
+      if (ev && ev.gamma !== null) {
+        const x = (ev.gamma / 45); // -1..1 approx
+        const y = (ev.beta / 90) - 0.5;
+        blobs.forEach((b, idx) => {
+          const depth = idx === 0 ? 10 : 6;
+          b.style.transform = `translate3d(${x * depth}px, ${-y * depth}px,0)`;
+        });
+      }
+    }, true);
   }
 })();
+
+/* ===========================
+   Accessibility niceties (keyboard focus)
+   =========================== */
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Tab') {
+    document.documentElement.classList.add('user-is-tabbing');
+  }
+});
+
+/* ===========================
+   NOTE: All tracking/webhook code intentionally removed.
+   This page is privacy-first: no telemetry, no outgoing webhooks.
+   =========================== */
 </script>
 </body>
 </html>
