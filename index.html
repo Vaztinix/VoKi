@@ -1,3 +1,271 @@
+You said:
+yeah please
+You said:
+ok i dont want the sheen now
+You said:
+So you added the content but the background like cuts off and resets the further down I scroll and there is no open animation when I press the menu button which I want it to stay where its at and its content anitmates and flows above it, along witht that not all hovers are working and especially on the buttons to invite, join, and open voki. mind fixing these issues:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>VoKi – Privacy-First AI Discord Bot</title>
+<link rel="icon" href="VoKi Logo (Updated Bot Logo).png" />
+<meta property="og:title" content="VoKi – Privacy-First AI Discord Bot">
+<meta property="og:description" content="Privacy-first AI moderation that keeps your Discord safe, positive, and in your control.">
+<meta property="og:image" content="https://vaztinix.github.io/VoKi/VoKi%20Logo%20(Updated%20Bot%20Logo).png">
+<meta property="og:url" content="https://vaztinix.github.io/VoKi/index.html">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+:root {
+  --primary:#aeefff; --accent:#6dc8ff; --bg-1:#0f1724;
+  --glass-bg: rgba(255,255,255,0.06);
+  --glass-bg-2: rgba(255,255,255,0.10);
+  --text:#eaf6ff;
+  --card-radius:18px;
+  --glass-blur:14px;
+  --card-shadow: 0 8px 30px rgba(2,6,23,0.6);
+  --accent-glow: 0 6px 30px rgba(109,200,255,0.14);
+}
+html, body {height:100%;}
+*{box-sizing:border-box}
+body {
+  margin:0;
+  font-family: "Segoe UI", Inter, Roboto, Arial, sans-serif;
+  background: linear-gradient(135deg,#06101b 0%, #112033 35%, #0b1530 100%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  min-height:100vh;
+  overflow-x:hidden;
+}
+.bg-liquid {
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  mix-blend-mode:screen;
+  opacity:0.65;
+}
+.bg-liquid .blob {
+  position:absolute;
+  width:520px;height:520px;border-radius:50%;
+  filter:blur(80px);
+  transform-origin:center;
+  animation:float 10s ease-in-out infinite;
+  opacity:0.9;
+}
+.blob.one{left:-10%;top:5%;background:linear-gradient(135deg,#3aa7ff66,#8e44ad66);animation-duration:18s;}
+.blob.two{right:-8%;bottom:5%;background:linear-gradient(135deg,#7de1ff66,#2b9eff66);animation-duration:14s;animation-delay:2s;}
+@keyframes float{0%{transform:translateY(0) scale(1)}50%{transform:translateY(-18px) scale(1.03)}100%{transform:translateY(0) scale(1)}}
+header {
+  position:sticky;top:0;z-index:1000;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px 20px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+  backdrop-filter: blur(8px);
+  border-bottom:1px solid rgba(255,255,255,0.03);
+}
+.brand {display:flex;align-items:center;gap:12px}
+.brand img{width:44px;height:44px;border-radius:10px;object-fit:cover;box-shadow:var(--accent-glow)}
+.brand h1{font-size:1.2rem;margin:0;color:var(--primary);letter-spacing:0.6px}
+nav{display:flex;gap:12px;align-items:center}
+.nav-links{display:flex;gap:8px}
+.nav-links a{
+  padding:8px 12px;
+  border-radius:12px;
+  font-weight:600;
+  color:inherit;
+  text-decoration:none;
+  transition:transform .18s ease, background .18s ease, color .18s ease;
+}
+.nav-links a:hover{
+  transform:translateY(-4px);
+  background: linear-gradient(90deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  color:#fff;
+  box-shadow:var(--accent-glow);
+}
+.container{max-width:1100px;margin:0 auto;padding:3rem 1rem;position:relative;z-index:10}
+.hero{padding:44px 0;text-align:center}
+.hero h1{font-size:2.2rem;margin-bottom:10px;color:var(--primary)}
+.lead{max-width:860px;margin:0 auto;color:rgba(234,246,255,0.9);font-size:1.05rem;line-height:1.5}
+.buttons{margin-top:18px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{ border-radius:999px;padding:12px 20px;font-weight:700;border:0;cursor:pointer;display:inline-flex;gap:10px;align-items:center;transition:transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s;box-shadow:0 6px 18px rgba(0,0,0,0.32);}
+.btn-primary{background:linear-gradient(90deg,var(--primary),var(--accent));color:#022;box-shadow:var(--accent-glow)}
+.btn-outline{background:transparent;border:2px solid rgba(174,239,255,0.12);color:var(--primary)}
+.section{padding:44px 1rem;position:relative}
+.card-grid{ display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:22px;max-width:1100px;margin:20px auto 0; }
+.card{ position:relative;overflow:hidden;border-radius:var(--card-radius); background:linear-gradient(180deg,var(--glass-bg), rgba(255,255,255,0.02)); border:1px solid rgba(255,255,255,0.05); backdrop-filter: blur(var(--glass-blur)); padding:18px;transition:transform .32s cubic-bezier(.2,.9,.3,1), box-shadow .32s; box-shadow:var(--card-shadow);}
+.card:hover{transform:translateY(-10px) rotateX(6deg);box-shadow:0 18px 50px rgba(2,6,23,0.7)}
+.card::before{ content:"";position:absolute;inset:0; background: linear-gradient(120deg, rgba(255,255,255,0.02), rgba(255,255,255,0.015)); pointer-events:none; }
+.card .lg-border{ position:absolute;inset:-1px; background:linear-gradient(90deg, rgba(255,255,255,0.03), rgba(174,239,255,0.04)); mask: linear-gradient(#000, #000); pointer-events:none; }
+.liquid-ripple{ position:absolute;left:-20%;top:-60%;width:300%;height:300%;opacity:0.25;mix-blend-mode:screen;pointer-events:none; animation:liquidMove 12s linear infinite; }
+@keyframes liquidMove{0%{transform:translateY(0) rotate(0)}50%{transform:translateY(6%) rotate(8deg)}100%{transform:translateY(0) rotate(0)}}
+.toast{position:fixed;top:70px;left:50%;transform:translateX(-50%);background:rgba(0,0,0,0.7);padding:12px 16px;border-radius:12px;color:#fff;box-shadow:0 8px 30px rgba(0,0,0,0.5);opacity:0;transition:opacity .25s,transform .25s;z-index:2000}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+#floatingMenu{position:fixed;bottom:26px;right:26px;z-index:1500;display:flex;flex-direction:column-reverse;align-items:flex-end;gap:10px}
+.menu-toggle{width:56px;height:56px;border-radius:16px;background:linear-gradient(90deg,var(--primary),var(--accent));border:none;color:#022;font-size:22px;cursor:pointer;box-shadow:var(--accent-glow)}
+.menu-items{display:flex;flex-direction:column;gap:8px;align-items:flex-end;}
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .6s ease}
+.fade-in.show{opacity:1;transform:translateY(0)}
+@media (max-width:860px){ .hero h1{font-size:1.6rem} header{padding:10px 12px} .nav-links{display:none} }
+</style>
+</head>
+<body>
+<div class="bg-liquid" aria-hidden="true"><div class="blob one"></div><div class="blob two"></div></div>
+
+<header>
+  <div class="brand" aria-label="VoKi brand"><img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi logo"><h1>VoKi</h1></div>
+  <nav aria-label="Primary navigation">
+    <div class="nav-links" role="navigation" aria-hidden="false">
+      <a href="index.html">Home</a>
+      <a href="team.html">Team</a>
+      <a href="ai-helper.html">Kite AI</a>
+      <a href="AI.html">VoKi AI</a>
+      <a href="tos.html">Legal</a>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <button id="themeToggle" class="menu-toggle" aria-pressed="false" title="Toggle theme">🌙</button>
+    </div>
+  </nav>
+</header>
+
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<main class="container" id="pageContent">
+  <!-- Hero Section -->
+  <section class="hero fade-in">
+    <h1>Privacy-First AI Moderation for Discord</h1>
+    <p class="lead">Keep your community safe, positive, and in your control — full transparency, no developer access to server data.</p>
+    <div class="buttons" role="group" aria-label="Primary actions">
+      <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549" target="_blank" rel="noopener">🚀 Invite VoKi</a>
+      <a class="btn btn-outline" href="https://discord.gg/cXsZr3cMEB" target="_blank" rel="noopener">💬 Join Server</a>
+      <a class="btn btn-primary" href="AI.html">🤖 Open VoKi AI</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section fade-in" id="about">
+    <h2 style="color:var(--primary);margin-bottom:8px">About VoKi</h2>
+    <p class="lead">VoKi is a modern privacy-first Discord moderation bot that prioritizes user safety, privacy, and transparency. Data remains on your server — developers cannot access member information.</p>
+  </section>
+
+  <!-- Features Section -->
+  <section class="section fade-in" aria-labelledby="features">
+    <h2 id="features" style="color:var(--primary);margin-bottom:8px">Core Features</h2>
+    <div class="card-grid">
+      <article class="card" role="article" aria-label="Privacy Logging">
+        <div class="lg-border"></div>
+        <svg class="liquid-ripple" viewBox="0 0 800 600" preserveAspectRatio="none" aria-hidden="true">
+          <defs><filter id="goo"><feGaussianBlur in="SourceGraphic" stdDeviation="40" result="blur" /><feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0 0 1 0 0 0 0 0 1 0 0 0 0 0 18 -7" result="goo" /></filter></defs>
+          <g filter="url(#goo)" fill="#9be9ff22">
+            <ellipse cx="120" cy="100" rx="220" ry="90"></ellipse>
+            <ellipse cx="620" cy="300" rx="180" ry="120"></ellipse>
+          </g>
+        </svg>
+        <h3>🔒 Privacy Logging</h3>
+        <p>All data is stored locally to your server; no external access by developers.</p>
+      </article>
+      <article class="card" role="article" aria-label="AI Moderation">
+        <div class="lg-border"></div>
+        <h3>🤖 Smart AI Moderation</h3>
+        <p>AI detects and filters negative messages to keep communities safe — with human-reviewed options.</p>
+      </article>
+      <article class="card" role="article" aria-label="Command Control">
+        <div class="lg-border"></div>
+        <h3>⚙️ Command Control</h3>
+        <p>Admins can enable or disable commands for full flexibility and auditability.</p>
+      </article>
+      <article class="card" role="article" aria-label="Community Driven">
+        <div class="lg-border"></div>
+        <h3>🧭 Community Driven</h3>
+        <p>Built with feedback from moderators and staff for real moderation needs.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Command Showcase Section -->
+  <section class="section fade-in">
+    <h2 style="color:var(--primary)">Command Showcase</h2>
+    <div class="card-grid">
+      <div class="card"><h3>/ban</h3><p>Ban a member quickly and safely.</p></div>
+      <div class="card"><h3>/mute</h3><p>Temporarily mute a member for specific durations.</p></div>
+      <div class="card"><h3>/ask</h3><p>Get AI assistance for moderation questions.</p></div>
+      <div class="card"><h3>/support</h3><p>Open staff support tickets for your community.</p></div>
+      <div class="card"><h3>/privacy</h3><p>Check or delete stored server data instantly.</p></div>
+    </div>
+  </section>
+
+  <!-- Latest Update Section -->
+  <section class="section fade-in">
+    <h2 style="color:var(--primary)">Latest Update — October 2025</h2>
+    <p class="lead">Privacy improvements, removal of message edit/delete logs, discontinued Roblox integrations, and new in-bot privacy controls. See Legal page for details.</p>
+  </section>
+</main>
+
+<footer style="text-align:center;padding:28px 1rem;color:rgba(255,255,255,.7);z-index:10;position:relative">
+  <p>© 2025 VoKi • Privacy-First Moderation for Discord</p>
+</footer>
+
+<!-- Floating Menu -->
+<div id="floatingMenu">
+  <div class="menu-items" id="menuItems" aria-hidden="true"></div>
+  <button id="menuToggle" class="menu-toggle" aria-label="Open menu" title="Open menu">☰</button>
+</div>
+
+<script>
+// Theme toggle
+const themeToggle = document.getElementById('themeToggle');
+let dark = localStorage.getItem('voki_dark') === '1' ? true : (localStorage.getItem('voki_dark') === '0' ? false : window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches);
+function applyTheme() {
+  if(dark){
+    document.documentElement.style.setProperty('--primary','#8be8ff');
+    document.documentElement.style.background = 'linear-gradient(135deg,#06101b 0%, #081627 100%)';
+    themeToggle.textContent='☀️';
+    themeToggle.setAttribute('aria-pressed','true');
+  } else {
+    document.documentElement.style.setProperty('--primary','#aeefff');
+    document.documentElement.style.background='';
+    themeToggle.textContent='🌙';
+    themeToggle.setAttribute('aria-pressed','false');
+  }
+  localStorage.setItem('voki_dark', dark ? '1' : '0');
+}
+applyTheme();
+themeToggle.addEventListener('click',()=>{dark=!dark;applyTheme();});
+
+// Toast
+const toastEl = document.getElementById('toast'); let toastTimer=null;
+function showToast(msg, timeout=3500){ clearTimeout(toastTimer); toastEl.textContent=msg; toastEl.classList.add('show'); toastTimer=setTimeout(()=>toastEl.classList.remove('show'),timeout);}
+document.querySelectorAll('.btn-outline').forEach(b=>{b.addEventListener('click', e=>{ if(b.textContent.trim().toLowerCase().includes('login')){e.preventDefault();showToast('Login is in development and unavailable.');} }); });
+
+// Floating Menu
+const floatingLinks=[{title:'Home', href:'index.html'},{title:'Team', href:'team.html'},{title:'Kite AI', href:'ai-helper.html'},{title:'VoKi AI', href:'AI.html'},{title:'Legal', href:'tos.html'}];
+const menuItems=document.getElementById('menuItems');
+floatingLinks.forEach((l,i)=>{ const a=document.createElement('a'); a.className='btn btn-outline'; a.style.transition='transform .28s ease, opacity .28s ease'; a.style.opacity='0'; a.style.transform='translateY(8px)'; a.href=l.href; a.textContent=l.title; menuItems.appendChild(a); setTimeout(()=>{ a.style.opacity='1'; a.style.transform='translateY(0)' }, 60*i+180); });
+let menuOpen=false;
+document.getElementById('menuToggle').addEventListener('click',()=>{ menuOpen=!menuOpen; menuItems.style.display=menuOpen?'flex':'none'; });
+
+// Fade-ins
+const faders=document.querySelectorAll('.fade-in');
+const observer=new IntersectionObserver((entries,obs)=>{entries.forEach(entry=>{ if(entry.isIntersecting){entry.target.classList.add('show'); obs.unobserve(entry.target); } });},{threshold:0.25});
+faders.forEach(f=>observer.observe(f));
+</script>
+</body>
+</html>
+You said:
+does it have all of the content
+You said:
+cool I was right now we have no content the background is fixed but not scrollable probably because of no content and the menu I want it in the bottom right corner and stay they and the contents in it flow above it upon press and flow back towards the button upon press again and the light mode barely makes a difference. 
+You said:
+use what I told you and what you see in the image to fix it
+
+
+You said:
+here is the current code:
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
