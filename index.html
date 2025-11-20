@@ -1,59 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VoKi – Privacy‑First AI Discord Bot</title>
-  <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>VoKi – Privacy-First AI Discord Bot</title>
 
-  <!-- Open Graph / Twitter -->
-  <meta property="og:title" content="VoKi – Privacy‑First AI Discord Bot">
-  <meta property="og:description" content="Privacy‑first AI moderation that keeps your Discord safe, positive, and in your control.">
-  <meta property="og:image" content="https://vaztinix.github.io/VoKi/VoKi%20Logo%20(Updated%20Bot%20Logo).png">
+  <!-- Favicon -->
+  <link id="favIcon" rel="icon" type="image/png" href="VoKi_Glass.png">
+
+  <!-- Open Graph / Twitter (updated to VoKi_Glass.png) -->
+  <meta property="og:title" content="VoKi – Privacy-First AI Discord Bot">
+  <meta property="og:description" content="Privacy-first AI moderation that keeps your Discord safe, positive, and in your control.">
+  <meta property="og:image" content="https://vaztinix.github.io/VoKi/VoKi_Glass.png">
   <meta property="og:url" content="https://vaztinix.github.io/VoKi/index.html">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="VoKi – Privacy‑First AI Discord Bot">
-  <meta name="twitter:description" content="Privacy‑first AI moderation that keeps your Discord safe, positive, and in your control.">
-  <meta name="twitter:image" content="https://vaztinix.github.io/VoKi/VoKi%20Logo%20(Updated%20Bot%20Logo).png">
+  <meta name="twitter:title" content="VoKi – Privacy-First AI Discord Bot">
+  <meta name="twitter:description" content="Privacy-first AI moderation that keeps your Discord safe, positive, and in your control.">
+  <meta name="twitter:image" content="https://vaztinix.github.io/VoKi/VoKi_Glass.png">
 
   <style>
-    :root {
-      --primary:#aeefff;
-      --accent:#6dc8ff;
-      --bg-gradient: linear-gradient(135deg,#4facfe,#6fa1ff,#8e44ad);
-      --bg-dark: linear-gradient(135deg,#141e30,#1f2a45,#243b55);
-      --text:#ffffff;
-      --card: rgba(255,255,255,0.08);
-      --card-hover: rgba(255,255,255,0.18);
-      --nav: rgba(0,0,0,0.85);
-      --error-bg: rgba(0,0,0,0.9);
-      --radius: 14px;
+    :root{
+      --primary: #aeefff;
+      --accent: #6dc8ff;
+      --glass: rgba(255,255,255,0.06);
+      --glass-strong: rgba(255,255,255,0.12);
+      --glass-clarity: rgba(255,255,255,0.025);
+      --bg-gradient: linear-gradient(135deg,#4facfe 0%, #6fa1ff 50%, #8e44ad 100%);
+      --bg-dark: linear-gradient(135deg,#0f1720 0%, #142033 50%, #243b55 100%);
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.75);
+      --radius: 16px;
+      --glass-blur: 10px;
+      --glass-border: rgba(255,255,255,0.08);
+      --shadow: 0 10px 30px rgba(0,0,0,0.35);
     }
 
-    /* Global */
-    *{box-sizing:border-box;}
+    /* Reset & Global */
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family:"Segoe UI",Arial,sans-serif;
+      font-family: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       color:var(--text);
       background:var(--bg-gradient);
-      background-size:400% 400%;
-      animation:flow 25s ease infinite;
+      background-size:300% 300%;
+      animation: bgFlow 28s ease infinite;
       -webkit-font-smoothing:antialiased;
-      scroll-behavior:smooth;
-      min-height:100vh;
-      transition:background 0.5s ease;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      transition: background .45s ease;
+      -webkit-font-kerning:normal;
     }
-    @keyframes flow{
-      0%{background-position:0% 50%;}
-      50%{background-position:100% 50%;}
-      100%{background-position:0% 50%;}
+    @keyframes bgFlow{
+      0%{background-position:0% 50%}
+      50%{background-position:100% 50%}
+      100%{background-position:0% 50%}
     }
-    h1,h2,h3,h4,h5,p{margin:0;padding:0;}
-    a{color:inherit;text-decoration:none;}
+    a{color:inherit;text-decoration:none}
+    h1,h2,h3,h4,p{margin:0}
 
-    /* Header & Nav */
+    /* Page glass overlay to add subtle sheen */
+    .page-overlay{
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background: radial-gradient(1200px 500px at 10% 10%, rgba(255,255,255,0.03), transparent 10%),
+                  linear-gradient(120deg, rgba(255,255,255,0.01), transparent 35%);
+      mix-blend-mode:overlay;
+      z-index:0;
+    }
+
+    /* Header */
     header{
       position:sticky;
       top:0;
@@ -61,131 +79,175 @@
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:1rem 2rem;
-      background:var(--nav);
-      border-bottom:1px solid rgba(255,255,255,0.04);
-      backdrop-filter:blur(6px);
+      gap:18px;
+      padding:14px 22px;
+      margin:0;
+      backdrop-filter: blur(calc(var(--glass-blur) + 2px)) saturate(120%);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35);
+      border-radius: 0 0 12px 12px;
+      position: sticky;
+      top: 0;
+      margin-bottom: 10px;
     }
-    .brand{display:flex;align-items:center;gap:12px;}
-    .brand img{width:44px;height:44px;border-radius:10px;object-fit:cover;}
-    .brand h1{color:var(--primary);font-size:1.25rem;letter-spacing:0.5px;}
-    nav{display:flex;align-items:center;gap:12px;}
-    .nav-links{display:flex;gap:8px;align-items:center;}
+
+    .brand{display:flex;align-items:center;gap:14px;z-index:2}
+    .brand img{
+      width:48px;height:48px;border-radius:12px;object-fit:cover;
+      background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      box-shadow: 0 6px 18px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(calc(var(--glass-blur) - 3px));
+      transform: translateZ(0);
+      transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .25s ease;
+    }
+    .brand img:hover{transform: translateY(-4px) scale(1.02); box-shadow: 0 14px 40px rgba(0,0,0,0.45)}
+    .brand h1{color:var(--primary);font-size:1.15rem;letter-spacing:.4px;margin-left:2px}
+
+    nav{display:flex;align-items:center;gap:12px}
+    .nav-links{display:flex;gap:8px;align-items:center}
     .nav-links a{
-      padding:8px 12px;
-      border-radius:10px;
-      font-weight:600;
-      transition:all 0.18s ease;
+      padding:8px 12px;border-radius:12px;font-weight:600;
+      transition:all .18s ease; color:var(--muted);
+      position:relative;
+      overflow:visible;
     }
-    .nav-links a:hover{background:var(--primary);color:#000;transform:translateY(-3px);}
-    .actions{display:flex;gap:10px;align-items:center;}
+    .nav-links a::after{
+      content:""; position:absolute; inset:0; border-radius:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      opacity:0; transform:scale(.98); transition: all .18s ease;
+      pointer-events:none;
+    }
+    .nav-links a:hover{color:#000;background:var(--primary); transform:translateY(-3px)}
+    .actions{display:flex;align-items:center;gap:10px}
+
     .icon-btn{
-      width:40px;height:40px;
-      border-radius:10px;
-      display:flex;align-items:center;justify-content:center;
-      background:transparent;
-      border:1px solid rgba(255,255,255,0.04);
-      cursor:pointer;
+      width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(calc(var(--glass-blur) - 6px));
+      cursor:pointer; transition: transform .18s ease, box-shadow .18s ease;
     }
-    .sep{width:2px;height:26px;background:var(--primary);opacity:0.6;border-radius:3px;}
+    .icon-btn:hover{transform:translateY(-3px); box-shadow:0 10px 28px rgba(0,0,0,0.35)}
 
-    /* Container & Hero */
-    .container{max-width:1100px;margin:0 auto;padding:3.2rem 1.5rem;text-align:center;}
-    .hero{padding:40px 0;}
-    h1{color:var(--primary);margin-bottom:0.6rem;font-size:2.1rem;}
-    .lead{max-width:820px;margin:0 auto;color:rgba(255,255,255,.95);opacity:.95;font-size:1.05rem;}
-    .buttons{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+    .sep{width:2px;height:28px;background:linear-gradient(180deg,var(--primary),transparent);opacity:.55;border-radius:3px}
+
+    /* Main container / hero */
+    .container{max-width:1100px;margin:0 auto;padding:3.2rem 1.5rem 4rem;position:relative;z-index:1}
+    .hero{padding:32px 0 18px;text-align:center}
+    .hero h1{color:var(--primary);margin-bottom:10px;font-size:2.1rem;letter-spacing:.2px}
+    .lead{max-width:820px;margin:0 auto;color:rgba(255,255,255,.95);opacity:.95;font-size:1.03rem}
+
+    /* Buttons (glassy pills with sheen) */
+    .buttons{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
     .btn{
-      border-radius:999px;
-      padding:12px 20px;
-      font-weight:700;
-      border:0;
-      cursor:pointer;
-      transition:transform .22s ease,opacity .18s;
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      box-shadow:0 6px 18px rgba(0,0,0,0.28);
+      border-radius:999px;padding:12px 20px;font-weight:700;border:0;cursor:pointer;
+      transition: transform .22s cubic-bezier(.2,.9,.3,1), box-shadow .22s ease, opacity .18s;
+      display:inline-flex;align-items:center;gap:10px;box-shadow:0 8px 30px rgba(0,0,0,0.35);
+      position:relative; overflow:visible;
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      border:1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(calc(var(--glass-blur) - 6px));
     }
-    .btn-primary{background:var(--primary);color:#000;}
-    .btn-outline{background:transparent;border:2px solid var(--primary);}
-    .btn:hover{transform:translateY(-4px);opacity:0.98;}
+    .btn::before{
+      /* animated sheen */
+      content:""; position:absolute; left:-30%; top:-40%; width:160%; height:220%;
+      background:linear-gradient(120deg, rgba(255,255,255,0.18), rgba(255,255,255,0.02) 45%, rgba(255,255,255,0.02) 60%, rgba(255,255,255,0.0));
+      transform:rotate(25deg) translateX(-20%); opacity:0.0; transition: all 0.9s cubic-bezier(.2,.9,.3,1);
+      pointer-events:none; mix-blend-mode:overlay;
+    }
+    .btn:hover::before{transform:rotate(25deg) translateX(0%); opacity:1}
+    .btn-primary{background: linear-gradient(180deg,var(--primary), rgba(255,255,255,0.06)); color:#000; border:none}
+    .btn-outline{background:transparent;border:2px solid rgba(255,255,255,0.10); color:var(--primary)}
 
-    /* Sections & Cards */
-    .section{padding:48px 1.5rem;text-align:center;}
-    .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;max-width:1100px;margin:22px auto 0;}
+    /* Sections & cards */
+    .section{padding:48px 1.5rem 16px;text-align:center;position:relative}
+    .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:22px;max-width:1100px;margin:22px auto 0}
     .card{
-      background:var(--card);
-      padding:20px;
-      border-radius:var(--radius);
-      transition:transform .25s ease,background .18s;
-      box-shadow:0 10px 30px rgba(0,0,0,.25);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius: var(--radius);
+      padding:20px; transition: transform .28s cubic-bezier(.2,.9,.3,1), box-shadow .28s ease;
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(var(--glass-blur));
+      min-height:110px;
+      display:flex;flex-direction:column;gap:10px;justify-content:flex-start;
+      position:relative; overflow:hidden;
     }
-    .card:hover{transform:translateY(-6px);background:var(--card-hover);}
-    footer{text-align:center;padding:28px 1.5rem;color:rgba(255,255,255,.8);position:relative;bottom:0;width:100%;}
+    .card::after{
+      /* subtle liquid ripple */
+      content:""; position:absolute; right:-40%; top:-50%; width:180%; height:180%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.025), transparent 20%),
+                  radial-gradient(circle at 70% 70%, rgba(255,255,255,0.02), transparent 18%);
+      transform: rotate(-20deg); opacity:0.9; pointer-events:none;
+    }
+    .card h3{font-size:1.05rem;color:var(--primary);margin-bottom:6px}
+    .card p{color:rgba(255,255,255,0.9); font-size:.95rem}
 
-    /* Toast */
-    .toast{
-      position:fixed;
-      top:60px;left:50%;
-      transform:translateX(-50%);
-      background:var(--error-bg);
-      padding:12px 16px;
-      border-radius:10px;
-      color:#fff;
-      box-shadow:0 8px 30px rgba(0,0,0,.4);
-      opacity:0;
-      transition:opacity .3s,transform .3s;
-      z-index:2000;
-    }
-    .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+    .card:hover{transform:translateY(-8px); box-shadow: 0 20px 50px rgba(0,0,0,0.46); background: linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015))}
 
     /* Floating Menu */
     #floatingMenu{
-      position:fixed;
-      bottom:24px;
-      right:24px;
-      display:flex;
-      flex-direction:column-reverse;
-      align-items:flex-end;
-      z-index:1500;
+      position:fixed; bottom:26px; right:26px; display:flex; flex-direction:column-reverse; align-items:flex-end; z-index:1500;
     }
     #floatingMenu .menu-toggle{
-      width:56px;height:56px;
-      border-radius:28px;
-      background:var(--primary);
-      color:#000;font-size:28px;border:none;cursor:pointer;
-      box-shadow:0 8px 20px rgba(0,0,0,0.3);
+      width:60px;height:60px;border-radius:50%;
+      background: linear-gradient(180deg,var(--primary), rgba(255,255,255,0.09));
+      color:#000;font-size:28px;border:none;cursor:pointer;box-shadow:0 12px 40px rgba(0,0,0,0.4);
+      transition: transform .25s cubic-bezier(.2,.9,.3,1), box-shadow .25s ease;
+      border:1px solid rgba(255,255,255,0.08);
+      display:flex;align-items:center;justify-content:center;
     }
-    #floatingMenu .menu-items{display:none;flex-direction:column;margin-bottom:12px;}
+    #floatingMenu .menu-toggle:active{transform:scale(.98)}
+    #floatingMenu .menu-items{display:none;flex-direction:column;margin-bottom:12px;align-items:flex-end;gap:8px}
     #floatingMenu .menu-items a{
-      background:var(--card);
-      padding:10px 16px;
-      margin:4px 0;
-      border-radius:14px;
-      font-weight:600;
-      transition:all .18s ease;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:10px 16px;margin:4px 0;border-radius:14px;font-weight:600;min-width:140px;text-align:right;
+      border:1px solid rgba(255,255,255,0.06);backdrop-filter: blur(calc(var(--glass-blur) - 6px));
+      transform:translateY(12px);opacity:0;transition: all .28s cubic-bezier(.2,.9,.3,1);
     }
-    #floatingMenu .menu-items a:hover{background:var(--card-hover);}
+    #floatingMenu .menu-items a:hover{transform:translateY(0); background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))}
 
-    /* Animations */
-    .fade-in{opacity:0;transform:translateY(12px);transition:all .6s ease;}
-    .fade-in.show{opacity:1;transform:translateY(0);}
+    /* Toast */
+    .toast{
+      position:fixed; top:70px; left:50%; transform:translateX(-50%) translateY(-8px);
+      background: linear-gradient(180deg, rgba(0,0,0,0.85), rgba(0,0,0,0.75));
+      padding:12px 18px; border-radius:12px; color:#fff; box-shadow:0 10px 30px rgba(0,0,0,.45);
+      opacity:0; transition:opacity .28s ease, transform .28s ease; z-index:2000;
+    }
+    .toast.show{opacity:1; transform:translateX(-50%) translateY(0)}
+
+    /* Fade-in / reveal */
+    .fade-in{opacity:0; transform:translateY(10px); transition: all .72s cubic-bezier(.2,.9,.3,1)}
+    .fade-in.show{opacity:1; transform:translateY(0)}
+
+    footer{ text-align:center; padding:28px 1.5rem; color:rgba(255,255,255,.75); position:relative; bottom:0; width:100%; margin-top:28px; z-index:1 }
 
     /* Responsive */
     @media(max-width:840px){
-      .brand h1{display:inline-block;}
-      nav{gap:8px;}
-      .container{padding:2rem 1rem;}
+      .brand h1{display:inline-block}
+      nav{gap:8px}
+      .container{padding:2rem 1rem}
+      header{padding:12px 14px}
     }
+
+    /* Dark theme adjustments (applied via JS by swapping bg gradient variable) */
+    .dark-mode header{ background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.00)); border-bottom:1px solid rgba(255,255,255,0.02) }
+
+    /* small accessibility: focus states */
+    a:focus, button:focus { outline: 3px solid rgba(110,200,255,0.18); outline-offset:3px; border-radius:8px }
   </style>
 </head>
 <body>
+  <div class="page-overlay" aria-hidden="true"></div>
+
   <header>
     <div class="brand">
-      <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi logo">
+      <img src="VoKi_Glass.png" alt="VoKi logo">
       <h1>VoKi</h1>
     </div>
+
     <nav>
       <div class="nav-links">
         <a href="index.html">Home</a>
@@ -194,26 +256,27 @@
         <a href="AI.html">VoKi AI</a>
         <a href="tos.html">Legal</a>
       </div>
+
       <div class="actions">
-        <button id="themeToggle" class="icon-btn" title="Toggle theme">
+        <button id="themeToggle" class="icon-btn" title="Toggle theme" aria-pressed="false">
           <img id="themeIcon" src="VoKi_Moon.png" alt="theme" style="width:18px;height:18px">
         </button>
-        <div class="sep"></div>
+        <div class="sep" aria-hidden="true"></div>
         <a class="btn btn-outline" href="#" id="loginBtn">Login</a>
       </div>
     </nav>
   </header>
 
-  <div id="toast" class="toast"></div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
 
-  <main class="container">
+  <main class="container" id="mainContent">
     <!-- Hero & Sections -->
     <section class="hero fade-in">
-      <h1>Privacy‑First AI Moderation for Discord</h1>
+      <h1>Privacy-First AI Moderation for Discord</h1>
       <p class="lead">Keep your community safe, positive, and in your control — full transparency, no developer access to server data.</p>
       <div class="buttons">
-        <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549" target="_blank">🚀 Invite VoKi</a>
-        <a class="btn btn-outline" href="https://discord.gg/cXsZr3cMEB" target="_blank">💬 Join Server</a>
+        <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549" target="_blank" rel="noopener">🚀 Invite VoKi</a>
+        <a class="btn btn-outline" href="https://discord.gg/cXsZr3cMEB" target="_blank" rel="noopener">💬 Join Server</a>
         <a class="btn btn-primary" href="AI.html">🤖 Open VoKi AI</a>
       </div>
     </section>
@@ -251,85 +314,140 @@
   </main>
 
   <footer>
-    <p>© 2025 VoKi • Privacy‑First Moderation for Discord</p>
+    <p>© 2025 VoKi • Privacy-First Moderation for Discord</p>
   </footer>
 
   <!-- Floating Menu -->
-  <div id="floatingMenu">
-    <div class="menu-items" id="menuItems"></div>
-    <button class="menu-toggle" id="menuToggle" title="Open menu">☰</button>
+  <div id="floatingMenu" aria-hidden="false">
+    <div class="menu-items" id="menuItems" aria-hidden="true"></div>
+    <button class="menu-toggle" id="menuToggle" title="Open menu" aria-expanded="false">☰</button>
   </div>
 
   <script>
+    // ===== Favicon helper =====
+    const favLink = document.getElementById('favIcon');
+    function setFavicon(filename){
+      if(favLink){
+        favLink.href = filename;
+      } else {
+        const l = document.createElement('link'); l.rel='icon'; l.type='image/png'; l.id='favIcon'; l.href=filename; document.head.appendChild(l);
+      }
+    }
+    // ensure favicon uses the new image name everywhere
+    setFavicon('VoKi_Glass.png');
+
     // ===== Theme Toggle =====
-    const themeToggle=document.getElementById('themeToggle');
-    const themeIcon=document.getElementById('themeIcon');
-    let dark=localStorage.getItem('voki_dark')==='1'?true:(localStorage.getItem('voki_dark')==='0'?false:window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const themeToggle = document.getElementById('themeToggle');
+    const themeIcon = document.getElementById('themeIcon');
+    let dark = localStorage.getItem('voki_dark') === '1'
+      ? true
+      : (localStorage.getItem('voki_dark') === '0' ? false : window.matchMedia('(prefers-color-scheme: dark)').matches);
+
     function applyTheme(){
       if(dark){
-        document.documentElement.style.setProperty('--bg-gradient','var(--bg-dark)');
-        themeIcon.src='VoKi_Sun.png';
+        // apply dark gradient
+        document.body.style.background = 'var(--bg-dark)';
+        document.documentElement.classList.add('dark-mode');
+        themeIcon.src = 'VoKi_Sun.png';
+        themeToggle.setAttribute('aria-pressed','true');
       } else {
-        document.documentElement.style.setProperty('--bg-gradient','linear-gradient(135deg,#4facfe,#6fa1ff,#8e44ad)');
-        themeIcon.src='VoKi_Moon.png';
+        document.body.style.background = 'var(--bg-gradient)';
+        document.documentElement.classList.remove('dark-mode');
+        themeIcon.src = 'VoKi_Moon.png';
+        themeToggle.setAttribute('aria-pressed','false');
       }
-      localStorage.setItem('voki_dark',dark?'1':'0');
+      // keep favicon aligned with branding (same image used for both themes)
+      setFavicon('VoKi_Glass.png');
+      localStorage.setItem('voki_dark', dark ? '1' : '0');
     }
     applyTheme();
-    themeToggle.addEventListener('click',()=>{dark=!dark;applyTheme();});
+    themeToggle.addEventListener('click', ()=>{ dark = !dark; applyTheme(); });
 
     // ===== Toast =====
-    const toastEl=document.getElementById('toast');
-    function showToast(msg,timeout=3500){
-      toastEl.textContent=msg;
+    const toastEl = document.getElementById('toast');
+    function showToast(msg, timeout = 3500){
+      toastEl.textContent = msg;
       toastEl.classList.add('show');
-      setTimeout(()=>toastEl.classList.remove('show'),timeout);
+      setTimeout(()=> toastEl.classList.remove('show'), timeout);
     }
-    document.getElementById('loginBtn').addEventListener('click',e=>{
+    document.getElementById('loginBtn').addEventListener('click', e => {
       e.preventDefault();
       showToast('Login is in development and unavailable.');
     });
 
     // ===== Floating Menu =====
-    const floatingLinks=[
+    const floatingLinks = [
       {title:'Home',href:'index.html'},
       {title:'Team',href:'team.html'},
       {title:'Kite AI',href:'ai-helper.html'},
       {title:'VoKi AI',href:'AI.html'},
       {title:'Legal',href:'tos.html'}
     ];
-    const menuItems=document.getElementById('menuItems');
-    floatingLinks.forEach(l=>{
-      const a=document.createElement('a');
-      a.textContent=l.title;
-      a.href=l.href;
-      a.style.opacity='0';
-      a.style.transform='translateY(12px)';
+    const menuItems = document.getElementById('menuItems');
+    floatingLinks.forEach(l => {
+      const a = document.createElement('a');
+      a.textContent = l.title;
+      a.href = l.href;
+      a.style.opacity = '0';
+      a.style.transform = 'translateY(12px)';
+      a.setAttribute('role','menuitem');
       menuItems.appendChild(a);
     });
-    let menuOpen=false;
-    document.getElementById('menuToggle').addEventListener('click',()=>{
+
+    let menuOpen = false;
+    const menuToggle = document.getElementById('menuToggle');
+    menuToggle.addEventListener('click', () => {
       if(!menuOpen){
-        menuItems.style.display='flex';
-        [...menuItems.children].forEach((el,i)=>setTimeout(()=>{el.style.opacity='1';el.style.transform='translateY(0)';},i*50));
+        menuItems.style.display = 'flex';
+        menuItems.setAttribute('aria-hidden','false');
+        menuToggle.setAttribute('aria-expanded','true');
+        [...menuItems.children].forEach((el,i) => setTimeout(()=>{
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, i * 60));
       } else {
-        [...menuItems.children].forEach((el,i)=>setTimeout(()=>{el.style.opacity='0';el.style.transform='translateY(12px)';},i*30));
-        setTimeout(()=>menuItems.style.display='none',300);
+        [...menuItems.children].forEach((el,i) => setTimeout(()=>{
+          el.style.opacity = '0';
+          el.style.transform = 'translateY(12px)';
+        }, i * 30));
+        setTimeout(()=> {
+          menuItems.style.display = 'none';
+          menuItems.setAttribute('aria-hidden','true');
+          menuToggle.setAttribute('aria-expanded','false');
+        }, 300);
       }
-      menuOpen=!menuOpen;
+      menuOpen = !menuOpen;
     });
 
-    // ===== Scroll Fade-in =====
-    const faders=document.querySelectorAll('.fade-in');
-    const observer=new IntersectionObserver((entries,obs)=>{
-      entries.forEach(entry=>{
+    // ===== Scroll Fade-in (IntersectionObserver) =====
+    const faders = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver((entries, obs) => {
+      entries.forEach(entry => {
         if(entry.isIntersecting){
           entry.target.classList.add('show');
           obs.unobserve(entry.target);
         }
       });
-    },{threshold:0.25});
-    faders.forEach(f=>observer.observe(f));
+    }, {threshold: 0.22});
+    faders.forEach(f => observer.observe(f));
+
+    // ===== Accessibility: close floating menu on outside click / Esc =====
+    document.addEventListener('click', (e) => {
+      if(menuOpen){
+        const fm = document.getElementById('floatingMenu');
+        if(!fm.contains(e.target)){
+          // close
+          [...menuItems.children].forEach((el,i) => { el.style.opacity='0'; el.style.transform='translateY(12px)'; });
+          setTimeout(()=>{ menuItems.style.display='none'; menuOpen=false; menuItems.setAttribute('aria-hidden','true'); menuToggle.setAttribute('aria-expanded','false'); }, 260);
+        }
+      }
+    });
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && menuOpen){
+        [...menuItems.children].forEach((el,i) => { el.style.opacity='0'; el.style.transform='translateY(12px)'; });
+        setTimeout(()=>{ menuItems.style.display='none'; menuOpen=false; menuItems.setAttribute('aria-hidden','true'); menuToggle.setAttribute('aria-expanded','false'); }, 260);
+      }
+    });
   </script>
 </body>
 </html>
