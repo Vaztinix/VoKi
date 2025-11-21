@@ -268,10 +268,10 @@
     function applyTheme(){
       if(dark){
         document.documentElement.style.setProperty('--bg-gradient','var(--bg-dark)');
-        themeIcon.src='VoKi_Sun.png';
+        themeIcon.src='☀️';
       } else {
         document.documentElement.style.setProperty('--bg-gradient','linear-gradient(135deg,#4facfe,#6fa1ff,#8e44ad)');
-        themeIcon.src='VoKi_Moon.png';
+        themeIcon.src='🌙';
       }
       localStorage.setItem('voki_dark',dark?'1':'0');
     }
