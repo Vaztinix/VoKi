@@ -196,7 +196,7 @@
       </div>
       <div class="actions">
         <button id="themeToggle" class="icon-btn" title="Toggle theme">
-          <img id="themeIcon" src="🌙" alt="theme" style="width:18px;height:18px">
+          <img id="themeIcon" src="VoKi_Moon.png" alt="theme" style="width:18px;height:18px">
         </button>
         <div class="sep"></div>
         <a class="btn btn-outline" href="#" id="loginBtn">Login</a>
@@ -268,10 +268,10 @@
     function applyTheme(){
       if(dark){
         document.documentElement.style.setProperty('--bg-gradient','var(--bg-dark)');
-        themeIcon.src='☀️';
+        themeIcon.src='VoKi_Sun.png';
       } else {
         document.documentElement.style.setProperty('--bg-gradient','linear-gradient(135deg,#4facfe,#6fa1ff,#8e44ad)');
-        themeIcon.src='🌙';
+        themeIcon.src='VoKi_Moon.png';
       }
       localStorage.setItem('voki_dark',dark?'1':'0');
     }
