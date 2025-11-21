@@ -215,4 +215,85 @@
     </section>
 
 
+   <!-- Floating Menu -->
+  <div id="floatingMenu">
+    <div class="menu-items" id="menuItems"></div>
+    <button class="menu-toggle" id="menuToggle" title="Open menu">☰</button>
+  </div>
+
+  <script>
+    // ===== Theme Toggle =====
+    const themeToggle=document.getElementById('themeToggle');
+    const themeIcon=document.getElementById('themeIcon');
+    let dark=localStorage.getItem('voki_dark')==='1'?true:(localStorage.getItem('voki_dark')==='0'?false:window.matchMedia('(prefers-color-scheme: dark)').matches);
+    function applyTheme(){
+      if(dark){
+        document.documentElement.style.setProperty('--bg-gradient','var(--bg-dark)');
+        themeIcon.src='VoKi_Sun.png';
+      } else {
+        document.documentElement.style.setProperty('--bg-gradient','linear-gradient(135deg,#4facfe,#6fa1ff,#8e44ad)');
+        themeIcon.src='VoKi_Moon.png';
+      }
+      localStorage.setItem('voki_dark',dark?'1':'0');
+    }
+    applyTheme();
+    themeToggle.addEventListener('click',()=>{dark=!dark;applyTheme();});
+
+    // ===== Toast =====
+    const toastEl=document.getElementById('toast');
+    function showToast(msg,timeout=3500){
+      toastEl.textContent=msg;
+      toastEl.classList.add('show');
+      setTimeout(()=>toastEl.classList.remove('show'),timeout);
+    }
+    document.getElementById('loginBtn').addEventListener('click',e=>{
+      e.preventDefault();
+      showToast('Login is in development and unavailable.');
+    });
+
+    // ===== Floating Menu =====
+    const floatingLinks=[
+      {title:'Home',href:'index.html'},
+      {title:'Team',href:'team.html'},
+      {title:'Kite AI',href:'ai-helper.html'},
+      {title:'VoKi AI',href:'AI.html'},
+      {title:'Legal',href:'tos.html'}
+    ];
+    const menuItems=document.getElementById('menuItems');
+    floatingLinks.forEach(l=>{
+      const a=document.createElement('a');
+      a.textContent=l.title;
+      a.href=l.href;
+      a.style.opacity='0';
+      a.style.transform='translateY(12px)';
+      menuItems.appendChild(a);
+    });
+    let menuOpen=false;
+    document.getElementById('menuToggle').addEventListener('click',()=>{
+      if(!menuOpen){
+        menuItems.style.display='flex';
+        [...menuItems.children].forEach((el,i)=>setTimeout(()=>{el.style.opacity='1';el.style.transform='translateY(0)';},i*50));
+      } else {
+        [...menuItems.children].forEach((el,i)=>setTimeout(()=>{el.style.opacity='0';el.style.transform='translateY(12px)';},i*30));
+        setTimeout(()=>menuItems.style.display='none',300);
+      }
+      menuOpen=!menuOpen;
+    });
+
+    // ===== Scroll Fade-in =====
+    const faders=document.querySelectorAll('.fade-in');
+    const observer=new IntersectionObserver((entries,obs)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('show');
+          obs.unobserve(entry.target);
+        }
+      });
+    },{threshold:0.25});
+    faders.forEach(f=>observer.observe(f));
+  </script>
+</body>
+</html>
+
+
   
