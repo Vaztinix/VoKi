@@ -103,32 +103,39 @@ footer { text-align:center; padding:28px 1.5rem; color:rgba(255,255,255,.8); mar
 #floatingMenu .menu-items a:hover { background:var(--card-hover); }
 
 /* RESPONSIVE */
-@media(max-width:840px){ .container{padding:2rem 1rem;} nav{gap:8px;} .brand h1{display:inline-block;} }
-</style>
+ /* Responsive */
+    @media(max-width:840px){
+      .brand h1{display:inline-block;}
+      nav{gap:8px;}
+      .container{padding:2rem 1rem;}
+    }
+  </style>
 </head>
-
 <body>
+  <header>
+    <div class="brand">
+      <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi logo">
+      <h1>VoKi</h1>
+    </div>
+    <nav>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="team.html">Team</a>
+        <a href="ai-helper.html">Kite AI</a>
+        <a href="AI.html">VoKi AI</a>
+        <a href="tos.html">Legal</a>
+      </div>
+      <div class="actions">
+        <button id="themeToggle" class="icon-btn" title="Toggle theme">
+          <img id="themeIcon" src="VoKi_Moon.png" alt="theme" style="width:18px;height:18px">
+        </button>
+        <div class="sep"></div>
+        <a class="btn btn-outline" href="#" id="loginBtn">Login</a>
+      </div>
+    </nav>
+  </header>
 
-<header>
-  <div class="brand">
-    <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi logo">
-    <h1>VoKi</h1>
-  </div>
-  <nav>
-    <div class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="team.html" class="active">Team</a>
-      <a href="tos.html">Legal</a>
-    </div>
-    <div class="actions">
-      <button id="themeToggle" class="icon-btn" title="Toggle theme">
-        <img id="themeIcon" src="VoKi_Moon.png" alt="theme" style="width:18px;height:18px">
-      </button>
-      <div class="sep"></div>
-      <a class="btn btn-outline" href="#" id="loginBtn">Login</a>
-    </div>
-  </nav>
-</header>
+  <div id="toast" class="toast"></div>
 
 <main class="container">
   <div class="hero">
