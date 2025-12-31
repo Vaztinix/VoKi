@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VoKi — Legal</title>
+  <title>VoKi — Legal & Privacy Policy</title>
 
-  <meta name="description" content="Review VoKi’s Terms of Service and Privacy Policy to understand how your data and privacy are protected." />
-  <meta property="og:title" content="VoKi — Legal" />
-  <meta property="og:description" content="Review VoKi’s Terms of Service and Privacy Policy to understand how your data and privacy are protected." />
-  <meta property="og:image" content="https://voki.pages.dev/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
+  <meta name="description" content="VoKi Terms of Service & Privacy Policy – privacy‑first Discord moderation bot. Clear, transparent, and secure." />
+  <meta property="og:title" content="VoKi — Legal & Privacy Policy" />
+  <meta property="og:description" content="VoKi Terms of Service & Privacy Policy – privacy‑first Discord moderation bot." />
+  <meta property="og:image" content="https://vaztinix.github.io/VoKi/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
   <meta property="og:type" content="website" />
 
   <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
@@ -28,7 +28,6 @@
     }
 
     * { box-sizing: border-box; }
-
     body {
       margin: 0;
       font-family: "Inter", "Segoe UI", system-ui, sans-serif;
@@ -83,15 +82,16 @@
     .nav-links a:hover, .nav-links a.active { color: var(--primary); }
 
     .container {
-      max-width: 1200px;
+      max-width: 1000px;
       margin: 0 auto;
       padding: 4rem 1.5rem;
     }
 
     section { margin-bottom: 6rem; }
 
-    .page-hero {
+    .hero {
       text-align: center;
+      padding-top: 2rem;
     }
 
     .badge {
@@ -106,41 +106,33 @@
       margin-bottom: 18px;
     }
 
-    .page-hero h1 {
-      font-size: clamp(2rem, 4vw, 2.8rem);
-      margin-bottom: 14px;
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin: 0 0 18px;
     }
 
-    .page-hero p {
-      max-width: 720px;
-      margin: 0 auto;
+    .hero p {
+      max-width: 760px;
+      margin: 0 auto 32px;
       color: var(--muted);
-    }
-
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-      margin-top: 3rem;
+      font-size: 1.05rem;
     }
 
     .card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 26px;
+      padding: 36px;
       transition: .25s;
-      text-align: left;
+      line-height: 1.6;
+      color: var(--muted);
     }
 
-    .card:hover {
-      background: var(--card-hover);
-      transform: translateY(-6px);
+    .card h2 {
+      color: var(--primary);
+      margin-top: 0;
     }
-
-    h2 { color: var(--primary); margin-bottom: 12px; }
-    p, li { color: var(--muted); line-height: 1.5; }
-    ul { padding-left: 20px; }
 
     footer {
       border-top: 1px solid var(--border);
@@ -174,86 +166,27 @@
 
 <main class="container">
 
-  <section class="page-hero">
-    <div class="badge">Legal & Policies</div>
+  <section class="hero">
+    <div class="badge">LEGAL & POLICIES</div>
     <h1>Terms of Service & Privacy Policy</h1>
     <p>
-      Read carefully to understand your rights, responsibilities, and how VoKi protects your server data.
+      Please read carefully to understand your responsibilities, rights, and how VoKi protects your server data.
     </p>
   </section>
 
-  <section class="grid">
-
+  <section>
     <div class="card">
-      <h2>1. Acceptance of Terms</h2>
-      <p>By inviting or using VoKi in your Discord server, you agree to follow these terms, comply with applicable laws, and respect the privacy of others.</p>
+      <h2>VoKi Legal & Privacy Information</h2>
+      <p><strong>1. Acceptance of Terms:</strong> By inviting or using VoKi, you agree to these terms and applicable laws. You also acknowledge that all moderation data remains under your control.</p>
+      <p><strong>2. User Responsibilities:</strong> Admins must configure VoKi responsibly. Harassment, spamming, or collecting unauthorized data is strictly prohibited. Compliance with Discord TOS is required.</p>
+      <p><strong>3. AI Moderation & Oversight:</strong> VoKi provides AI suggestions to assist moderation. Human moderators have final authority. AI operates on short-term server context and does not retain messages permanently.</p>
+      <p><strong>4. Privacy Policy:</strong> No messages or personal data are stored externally without consent. Server admins control all server data. Users may request deletion of their data using VoKi commands. Logs are minimal and only for moderation transparency.</p>
+      <p><strong>5. Permissions & Access:</strong> VoKi requests only necessary permissions. Server owners can revoke permissions anytime. Commands and roles can be configured for security.</p>
+      <p><strong>6. Intellectual Property:</strong> All code, branding, and graphics remain VoKi property. Unauthorized use, reproduction, or monetization is prohibited.</p>
+      <p><strong>7. Updates & Modifications:</strong> VoKi may update features, security, or AI functionality. Changes are communicated via official Discord channels. Admins must review permissions after updates.</p>
+      <p><strong>8. Limitation of Liability:</strong> VoKi is provided as-is. Developers are not responsible for data loss, server disruptions, or other damages from use.</p>
+      <p><strong>9. Support & Contact:</strong> For assistance or reporting misuse, join our <a href="https://discord.gg/cXsZr3cMEB" target="_blank">support server</a>.</p>
     </div>
-
-    <div class="card">
-      <h2>2. User Responsibilities</h2>
-      <ul>
-        <li>Admins must ensure VoKi is used responsibly in their servers.</li>
-        <li>Prohibited actions include harassment, spamming, or collecting unauthorized data.</li>
-        <li>Users must follow Discord's Terms of Service alongside VoKi's rules.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>3. AI Moderation & Oversight</h2>
-      <ul>
-        <li>VoKi provides AI suggestions to assist moderation, but final decisions remain with server moderators.</li>
-        <li>AI actions are based on server-specific context and short-term memory only.</li>
-        <li>Moderators can review, adjust, or override all AI actions at any time.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>4. Privacy Policy</h2>
-      <ul>
-        <li>No personal messages are stored externally without consent.</li>
-        <li>All server data is controlled by server admins; developers cannot access it.</li>
-        <li>Users may request deletion of their stored data using VoKi commands.</li>
-        <li>Minimal logging is used solely for moderation transparency.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>5. Permissions & Access</h2>
-      <ul>
-        <li>VoKi requests only the permissions necessary for moderation tasks.</li>
-        <li>Server owners may revoke any permissions at any time.</li>
-        <li>Commands and roles can be configured per server for security.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>6. Intellectual Property</h2>
-      <ul>
-        <li>All code, branding, and graphics remain the property of VoKi.</li>
-        <li>Unauthorized reproduction, redistribution, or monetization is prohibited.</li>
-        <li>Server owners may not claim VoKi as their own software.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>7. Updates & Modifications</h2>
-      <ul>
-        <li>VoKi may receive updates to improve security, AI performance, and new features.</li>
-        <li>Changes are communicated via official Discord announcements.</li>
-        <li>Server admins are responsible for adapting to updates and reviewing permissions.</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2>8. Limitation of Liability</h2>
-      <p>VoKi is provided as-is. Developers are not liable for data loss, server disruptions, or other damages arising from its use.</p>
-    </div>
-
-    <div class="card">
-      <h2>9. Support & Contact</h2>
-      <p>For questions, assistance, or reporting misuse, join our <a href="https://discord.gg/cXsZr3cMEB" target="_blank">support server</a>.</p>
-    </div>
-
   </section>
 
 </main>
