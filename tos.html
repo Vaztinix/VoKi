@@ -1,262 +1,266 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>VoKi – Terms of Service & Privacy Policy</title>
-<link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VoKi — Legal</title>
 
-<!-- Open Graph / Twitter -->
-<meta property="og:title" content="VoKi – Terms of Service & Privacy Policy" />
-<meta property="og:description" content="Review VoKi’s Terms of Service and Privacy Policy to understand how your data and privacy are protected." />
-<meta property="og:image" content="https://vaztinix.github.io/VoKi/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://vaztinix.github.io/VoKi/tos.html" />
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="VoKi – Terms of Service & Privacy Policy" />
-<meta name="twitter:description" content="Review VoKi’s Terms of Service and Privacy Policy to understand how your data is protected." />
-<meta name="twitter:image" content="https://vaztinix.github.io/VoKi/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
+  <meta name="description" content="Review VoKi’s Terms of Service and Privacy Policy to understand how your data and privacy are protected." />
+  <meta property="og:title" content="VoKi — Legal" />
+  <meta property="og:description" content="Review VoKi’s Terms of Service and Privacy Policy to understand how your data and privacy are protected." />
+  <meta property="og:image" content="https://voki.pages.dev/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
+  <meta property="og:type" content="website" />
 
-<style>
-:root {
-  --primary: #aeefff;
-  --accent: #6dc8ff;
-  --bg-gradient: linear-gradient(135deg,#4facfe,#6fa1ff,#8e44ad);
-  --bg-dark: linear-gradient(135deg,#141e30,#1f2a45,#243b55);
-  --text: #ffffff;
-  --card: rgba(255,255,255,0.08);
-  --card-hover: rgba(255,255,255,0.18);
-  --nav: rgba(0,0,0,0.85);
-  --error-bg: rgba(0,0,0,0.9);
-  --radius: 14px;
-}
+  <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
 
-/* GLOBAL */
-* { box-sizing:border-box; }
-body {
-  margin:0; font-family:"Segoe UI",Arial,sans-serif; color:var(--text);
-  background: var(--bg-gradient); background-size:400% 400%;
-  animation:flow 25s ease infinite; scroll-behavior: smooth; min-height:100vh;
-}
-@keyframes flow { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --bg-soft: #12182b;
+      --card: rgba(255,255,255,0.06);
+      --card-hover: rgba(255,255,255,0.12);
+      --border: rgba(255,255,255,0.08);
+      --primary: #aeefff;
+      --accent: #7aa2ff;
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.7);
+      --radius: 18px;
+    }
 
-/* HEADER */
-header {
-  position: sticky; top:0; z-index:1000;
-  display:flex; justify-content:space-between; align-items:center; gap:1rem;
-  padding:1rem 2rem; background:var(--nav); border-bottom:1px solid rgba(255,255,255,0.04);
-  backdrop-filter: blur(6px);
-}
-.brand { display:flex; align-items:center; gap:12px; }
-.brand img { width:44px; height:44px; border-radius:10px; object-fit:cover; }
-.brand h1 { margin:0; font-size:1.25rem; color:var(--primary); letter-spacing:0.5px; }
-nav { display:flex; align-items:center; gap:12px; }
-.nav-links { display:flex; gap:8px; align-items:center; }
-.nav-links a { color:var(--primary); text-decoration:none; padding:8px 12px; border-radius:10px; font-weight:600; transition: all 0.18s ease; }
-.nav-links a:hover, .nav-links a.active { background:var(--primary); color:#000; transform:translateY(-2px); }
-.actions { display:flex; gap:10px; align-items:center; }
-.icon-btn { width:40px; height:40px; border-radius:10px; display:flex; align-items:center; justify-content:center; background:transparent; border:1px solid rgba(255,255,255,0.04); cursor:pointer; }
-.sep { width:2px; height:26px; background:var(--primary); opacity:0.6; border-radius:3px; }
+    * { box-sizing: border-box; }
 
-/* MAIN CONTENT */
-.container { max-width:900px; margin:0 auto; padding:3rem 1.5rem; text-align:left; }
-.card { background:var(--card); padding:28px; border-radius:var(--radius); margin-bottom:20px; box-shadow:0 12px 32px rgba(0,0,0,.25); }
-h1,h2 { color:var(--primary); margin-bottom:12px; }
-p, li { opacity:0.95; line-height:1.5; }
-ul { padding-left:20px; margin:0; }
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      background: radial-gradient(1200px 600px at 10% -10%, #1b2a55, transparent),
+                  radial-gradient(900px 500px at 90% 10%, #2a1b55, transparent),
+                  var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
 
-/* FOOTER */
-footer { text-align:center; padding:28px 1.5rem; color:rgba(255,255,255,.8); }
+    a { color: inherit; text-decoration: none; }
 
-/* TOAST */
-.toast { position:fixed; right:50%; transform:translateX(50%); top:60px; background:var(--error-bg); padding:12px 16px; border-radius:10px; color:#fff; box-shadow:0 8px 30px rgba(0,0,0,.4); opacity:0; transition:opacity .2s, transform .2s; z-index:2000; }
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      backdrop-filter: blur(10px);
+      background: rgba(10,14,30,0.75);
+      border-bottom: 1px solid var(--border);
+    }
 
-/* FLOATING MENU */
-#floatingMenu { position:fixed; bottom:24px; right:24px; display:flex; flex-direction:column-reverse; align-items:flex-end; z-index:1500; }
-#floatingMenu .menu-toggle { width:56px; height:56px; border-radius:28px; background:var(--primary); color:#000; font-size:28px; border:none; cursor:pointer; box-shadow:0 8px 20px rgba(0,0,0,0.3); }
-#floatingMenu .menu-items { display:none; flex-direction:column; margin-bottom:12px; }
-#floatingMenu .menu-items a { background:var(--card); padding:10px 16px; margin:4px 0; border-radius:14px; text-decoration:none; color:var(--text); font-weight:600; transition: all .18s ease; }
-#floatingMenu .menu-items a:hover { background:var(--card-hover); }
+    .nav {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
 
-/* RESPONSIVE */
-@media(max-width:840px){ .container{padding:2rem 1rem;} nav{gap:8px;} .brand h1{display:inline-block;} }
-</style>
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .brand img {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .nav-links a:hover, .nav-links a.active { color: var(--primary); }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 4rem 1.5rem;
+    }
+
+    section { margin-bottom: 6rem; }
+
+    .page-hero {
+      text-align: center;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(174,239,255,0.12);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.6px;
+      margin-bottom: 18px;
+    }
+
+    .page-hero h1 {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      margin-bottom: 14px;
+    }
+
+    .page-hero p {
+      max-width: 720px;
+      margin: 0 auto;
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 3rem;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 26px;
+      transition: .25s;
+      text-align: left;
+    }
+
+    .card:hover {
+      background: var(--card-hover);
+      transform: translateY(-6px);
+    }
+
+    h2 { color: var(--primary); margin-bottom: 12px; }
+    p, li { color: var(--muted); line-height: 1.5; }
+    ul { padding-left: 20px; }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 1.5rem;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    @media (max-width: 800px) {
+      .nav-links { display: none; }
+    }
+  </style>
 </head>
-
 <body>
 
 <header>
-  <div class="brand">
-    <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi logo">
-    <h1>VoKi</h1>
-  </div>
-  <nav>
-    <div class="nav-links">
+  <div class="nav">
+    <div class="brand">
+      <img src="VoKi Logo (Updated Bot Logo).png" alt="VoKi" />
+      <span>VoKi</span>
+    </div>
+    <nav class="nav-links">
       <a href="index.html">Home</a>
       <a href="team.html">Team</a>
       <a href="ai-helper.html">Kite AI</a>
       <a href="AI.html">VoKi AI</a>
       <a href="tos.html" class="active">Legal</a>
-    </div>
-    <div class="actions">
-      <button id="themeToggle" class="icon-btn" title="Toggle theme">
-        <img id="themeIcon" src="VoKi_Moon.png" alt="theme" style="width:18px;height:18px">
-      </button>
-      <div class="sep"></div>
-      <a class="btn btn-outline" href="#" id="loginBtn">Login</a>
-    </div>
-  </nav>
+    </nav>
+  </div>
 </header>
 
 <main class="container">
-  <div class="card">
+
+  <section class="page-hero">
+    <div class="badge">Legal & Policies</div>
     <h1>Terms of Service & Privacy Policy</h1>
-    <p>Welcome to VoKi. By using our services, you agree to the following terms and policies.</p>
-  </div>
+    <p>
+      Read carefully to understand your rights, responsibilities, and how VoKi protects your server data.
+    </p>
+  </section>
 
-  <div class="card">
-    <h2>1. Purpose</h2>
-    <ul>
-      <li>Provide privacy-first AI moderation tools for Discord communities.</li>
-      <li>Enhance server safety, trust, and fairness through automation.</li>
-      <li>Support secure, positive interactions among all users.</li>
-    </ul>
-  </div>
+  <section class="grid">
 
-  <div class="card">
-    <h2>2. Responsible Use</h2>
-    <ul>
-      <li>Use VoKi only for intended purposes and respect others.</li>
-      <li>No harassment, spamming, or unauthorized data collection.</li>
-      <li>Compliance with Discord Terms of Service is required.</li>
-      <li>Admins configure bot according to server rules.</li>
-    </ul>
-  </div>
+    <div class="card">
+      <h2>1. Acceptance of Terms</h2>
+      <p>By inviting or using VoKi in your Discord server, you agree to follow these terms, comply with applicable laws, and respect the privacy of others.</p>
+    </div>
 
-  <div class="card">
-    <h2>3. AI Features</h2>
-    <ul>
-      <li>AI assists moderation and support; human oversight is required.</li>
-      <li>Short-term context memory improves accuracy.</li>
-      <li>Moderators can review, adjust, or override AI actions.</li>
-      <li>Transparency and fairness are prioritized.</li>
-    </ul>
-  </div>
+    <div class="card">
+      <h2>2. User Responsibilities</h2>
+      <ul>
+        <li>Admins must ensure VoKi is used responsibly in their servers.</li>
+        <li>Prohibited actions include harassment, spamming, or collecting unauthorized data.</li>
+        <li>Users must follow Discord's Terms of Service alongside VoKi's rules.</li>
+      </ul>
+    </div>
 
-  <div class="card">
-    <h2>4. Privacy Policy</h2>
-    <ul>
-      <li>No personal data collected without consent.</li>
-      <li>All data remains on your server; developers do not access it.</li>
-      <li>Users may view and delete data with the User Data command.</li>
-      <li>Removed logging of message edits, deletions, and leaves to protect privacy.</li>
-    </ul>
-  </div>
+    <div class="card">
+      <h2>3. AI Moderation & Oversight</h2>
+      <ul>
+        <li>VoKi provides AI suggestions to assist moderation, but final decisions remain with server moderators.</li>
+        <li>AI actions are based on server-specific context and short-term memory only.</li>
+        <li>Moderators can review, adjust, or override all AI actions at any time.</li>
+      </ul>
+    </div>
 
-  <div class="card">
-    <h2>5. Permissions</h2>
-    <ul>
-      <li>VoKi requests only necessary permissions for moderation.</li>
-      <li>Server admins control bot access and privileges.</li>
-      <li>Command management per server coming soon.</li>
-    </ul>
-  </div>
+    <div class="card">
+      <h2>4. Privacy Policy</h2>
+      <ul>
+        <li>No personal messages are stored externally without consent.</li>
+        <li>All server data is controlled by server admins; developers cannot access it.</li>
+        <li>Users may request deletion of their stored data using VoKi commands.</li>
+        <li>Minimal logging is used solely for moderation transparency.</li>
+      </ul>
+    </div>
 
-  <div class="card">
-    <h2>6. Guidelines</h2>
-    <ul>
-      <li>Follow community standards and respect VoKi’s systems.</li>
-      <li>Report bugs, misuse, or requests responsibly.</li>
-      <li>Admins should review permissions periodically.</li>
-    </ul>
-  </div>
+    <div class="card">
+      <h2>5. Permissions & Access</h2>
+      <ul>
+        <li>VoKi requests only the permissions necessary for moderation tasks.</li>
+        <li>Server owners may revoke any permissions at any time.</li>
+        <li>Commands and roles can be configured per server for security.</li>
+      </ul>
+    </div>
 
-  <div class="card">
-    <h2>7. Logging</h2>
-    <ul>
-      <li>Moderation actions logged locally for transparency and accountability.</li>
-      <li>No sensitive message content is stored externally.</li>
-      <li>Logs help in dispute resolution and management.</li>
-    </ul>
-  </div>
+    <div class="card">
+      <h2>6. Intellectual Property</h2>
+      <ul>
+        <li>All code, branding, and graphics remain the property of VoKi.</li>
+        <li>Unauthorized reproduction, redistribution, or monetization is prohibited.</li>
+        <li>Server owners may not claim VoKi as their own software.</li>
+      </ul>
+    </div>
 
-  <div class="card">
-    <h2>8. Security</h2>
-    <ul>
-      <li>Secure coding practices and permission handling applied.</li>
-      <li>Admins should review access and commands periodically.</li>
-      <li>Server interactions minimize data exposure.</li>
-    </ul>
-  </div>
+    <div class="card">
+      <h2>7. Updates & Modifications</h2>
+      <ul>
+        <li>VoKi may receive updates to improve security, AI performance, and new features.</li>
+        <li>Changes are communicated via official Discord announcements.</li>
+        <li>Server admins are responsible for adapting to updates and reviewing permissions.</li>
+      </ul>
+    </div>
 
-  <div class="card">
-    <h2>9. Updates</h2>
-    <ul>
-      <li>VoKi receives updates to improve functionality, AI moderation, and security.</li>
-      <li>Major changes communicated via Discord announcements.</li>
-      <li>Roblox integrations removed; focus is on Discord moderation.</li>
-      <li>Multilingual support temporarily paused for improvements.</li>
-    </ul>
-  </div>
+    <div class="card">
+      <h2>8. Limitation of Liability</h2>
+      <p>VoKi is provided as-is. Developers are not liable for data loss, server disruptions, or other damages arising from its use.</p>
+    </div>
 
-  <div class="card">
-    <h2>10. Support</h2>
-    <p>Visit our <a href="https://discord.gg/PKWJuRrgUd" target="_blank">support server</a> for assistance.</p>
-    <p>Leave a review on Top.gg: <a href="https://top.gg/bot/1375943730951098549#reviews" target="_blank">Top.gg Reviews</a></p>
-  </div>
+    <div class="card">
+      <h2>9. Support & Contact</h2>
+      <p>For questions, assistance, or reporting misuse, join our <a href="https://discord.gg/cXsZr3cMEB" target="_blank">support server</a>.</p>
+    </div>
+
+  </section>
+
 </main>
 
 <footer>
-  <p>© 2025 VoKi • Privacy‑First Moderation for Discord</p>
+  © 2025 VoKi — Privacy‑First AI & Moderation for Discord
 </footer>
-
-<div id="floatingMenu">
-  <div class="menu-items" id="menuItems"></div>
-  <button class="menu-toggle" id="menuToggle">☰</button>
-</div>
-
-<div id="toast" class="toast"></div>
-
-<script>
-// Theme Toggle
-const themeToggle = document.getElementById('themeToggle');
-const themeIcon = document.getElementById('themeIcon');
-let dark = localStorage.getItem('voki_dark')==='1' ? true : (localStorage.getItem('voki_dark')==='0' ? false : window.matchMedia('(prefers-color-scheme: dark)').matches);
-function applyTheme(){ 
-  if(dark){ document.body.style.background='var(--bg-dark)'; themeIcon.src='VoKi_Sun.png'; }
-  else{ document.body.style.background='var(--bg-gradient)'; themeIcon.src='VoKi_Moon.png'; }
-  localStorage.setItem('voki_dark', dark?'1':'0');
-}
-applyTheme();
-themeToggle.addEventListener('click',()=>{ dark=!dark; applyTheme(); });
-
-// Toast for login button
-const toast = document.getElementById('toast');
-document.getElementById('loginBtn').addEventListener('click', e=>{ e.preventDefault(); toast.textContent='Login is in development and unavailable.'; toast.classList.add('show'); setTimeout(()=>toast.classList.remove('show'),3500); });
-
-// Floating Menu
-const floatingLinks = [
-  {title:'Home',href:'index.html'},
-  {title:'Team',href:'team.html'},
-  {title:'Kite AI',href:'ai-helper.html'},
-  {title:'VoKi AI',href:'AI.html'},
-  {title:'Legal',href:'tos.html'}
-];
-const menuItems = document.getElementById('menuItems');
-menuItems.innerHTML=''; 
-floatingLinks.forEach(l=>{ const a=document.createElement('a'); a.textContent=l.title; a.href=l.href; menuItems.appendChild(a); });
-let menuOpen=false;
-document.getElementById('menuToggle').addEventListener('click',()=>{
-  if(!menuOpen){
-    menuItems.style.display='flex';
-    [...menuItems.children].forEach((el,i)=>setTimeout(()=>{el.style.opacity='1'; el.style.transform='translateY(0)';},i*45));
-  }else{
-    [...menuItems.children].forEach((el,i)=>setTimeout(()=>{el.style.opacity='0'; el.style.transform='translateY(12px)';},i*25));
-    setTimeout(()=>menuItems.style.display='none',200);
-  }
-  menuOpen=!menuOpen;
-});
-</script>
 
 </body>
 </html>
