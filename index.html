@@ -4,7 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>VoKi — Privacy‑First Discord Bot</title>
-  <title> Happy New Years</title>
 
   <meta name="description" content="VoKi is a privacy‑first Discord moderation & AI assistant bot. Transparent, safe, and fully controlled by server owners." />
   <meta property="og:title" content="VoKi — Privacy‑First Discord Bot" />
@@ -213,6 +212,49 @@
     @media (max-width: 800px) {
       .nav-links { display: none; }
     }
+
+    #newYearPopup {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  max-width: 320px;
+  background: rgba(20,25,50,0.6);
+  border: 1px solid var(--border);
+  backdrop-filter: blur(12px);
+  border-radius: 18px;
+  padding: 20px 22px;
+  z-index: 2000;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+  animation: slideIn 0.6s ease;
+}
+
+#newYearPopup h3 {
+  margin: 0 0 6px;
+  color: var(--primary);
+}
+
+#newYearPopup p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+#newYearPopup .close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 18px;
+  cursor: pointer;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
   </style>
 </head>
 <body>
@@ -244,22 +286,21 @@
       your server data stays yours. No hidden access. No silent logging.
     </p>
 
-    <div class="cta">
-      <a class="btn btn-primary" href="https://discord.com/oauth2/authorize?client_id=1375943730951098549" target="_blank">Invite VoKi</a>
-      <a class="btn btn-ghost" href="https://discord.gg/cXsZr3cMEB" target="_blank">Support Server</a>
-    </div>
-  </section>
-
-  
   <section class="trust">
-    <h2>Public & Transparent</h2>
-    <p class="muted">VoKi is publicly listed on top.gg for accountability and visibility.</p>
-    <div class="widget">
-      <a href="https://top.gg/bot/1375943730951098549" target="_blank">
-        <img src="https://top.gg/api/widget/1375943730951098549.svg" alt="VoKi on top.gg" />
-      </a>
-    </div>
-  </section>
+  <h2>Trusted on Top.gg</h2>
+  <p class="muted">
+    Help VoKi grow by voting, rating, or adding it to your server.
+    Every vote increases visibility.
+  </p>
+
+  <div class="cta" style="margin-top: 24px;">
+    <a class="btn btn-primary" href="https://top.gg/bot/1375943730951098549/vote" target="_blank">
+      Vote on Top.gg
+    </a>
+    <a class="btn btn-ghost" href="https://top.gg/bot/1375943730951098549" target="_blank">
+      View Profile
+    </a>
+  </div>
 
   <section>
     <h2>Core Principles</h2>
@@ -295,5 +336,13 @@
   © 2026 VoKi | Privacy‑First AI & Moderation for Discord
 </footer>
 
-</body>
+</body>|
+  <div id="newYearPopup">
+  <button class="close">✕</button>
+  <h3>🎉 Happy New Year</h3>
+  <p>
+    “Small steps every day build powerful futures.”
+  </p>
+</div>
+
 </html>
