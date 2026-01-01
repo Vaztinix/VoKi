@@ -1,185 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>VoKi AI</title>
-<link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VoKi AI</title>
 
-<style>
-:root {
-  --primary: #aeefff;
-  --accent: #6dc8ff;
-  --bg-gradient: linear-gradient(135deg,#4facfe,#6fa1ff,#8e44ad);
-  --bg-dark: linear-gradient(135deg,#141e30,#1f2a45,#243b55);
-  --text: #ffffff;
-  --card: rgba(255,255,255,0.08);
-  --card-hover: rgba(255,255,255,0.18);
-  --radius: 18px;
-}
+  <meta name="description" content="VoKi AI provides privacy-first AI assistance for moderation, support, and Discord communities." />
+  <meta property="og:title" content="VoKi AI" />
+  <meta property="og:description" content="Privacy-first AI assistance for Discord moderation and support." />
+  <meta property="og:image" content="https://vaztinix.github.io/VoKi/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
+  <meta property="og:type" content="website" />
 
-/* ============================== GLOBAL ============================== */
-body {
-  margin:0;
-  font-family:"Segoe UI",Arial,sans-serif;
-  color:var(--text);
-  background: var(--bg-gradient); background-size:400% 400%;
-  animation:gradientFlow 25s ease infinite;
-  display:flex;
-  flex-direction:column;
-  min-height:100vh;
-  scroll-behavior:smooth;
-}
-@keyframes gradientFlow { 0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%} }
+  <link rel="icon" type="image/png" href="VoKi Logo (Updated Bot Logo).png" />
 
-/* ============================== HEADER ============================== */
-header {
-  text-align:center;
-  padding:1.5rem;
-  font-size:2rem;
-  font-weight:bold;
-  color:var(--primary);
-  text-shadow:0 2px 8px rgba(0,0,0,0.3);
-}
+  <style>
+    :root {
+      --bg: #0b0f1a;
+      --card: rgba(255,255,255,0.08);
+      --card-hover: rgba(255,255,255,0.04);
+      --border: rgba(255,255,255,0.08);
+      --primary: #aeefff;
+      --accent: #7aa2ff;
+      --text: #ffffff;
+      --muted: rgba(255,255,255,0.7);
+      --radius: 18px;
+    }
 
-/* ============================== EMBED ============================== */
-.embed {
-  max-width:900px;
-  margin:0 auto 1.5rem auto;
-  background: rgba(0,0,0,0.45);
-  border-left: 6px solid var(--primary);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  box-shadow: 0 4px 20px rgba(0,0,0,.4);
-  transition: all 0.4s ease;
-  opacity:0;
-  transform: translateY(20px);
-}
-.embed h3 { margin:0 0 6px 0; color:var(--primary); font-size:1.2rem; }
-.embed p { margin:0; font-size:0.95rem; opacity:0.85; }
+    * { box-sizing: border-box; }
 
-/* ============================== MAIN ============================== */
-main {
-  flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; padding:1rem;
-}
-.chat-box {
-  width:100%; max-width:900px; height:70vh;
-  background: rgba(0,0,0,.4);
-  backdrop-filter: blur(6px);
-  border-radius:var(--radius);
-  overflow:hidden;
-  box-shadow:0 6px 30px rgba(0,0,0,0.4);
-  transition: all 0.5s ease;
-}
-.chat-box iframe {
-  width:100%; height:100%; border:none;
-  border-radius:var(--radius);
-  transition: all 0.4s ease;
-}
+    body {
+      margin: 0;
+      font-family: "Inter", "Segoe UI", system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 600px at 10% -10%, #1b2a55, transparent),
+        radial-gradient(900px 500px at 90% 10%, #2a1b55, transparent),
+        var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-/* ============================== FOOTER ============================== */
-footer {
-  text-align:center; padding:1rem;
-  font-size:0.9rem; opacity:0.85;
-}
-footer a { color:var(--primary); text-decoration:none; margin:0 .5rem; }
+    a { color: inherit; text-decoration: none; }
 
-/* ============================== FLOATING MENU ============================== */
-#floatingMenu {
-  position:fixed; bottom:24px; right:24px;
-  display:flex; flex-direction:column-reverse; align-items:flex-end; z-index:1500;
-}
-#floatingMenu .menu-toggle {
-  width:56px; height:56px; border-radius:28px;
-  background:var(--primary); color:#000; font-size:28px;
-  border:none; cursor:pointer;
-  box-shadow:0 8px 20px rgba(0,0,0,0.3);
-  transition: all 0.3s ease;
-}
-#floatingMenu .menu-toggle:hover { transform:scale(1.1); }
-#floatingMenu .menu-items {
-  display:none; flex-direction:column; margin-bottom:12px;
-}
-#floatingMenu .menu-items a {
-  background:var(--card); padding:12px 18px; margin:6px 0; border-radius:var(--radius);
-  text-decoration:none; color:var(--text); font-weight:600;
-  opacity:0; transform:translateY(20px); transition: all 0.5s ease;
-}
-#floatingMenu .menu-items a:hover { background:var(--card-hover); }
+    header {
+      text-align: center;
+      padding: 2.5rem 1.5rem 1.5rem;
+    }
 
-/* ============================== RESPONSIVE ============================== */
-@media(max-width:600px){ header{ font-size:1.6rem; } }
-</style>
+    .badge {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: rgba(174,239,255,0.12);
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.6px;
+      margin-bottom: 16px;
+    }
+
+    header h1 {
+      font-size: clamp(2.4rem, 4vw, 3.2rem);
+      margin: 0 0 12px;
+    }
+
+    header p {
+      max-width: 720px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      padding: 2rem 1.5rem 3rem;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: background 0.25s ease, transform 0.25s ease;
+    }
+
+    .card:hover {
+      background: var(--card-hover);
+      transform: translateY(-6px);
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      color: var(--primary);
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .ai-frame {
+      padding: 0;
+      overflow: hidden;
+      height: 70vh;
+    }
+
+    .ai-frame iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: var(--radius);
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 1.5rem;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    #floatingMenu {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      flex-direction: column-reverse;
+      align-items: flex-end;
+      z-index: 1500;
+    }
+
+    #floatingMenu .menu-toggle {
+      width: 56px;
+      height: 56px;
+      border-radius: 28px;
+      background: var(--primary);
+      color: #000;
+      font-size: 26px;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+      transition: transform 0.3s ease;
+    }
+
+    #floatingMenu .menu-toggle:hover {
+      transform: scale(1.1);
+    }
+
+    #floatingMenu .menu-items {
+      display: none;
+      flex-direction: column;
+      margin-bottom: 12px;
+    }
+
+    #floatingMenu .menu-items a {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 12px 18px;
+      margin: 6px 0;
+      border-radius: var(--radius);
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: background 0.25s ease, transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    #floatingMenu .menu-items a:hover {
+      background: var(--card-hover);
+    }
+
+    @media (max-width: 700px) {
+      .ai-frame { height: 65vh; }
+    }
+  </style>
 </head>
 <body>
 
-<header>VoKi AI</header>
-
-<!-- VoKi AI Embed -->
-<div class="embed" id="aiEmbed">
-  <h3>VoKi AI</h3>
-  <p>Official VoKi AI for moderation, support, and community management in Discord.</p>
-</div>
+<header>
+  <div class="badge">VoKi AI</div>
+  <h1>Privacy-First AI Assistance</h1>
+  <p>
+    VoKi provides assistance for moderation, support,
+    and community management — without hidden logging or developer access.
+  </p>
+</header>
 
 <main>
-  <div class="chat-box">
-    <iframe src="https://app.livechatai.com/aibot-iframe/cmhfv20al0001jr04y2933u0w" allow="microphone"></iframe>
+  <div class="container">
+
+    <div class="card">
+      <h3>About VoKi AI</h3>
+      <p>
+        This AI instance is officially connected with VoKi and designed to support
+        Discord communities responsibly. All interactions respect user privacy
+        and moderation.
+      </p>
+    </div>
+
+    <div class="card ai-frame">
+      <iframe
+        src="https://app.livechatai.com/aibot-iframe/cmhfv20al0001jr04y2933u0w"
+        allow="microphone">
+      </iframe>
+    </div>
+
   </div>
 </main>
 
 <footer>
-  Created by <strong>@vaztinix</strong> — Officially affiliated with Discord | VoKi Privacy-First AI & Moderation.
+  © 2026 VoKi | Privacy-First AI & Moderation for Discord
 </footer>
 
-<!-- Floating Corner Menu -->
-<div id="floatingMenu">
-  <div class="menu-items" id="menuItems"></div>
-  <button class="menu-toggle" id="menuToggle">☰</button>
-</div>
-
-<script>
-// Theme handling
-let dark = localStorage.getItem('voki_dark')==='1' ? true : (localStorage.getItem('voki_dark')==='0' ? false : window.matchMedia('(prefers-color-scheme: dark)').matches);
-if(dark){ document.body.style.background='var(--bg-dark)'; }
-
-// Animate embed on load
-window.addEventListener('load', ()=>{
-  const embed = document.getElementById('aiEmbed');
-  setTimeout(()=>{ embed.style.opacity='1'; embed.style.transform='translateY(0)'; }, 200);
-});
-
-// Floating menu links
-const floatingLinks = [
-  {title:'Home',href:'index.html'},
-  {title:'Team',href:'team.html'},
-  {title:'Legal',href:'tos.html'}
-];
-const menuItems = document.getElementById('menuItems');
-menuItems.innerHTML='';
-floatingLinks.forEach((link,i)=>{
-  const a = document.createElement('a');
-  a.textContent = link.title;
-  a.href = link.href;
-  menuItems.appendChild(a);
-});
-
-// Floating menu toggle animation
-let menuOpen=false;
-document.getElementById('menuToggle').addEventListener('click',()=>{
-  if(!menuOpen){
-    menuItems.style.display='flex';
-    [...menuItems.children].forEach((el,i)=>{
-      setTimeout(()=>{ el.style.opacity='1'; el.style.transform='translateY(0)'; }, i*75);
-    });
-  } else {
-    [...menuItems.children].forEach((el,i)=>{
-      setTimeout(()=>{ el.style.opacity='0'; el.style.transform='translateY(20px)'; }, i*50);
-    });
-    setTimeout(()=>menuItems.style.display='none',300);
-  }
-  menuOpen=!menuOpen;
-});
-</script>
-
-</body>
 </html>
