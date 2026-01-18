@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VoKi — Privacy‑First Discord Bot</title>
+  <title>VoKi — Privacy-First Discord Bot</title>
 
-  <meta name="description" content="VoKi is a privacy‑first Discord moderation & AI assistant bot. Transparent, safe, and fully controlled by server owners." />
-  <meta property="og:title" content="VoKi — Privacy‑First Discord Bot" />
+  <meta name="description" content="VoKi is a privacy-first Discord moderation & AI assistant bot. Transparent, safe, and fully controlled by server owners." />
+  <meta property="og:title" content="VoKi — Privacy-First Discord Bot" />
   <meta property="og:description" content="Modern AI moderation for Discord. No developer access. No hidden logging." />
   <meta property="og:image" content="https://vaztinix.github.io/VoKi/VoKi%20Logo%20(Updated%20Bot%20Logo).png" />
   <meta property="og:type" content="website" />
@@ -14,7 +14,6 @@
   <link rel="icon" type="image/png" href="vokiwinterlogo" />
 
   <style>
-    
     :root {
       --bg: #0b0f1a;
       --bg-soft: #12182b;
@@ -160,18 +159,6 @@
       text-align: center;
     }
 
-    .widget {
-      display: inline-block;
-      margin-top: 24px;
-      padding: 16px;
-      border-radius: var(--radius);
-      background: var(--card);
-      border: 1px solid var(--border);
-      transition: .25s;
-    }
-
-    .widget:hover { background: var(--card-hover); transform: translateY(-6px); }
-
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -191,7 +178,6 @@
     .card h3 { margin-top: 0; }
     .card p { color: var(--muted); }
 
-    
     .cmd {
       font-family: monospace;
       background: rgba(0,0,0,0.35);
@@ -201,7 +187,6 @@
       margin-bottom: 10px;
     }
 
-    
     footer {
       border-top: 1px solid var(--border);
       padding: 32px 1.5rem;
@@ -212,9 +197,6 @@
     @media (max-width: 800px) {
       .nav-links { display: none; }
     }
-
-    
-
   </style>
 </head>
 <body>
@@ -237,30 +219,31 @@
 
 <main class="container">
 
-  
   <section class="hero">
-    <div class="badge">PRIVACY‑FIRST DISCORD BOT</div>
+    <div class="badge">PRIVACY-FIRST DISCORD BOT</div>
     <h1>Moderation & AI <br>Built for Trust</h1>
     <p>
-      VoKi is a modern Discord moderation and AI  bot designed with one rule:
+      VoKi is a modern Discord moderation and AI bot designed with one rule:
       your server data stays yours. No hidden access. No silent logging.
     </p>
+  </section>
 
   <section class="trust">
-  <h2>Trusted on Top.gg</h2>
-  <p class="muted">
-    Help VoKi grow by voting, rating, or adding it to your server.
-    Every vote increases visibility.
-  </p>
+    <h2>Trusted on Top.gg</h2>
+    <p class="muted">
+      Help VoKi grow by voting, rating, or adding it to your server.
+      Every vote increases visibility.
+    </p>
 
-  <div class="cta" style="margin-top: 24px;">
-    <a class="btn btn-primary" href="https://top.gg/bot/1375943730951098549/vote" target="_blank">
-      Vote on Top.gg
-    </a>
-    <a class="btn btn-ghost" href="https://top.gg/bot/1375943730951098549" target="_blank">
-      View Profile
-    </a>
-  </div>
+    <div class="cta" style="margin-top: 24px;">
+      <a class="btn btn-primary" href="https://top.gg/bot/1375943730951098549/vote" target="_blank">
+        Vote on Top.gg
+      </a>
+      <a class="btn btn-ghost" href="https://top.gg/bot/1375943730951098549" target="_blank">
+        View Profile
+      </a>
+    </div>
+  </section>
 
   <section>
     <h2>Core Principles</h2>
@@ -270,11 +253,11 @@
         <p>Server content is never accessible to developers. Data stays isolated and controlled.</p>
       </div>
       <div class="card">
-        <h3>AI‑Assisted Moderation (BETA)</h3>
+        <h3>AI-Assisted Moderation (BETA)</h3>
         <p>VoKi assists moderators by identifying harmful patterns, not replacing human judgment.</p>
       </div>
       <div class="card">
-        <h3>Moderator‑First Design</h3>
+        <h3>Moderator-First Design</h3>
         <p>Commands, logs, and controls are built to be predictable, fast, and auditable.</p>
       </div>
     </div>
@@ -290,10 +273,60 @@
     </div>
   </section>
 
+  <!-- Updates Section -->
+  <section>
+    <h2>Latest Updates</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>AI Upgrade</h3>
+        <p>
+          VoKi has been upgraded from ChatGPT (gpt-4o-mini) to ChatGPT (gpt-4.1-mini),
+          delivering improved performance and more reliable AI responses.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Series N & Leveling</h3>
+        <p>
+          Series N introduces a new pack of commands with its own category and leveling system.
+          The Leveling Series N system is now fully rolled out, including major improvements
+          to how leveling functions.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Server-Specific Progress</h3>
+        <p>
+          Leveling Series N is now server-specific, ensuring progress and rankings
+          remain isolated per server. This update also resolved issues related to
+          Modify Level.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Leaderboard Command</h3>
+        <p>
+          A new <span class="cmd">/leaderboard</span> command allows users to view ranking
+          progress within the leveling system directly in Discord.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>Performance Improvements</h3>
+        <p>
+          VoKi can now operate continuously throughout the entire month without disabling
+          commands due to rate limits, resulting in faster and more responsive behavior.
+        </p>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
-  © 2026 VoKi | Privacy‑First AI & Moderation for Discord
+  © 2026 VoKi | Privacy-First AI & Moderation for Discord
 </footer>
 
+</body>
 </html>
+
