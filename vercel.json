@@ -3,3 +3,25 @@
     { "src": "**/*.html", "use": "@vercel/static" }
   ]
 }
+
+import { streamText } from 'ai'
+
+const result = streamText({
+  model: 'openai/gpt-5.2',
+  prompt: 'Why is the sky blue?'
+})
+
+\* ==== Add a secret to Vercel.com ==== */
+curl -X POST "https://ai-gateway.vercel.sh/v1/chat/completions" \
+-H "Authorization: Bearer $AI_GATEWAY_API_KEY" \
+-H "Content-Type: application/json" \
+-d '{
+  "model": "openai/gpt-5.2",
+  "messages": [
+    {
+      "role": "user",
+      "content": "Why is the sky blue?"
+    }
+  ],
+  "stream": false
+}'
