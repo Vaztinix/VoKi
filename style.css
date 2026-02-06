@@ -25,7 +25,7 @@ body {
   transition: background 0.5s, color 0.5s;
 }
 
-/* ===== Top Navbar ===== */
+
 header {
   background: #222;
   color: #fff;
@@ -65,13 +65,13 @@ header {
   cursor: pointer;
 }
 
-/* ===== Hero Section ===== */
+
 .hero {
   padding: 50px;
   text-align: center;
 }
 
-/* ===== Footer ===== */
+
 footer {
   background: #222;
   color: #fff;
@@ -86,7 +86,7 @@ footer a {
   margin: 0 .5rem;
 }
 
-/* ===== Sidebar / Slide-in Menu ===== */
+
 .sidebar,
 nav.menu {
   position: fixed;
@@ -125,7 +125,7 @@ body.sidebar-open .sidebar {
   left: 0;
 }
 
-/* ===== Container ===== */
+
 .container {
   margin-left: 270px;
   padding: 50px 40px;
@@ -162,7 +162,7 @@ body.sidebar-open .sidebar {
   border-radius: 10px;
 }
 
-/* ===== Light Mode ===== */
+
 body.light {
   --text-color: #333;
   --sidebar-bg: rgba(255, 255, 255, 0.8);
@@ -179,7 +179,7 @@ body.light .sidebar a:hover {
   color: #fff !important;
 }
 
-/* ===== Dark Mode ===== */
+
 body.dark {
   background: var(--dark-bg);
   color: var(--dark-text);
@@ -193,9 +193,9 @@ body.dark .sidebar {
   background: rgba(15, 25, 40, 0.9);
 }
 
-/* ===== Responsive ===== */
+
 @media (max-width: 768px) {
-  /* Navbar collapse */
+
   .nav-links {
     display: none;
     flex-direction: column;
@@ -208,7 +208,7 @@ body.dark .sidebar {
   .nav-links.show { display: flex; }
   .menu-toggle { display: block; }
 
-  /* Sidebar collapse / slide-in menu */
+  
   .sidebar,
   nav.menu {
     position: fixed;
